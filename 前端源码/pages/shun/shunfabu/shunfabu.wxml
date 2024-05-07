@@ -1,0 +1,124 @@
+<form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+    <view class="publish">
+        <view class="banner">
+            <view class="list flex-center">
+                <view class="blue_box"></view>
+                <view class="list_name">出发地：</view>
+                <input class="list_inp gobyndsingle" name="address1" placeholder="请定位您的出发地" placeholderStyle="color:#999;" type="text" value="{{address}}"></input>
+                <view bindtap="add" class="blue_box1">
+                    <image mode="aspectFill" src="/assets/img/address3.png"></image>
+                </view>
+            </view>
+            <view class="list flex-center">
+                <view class="red_box"></view>
+                <view class="list_name">目的地：</view>
+                <input class="list_inp gobyndsingle" name="address2" placeholder="请定位您的目的地" placeholderStyle="color:#999;" type="text" value="{{address1}}"></input>
+                <view bindtap="add1" class="blue_box1">
+                    <image mode="aspectFill" src="/assets/img/address3.png"></image>
+                </view>
+            </view>
+            <view class="list flex-center" wx:if="{{id==1||id==2}}">
+                <view class="red_box"></view>
+                <view class="list_name">途径地：</view>
+                <input class="list_inp" name="path" placeholder="请填写途径地（没有可不填）" placeholderStyle="color:#999;" type="text"></input>
+            </view>
+            <view class="listflex">
+                <image class="list_clock" src="/assets/img/naozhong@2x.png"></image>
+                <view class="list_name">出发时间：</view>
+                <view class="">
+                    <picker bindchange="bindDateChange" mode="date" start="{{date}}">
+                        <view class="picker">
+                          请选择日期：{{date}}
+                        </view>
+                    </picker>
+                    <picker bindchange="bindTimeChange" class="list_pick" mode="time" start="{time}">
+                        <view class="picker">
+                          请选择时间{{time}}
+                        </view>
+                    </picker>
+                </view>
+            </view>
+            <view class="list flex-center" wx:if="{{id!=3&&id!=2}}">
+                <image class="list_renqun" src="/assets/img/renqun.png"></image>
+                <view class="list_name">
+                    <text wx:if="{{id==0}}">乘车人数：</text>
+                    <text wx:if="{{id==1}}">可乘人数：</text>
+                </view>
+                <picker bindchange="bindPickerChange" range="{{array}}" value="{{arr_index}}">
+                    <view>
+            {{array[arr_index]}}人
+          </view>
+                </picker>
+            </view>
+            <view class="list flex-center" wx:if="{{id==3}}">
+                <view class="blue_box"></view>
+                <view class="list_name">货物重量：</view>
+                <input class="list_inp" name="weight" placeholder="请输入货物重量，单位公斤" placeholderStyle="color:#999;" type="text"></input>
+            </view>
+            <view class="list flex-center" wx:if="{{id==2}}">
+                <image class="list_renqun" src="/assets/img/renqun.png"></image>
+                <view class="list_name">
+                    <text>车辆数量：</text>
+                </view>
+                <picker bindchange="bindPickerChange" range="{{array}}" value="{{arr_index}}">
+                    <view>
+            {{array[arr_index]}}辆
+          </view>
+                </picker>
+            </view>
+        </view>
+        <view class="section">
+            <view class="list flex-center">
+                <image class="list_renqun" src="/assets/img/wode.png"></image>
+                <view class="list_name">联系人：</view>
+                <input class="list_inp" name="contacts" placeholder="请填写联系人" placeholderStyle="color:#999;"></input>
+            </view>
+            <view class="list flex-center">
+                <image class="list_renqun" src="/assets/img/ph.png"></image>
+                <view class="list_name">手机号：</view>
+                <input class="list_inp" name="contacts_tel" placeholder="请填写联系人电话" placeholderStyle="color:#999;" type="number"></input>
+            </view>
+            <view class="list flex-center" wx:if="{{money>0}}">
+                <image class="list_renqun" src="/assets/img/dfsd.png"></image>
+                <view class="list_inp">发布一条需要{{money}}元</view>
+            </view>
+        </view>
+        <view class="prompt">
+            <view>温馨提示：</view>
+            <view>实际出发时间大概是您出发的前后十分钟，具体以司机电话为准。</view>
+        </view>
+        <view class="content">
+            <view class="">其他需求</view>
+            <view class="content_xuqiu">
+                <textarea bindinput="text" class="content_inp" name="other_demand" placeholder="简单补充说明：上车小区、时间说明等等" placeholderStyle="color:#999;" value="{{text}}" wx:if="{{duty==true}}"></textarea>
+            </view>
+            <view class="flex2">
+                <view bindtap="changeColor" class="conlabel {{item.click_class}}" id="{{index}}" wx:for="{{label}}" wx:key="*this">{{item.tagname}}</view>
+            </view>
+        </view>
+        <view class="agree flex1">
+            <view bindtap="icon_show" class="agree_icon flex1">
+                <icon color="#ED414A" hidden="{{icon_hidden}}" size="18" type="success"></icon>
+            </view>
+            <view class="">我已阅读并同意
+        <text bindtap="cancel" style="color:#ED414A">《同行平台声明》</text>
+            </view>
+        </view>
+        <view class="footer"></view>
+        <view class="confirm">
+            <button formType="submit" style="background:{{system.color}}" wx:if="{{icon_hidden==false}}">确定发布{{money}}元</button>
+            <button style="background:#d5d5d5" wx:else>确定发布  {{money}}元</button>
+        </view>
+
+  
+
+        <view class="zhezhao" hidden="{{duty}}"></view>
+        <view class="kcrzxy" hidden="{{duty}}">
+            <view class="kcrzxyhd">同行须知</view>
+            <scroll-view scrollY class="kcrzxybd" style="height: 600rpx;">
+                <rich-text nodes="{{pc_xuz}}"></rich-text>
+            </scroll-view>
+            <view bindtap="cancel" class="queren">确定</view>
+        </view>
+    </view>
+</form>

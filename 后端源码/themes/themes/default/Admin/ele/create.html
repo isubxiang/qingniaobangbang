@@ -1,0 +1,202 @@
+<include  file='public:header'/>
+<style>.tu-left-td{ width:170px;}</style>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">订餐管理</li>
+        <li class="li2">餐饮商家</li>
+        <li class="li2 li3">新增商家</li>
+    </ul>
+</div>
+<p class="attention"><span>注意：</span>很多功能需要在商家后台设置，如果您是管理员您可以点击管理商家》》》然后到商家后台设置，比如外卖留言标签，外卖时间段等功能！</p>
+<div class="main-tudou-sc-add ">
+    <div class="tu-table-box">
+        <form  target="x-frame" action="<{:U('ele/create')}>" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	
+            	<tr>
+                    <td class="tu-left-td">选择学校：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="school_id" name="data[school_id]" value="<{$detail.school_id|default=''}>"/>
+                            <input class="tudou-sc-add-text-name w210 sj" type="text" name="Name" id="Name"  value="<{$school.Name}>"/>
+                        </div>
+                        <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="seleSj">选择学校</a>
+                        <code>中途不要选择学校，请注意编辑</code>
+                    </td>
+                </tr> 
+                
+                <tr>
+                    <td  width="150" class="tu-left-td">商家：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="shop_id" name="data[shop_id]" value="<{$detail.shop_id|default=''}>"/>
+                            <input type="text" id="shop_name" name="shop_name" value="" class="tudou-manageInput w200" />
+                        </div>
+                        <a mini="select"  w="1000" h="600" href="<{:U('shop/select')}>" class="seleSj">选择商家</a>
+                    </td>
+                </tr>
+                
+                
+                 <tr>
+                    <td class="tu-left-td">营业执照：</td>
+                 <td class="tu-right-td">
+                    <div style="width:300px;height:100px; float:left;">
+                        <input type="hidden" name="data[pic1]" value="<{$detail.pic1}>" id="data_pic1" />
+                        <div id="fileToUpload1" >上传营业执照</div>
+                    </div>
+                    <div style="width:300px;height:100px;float:left;">
+                        <img id="pic1_img" width="120" height="80"  src="<{:config_img($detail['pic1'])}>" />
+                    </div>
+                    <script>                                            
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+						pick: '#fileToUpload1',                             
+						resize: true,  
+						compress :{width:800,height:600,quality:100,allowMagnify: false,crop: true}                       
+					});                                                 
+					uploader.on('uploadSuccess', function(file,resporse){                             
+						$("#data_pic1").val(resporse.url);                             
+						$("#pic1_img").attr('src',resporse.url).show();    
+						layer.msg('上传成功');                        
+					});                                                
+					uploader.on('uploadError', function(file){                             
+						layer.msg('上传出错');                         
+					});                     
+                    </script>
+                </td>
+            </tr> 
+                
+            
+             <tr>
+                 <td class="tu-left-td">卫生许可证：</td>
+                 <td class="tu-right-td">
+                    <div style="width:300px;height:100px;float:left;">
+                        <input type="hidden" name="data[pic2]" value="<{$detail.pic2}>" id="data_pic2" />
+                        <div id="fileToUpload2">上传卫生许可证</div>
+                    </div>
+                    <div style="width:300px;height:100px;float:left;">
+                        <img id="pic2_img" width="120" height="80"  src="<{:config_img($detail['pic2'])}>" />
+                    </div>
+                    <script>                                            
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+						pick: '#fileToUpload2',                             
+						resize: true,  
+						compress :{width:800,height:600,quality:100,allowMagnify: false,crop: true}                       
+					});                                                 
+					uploader.on('uploadSuccess', function(file,resporse){                             
+						$("#data_pic2").val(resporse.url);                             
+						$("#pic2_img").attr('src',resporse.url).show();  
+						layer.msg('上传成功');                         
+					});                                                
+					uploader.on('uploadError', function(file){                             
+						layer.msg('上传出错');                        
+					});                     
+                    </script>
+                </td>
+            </tr>
+            
+                
+               <tr>
+                    <td class="tu-left-td">是否打烊：</td>
+                    <td  class="tu-right-td">
+                        <label> <input type="radio" name="data[is_open]" value="1" <eq name="detail.is_open" value="1">checked="checked"</eq>  />营业中 </label>
+                        <label> <input type="radio" name="data[is_open]" value="0"  <eq name="detail.is_open" value="0">checked="checked"</eq> /> 打烊</label>
+                        <code>具体营业时间见下面</code>
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">营业时间段设置：</td>
+                    <td><input type="text" name="data[busihour]" value="<{$detail.busihour|default=''}>" class="tudou-manageInput w360"/>
+					<code>营业时间段设置范本：08:00-12:30,13:00-23:00 特别主题是英文状态下输入的：号跟-号，否则会出错，首先开启上面的营业状态然后设置下面的营业时间，留空默认全天开启</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">状态审核：</td>
+                    <td  class="tu-right-td">
+                        <label> <input type="radio" name="data[audit]" value="0" <eq name="detail.audit" value="0">checked="checked"</eq>  />审核中 </label>
+                        <label> <input type="radio" name="data[audit]" value="1"  <eq name="detail.audit" value="1">checked="checked"</eq> /> 通过</label>
+                        <label> <input type="radio" name="data[audit]" value="2"  <eq name="detail.audit" value="2">checked="checked"</eq> /> 拒绝</label>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td class="tu-left-td">所属分类：</td>
+                    <td class="tu-right-td"> 
+                        <foreach name="getEleCate" item="var" key="index">
+                            <label style="margin-right: 10px;"><span><{$var}>：</span><input type="radio" name="cate[]" value="<{$index}>"<?php if(in_array($index,$cate)){?> checked="checked" <?php }?> /></label>
+                        </foreach>   
+                </td> 
+                </tr>
+                
+                <tr><td class="tu-right-td profit" colspan="2"> 费用设置</td></tr>
+                <tr>
+                    <td class="tu-left-td">配送费：</td>
+                    <td  class="tu-right-td"><input type="text" name="data[logistics]" value="<{:round($detail['logistics']/100,2)}>" class="tudou-manageInput w80"/>
+					<code>配送费必须设置，商家固定外卖配送费，如果开启满多少减去这个配送费，那么如果是平台配送员抢单，那么这个配送费需要在结算价格里面扣除</code>
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">满多钱免配送费：</td>
+                    <td  class="tu-right-td">
+                    <input type="text" name="data[logistics_full]" value="<{:round($detail['logistics_full']/100,2)}>" class="tudou-manageInput w80"/>
+					<code style="color:#F00">客户在当前商家单笔订单超过多少钱后免配送费，如果您想给客户免配送费这里设置满减就行了，但是如果是平台配送的话配送费在结算总价里面扣除</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">起送价：</td>
+                    <td  class="tu-right-td"><input type="text" name="data[since_money]" value="<{:round($detail['since_money']/100,2)}>" class="tudou-manageInput w80"/>
+                    <code>满多少钱才能下单，低于起送价不能下单！</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">结算费率：</td>
+                    <td class="tu-right-td"><input type="text" name="data[rate]" value="<{$detail.rate|default=''}>" class="tudou-manageInput w80"/>
+                        <code style="color:#00F">千分比，比如是千分之60就填60相当于6%，不能写小数点，建议100-150结算价格跟满减没关系</code>
+                    </td>
+                </tr>
+                
+                <tr><td class="tu-right-td profit" colspan="2"> 其他设置项目</td></tr>
+                <tr>
+                    <td class="tu-left-td">卖出数：</td>
+                    <td><input type="text" name="data[sold_num]" value="<{$detail.sold_num|default=''}>" class="tudou-manageInput" />
+					<code>已售虚拟数量！</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">月卖出数：</td>
+                    <td  class="tu-right-td"><input type="text" name="data[month_num]" value="<{$detail.month_num|default=''}>" class="tudou-manageInput" />
+					<code>当月销售数量！</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">说明：</td>
+                    <td  class="tu-right-td"><textarea  name="data[intro]" cols="60" rows="4" ><{$detail.intro|default=''}></textarea>
+					<code>当前商家的简短介绍！</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">排序：</td>
+                    <td  class="tu-right-td"><input type="text" name="data[orderby]" value="<{$detail.orderby|default='100'}>" class="tudou-manageInput" />
+					<code>商家的固定排序，默认100，数字越小，排名越靠前！</code>
+                    </td>
+                </tr>
+                
+                
+            </table>
+            <div class="sm-qr-tu"><input type="submit" value="确认添加" class="sm-tudou-btn-input" /></div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

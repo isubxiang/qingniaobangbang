@@ -1,0 +1,8 @@
+{
+    "navigationBarTitleText": "结算",
+    "component": true,
+    "usingComponents": {
+        "popup": "/components/popup",
+        "dialog": "/components/dialog"
+    }
+}

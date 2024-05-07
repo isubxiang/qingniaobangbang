@@ -1,0 +1,67 @@
+<import src="../template/load-tmpl.wxml"></import>
+<view class="">
+    <view class="header">
+        <view class="header-bg">
+            <view class="balance">
+                <text class="bal-head-money">{{userSta.fundStr}}</text>
+                <navigator class="more" url="../mine/account/withdraw">提现</navigator>
+            </view>
+            <view bindtap="showFilter" class="bal-type" wx:if="{{userSta.list.length>=1}}">
+                <text class="bal-type-text">交易类型</text>
+                <image class="bal-more" src="/assets/img/bal-more.png"></image>
+            </view>
+            <view class="bal-bj">
+                <view class="bal-time">
+                    <picker bindchange="bindMultiPickerChange" mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}">
+                        <view class="bal-time-text">
+                            {{multiArray[0][ multiIndex[0] ]}}年{{multiArray[1][ multiIndex[1] ]}}月
+                        </view>
+                    </picker>
+                    <image class="bal-more" src="/assets/img/bal-time.png"></image>
+                </view>
+                <view class="bal-time">
+                    <view class="bal-money">
+                        <text class="bal-type-text">支出</text>
+                        <text class="money money-yuan money-out">￥{{userSta.outNumStr}}</text>
+                        <text class="bal-type-text"> 收入</text>
+                        <text class="money money-yuan money-in">￥{{userSta.inNumStr}}</text>
+                    </view>
+                    <view bindtap="monthSta" class="bal-time bal-money-more">
+                        <text class="bal-type-text">月账单</text>
+                        <image class="bal-more" src="/assets/img/right.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;">
+            <view class="list" wx:for="{{scoreList}}" wx:key="id">
+                <view class="hr" wx:if="{{index!=0}}"></view>
+                <view class="item">
+                    <view class="left">
+                        <text class="ellipsis name">{{item.dataTypeStr}}</text>
+                        <view class="time">{{item.createTimeStr}}</view>
+                    </view>
+                    <view class="money {{item.symbol=='-'?'money-out':'money-in'}}">
+                            {{item.varNumStr}}
+                        </view>
+                </view>
+            </view>
+            <template is="load-tmpl" data="{{reqInit:reqInit,loadProcess:loadProcess,dataSize:scoreList.length,loadingComplete:loadingComplete}}"></template>
+        </scroll-view>
+    </view>
+</view>
+<view bindtap="closeFilter" catchtouchmove="preventTouchMove" class="modal-auth-mask list-filter-mask" wx:if="{{filterShow}}">
+    <view catchtap="preventTouchMove" class="par-row list-filter-box">
+        <view class="weui-grids border-color">
+            <view catchtap="catClick" class="weui-grid border-color {{item.state==busiType?'active-box':''}}" data-state="{{item.state}}" wx:for="{{userSta.list}}" wx:key="*this">
+                <view class="weui-grid__label cat-item {{item.state==busiType?'active':''}}">{{item.name}}</view>
+            </view>
+        </view>
+        <view class="list-filter-mode">
+            <button catchtap="catClick" class="list-filter-btn list-filter-yes" data-state="-1" plain="true">清空条件
+            </button>
+        </view>
+    </view>
+</view>

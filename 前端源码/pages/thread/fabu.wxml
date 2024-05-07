@@ -1,0 +1,28 @@
+<view class="pbnavbar">
+    <view class="header">
+        <view class="header_text">免责声明：平台发布的所有信息（收费、免费）；平台只负责发布、展示，与平台本身无关，平台不负任何责任。</view>
+    </view>
+
+   
+    <view class="select flex1">
+        <view class="xian"></view>
+        <view class="select_text">请选择您要发布的栏目</view>
+        <view class="xian"></view>
+    </view>
+    <view class="content flex2">
+        <view bindtap="edit" class="content_list flex3 rel" data-id="{{item.id}}" data-index="{{index}}" wx:for="{{nav}}" wx:key="*this">
+            <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+                <button formType="submit"></button>
+            </form>
+            <image class="content_img" src="{{item.img}}"></image>
+            <view class="gobyndsingle" style="width:100%">{{item.type_name}}</view>
+        </view>
+    </view>
+    <view class="base" wx:if="{{base==true}}">
+        <view style="background:{{System.color}}">请选择发布栏目</view>
+        <view class="array">
+            <view bindtap="selected" id="{{index}}" wx:for="{{array}}">{{item}}</view>
+        </view>
+        <view bindtap="cancel">取消</view>
+    </view>
+</view>

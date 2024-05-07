@@ -1,0 +1,36 @@
+<view class="container">
+    <view class="body">
+        <view bindtap="onItemTap" class="coupon{{item.invalid?' coupon-disabled':''}}" data-index="{{index}}" hoverClass="navigator-hover" wx:for="{{model}}" wx:key="Id">
+            <view class="checked" wx:if="{{item.isSelected}}">
+                <text class="iconfont icon-check"></text>
+            </view>
+            <view class="content">
+                <view class="left">
+                    <text class="money money-rmb">{{item.Money}}</text>
+                    <view>满{{item.MoneyLimit}}可用</view>
+                </view>
+                <view class="right">
+                    <view>编码：{{item.code}}</view>
+                    <text class="ellipsis name">抵扣金额</text>
+                    <view>有效期至：{{util.formatDate(item.ExpiredTime)}}</view>
+                </view>
+            </view>
+            <view class="limit">
+                <view class="gap gap-l"></view>
+                <view class="gap gap-r"></view>
+        {{model.Remark}}
+      </view>
+        </view>
+        <view class="more" wx:if="{{!invalid&&model.length}}">
+            <text class="iconfont icon-empty"></text>
+      没有更多有效优惠券了，<navigator url="index?invalid=1">查看无效优惠券<text class="iconfont icon-right_light"></text>
+            </navigator>
+        </view>
+        <view class="more empty" wx:else>
+            <text class="iconfont icon-empty"></text>
+      没有更多有效优惠券了<navigator url="index?invalid=1" wx:if="{{!invalid}}">查看无效优惠券<text class="iconfont icon-right_light"></text>
+            </navigator>
+        </view>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

@@ -1,0 +1,34 @@
+<include  file='public:header'/>
+<style>
+.profit{text-align: center;color: #333;font-weight: bold; background: #F5F5FB;}
+.sogn{ width:120px; margin:5px 0;height: 30px;}
+</style>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">基本设置</li>
+        <li class="li2 li3">支付红包设置</li>
+    </ul>
+</div>
+<p class="attention"><span>注意：</span>这里是注册送的支付红包</p>
+<form  target="x-frame" action="<{:U('setting/pay')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            
+            <tr>
+                <td class="tu-left-td">注册赠送红包：</td>
+                <td class="tu-right-td">
+                    <input type="text" name="data[money]" value="<{$CONFIG['pay']['money']}>" class="tudou-manageInput w80"/>元
+                    <code> 填写0或者留空注册不送红包，用户支付的时候，支付金额必须大于红包金额才能使用红包，仅限于跑腿下单时候使用</code>
+                </td>
+            </tr>
+            	
+                
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input"/></div>
+    </div>
+</form>
+<include  file='public:footer'/>       

@@ -1,0 +1,102 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">会员</li>
+        <li class="li2">会员管理</li>
+        <li class="li2 li3">会员冻结金</li>
+    </ul>
+</div>
+
+
+<style>
+.shang{background:#F00; color:#FFF; padding:0 5px; margin:0 5px;}
+.delivery{background: #00F; color:#FFF; padding:0 5px; margin:0 5px;}
+</style>
+
+
+
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>
+        这里是会员冻结金列表 
+        <a class="tu-dou-btn-small-waring tudoukuaijie" mini="act" href="<{:U('app/api/returnFrozenMoney',array('type'=>'1','admin_id'=>$admin['admin_id']))}>">点击返还冻结金</a>
+    </p>
+    
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('user/create','','添加会员','load','',700,600)}>
+            </div>
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('user/recycle')}>">
+                    <div class="seleHidden" id="seleHidden">
+                    	<div class="seleK">
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text " />
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label>
+                        <label>
+                            <span>关键字</span>
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                            <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                        </label>
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+        <div class="clear"></div>
+    </div>
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="user_id" /></td>
+                    <td>ID</td>
+                    <td>账户</td>
+                    <td>昵称</td>
+                    <td>会员等级</td>
+                    <td>会员手机</td>
+                    <td>余额</td>
+                    <td>冻结金</td>
+                    <td>每天返还多少冻结金</td>
+                    <td>冻结金最后修改时间</td>
+                    <td>注册时间</td>
+                    <td class="w200">操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_user_id" type="checkbox" name="user_id[]" value="<{$var.user_id}>" /></td>
+                        <td><{$var.user_id}></td>
+                        <td><{$var.account}></td>
+                        <td><{$var.nickname}></td>
+                        <td><{$rank[$var['rank_id']]['rank_name']|default="无等级"}></td>
+                        <td><{$var.mobile}></td>
+                        <td><{:round($var['money']/100,2)}></td>
+                        <td style="color:#F00">&yen;<{:round($var['frozen_money']/100,2)}>元</td>
+                        <td>&yen;<{:round($var['frozen_today_money']/100,2)}>元</td>
+                        <td><{$var.frozen_money_time|date='Y-m-d H:i:s',###}></td>
+                        <td><{$var.reg_time|date='Y-m-d H:i:s',###}></td>
+                        <td>
+                        	<{:BA('user/frozen_money',array("user_id"=>$var["user_id"]),'设置会员冻结金','load','tu-dou-btn-small',600,350)}>
+                            <{:BA('user/frozen_edit',array("user_id"=>$var["user_id"]),'设置冻结金每天解冻多钱','load','tu-dou-btn-small',600,350)}> 
+                             
+                            <{:BA('user/frozenlogs',array("user_id"=>$var["user_id"]),'冻结金解冻列表','','tu-dou-btn-small')}>
+                            <{:BA('usermoneylogs/index',array("user_id"=>$var["user_id"]),'会员余额日志','','tu-dou-btn-small')}>     
+                        	<a target="_blank" href="<{:U('user/manage',array('user_id'=>$var['user_id']))}>" class="tu-dou-btn-small">管理用户</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

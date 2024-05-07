@@ -1,0 +1,36 @@
+<include  file='public:header'/>
+<style>.tu-left-td {width: 150px;}</style>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">基本设置</li>
+        <li class="li2 li3">搜索设置</li>
+    </ul>
+</div>
+
+<p class="attention"><span>注意：这个单独卖</span></p>
+<form  target="x-frame" action="<{:U('setting/search')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+                <tr>
+                    <td class="tu-left-td">wap搜索显示默认关键字：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[keyword]" value="<{$CONFIG.search.keyword}>" class="tudou-sc-add-text-name w150" />
+						<code>wap搜索显示默认关键字！</code>
+                    </td>
+                </tr>
+           
+            </table>
+
+        </div>
+
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+
+    </div>
+
+</form>
+
+<include  file='public:footer'/>       
+

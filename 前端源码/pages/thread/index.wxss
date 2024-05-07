@@ -1,0 +1,212 @@
+@import "../../style.wxss";
+
+
+
+
+.home-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 98%;
+    height: 60rpx;
+    padding: 35rpx 0 20rpx 3%;
+    z-index: 10;
+    background: transparent;
+}
+
+.bottomView {
+    width: 100%;
+    height: 64rpx;
+    line-height: 64rpx;
+    background: #f5f5f5;
+    padding: 20rpx 0;
+    clear: both;
+}
+
+.bottomView image {
+    width: 500rpx;
+    height: 64rpx;
+    display: block;
+    margin: 0 auto;
+}
+.home-fixed .inputButton {
+    width: 98%;
+    line-height: 56rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    margin: 0;
+}
+
+
+.nav {
+    color: #fff;
+}
+
+.nav-c {
+    background: #fff;
+    color: black;
+}
+
+.nav view,.nav-c view {
+    display: inline-block;
+}
+
+.home-communtiy {
+    max-width: 100%;
+    height: 46rpx;
+    line-height: 46rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color:#fff;
+    font-size:26rpx;
+}
+
+.home-position {
+    background-color:rgba(0,0,0,0.20);
+    border-radius:10rpx;
+    padding:0rpx 10rpx;
+}
+
+.home-inputxt {
+    float: right;
+    width: 58%;
+    height: 58rpx;
+    background: rgba(200,200,200,0.5);
+    border-radius: 30rpx;
+    margin-right: 4%;
+    position: relative;
+}
+
+.home-downicon {
+    vertical-align: top;
+    margin-top: -5rpx;
+    margin-left: 16rpx;
+}
+
+.home-inputxt input {
+    padding-left: 45rpx;
+}
+
+
+
+
+
+.llfb {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 28rpx;
+    padding: 15rpx 30rpx;
+    background: #fff;
+    border-bottom: 1rpx solid #e5e5e5;
+    color: #666;
+}
+
+.llfbrt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.llfbrt view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.llfbrt image {
+    width: 50rpx;
+    height:50rpx;
+    margin-right: 10rpx;
+}
+
+.llfbrt>view {
+    margin-right: 20rpx;
+}
+
+.llfbleft image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.banner {
+    margin-top: 0rpx;
+}
+
+.bold {
+    color: #ed414a;
+    border-bottom: 0rpx solid #ed414a;
+}
+
+.recommend {
+    width: 100%;
+    height: 88rpx;
+    margin-top: 12rpx;
+}
+
+.recommend>view:nth-child(1) {
+    width: 15%;
+    text-align: center;
+    background: #fff;
+    float: left;
+    line-height: 88rpx;
+    font-size: 30rpx;
+    box-sizing: border-box;
+    color: rgb(102,102,102);
+}
+
+.recommend>view:nth-child(2) {
+    width: 15%;
+    text-align: center;
+    background: #fff;
+    float: left;
+    line-height: 88rpx;
+    font-size: 30rpx;
+    box-sizing: border-box;
+    color: rgb(102,102,102);
+}
+
+.normal {
+    color: #999;
+}
+
+.nav-two {
+    height: 88rpx;
+    background: #fff;
+    width: 70%;
+    white-space: nowrap;
+    float: left;
+    border-bottom: none;
+}
+
+.nav-two view {
+    width: auto;
+    display: inline-block;
+    box-sizing: content-box;
+    height: 88rpx;
+    line-height: 88rpx;
+    font-size: 30rpx;
+    padding: 0 10rpx;
+}
+
+.uls {
+    height: 88rpx;
+    width: auto;
+    background: orange;
+}
+
+.listss {
+    width: auto;
+    padding: 0 20rpx;
+    height: 83rpx;
+    display: inline-block;
+    line-height: 88rpx;
+    font-size: 26rpx;
+    color: rgb(102,102,102);
+}
+
+.none_store {
+    margin-top: 4rpx;
+}

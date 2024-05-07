@@ -1,0 +1,61 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">短信模板</li>
+        <li class="li2 li3">短信宝模版</li>
+    </ul>
+</div>
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里只要是针对的短信宝接口，记住模板状态要开启哦！</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('sms/create','','添加内容')}>
+                <{:BA('smsbao/index','','短信发送记录')}>
+            </div>
+        </div>
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="sms_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>标签</td>
+                        <td>说明</td>
+                        <td>模版</td>
+                        <td class="w80">是否开启</td>
+                        <td class="w120">操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_sms_id" type="checkbox" name="sms_id[]" value="<{$var.sms_id}>" /></td>
+                            <td><{$var.sms_id}></td>
+                            <td><{$var.sms_key}></td>
+                            <td><{$var.sms_explain}></td>
+                            <td><{$var.sms_tmpl}></td>
+                            <td><eq name="var.is_open" value="1" >是<else/>否</eq></td>
+                            <td>
+                                <{:BA('sms/edit',array("sms_id"=>$var["sms_id"]),'编辑','','tu-dou-btn')}>
+                                <eq name="var.is_open" value="0"> <{:BA('sms/audit',array("sms_id"=>$var["sms_id"]),'开启','act','tu-dou-btn')}> 
+                        <else />
+                        <{:BA('sms/delete',array("sms_id"=>$var["sms_id"]),'关闭','act','tu-dou-btn')}>
+                        </eq>
+
+                        </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr">
+                <div class="left">
+                    <{:BA('sms/delete','','批量关闭','list','a2')}>
+                    <{:BA('sms/audit','','批量开启','list','tu-dou-btn')}>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+<include  file='public:footer'/>       

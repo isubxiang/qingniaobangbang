@@ -1,0 +1,98 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: #f0f0f0;
+    height: 100rpx;
+}
+
+.header .query {
+    margin: 20rpx;
+    height: 60rpx;
+    border-radius: 30rpx;
+    background: #fff;
+    padding-right: 30rpx;
+    display: flex;
+    align-items: center;
+}
+
+.header .query .region {
+    padding: 0 20rpx 0 30rpx;
+    border-top-left-radius: 30rpx;
+    border-bottom-left-radius: 30rpx;
+    font-size: 26rpx;
+    color: #666;
+    line-height: 60rpx;
+}
+
+.header .query .region .iconfont {
+    font-size: 24rpx;
+    margin-left: 8rpx;
+    color: #aaa;
+}
+
+.header .query input {
+    height: 40rpx;
+    line-height: 40rpx;
+    background: #fff;
+    flex: 1;
+    padding-left: 20rpx;
+    border-left: 1rpx solid #f0f0f0;
+}
+
+.body {
+    background: #fff;
+    margin-top: 100rpx;
+}
+
+.body .item {
+    padding: 20rpx 24rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    display: flex;
+}
+
+.body .item .title {
+    font-size: 32rpx;
+    flex: 1;
+}
+
+.body .item .iconfont {
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.body .notfound {
+    padding: 50rpx 30rpx;
+    background: #f7f7f7;
+}
+
+.body .notfound .desc {
+    font-size: 30rpx;
+    margin-bottom: 20rpx;
+    color: #aaa;
+}
+
+.body .notfound .input {
+    display: flex;
+}
+
+.body .notfound .input input {
+    border: 1rpx solid #06c1ae;
+    flex: 1;
+    height: 72rpx;
+    line-height: 72rpx;
+    padding: 0 24rpx;
+    background: #fff;
+}
+
+.body .notfound .input button {
+    width: 160rpx;
+    background: #06c1ae;
+    color: #fff;
+    height: 76rpx;
+    font-size: 30rpx;
+}

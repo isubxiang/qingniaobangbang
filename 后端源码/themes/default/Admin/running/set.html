@@ -1,0 +1,30 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">跑腿设置</li>
+        <li class="li2 li3">跑腿设置</li>
+    </ul>
+</div>
+<p class="attention"><span>注意：</span>跑腿设置写在这里</p>
+<form  target="x-frame" action="<{:U('running/set')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+                <tr>
+                    <td class="tu-left-td">跑腿类目：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="channelname" value="<{:C('cfg_channelname')}>" class="tudou-sc-add-text-name w360" />
+						<code>建议10个分类，一次设置好后期请不要修改，用,分割? demo： 二手,车辆,求职,商城,房屋,培训,招聘,服务,兼职,宠物</code>
+                    </td>
+                </tr>
+              
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

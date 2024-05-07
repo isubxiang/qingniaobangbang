@@ -1,0 +1,58 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">小程序</li>
+        <li class="li2">路径管理</li>
+        <li class="li2 li3">路径列表</li>
+    </ul>
+</div>
+<style>
+
+.tips{color: #fff; background: #1ca290; padding: 0px 5px; border-radius:0px; margin-left:0 5px; display: inline-block; float: right; height: 20px; line-height: 20px;}
+.attention {
+    height: auto;
+}
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr {
+    border: 0px solid #dbdbdb;
+    background-color: #FFF;
+}
+.tu-table-box code {
+    margin-bottom: 10px;
+}
+
+</style>
+<div class="main-tu-js main-sc">
+
+	<p class="attention">
+        <span>小程序路径：</span>更多不明白的路径联系管理员</p>
+    <div class="tudou-js-nr">
+        
+
+         <form  target="x-frame" method="post">
+            <div class="tu-table-box">
+                    
+                     <code style="color:#F00">分类格式列如：【/pages/errand/apply/index?type=23340&remark=请直接将取件短信粘贴此处。示例：【菜鸟驿站】取件码8888&start=去哪里取件&end=到哪里送货】 这里的type就是当前分类的ID，后面的remark为描述，start为开始地址，end为到货地址说明</code><br>
+                    <code>多商家格式列如：【/pages/shop/_/index?type=1】  后面这个1数字就是外卖分类列表的ID分别是1-8的数字不要乱写</code><br>
+                    <code>单商家格式列如：【/pages/shop/_/index?id=1】  后面这个1数字就是外卖商家的ID，请不要写错，否则打不开</code><br>
+                    <code>外卖商家列表：【/pages/shop/_/list?id=1】  后面这个1数字就是外卖分类的ID，请不要写错，否则打不开</code><br>
+                    <code>拼车：【/pages/shun/shun?id=1】 固定格式请勿修改</code><br>
+                    <code>拼团：【/pages/collage/index?id=1 】固定格式请勿修改</code><br>
+                    <code>信息：【/pages/thread/index?id=1】 固定格式请勿修改，如果设置tabBar请勿填写该链接</code><br>
+                    <code>个人中心推广海报：【/pages/mine/canvas/canvas?id=1】 固定格式请勿修改</code><br>
+                    <code>配送人员入驻：【/pages/mine/info/auth?id=1】 固定格式请勿修改</code><br>
+                    <code>优惠券首页：【/pages/coupon/index?id=1】 固定格式请勿修改</code><br>
+                    <code>优惠券详情：【/pages/coupon/info?id&yhqid=*&sjid=0=1】 固定格式请勿修改*用优惠券ID代替</code><br>
+                    <code>外卖商家列表：【/pages/shop/_/list?id=1】 固定格式请勿修改</code><br>
+                    <code>外卖商家列表带分类ID：【/pages/shop/_/list?id=1&cateId=*&name=*】 固定格式请勿修改cateId分类ID，name分类名称</code><br>
+                    
+                    <code>直播列表：【/pages/live/index?id=1】 直播列表</code><br>
+                  
+                    <code>站外链接：【/pages/common/content/web?url=https://paotui.jintaocms.com】 https://paotui.jintaocms.com为您的业务域名，需要小程序后台添加，这样可连接到站外</code><br>
+               
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+<include  file='public:footer'/>       

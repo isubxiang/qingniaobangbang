@@ -1,0 +1,69 @@
+@import "../balance.wxss";
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 8px;
+}
+
+.bal-more {
+    width: 16px;
+    height: 16px;
+}
+
+.bal-time {
+    display: flex;
+    align-items: center;
+    font-family: Arial,Helvetica,sans-serif;
+}
+
+.bal-time-text {
+    color: #555;
+    font-size: 14px;
+}
+
+.had-text {
+    font-size: 12px;
+    color: #898989;
+    margin-left: 10px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+}
+
+.had-text.active {
+    color: #3bbb8d;
+    border-bottom: solid 2px #3bbb8d;
+}
+
+.money-box {
+    padding: 10px 10px;
+    text-align: center;
+    background-color: #3bbb8d;
+}
+
+.money-note {
+    font-size: 12px;
+    color: #fff;
+}
+
+.money-text {
+    color: #fff;
+    font-family: Arial,Helvetica,sans-serif;
+    font-weight: bold;
+}
+
+.money-number {
+    font-size: 30px;
+}
+
+.no-data {
+    text-align: center;
+    font-size: 12px;
+    color: #222;
+    height: 30px;
+    line-height: 30px;
+}

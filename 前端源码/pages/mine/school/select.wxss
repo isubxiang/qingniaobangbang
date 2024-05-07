@@ -1,0 +1,47 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.location {
+    margin: 40rpx 30rpx;
+    height: 48rpx;
+    line-height: 48rpx;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.location .caption {
+    color: #888;
+    white-space: nowrap;
+}
+
+.location .create {
+    color: #666;
+    border-radius: 10rpx;
+    display: inline-block;
+    background: #fff;
+    padding: 0 16rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.location .relocate {
+    color: #666;
+    margin-left: 20rpx;
+    white-space: nowrap;
+    font-size: 26rpx;
+}
+
+.list {
+    background: #fff;
+}
+
+.none {
+    margin-top: 60rpx;
+    text-align: center;
+    color: #888;
+}
+
+.none .create {
+    display: inline;
+    color: #3aabea;
+}

@@ -1,0 +1,47 @@
+<view class="container">
+    <view class="body">
+        <form bindsubmit="onSubmit">
+            <view class="section">联系人</view>
+            <view class="list">
+                <view class="row">
+                    <text class="caption">姓名</text>
+                    <input bindblur="onLinkmanBlur" class="input" name="linkman" placeholder="请填写收货人姓名" value="{{model.Linkman}}"></input>
+                </view>
+                <view class="hr"></view>
+                <view class="row">
+                    <text class="caption">性别</text>
+                    <view class="value-left">
+                        <radio-group bindchange="onGenderChange" class="radio-group">
+                            <label class="radio">
+                                <radio checked="{{model.Gender!=2}}" color="#06c1ae" value="1"></radio>男
+              </label>
+                            <label class="radio">
+                                <radio checked="{{model.Gender==2}}" color="#06c1ae" value="2"></radio>女
+              </label>
+                        </radio-group>
+                    </view>
+                </view>
+                <view class="hr"></view>
+                <view class="row">
+                    <text class="caption">手机</text>
+                    <input bindblur="onPhoneBlur" class="input" name="phone" placeholder="请填写收货人手机号" value="{{model.Phone}}"></input>
+                </view>
+            </view>
+            <view class="section">地址</view>
+            <view class="list">
+                <view bindtap="onSchoolTap" class="row" hoverClass="navigator-hover">
+                    <text class="caption">校区</text>
+                    <view class="value-left">{{model.SchoolId?model.SchoolName:'请选择'}}<text class="iconfont icon-right_light"></text>
+                    </view>
+                </view>
+                <view class="hr"></view>
+                <view class="row row-addr">
+                    <text class="caption">楼名房号</text>
+                    <textarea autoHeight="true" bindblur="onAddressChanged" bindconfirm="onAddressChanged" class="input fill" name="address" placeholder="如：A区宿舍10号楼302" value="{{model.Address}}"></textarea>
+                </view>
+            </view>
+            <button class="save" formType="submit" type="primary">确定</button>
+            <view bindtap="onDelete" class="delete" wx:if="{{!!model.Id}}">删除本条地址</view>
+        </form>
+    </view>
+</view>

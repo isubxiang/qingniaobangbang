@@ -1,0 +1,70 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">支付设置</li>
+        <li class="li2">微信小程序支付</li>
+        <li class="li2 li3">微信小程序支付安装</li>
+    </ul>
+</div>
+<p class="attention"><span>注意：</span>这里不是小程序支付，别搞错了哦，这里配置后只适合小程序端支付</p>
+<form target="x-frame" action="<{:U('payment/install',array('payment_id'=>$detail['payment_id']))}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">支付方式:</td>
+                    <td class="tu-right-td">
+                        <img src="__PUBLIC__/images/<{$detail.logo}>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">支付方式介绍:</td>
+                    <td class="tu-right-td" style="font-size: 14px;">
+                        <{$detail.contents}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">AppId：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[appid]" value="<{$detail.setting.appid}>" class="tudou-sc-add-text-name w200" />
+                        <code>微信小程序后台的AppId</code>
+                    </td>
+                </tr>  
+                <tr>
+                    <td class="tu-left-td">AppSecret：</td>
+                    <td class="tu-right-td">
+                          <input type="text" name="data[appsecret]" value="<{$detail.setting.appsecret}>"  class="tudou-sc-add-text-name w360" />
+                          <code>微信小程序后台的AppSecret,跟您微信配置里面的AppSecret必须一致</code>
+                    </td>
+                </tr>  
+                 <tr>
+                    <td class="tu-left-td">商户ID：</td>
+                    <td class="tu-right-td">
+                          <input type="text" name="data[mchid]" value="<{$detail.setting.mchid}>"  class="tudou-sc-add-text-name w200" />
+                          <code>微信小程序后台左侧微信支付，支付配置里面有商户号，填写这里，不要有空格</code>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tu-left-td">商户密钥：</td>
+                    <td class="tu-right-td">
+                          <input type="text" name="data[appkey]" value="<{$detail.setting.appkey}>"  class="tudou-sc-add-text-name w360" />
+                          <code>微微信小程序后台自己设置的，记得不要有空格，否则支付失败！</code>
+                    </td>
+                </tr>
+               
+                 <tr>
+                    <td class="tu-left-td">安全码：</td>
+                     <td class="tu-right-td">
+                          <input type="text" name="data[safety]" value="******"  class="tudou-sc-add-text-name w360" />
+                          <code>输入你的网站安全码，输入错误会导致修改失败哦</code>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确定安装" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+
+
+

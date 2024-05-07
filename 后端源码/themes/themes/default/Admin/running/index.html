@@ -1,0 +1,229 @@
+<include  file='public:header'/>
+
+<style>
+.main-tu-js .tudou-js-nr .tu-select-nr .left a, .piliangcaozuo{
+	height:20px;
+    line-height: 20px;
+    border-radius:2px;
+    padding-left: 5px;
+    background-image: none;
+    padding-right: 5px;
+}
+.main-sc .tudou-js-nr .tu-select-nr .right .select {
+    margin-right: 5px;
+}
+</style>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿管理</li>
+        <li class="li2">跑腿订单</li>
+        <li class="li2 li3">跑腿列表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+  <p class="attention"><span>注意：</span>状态码：'1'='待付款','2'='待处理','4'='制作中','8'='待配送','16'='已接单','32'='配送中','64'='待评价','128'='已完成','256'='付款超时','512'='用户取消','1024'='商家取消','2048'='过期取消','4096'='后台取消','8192'='退款失败'</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+        
+        
+            <div class="left">
+            	<a href="<{:U('running/index',array('p'=>$p))}>">刷新订单</a>
+                <a <eq name="OrderStatus" value="999">class="on"</eq> href="<{:U('running/index',array('OrderStatus'=>$key))}>">全部订单</a>
+                <foreach name="getOrderStatus" key="key" item="item">
+                   <a <eq name="OrderStatus" value="$key">class="on"</eq> href="<{:U('running/index',array('OrderStatus'=>$key))}>"><{$item}></a>
+                </foreach>
+            </div>
+            
+            
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('running/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                    <div class="seleK">
+                    	<label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text"/>
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label>
+                        
+                        <label>
+                                <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                         </label> 
+
+
+                     	<label>
+                            <span>订单状态</span>
+                            <select name="OrderStatus" class="select w110">
+                                <option value="999">=请选择状态=</option>
+                                <foreach name="getOrderStatus" key="key" item="item">
+                                    <option <eq name="OrderStatus" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                                </foreach>
+                            </select>
+                        </label>
+                        
+                        <label>
+                            <span>订单类型</span>
+                            <select name="Type" class="select w110">
+                               <option value="999">=请选择类型=</option>
+                               <option <eq name="Type" value="2">selected="selected"</eq>  value="2">跑腿订单</option>
+                               <option <eq name="Type" value="1">selected="selected"</eq>  value="1">外卖订单</option>
+                            </select>
+                        </label>
+                        
+                        <label>
+                            <span>配送方式</span>
+                            <select name="is_ele_pei" class="select w110">
+                               <option value="999">=请选择配==</option>
+                               <option <eq name="is_ele_pei" value="0">selected="selected"</eq>  value="0">网站配送</option>
+                               <option <eq name="is_ele_pei" value="1">selected="selected"</eq>  value="1">商家配送</option>
+                            </select>
+						</label>
+                        
+                        <label>
+                            <span>外卖下单方式</span>
+                            <select name="orderType" class="select w110">
+                               <option value="999">=外卖下单方式==</option>
+                               <option <eq name="orderType" value="1">selected="selected"</eq>  value="1">在线点餐</option>
+                               <option <eq name="orderType" value="2">selected="selected"</eq>  value="2">到店消费</option>
+                            </select>
+						</label>
+
+
+
+                                                
+                        <label>
+                            <span>关键字</span>
+                            <input type="text" name="keyword" value="<{$keyword|default=''}>" class="tu-inpt-text" />
+                            <input type="submit" value="搜索"  class="inpt-button-tudou" />
+                            
+                            <a href="<{:U('running/export')}>" class="inpt-button-tudou">&nbsp;&nbsp;导出</a>
+                            
+                            
+                            
+                        </label>
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="running_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>学校名称</td>
+                    <td>订单类型</td>
+                    <td>配送方式</td>
+                    <td>外卖下单方式</td>
+                    <td>订单状态</td>
+                    <td>限制时间</td>
+                    <td>买家昵称</td>
+                    <td>配送员信息</td>
+                    <td>跑腿费用</td>
+                    <td>红包费用</td>
+                    <td>规格费用</td>
+                    <td>实际支付</td>
+                    <td>结算费用</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr <if condition="$var['running_id'] eq $running_id">style="background:#eee"</if>>
+                        <td><input class="child_running_id" type="checkbox" name="running_id[]" value="<{$var.running_id}>" /></td>
+                        <td><{$var.running_id}></td>
+                        <td><{$var.school.Name}></td>
+                        <td><if condition="$var['Type'] eq 2">跑腿订单<else/>外卖订单</if></td>
+                        <td><if condition="$var['is_ele_pei'] eq 1">商家配送<else/>平台配送</if></td>
+                        <td>
+                            <if condition="$var['Type'] eq 1">
+                                <if condition="$var['orderType'] eq 1">在线点餐<else/>到店消费</if>
+                            </if>
+                            <if condition="$var['Type'] eq 2">
+                            	---
+                            </if>
+                        </td>
+                        <td><{$getOrderStatus[$var['OrderStatus']]}></td>
+                        <td><{$var['ExpiredMinutes']}>分钟</td>
+                        <td><{$var.user.nickname}></td>
+                        <td><{$var.deliveryInfo}></td>
+                        <td> &yen;<{:round($var['freight']/100,2)}></td>
+                        <td> - &yen;<{:round($var['redpacket_money']/100,2)}></td>
+                        <td> + &yen;<{:round($var['attr_money']/100,2)}></td>
+                        <td> &yen;<{:round($var['need_pay']/100,2)}></td>
+                        <td style="color:#F00">&yen;<{:round($var['money']['money']/100,2)}></td>
+                        <td>
+                        	<eq name="var.OrderStatus" value="1">
+                        		<{:BA('running/deleteOrder',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn')}>
+                                <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn')}>
+                            </eq>
+                            
+                            <eq name="var.OrderStatus" value="2">
+                        		<{:BA('running/closedOrder',array("running_id"=>$var["running_id"],"p"=>$p),'关闭订单','act','tu-dou-btn')}>
+                                <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn')}>
+                            </eq>
+                            
+                            <eq name="var.files" value="1">
+                        		<{:BA('running/files',array("running_id"=>$var["running_id"],"p"=>$p),'附件','','tu-dou-btn-small-waring')}>
+                            </eq>
+                            
+                            <eq name="var.OrderStatus" value="32">
+                        		<{:BA('running/completeOrder',array("running_id"=>$var["running_id"],"p"=>$p),'完成订单','act','tu-dou-btn')}>
+                            </eq>
+                            
+                            
+                            <eq name="var.OrderStatus" value="256">
+                        		<{:BA('running/delete',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn-small')}>
+                            </eq>
+                            <eq name="var.OrderStatus" value="2048">
+                        		<{:BA('running/delete',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn-small')}>
+                            </eq>
+                            
+                            <eq name="var.OrderStatus" value="128">
+                            	<{:BA('delivery/finance',array("order_id"=>$var["running_id"],"delivery_id"=>$var["cid"],"p"=>$p),'财务','','tu-dou-btn-small')}>
+                            </eq>
+                            
+                            <eq name="var.Type" value="1">
+                        		<{:BA('running/product',array("running_id"=>$var["running_id"],"shop_id"=>$var["ShopId"],"source"=>"index","p"=>$p),'订单明细','','tu-dou-btn-small')}>
+                            </eq>
+                            
+                            <{:BA('running/detail',array("running_id"=>$var["running_id"],"p"=>$p),'详细','','tu-dou-btn-small-waring')}>
+                            
+                            <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn-small')}>
+                            <{:BA('running/complete',array("running_id"=>$var["running_id"],"p"=>$p),'强制完成','act','tu-dou-btn-small')}>
+                            
+                            <eq name="var.Type" value="2">
+                        		<{:BA('running/Printing',array("running_id"=>$var["running_id"],"p"=>$p),'打印操作','','tu-dou-btn-small-waring')}>
+                            </eq>
+                            
+                            <{:BA('paymentlogs/index',array("type"=>"running","order_id"=>$var["running_id"],"p"=>$p),'支付日志','','tu-dou-btn-small')}>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+             <{$page}>
+        </div>
+        
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

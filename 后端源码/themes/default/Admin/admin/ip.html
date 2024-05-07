@@ -1,0 +1,52 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">系统</li>
+        <li class="li2">管理员管理</li>
+        <li class="li2 li3">禁止访问IP列表</li>
+    </ul>
+</div>
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里是禁止网站访问列表</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr">
+            <div class="left">
+                <{:BA('admin/createip','','添加禁止IP段','load','',500,450)}>
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('admin/ip')}>">
+                 <div class="seleHidden" id="seleHidden">
+                    <input type="text"  class="tu-inpt-text" name="keyword" value="<{$keyword}>"/>
+                    <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                </form>
+                </div>
+            </div>
+        </div>
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50">ID</td>
+                        <td>开始IP</td>
+                        <td>结束IP</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.id}></td>
+                            <td><{$var.start}>(<{$var.start_ip_area}>)</td>
+                            <td><{$var.end}>(<{$var.end_ip_area}>)</td>
+                            <td>
+                                <{:BA('admin/editip',array("id"=>$var["id"]),'编辑','load','tu-dou-btn',500,450)}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+                <{$page}>
+            </div>
+        </form>
+
+    </div>
+</div>
+<include  file='public:footer'/>       

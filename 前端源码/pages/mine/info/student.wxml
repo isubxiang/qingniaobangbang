@@ -1,0 +1,29 @@
+<view class="list body">
+    <view class="stamp" wx:if="{{model.IsVerified==0}}">
+        <text>审核中</text>
+    </view>
+    <view class="row">
+        <text class="caption">姓名</text>
+        <view class="value">{{model.RealName}}</view>
+    </view>
+    <view class="hr"></view>
+    <view class="row">
+        <text class="caption">学号</text>
+        <view class="value">{{model.StudentCode}}</view>
+    </view>
+    <view class="hr"></view>
+    <view class="row">
+        <text class="caption">学校</text>
+        <view class="value">{{model.SchoolName}}</view>
+    </view>
+    <view class="hr"></view>
+    <view class="row">
+        <text class="caption">院系</text>
+        <view class="value">{{model.Department}}</view>
+    </view>
+    <view class="hr"></view>
+    <view class="row">
+        <text class="caption">专业</text>
+        <view class="value">{{model.Major}}</view>
+    </view>
+</view>

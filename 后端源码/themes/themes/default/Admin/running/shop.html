@@ -1,0 +1,94 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿系统</li>
+        <li class="li2">商家管理</li>
+        <li class="li2 li3">学校商家列表</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里是学校商家列表  当前学校【<{$detail['Name']}>】</p>
+    <div class="tudou-js-nr">
+    
+    
+        <div class="tu-select-nr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('running/schoolShopPublish',array('school_id'=>$school_id),'添加商家')}>
+                <{:BA('running/shop',array('school_id'=>$school_id),'刷新本页','','',600,360)}>
+            </div>
+            <form method="post" action="<{:U('running/school',array('school_id'=>$school_id))}>">
+            	<input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                <div class="right">
+                     <div class="seleK">
+                         <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                    	</label>
+                        
+                        
+                       	<label>
+                            <input type="hidden" id="shop_id" name="shop_id" value="<{$shop_id|default=''}>"/>
+                            <input type="text"   id="shop_name" name="shop_name" value="<{$shop_name}>" class="text " />
+                            <a mini="select"  w="1000" h="600" href="<{:U('ele/select')}>" class="sumit">选择商家</a>
+                        </label>
+                        
+                        
+                        <input type="text" name="keyword" placeholder=" 输入关键字"  value="<{$keyword}>" class="tu-inpt-text"/>
+                        <input type="submit" value="  搜索"  class="inpt-button-tudou"/>
+                    </div>
+                </div>
+           </form>
+        </div>
+ 
+ 
+ 
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="id"/></td>
+                        <td class="w50">ID</td>
+                        <td>学校ID</td>
+                        <td>商家ID</td>
+                        <td>商家名称</td>
+                        <td>商家地址</td>
+                        <td>商家图片</td>
+                        <td>排序</td>
+                        <td>创建时间</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_id" type="checkbox" name="id[]" value="<{$var.id}>"/></td>
+                            <td><{$var.id}></td>
+                            <td><{$var.school_id}></td>
+                            <td><{$var.shop_id}></td>
+                            <td><{$var['ele']['shop_name']}></td>
+                            <td><a href="<{:config_weixin_img($var['shop']['photo'])}>" class="tooltip"><img src="<{:config_img($var['shop']['photo'])}>" class="w80"></a></td>
+                            <td><{$var['shop']['addr']}></td>
+                            <td><{$var.orderby}></td>
+                            <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                            <td>
+                            	<{:BA('running/product',array("shop_id"=>$var['shop_id'],'source'=>'shop'),'订单明细','','tu-dou-btn-small')}>
+                                <{:BA('running/schoolShopPublish',array("school_id"=>$var["school_id"]),'编辑','','tu-dou-btn')}>
+                                <{:BA('running/schoolShopDelete',array("school_id"=>$var["school_id"]),'删除','act','tu-dou-btn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr">
+                <div class="left">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       
+

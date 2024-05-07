@@ -1,0 +1,40 @@
+<view bindtap="chooseItem" class="cha-box cha-title" data-exam="{{item.exam}}" data-fee="{{item.totalFeeStr}}" data-id="{{item.id}}" wx:for="{{rankList}}" wx:key="id">
+    <icon class="cha-img" color="#3bbb8d" type="{{selectItem==item.id?'success':'circle'}}"></icon>
+    <view class="member-box">
+        <view>
+            <text class="member-title">{{item.rankTypeStr}}</text>
+            <text class="que-list-title" wx:if="{{item.exam==0}}">(充值后可做所有试题)</text>
+        </view>
+        <view class="que-list-bottom">
+            <view class="ms-nav-content">已有{{item.personNumStr}}人购买</view>
+            <view>
+                <text class="que-list-money">{{item.totalFeeStr}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="weui-cells weui-cells_form cha-box" wx:if="{{reqInit}}">
+    <view bindtap="fundClick" class="weui-cell">
+        <view class="weui-cell__hd">
+            <label class="weui-label">账户余额</label>
+            <view wx:if="{{!rechargeHide}}">
+                <button catchtap="rechargeClick" class="change-recharge">去充值</button>
+            </view>
+        </view>
+        <view class="weui-cell__bd change-add">
+            <text class="">可用余额：{{fundStr}}元</text>
+            <icon class="change-img change-margin-right" color="#3bbb8d" type="{{payType=='fund'?'success':'circle'}}"></icon>
+        </view>
+    </view>
+    <view bindtap="wxPayClick" class="weui-cell">
+        <view class="weui-cell__hd">
+            <label class="weui-label">{{payAgent}}</label>
+        </view>
+        <view class="weui-cell__bd change-add">
+            <text class=""></text>
+            <icon class="change-img change-margin-right" color="#3bbb8d" type="{{payType=='wx'?'success':'circle'}}"></icon>
+        </view>
+    </view>
+</view>
+<button bindtap="onFormSubmit" class="mem-btn" plain="true" type="default" wx:if="{{reqInit}}">{{checkOutPayText}}
+</button>

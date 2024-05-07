@@ -1,0 +1,4 @@
+.weui-btn {
+    background-color: #3bbb8d!important;
+    color: #fff!important;
+}

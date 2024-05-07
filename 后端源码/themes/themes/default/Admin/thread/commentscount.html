@@ -1,0 +1,60 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">信息</li>
+        <li class="li2">帖子评论</li>
+        <li class="li2 li3">评论月统计</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>按月统计</p>
+    <div class="tudou-js-nr">
+        
+        <form method="post" action="<{:U('thread/commentsCount')}>">
+            <div class="tu-select-nr tu-select-nr2" style="display: block;">
+                <div class="left">
+                    <div class="seleK">
+                  
+                        <label>
+                            <span>月份</span>
+                            <input type="text" name="month" value="<{$month|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM'});"  class="text" />
+                        </label>
+                         <label>
+                                <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                                <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text " />
+                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                            </label>
+                    </div>
+                </div>
+                <div class="right">
+                    <input type="submit" value=" 搜索"  class="inpt-button-tudou"/>
+                </div>
+        </form>
+        <div class="clear"></div>
+    </div>
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td>会员ID </td>
+                    <td>会员昵称 </td>
+                    <td>月份    </td>
+                    <td>数量</td>
+                  
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                    	<td><{$var.user_id}></td>
+                        <td><{$users[$var['user_id']]['nickname']}></td>
+                        <td><{$var.m}></td>
+                        <td><{$var['money']}></td>
+                
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  

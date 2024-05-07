@@ -1,0 +1,12 @@
+<view class="container">
+    <view class="body">
+        <view class="list">
+            <view bindtap="onOrderListDefaultTap" class="row" hoverClass="navigator-hover">
+                <text class="caption">订单列表默认项</text>
+                <text class="value value-holder">{{orderListDefault}}</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+        </view>
+        <view class="remark">修改后，我的订单列表界面将默认展示所选项</view>
+    </view>
+</view>

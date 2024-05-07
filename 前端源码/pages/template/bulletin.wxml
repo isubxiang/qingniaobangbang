@@ -1,0 +1,16 @@
+<template name="pub-bulletin">
+    <scroll-view class="container" wx:if="{{noticeList.length>=1}}">
+        <view class="scrolltxt">
+            <image class="notice-img" src="/img/notice.png"></image>
+            <view class="marquee_box">
+                <view class="marquee_text" style="transform: translateX(-{{marqueeDistance}}px)">
+                    <block wx:for="{{noticeList}}" wx:key="id">
+                        <text style="margin-right:20px;"></text>
+                        <view bindtap="toNotice" class="marquee-text-info {{item.dataType==1?'warning':''}}" data-id="{{item.id}}">{{index+1}}、{{item.title}}
+            </view>
+                    </block>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</template>

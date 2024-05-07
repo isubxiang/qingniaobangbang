@@ -1,0 +1,139 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿系统</li>
+        <li class="li2">配送员管理</li>
+        <li class="li2 li3">配送员列表</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里是跑腿的配送员列表，审核状态在编辑里面</p>
+    <div class="tudou-js-nr">
+    
+    
+        <div class="tu-select-nr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('running/deliveryPublish',array('school_id'=>$detail['school_id'],'date'=>$date),'添加配送员')}>
+                <{:BA('running/delivery',array('school_id'=>$detail['school_id']),'刷新本页','','',600,360)}>
+            </div>
+            <form method="post" action="<{:U('running/delivery',array('school_id'=>$detail['school_id']))}>">
+                <div class="right">
+                     <div class="seleK">
+                         <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                    	</label>
+                        
+                         <label>
+                            <span>审核状态：</span>
+                            <select class="select w120" name="audit">
+                             <option <eq name="audit" value="999">selected="selected"</eq> value="999">请选择</option>
+                                <foreach name="getDeliveryAudits" key="key" item="item">
+                                    <option <eq name="audit" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                                </foreach>
+                            </select>
+                        </label>
+                       <label>
+                                <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                            </label>
+                         <label> 
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text " />
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label>
+                        <input type="text" name="keyword" placeholder=" 输入关键字"  value="<{$keyword}>" class="tu-inpt-text"/>
+                        <input type="submit" value="  搜索"  class="inpt-button-tudou"/>
+                    </div>
+                </div>
+           </form>
+        </div>
+ 
+ 
+ 
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="delivery_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>会员ID</td>
+                        <td>学校ID</td>
+                        <td>实名</td>
+                        <td>身份证</td>
+                        <td>男女</td>
+                        <td>手机</td>
+                        <td>审核状态</td>
+                        <td>保证金</td>
+                        <td>保证金状态</td>
+                        <td>通知状态</td>
+                        <td>绑定公众号状态</td>
+                        <td>接单开始时间</td>	
+                        <td>接单结束时间</td>
+                        <td>申请时间</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_delivery_id" type="checkbox" name="delivery_id[]" value="<{$var.delivery_id}>"/></td>
+                            <td><{$var.delivery_id}></td>
+                            <td><{$var.user_id}></td>
+                            <td><{$var.school_id}></td>
+                            <td><{$var.RealName}></td>
+                            <td><{$var.IdCode}></td>
+                            <td>  
+                            	<eq name="var.Gender" value="1">男</eq>
+                                <eq name="var.Gender" value="2">女</eq>
+                                <eq name="var.Gender" value="0">未选择</eq>
+                            </td>
+                            <td><{$var.phoneNumber}></td>
+                            <td><{$getDeliveryAudits[$var['audit']]}></td>
+                            
+                            <td style="color:#F00"> &yen; <{:round($var['deposit']/100,2)}> 元</td>
+                            
+                            <td><{$getDeliveryDeposit[$var['is_deposit']]}></td>
+                            
+                            <td>  
+                            	<eq name="var.notifyFlag" value="1">接受消息</eq>
+                                <eq name="var.notifyFlag" value="0">不接受消息</eq>
+                            </td>
+                            <td>  
+                                <eq name="var.bindFlag" value="1">已绑定</eq>
+                                <eq name="var.bindFlag" value="0">未绑定</eq>
+                            </td>
+                            <td><{$var.notifyFrom}></td>	
+                            <td><{$var.notifyEnd}></td>
+                        
+                            <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                            <td>
+                            
+                                <eq name="var.is_deposit" value="2">
+                                	<{:BA('running/userDepositThaw',array("delivery_id"=>$var["delivery_id"],"is_deposit"=>2),'确认解冻','act','tu-dou-btn-small')}>
+                                </eq>
+                                
+                            
+                                <{:BA('running/deliveryPublish',array("delivery_id"=>$var["delivery_id"]),'编辑','','tu-dou-btn')}>
+                                <{:BA('running/finance',array("delivery_id"=>$var["delivery_id"]),'财务','','tu-dou-btn')}>
+                                <{:BA('running/deliveryDelete',array("delivery_id"=>$var["delivery_id"]),'删除','act','tu-dou-btn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr">
+                <div class="left">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       
+

@@ -1,0 +1,65 @@
+<view class="container">
+
+
+   
+
+    <view class="body">
+    
+    <view catchtap="tosearch" class="searchBox">
+        <image class="ico_search" mode="aspectFit" src="/assets/img/quan_sou.png"></image>
+        <input disabled="true" placeholder="请输入商家名称或商品名称"></input>
+    </view>
+
+
+      <swiper autoplay="true" circular="true" class="classify" duration="1000" indicatorActiveColor="{{System.color}}" indicatorColor="#f2f2f2" indicatorDots="{{nav.length>1}}" interval="4000" style="height:{{height}}rpx" wx:if="{{nav.length>0}}">
+        <swiper-item wx:for="{{nav}}" wx:key="{{item.value}}">
+            <view bindtap="jump" data-id="{{item.id}}" data-name="{{item.type_name}}" wx:for="{{item}}" wx:key="{{item.value}}">
+                <view class="classify_logo rel">
+                    <image class="ab udlr" mode="aspectFill" src="{{item.img}}" style="border-radius:10rpx;"></image>
+                </view>
+                <view class="classify_name center gobyndsingle {{item.id==cateId?'actived':''}}">{{item.type_name}}</view>
+            </view>
+        </swiper-item>
+    </swiper>
+
+        
+        <view class="body-list">
+            <view class="item {{item.IsClosed==1?'actived':''}}" wx:for="{{model}}" wx:key="Id">
+                <navigator url="index?id={{item.shop_id}}&cate_id={{item.cate}}"></navigator>
+                <image class="logo" src="{{item.img}}"></image>
+                <view>
+                    <text class="name">{{item.shop_name}}</text>
+                    <view class="grade">
+                        <view class="left">
+                            <text class="score">
+                                <text class="iconfont icon-star_fill"></text>
+                                <text class="iconfont icon-star_fill"></text>
+                                <text class="iconfont icon-star_fill"></text>
+                                <text class="iconfont icon-star_fill"></text>
+                                <text class="iconfont icon-star_half"></text>
+                                <text class="value">{{item.score}}</text>
+                            </text>
+                            <text class="sale">月销{{item.sold_num}}单</text>
+                            <text class="sale IsClosed" wx:if="{{item.IsClosed==1}}">已打样</text>
+                        </view>
+                        <view class="right">
+                            <text class="distance"></text>
+                            <text class="minutes"></text>
+                        </view>
+                    </view>
+                    <view class="desc">
+                        <text class="money">{{item.SinceMoney}}元起送</text>
+                        <text class="money">配送费{{item.Logistics}}元</text>
+                    </view>
+                    <view class="promotions">
+                        <view>
+                            <text>促</text>总价满{{item.LogisticsFull}}元免配送费</view>
+                    </view>
+                </view>
+            </view>
+			
+			
+            
+        </view>
+    </view>
+</view>

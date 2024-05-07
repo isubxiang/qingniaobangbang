@@ -1,0 +1,51 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">帖子</li>
+        <li class="li2">帖子回复</li>
+        <li class="li2 li3">添加回复</li>
+    </ul>
+</div>
+<div class="main-tudou-sc-add ">
+
+    <div class="tu-table-box">
+        <form  target="x-frame" action="<{:U('threadpost/comments_create',array('comment_id'=>$detail['comment_id'],'post_id'=>$post_id))}>" method="post">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">帖子ID：</td>
+                     <td class="tu-right-td"><input type="text" name="data[post_id]" value="<{$detail.post_id|default=''}>" class="tudou-manageInput" />
+
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">用户：</td>
+                     <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" class="tudou-manageInput" />
+                            <input type="text" name="nickname" id="nickname"  value="" class="tudou-manageInput"/>
+                        </div>
+                        <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="tu-dou-btn">选择用户</a>
+                    </td>
+                </tr> 
+                
+               <tr>
+                    <td class="tu-left-td">
+                        回复内容：
+                    </td>
+                    <td class="tu-right-td">
+                        <textarea name="data[contents]" cols="50" rows="5"><{$detail.contents}></textarea>
+                        <code>回复的内容编辑</code>
+                    </td>
+                </tr>
+                 <tr>
+                    <td colspan="2">
+                        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

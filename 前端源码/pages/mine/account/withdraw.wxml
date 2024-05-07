@@ -1,0 +1,76 @@
+<view class="container">
+    <modal  confirmColor="#06c1ae" confirmText="我知道了" hidden="{{modalType!='explain'}}" noCancel="true" title="提现说明">
+        <view class="modal-content">
+            <text>1. 单次提现金额必须大于等于{{model.MoneyMinWithdraw}}元；</text>
+            <text>2. 已评价订单，赏金须在评价次日23:59:59后才计入可提现金额。</text>
+            <text>3. 未评价已完成订单，赏金须在完成起第七日23:59:59后才计入可提现金额。</text>
+        </view>
+    </modal>
+    <view class="header">
+        <form bindsubmit="onWithdrawSubmit" reportSubmit="true">
+            <view class="list">
+                <view class="row avatar">
+                    <text class="caption">余额</text>
+                    <view class="value">{{util.formatMoney(model.Balance)}}</view>
+                </view>
+                <view class="hr"></view>
+                <view class="row">
+                    <view class="caption">可提现金额<text class="iconfont icon-questionfill"></text>
+                    </view>
+                    <view class="value">{{util.formatMoney(model.MoneyUsable)}}</view>
+                </view>
+
+
+                <view class="hr"></view>
+                <view class="row">
+                    <text class="caption">本次提现金额</text>
+                    <input bindinput="onMoneyInput" class="value" focus="true" name="money" placeholder="0.00" type="digit"></input>
+                </view>             
+
+                <view class="hr" wx:if="{{is_alipay_cash=='1'}}"></view>
+                <view class="row" wx:if="{{is_alipay_cash=='1'}}">
+                    <text class="caption">姓名</text>
+                    <input  class="value"  name="alipay_real_name" placeholder="输入支付宝名字" type="text"></input>
+                </view>
+                <view class="hr" wx:if="{{is_alipay_cash=='1'}}"></view>
+                <view class="row" wx:if="{{is_alipay_cash=='1'}}">
+                    <text class="caption">支付宝账户</text>
+                    <input  class="value"  name="alipay_account" placeholder="输入支付宝账户" type="text"></input>
+                </view>
+
+
+                <view class="hr"></view>
+                <view class="row">
+                    <text class="caption">提现说明</text>
+                    <input  class="value"  name="info" placeholder="输入提现备注" type="text"></input>
+                </view>
+                <view class="hr"></view>
+                <view class="row2 avatar">
+                    <view class="value2">如填写了支付宝信息则默认支付宝提现方式，提现最低{{model.cashMoney}}元，最高{{model.cashMoneyBig}}元，手续费{{model.cashCommission}}%</view>
+                </view>
+
+
+                <view class="btns">
+                    <button disabled="{{!buttonEnabled}}" formType="submit" type="primary">提现</button>
+                </view>
+            </view>
+        </form>
+    </view>
+    <view class="body">
+        <view class="section">提现记录</view>
+        <view class="item" wx:if="model.Logs.length">
+            <view class="empty">暂无记录</view>
+        </view>
+        <block wx:for="{{model.Logs}}" wx:key="index">
+            <view class="hr" wx:if="{{index>0}}"></view>
+            <view class="item">
+                <view class="left">
+                    <text class="ellipsis name">{{item.Remark}}</text>
+                    <view class="time">{{util.formatDate(item.CreatedTime,'minute')}}</view>
+                </view>
+                <view class="money money-out">{{item.Money}}</view>
+            </view>
+        </block>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

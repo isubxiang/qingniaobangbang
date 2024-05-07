@@ -1,0 +1,187 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">会员</li>
+        <li class="li2">会员管理</li>
+        <li class="li2 li3">会员管理</li>
+    </ul>
+</div>
+<style>
+.seleK{height: 30px;}
+.seleK label {margin-bottom: 10px;}
+.main-sc .tudou-js-nr .tu-select-nr .right span{line-height:30px; height:30px; padding-right: 0;}
+.seleK .text{height: 28px; width:120px !important;}
+.seleK .sumit{height:30px;padding-left:27px;background-position:6px center;padding-right:10px;line-height:30px}
+.main-sc .tudou-js-nr .tu-select-nr .right .select{height: 30px; line-height: 30px;width: 80px;margin-right:5px}
+.tu-inpt-text{width: 120px; height: 28px; line-height: 30px;}
+.inpt-button-tudou{height:36px;line-height:30px;background:rgb(0, 153, 204); width:70px;text-align: center;}
+.weixin{ background:#44b549!important;}
+.shang, .delivery, .weibo, .qq, .weixin{color:#FFF; padding:0 3px; margin:0 2px;}
+.shang{ background:#F00; }
+.delivery{ background: #00F;}
+.weibo{ background:#903;}
+.qq{ background:#09F}
+.weixin{ background:#0C0;}
+</style>
+
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>即将增加设置冻结金功能，冻结金无法提现，管理员可以解冻</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('user/create','','添加会员','load','',700,600)}>
+                <a class="tu-dou-btn export"  href="javascript:void(0);" rel="<{:U('user/export_code')}>" admin_id="<{$admin.admin_id}>" info="导出会员">导出会员</a>
+            </div>
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('user/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                    
+                    <div class="seleK">
+                     <label><span>开始时间</span><input type="text" name="bg_date" placeholder=" 注册开始时间" value="<{$bg_date|default=''}>"onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});" class="text"/></label>
+                        <label><span>结束时间</span><input type="text" name="end_date"  placeholder=" 注册结束时间" value="<{$end_date|default=''}>"onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});" class="text"/></label>
+                        <label>
+                            <span>账户</span>
+                            <input type="text" placeholder=" 账户、昵称、手机号" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                        </label>
+                        
+                        
+                        <label>
+                            <span>登录锁定状态</span>
+                            <select name="is_lock" class="select w80">
+                                <option value="999">请选择</option>
+                                <option <eq name="is_lock" value="1">selected="selected"</eq>  value="1">已锁定</option>
+                                <option <eq name="is_lock" value="0">selected="selected"</eq>  value="0">未锁定</option>
+                            </select>
+                        </label>
+                        
+                
+                                                
+                         <label>
+                            <span>用户等级：</span>
+                            <select name="rank_id" class="select w100">
+                                <option value="0">请选择</option>
+                                <foreach name="ranks" item="item">           
+                                    <option <eq name="item.rank_id" value="$rank_id">selected="selected"</eq>  value="<{$item.rank_id}>"><{$item.rank_name}></option>
+                                </foreach>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                        </label>
+                    </div> 
+                     </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="user_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>学校ID</td>
+                    <td>账户</td>
+                    <td>昵称</td>
+                    <td>fuid1</td>
+                    <td>fuid2</td>
+                    <td>fuid3</td>
+                    <td>头像</td>
+                    <td>手机</td>
+                    <td>会员等级</td>
+                    <td>余额</td>
+                    <td>积分</td>
+                    <td>商户资金</td>
+                    <td>通知状态</td>
+                    <td>绑定公众号状态</td>
+                    <td>接单开始时间</td>	
+                    <td>接单结束时间</td>
+                    <td>登录状态</td>
+                    <td>注册时间(IP)</td>
+                    <td class="w200">操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_user_id" type="checkbox" name="user_id[]" value="<{$var.user_id}>" /></td>
+                        <td><{$var.user_id}></td>
+                        <td><{$var.school_id}></td>
+                        <td>
+                            <if condition="!empty($var['account'])">
+                                <{$var.account}>
+                            </if>
+                            <eq name="var.is_shop" value="1"><span class="shang">商</span></eq>
+                            <eq name="var.is_weixin" value="1"><span class="weixin">微信</span></eq>
+                        </td>
+                        <td><{$var.nickname}></td>
+                        <td><{$var.fuid1}></td>
+                        <td><{$var.fuid2}></td>
+                        <td><{$var.fuid3}></td>
+                        <td><a href="<{:config_weixin_img($var['face'])}>" class="tooltip"><img style="border-radius:50%" src="<{:config_img($var['face'])}>" class="w80"></a></td>
+                        <td><{$var['mobile']|default='未绑定手机'}><br/></td>
+                        <td><{$rank[$var['rank_id']]['rank_name']|default='无等级'}><br/></td>
+                        <td>&yen; <{:round($var['money']/100,2)}></td>
+                        <td><{$var.integral}></td>
+                        <td>&yen; <{:round($var['gold']/100,2)}></td>
+                      
+                        <td>  
+                            <eq name="var.notifyFlag" value="1">接受消息</eq>
+                            <eq name="var.notifyFlag" value="0">不接受消息</eq>
+                        </td>
+                        <td>  
+                            <eq name="var.bindFlag" value="1">已绑定</eq>
+                            <eq name="var.bindFlag" value="0">未绑定</eq>
+                        </td>
+                        <td><{$var.notifyFrom}></td>	
+                        <td><{$var.notifyEnd}></td>
+                        
+                        <td><eq name="var.is_lock" value="1">已锁定<else/>未锁定</eq></td>
+                        
+                        <td>
+                            <{$var.reg_time|date='Y-m-d H:i:s',###}><br/>
+                            <{$var.reg_ip}><br>(<{$var.reg_ip_area}>)
+                        </td>
+                        
+                    <td class="w200">
+                        <{:BA('user/integral',array("user_id"=>$var["user_id"]),'积分','load','tu-dou-btn-small',600,350)}>
+                        <{:BA('user/money',array("user_id"=>$var["user_id"]),'余额','load','tu-dou-btn-small',600,350)}>
+                        <{:BA('usermoneylogs/index',array("user_id"=>$var["user_id"]),'余额日志','','tu-dou-btn-small-waring')}>
+                        
+                        
+                        <{:BA('user/edit',array("user_id"=>$var["user_id"]),'编辑','load','tu-dou-btn-small',700,600)}>
+                        <{:BA('user/delete',array("user_id"=>$var["user_id"]),'删除','act','tu-dou-btn-small')}>
+                        <eq name="var.closed" value="-1">
+                        	<{:BA('user/audit',array("user_id"=>$var["user_id"]),'审核通过','act','tu-dou-btn-small')}>
+                        </eq>  
+                        <eq name="var.is_shop" value="1">
+                            <{:BA('user/gold',array("user_id"=>$var["user_id"]),'商户资金','load','tu-dou-btn-small-waring',600,350)}>  
+                        </eq>
+                        <{:BA('user/binding',array("uid"=>$var["user_id"]),'绑定信息','','tu-dou-btn-small-waring')}>
+                        
+                    </td>
+                    
+                    
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <{:BA('user/audit','','批量审核','list',' tu-dou-btn')}>
+                <{:BA('user/delete','','批量删除','list',' a2')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+            
+        </script>
+        
+        
+<include  file='public:footer'/>  
+
+

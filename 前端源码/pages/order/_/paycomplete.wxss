@@ -1,0 +1,33 @@
+page {
+    background: #fff;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.body icon {
+    margin-bottom: 30rpx;
+    margin-top: 200rpx;
+}
+
+.body .title {
+    font-size: 36rpx;
+    color: #ff9800;
+    margin-bottom: 100rpx;
+}
+
+.body view {
+    font-size: 30rpx;
+    width: 80%;
+    text-align: center;
+    color: #666;
+}
+
+.body view text {
+    font-weight: 700;
+    margin-right: 4rpx;
+    color: #3aabea;
+}

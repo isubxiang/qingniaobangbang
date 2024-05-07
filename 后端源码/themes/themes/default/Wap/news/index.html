@@ -1,0 +1,60 @@
+<include file="public:header"/>
+
+<script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
+<div class="blank-20"></div>
+
+
+<div class="list-media-x" id="list-media">
+	<ul>
+		<div class="container">
+			<div class="container text-center">
+				<a class="button button-block button-big bg-dot" onclick="navigateTo('<{$src}>')">公众号菜单进入小程序</a>
+			</div>
+		</div>
+        
+        <div class="container">
+
+			<div class="padding-large">
+				<img src="<{:config_weixin_img($CONFIG['site']['wxcode'])}>" width="90%"/>
+			</div>
+			<p class="text-center">关注公众号</p>
+
+		</div>
+        
+	</ul>
+</div>
+
+<script>
+
+wx.config({
+	debug: false,
+	appId: '<{$signPackage.appId}>',
+	timestamp: '<{$signPackage.timestamp}>',
+	nonceStr: '<{$signPackage.nonceStr}>',
+	signature: '<{$signPackage.signature}>',
+	jsApiList: ['invokeMiniProgramAPI','checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone']
+});
+
+function navigateTo(src){
+	var src = src;
+	console.log(src)
+	
+	if(src){
+		wx.miniProgram.navigateTo({
+			url:'/pages/errand/_/index',
+			success: function(){
+			layer.closeAll();
+				console.log('success')
+			},
+			fail: function(){
+				console.log('fail');
+			},
+			complete:function(){
+				console.log('complete');
+			}
+      	});
+ 	}
+}	
+
+</script>

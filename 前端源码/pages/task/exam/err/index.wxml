@@ -1,0 +1,16 @@
+<import src="../../../template/load-tmpl.wxml"></import>
+<scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;">
+    <view bindtap="chooseItem" class="use-box cha-title err-padding" data-id="{{item.id}}" wx:if="{{item.show}}" wx:for="{{examList}}" wx:key="id">
+        <view class="cha-title-text">
+            <view class="ms-nav-mn">
+                <text class="que-list-title">{{item.paperName}}</text>
+            </view>
+            <view class="que-list-bottom">
+                <view class="ms-nav-content">错题数：<text class="ms-nav-ym">{{item.errCnt}}</text>
+                </view>
+            </view>
+        </view>
+        <image class="cha-img" src="/assets/img/right.png"></image>
+    </view>
+    <template is="load-tmpl" data="{{reqInit:reqInit,loadProcess:loadProcess,dataSize:examList.length,loadingComplete:loadingComplete}}"></template>
+</scroll-view>

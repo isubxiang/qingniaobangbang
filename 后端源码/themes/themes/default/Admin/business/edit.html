@@ -1,0 +1,51 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+     <li class="li1">设置</li>
+        <li class="li2">商圈设置</li>
+        <li class="li2 li3">编辑商圈</li>
+    </ul>
+</div>
+
+<div class="listBox clfx">
+    <div class="menuManage">
+        <form target="x-frame" action="<{:U('business/edit',array('business_id'=>$detail['business_id'],'area_id'=>$area_id))}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                        <tr>
+                            <td class="tu-left-td">商圈名称：</td>
+                            <td class="tu-right-td"><input type="text" name="data[business_name]" value="<{$detail.business_name|default=''}>" class="tudou-manageInput" />
+                            </td>
+                        </tr>  
+                        
+                          <tr>
+                            <td class="tu-left-td">管理账户：</td>
+                            <td class="tu-right-td">
+                                <div class="lt">
+                                    <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" class="tudou-manageInput" />
+                                    <input class="tudou-sc-add-text-name sj" type="text" name="nickname" id="nickname"  value="<{$user.nickname}>" />
+                                </div>
+                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="seleSj">选择账户</a>
+                            </td>
+                        </tr> 
+                         <tr>
+                            <td class="tu-left-td">分成比例：</td>
+                            <td class="tu-right-td"><input type="text" name="data[ratio]" value="<{:round($detail['ratio']/100,2)}>" class="tudou-sc-add-text-name"/>%
+                            <code>预留字段，百分比费率，用于管理员提成</code>
+                            </td>
+                        </tr> 
+                        <tr>
+                            <td class="tu-left-td">排序：</td>
+                            <td class="tu-right-td"><input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="tudou-manageInput" />
+                                <code>数字越小排序越高</code>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sm-qr-tu"><input type="submit" value="确定编辑" class="sm-tudou-btn-input" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>

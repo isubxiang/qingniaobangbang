@@ -1,0 +1,50 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">模版管理</li>
+        <li class="li2">SEO模版</li>
+        <li class="li2 li3">编辑模板</li>
+    </ul>
+</div>
+<form target="x-frame" action="<{:U('seo/edit',array('seo_id'=>$detail['seo_id']))}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">全局可用标签：</td>
+                    <td class="tu-right-td" style="font-size: 14px;">站点名称{sitename},客服电话{tel},分站城市名称{city_name}</td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">标签：</td>
+                    <td class="tu-right-td"><input type="text" name="data[seo_key]" value="<{$detail.seo_key|default=''}>" class="tudou-manageInput" />
+
+                    </td>
+                </tr><tr>
+                    <td class="tu-left-td">说明：</td>
+                    <td class="tu-right-td"><textarea  name="data[seo_explain]" cols="50" rows="10" ><{$detail.seo_explain|default=''}></textarea>
+
+                    </td>
+                </tr><tr>
+                    <td class="tu-left-td">SEO标题：</td>
+                    <td class="tu-right-td"><textarea  name="data[seo_title]" cols="50" rows="10" ><{$detail.seo_title|default=''}></textarea>
+
+                    </td>
+                </tr><tr>
+                    <td class="tu-left-td">SEO关键字：</td>
+                    <td class="tu-right-td"><textarea  name="data[seo_keywords]" cols="50" rows="10" ><{$detail.seo_keywords|default=''}></textarea>
+
+                    </td>
+                </tr><tr>
+                    <td class="tu-left-td">SEO描述：</td>
+                    <td class="tu-right-td"><textarea  name="data[seo_desc]" cols="50" rows="10" ><{$detail.seo_desc|default=''}></textarea>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认编辑" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

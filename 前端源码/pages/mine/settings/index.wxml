@@ -1,0 +1,16 @@
+<view class="container">
+    <view class="body">
+        <view class="list">
+            <navigator class="row" url="errand">
+                <text class="caption">接单设置</text>
+                <text class="value value-holder">接单中</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </navigator>
+            <view class="hr"></view>
+            <navigator class="row" url="display">
+                <text class="caption">显示设置</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </navigator>
+        </view>
+    </view>
+</view>

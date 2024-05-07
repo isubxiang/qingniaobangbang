@@ -1,0 +1,99 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">基本设置</li>
+        <li class="li2 li3">配送员配置</li>
+    </ul>
+</div>
+
+<style>
+.tu-left-td{width: 200px;}
+.sogn{ height:30px}
+.profit{text-align:center; color:#000; font-size:18px; font-weight:bold; background:#ECECEC;}
+.main-tudou-sc-add .tu-table-box .table2 tr td{text-align: center;}
+.attention{position: fixed; background: #ececec;padding: 10px 20px;}
+</style>
+
+
+<p class="attention"><span>注意：</span>配送设置，跑腿小程序的支付设置调用总后台的设置</p>
+
+<form  target="x-frame" action="<{:U('setting/delivery')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<tr id="miao1">
+                  <td class="tu-right-td profit" colspan="2">默认配送跑腿小程序配置</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">跑腿小程序appid：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[appid]" value="<{$CONFIG['delivery']['appid']}>" class="tudou-manageInput w260"/>
+                        <code>跑腿小程序appid</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">跑腿小程序appsecret：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[appsecret]" value="<{$CONFIG['delivery']['appsecret']}>" class="tudou-manageInput w260"/>
+                        <code>跑腿小程序appsecret</code>
+                    </td>
+                </tr>
+                
+                
+                
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2"> wss设置</td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">wss连接：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[wss]" value="<{$CONFIG['delivery']['wss']}>" class="tudou-manageInput w260"/>
+                        <code>比如：im.jintaocms.com 记住不带http或者https</code>
+                    </td>
+                </tr>
+               
+                <tr>
+                  <td class="tu-right-td profit" colspan="2"> 培训地点</td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">培训站点：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[train_name]" value="<{$CONFIG['delivery']['train_name']}>" class="tudou-manageInput w260"/>
+                        <code>培训站点</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">培训地址：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[train_address]" value="<{$CONFIG['delivery']['train_address']}>" class="tudou-manageInput w260"/>
+                        <code>培训地址</code>
+                    </td>
+                </tr>       
+                <tr>
+                    <td class="tu-left-td">培训电话：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[train_phone]" value="<{$CONFIG['delivery']['train_phone']}>" class="tudou-manageInput w260"/>
+                        <code>培训电话</code>
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="tu-left-td">来电时间：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[train_morn]" value="<{$CONFIG['delivery']['train_morn']}>" class="tudou-manageInput w260"/>
+                        <code>上午</code>
+                        <input type="text" name="data[train_after]" value="<{$CONFIG['delivery']['train_after']}>" class="tudou-manageInput w260"/>
+                        <code>下午</code>
+                    </td>
+                </tr> 
+                           
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>   

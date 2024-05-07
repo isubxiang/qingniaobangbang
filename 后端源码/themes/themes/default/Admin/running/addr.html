@@ -1,0 +1,94 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">会员</li>
+        <li class="li2">收货地址</li>
+        <li class="li2 li3">地址列表</li>
+    </ul>
+</div>
+
+
+
+<div class="main-tu-js main-sc">
+<p class="attention"><span>注意：</span> 这里是跑腿地址列表</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('running/addr')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                        	<label>
+                                <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>"/>
+                                <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text "/>
+                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                            </label>
+                            
+                               <label>
+                                    <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                    <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                    <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                                </label>
+                             <label> 
+
+
+
+                            <span>关键字</span>
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text"/>
+                            <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="addr_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>用户昵称</td>
+                    <td>用户ID</td>
+                    <td>学校ID</td>
+                    <td>学校名称</td>
+                    <td>姓名</td>
+                    <td>手机</td>
+                    <td>地址</td>
+                    <td>性别</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_addr_id" type="checkbox" name="addr_id[]" value="<{$var.addr_id}>" /></td>
+                        <td><{$var.addr_id}></td>
+                        <td><{$var['user']['nickname']}></td>
+                        <td><{$var.user_id}></td>
+                        <td><{$var.SchoolId}></td>
+                        <td><{$var['school']['Name']}></td>
+                        <td><{$var.name}></td>
+                        <td><{$var.mobile}></td>
+                        <td><{$var.addr}></td>
+                        <td><eq name="var.Gender" value="1">男<else/>女</eq></td>
+                        <td>
+                            <{:BA('running/addrDelete',array("addr_id"=>$var["addr_id"]),'删除','act','tu-dou-btn')}>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <{:BA('running/addrDelete','','批量删除','list',' a2')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

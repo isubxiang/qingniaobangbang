@@ -1,0 +1,36 @@
+<view class="container">
+    <view class="header">
+        <scroll-view class="filters" scrollX="true">
+            <view class="navs">
+                <view bindtap="onCategoryItemTap" class="first{{typeIndex<0?' actived':''}}" data-index="-1">
+                    <text>全部</text>
+                </view>
+                <view bindtap="onCategoryItemTap" class="{{index==errandTypes.length-1?'last':''}}{{index==typeIndex?' actived':''}}" data-index="{{index}}" wx:for="{{errandTypes}}" wx:key="Value">
+                    <text>{{item.Name}}</text>
+                </view>
+            </view>
+        </scroll-view>
+    </view>
+    <view class="body">
+        <view class="body-list">
+            <block wx:for="{{model}}" wx:key="Id">
+                <view class="hr" wx:if="{{index>0}}"></view>
+                <view bindtap="onItemTap" class="item" data-index="{{index}}">
+                    <view class="left ellipsis">
+                        <text class="content">
+                            <text class="iconfont icon-attentionforbid secret" wx:if="{{item.IsSecret}}"></text>{{item.Remark}}</text>
+                        <view class="desc">
+                            <text class="type">{{item.Type==1?'外卖跑腿':item.cateName}}</text>
+                            <text class="time">{{item.CreatedTimeString}}</text>{{item.Description}}</view>
+                    </view>
+                    <view class="right">
+                        <view>{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}：<text class="money money-rmb">{{item.MoneyFreight+item.MoneyTip}}</text>
+                        </view>
+                        <button catchtap="onItemSubmitTap" class="{{item.Status>32?'finished':item.Status>8?'accepted':item.IsForbiddenAccept?'disabled':''}}" data-index="{{index}}" type="primary">{{item.Status>32?'已完成':item.Status>8?'已接单':item.IsForbiddenAccept?'限制抢单':'抢单'}}</button>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />

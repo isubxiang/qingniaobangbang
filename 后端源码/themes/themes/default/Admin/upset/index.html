@@ -1,0 +1,51 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">上传设置</li>
+		<li class="li2 li3">配置列表</li>
+    </ul>
+</div>
+<style>
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr { border: 0px solid #dbdbdb;}
+</style>
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>只能开启一种上传方式，不能都设置为启用状态！不会配置联系：1--2--0--5---8--5--022</p>
+    <div class="tudou-js-nr">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50">ID</td>
+                        <td>名称</td>
+                        <td>accessKey</td>
+                        <td>secrectKey</td>
+                        <td>域名</td>
+                        <td>空间名</td>
+                        <td>超时时间</td>
+                        <td>是否开启(0关闭1开启)</td>                
+                        <td class="w120">操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                    	<php>
+                            $config = (json_decode($var['para'], true)); 
+                        </php>
+                        <tr>
+                            <td><{$var.id}></td>
+                            <td><{$var.type}></td>
+                            <td><{$config.accessKey}></td>
+                            <td><{$config.secrectKey}></td>
+                            <td><{$config.domain}></td> 
+                            <td><{$config.bucket}></td> 
+                            <td><{$config.timeout}></td>  
+                            <td><{$var.status}></td>            
+                            <td>
+                                <{:BA('upset/edit',array("id"=>$var["id"]),'编辑','','tu-dou-btn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
+    </div>
+</div>
+<include  file='public:footer'/>       
+

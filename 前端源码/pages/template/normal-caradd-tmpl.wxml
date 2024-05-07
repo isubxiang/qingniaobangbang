@@ -1,0 +1,25 @@
+<template name="normal-add">
+    <view bindtap="normalAddClose" catchtouchmove="preventTouchMove" class="modal-auth-mask" wx:if="{{normalAddShow}}">
+        <view catchtap="preventTouchMove" class="box">
+            <view class="head">
+                <text catchtap="normalClick" class="head_word {{normaAddState==0?'active':''}}">常用地址</text>
+                <text catchtap="otherAddClick" class="head_word {{normaAddState==1?'active':''}}">其它地址</text>
+            </view>
+            <view class="head_box">
+                <scroll-view class="commonly_used" scrollY="true" style="height:520rpx;" wx:if="{{normaAddState==0}}">
+                    <view bindtap="chooseNormalAdd" class="address_box" data-name="{{item.addName}}" wx:for="{{normalList}}" wx:key="id">
+                        <view class="address_border_box">
+                            <view>
+                                <text class="address_name">{{item.addName}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </scroll-view>
+                <view class="par-row" wx:if="{{normaAddState==1}}">
+                    <textarea bindinput="onNewAddBlur" catchtap="preventTouchMove" class="par-details all-border" cursorSpacing="300rpx" fixed="true" maxlength="150" placeholder="请输入其他地址"></textarea>
+                    <view catchtap="newAddConfirm" class="par-btn par-margin">确定</view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

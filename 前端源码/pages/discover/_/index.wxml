@@ -1,0 +1,52 @@
+<view class="container">
+    <view class="header" wx:if="{{false}}">
+        <view class="header-module">
+            <navigator>
+                <image src="http://img.zcool.cn/community/012af95795d1700000012e7e0d0e92.jpg@750w_1l_2o_100sh.webp"></image>
+            </navigator>
+        </view>
+    </view>
+    <view class="body">
+        <image class="task-bg" src="http://img.zcool.cn/community/019dcf5932579ba8012193a39f646b.png@750w_1l_2o_100sh.png"></image>
+        <view class="item">
+            <text class="iconfont icon-questionfill"></text>
+            <view>
+                <text class="name">每日签到</text>
+                <text class="desc">奖励 5-30 金币</text>
+            </view>
+            <navigator class="button">签到</navigator>
+        </view>
+        <view class="item">
+            <text class="iconfont icon-questionfill"></text>
+            <view>
+                <text class="name">邀请好友</text>
+                <text class="desc">奖励 5 元红包</text>
+            </view>
+            <navigator class="button">邀请</navigator>
+        </view>
+        <view class="item">
+            <text class="iconfont icon-questionfill"></text>
+            <view>
+                <text class="name">跑腿赚赏金</text>
+                <text class="desc">每日首单奖励 2 元红包</text>
+            </view>
+            <navigator class="button">去抢单</navigator>
+        </view>
+        <view class="item">
+            <text class="iconfont icon-questionfill"></text>
+            <view>
+                <text class="name">评价有礼</text>
+                <text class="desc">完成订单并评价奖励 10 个金币</text>
+            </view>
+            <navigator class="button">签到</navigator>
+        </view>
+        <view class="item">
+            <text class="iconfont icon-questionfill"></text>
+            <view>
+                <text class="name">完善信息</text>
+                <text class="desc">奖励 50 个金币</text>
+            </view>
+            <navigator class="button">去完善</navigator>
+        </view>
+    </view>
+</view>

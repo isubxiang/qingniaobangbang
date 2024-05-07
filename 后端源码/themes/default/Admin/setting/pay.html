@@ -1,0 +1,47 @@
+<include  file='public:header'/>
+<style>
+.profit {text-align: center;color: #333;font-weight: bold; background: #F5F5FB;}
+.tu-left-td{width:220px;}
+.sogn{ width:120px; margin:5px 0;height: 30px;}
+</style>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">基本设置</li>
+        <li class="li2 li3">支付设置</li>
+    </ul>
+</div>
+<p class="attention"><span>这里写一些支付基本设置</span>注意：以后关于支付设置全部写这里</p>
+<form  target="x-frame" action="<{:U('setting/pay')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            
+            
+            	
+                
+              <tr>
+                    <td class="tu-left-td">用户申请提现默认选择支付：</td>
+                    <td class="tu-right-td">
+                        <select name="data[cash]"  class="tudou-sc-add-text-name sogn">
+                        	<option value="" <if condition="$CONFIG['pay']['cash'] eq ''">selected='selected'</if>>请选择方式</option>
+                            <option value="weixin" <if condition="$CONFIG['pay']['cash'] eq weixin">selected='selected'</if>>微信</option>
+                            <option value="bank" <if condition="$CONFIG['pay']['cash'] eq bank">selected='selected'</if>>银行卡</option>
+                            <option value="alipay" <if condition="$CONFIG['pay']['cash'] eq alipay">selected='selected'</if>>支付宝</option>
+                        </select>
+                        <code>用户在会员中心收你钱提现的时候默认提现付款方式</code></td>
+                </tr>
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan = "2"> 支付密码设置 </a></td>
+                </tr>
+                    
+				
+                
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       

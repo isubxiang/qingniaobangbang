@@ -1,0 +1,46 @@
+<import src="../../../template/load-tmpl.wxml"></import>
+<view class="ms-head-scroll">
+    <view bindtap="chooseRegion" class="ms-head-text que-color">
+        <text class="ms-nav-dt">{{selectRegionName}}</text>
+        <image class="ms-head-img" src="/img/exam-bottom.png"></image>
+    </view>
+    <view bindtap="chooseYear" class="ms-head-text que-color">
+        <text class="ms-nav-mn">{{selectYear}}</text>
+        <image class="ms-head-img" src="/img/exam-bottom.png"></image>
+    </view>
+</view>
+<scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;">
+    <view class="que-box">
+        <view class="que-list que-list-bottom" wx:for="{{examList}}" wx:key="id">
+            <image class="video-img" src="{{item.posterUrl}}"></image>
+            <view class="video-box">
+                <view class="video-title">{{item.videoName}}</view>
+                <view class="que-list-bottom">
+                    <view class="ms-nav-content">共{{item.examNum}}人看过</view>
+                    <view class="">
+                        <text class="que-list-money">{{item.distPrice}}</text>
+                        <text class="que-list-price">{{item.orgPriceStr}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="load-tmpl" data="{{reqInit:reqInit,loadProcess:loadProcess,dataSize:examList.length,loadingComplete:loadingComplete}}"></template>
+</scroll-view>
+<view bindtap="chooseRegion" class="ms-mask" wx:if="{{regionDialog}}">
+    <view class="ms-sort">
+        <view class="ms-sort-right">
+            <view catchtap="chooseRegionItem" class="ms-sort-text {{selectRegion==item.id?'acitve':''}}" data-id="{{item.id}}" data-name="{{item.regionName}}" wx:for="{{regionList}}" wx:key="id">
+                {{item.regionName}}
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="chooseYear" class="ms-mask" wx:if="{{yearDialog}}">
+    <view class="ms-sort">
+        <view class="ms-sort-right">
+            <view catchtap="chooseYearItem" class="ms-sort-text {{selectYear==item?'acitve':''}}" data-id="{{item}}" wx:for="{{yearList}}" wx:key="*this">{{item}}
+            </view>
+        </view>
+    </view>
+</view>

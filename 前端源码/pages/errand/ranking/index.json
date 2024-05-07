@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "排行榜",
+    "component": true,
+    "usingComponents": {
+        "avatar": "/components/avatar"
+    }
+}

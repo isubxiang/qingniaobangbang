@@ -1,0 +1,27 @@
+<view class="container">
+    <view class="header">
+        <view bindtap="onRuleTap" class="rule">金币规则<text class="iconfont icon-questionfill"></text>
+        </view>
+        <view class="circle">
+            <view class="value"></view>
+            <view class="money-ge">{{model.TotalValue}}</view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="section">金币明细</view>
+        <view class="item" wx:if="model.Logs.length">
+            <view class="empty">暂无明细记录</view>
+        </view>
+        <block wx:for="{{model.Logs}}" wx:key="index">
+            <view class="hr" wx:if="{{index>0}}"></view>
+            <view class="item">
+                <view class="left">
+                    <text class="ellipsis name">{{item.Remark}}</text>
+                    <view class="time">{{util.formatDate(item.CreatedTime,'minute')}}</view>
+                </view>
+                <view class="money money-{{item.Value>0?'in':'out'}}">{{item.Value}}</view>
+            </view>
+        </block>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

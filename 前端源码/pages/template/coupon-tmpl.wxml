@@ -1,0 +1,37 @@
+<template name="coupon-modal">
+    <view bindtap="couponClose" catchtouchmove="preventTouchMove" class="modal-auth-mask" wx:if="{{couponModalShow}}">
+        <view class="modal-coupon-content position-height">
+            <scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;padding:20rpx;box-sizing:border-box;">
+                <view catchtap="selectCoupon" class="coupon no-coupon" data-couponcode="-1">
+                   不使用优惠券
+                    <icon class="no-coupon-btn" color="#3bbb8d" size="26px" type="{{selectedCouponCode=='-1'?'success':'circle'}}"></icon>
+                </view>
+                <view catchtap="selectCoupon" class="coupon" data-couponcode="{{item.id}}" wx:for="{{couponList}}" wx:key="id">
+                    <view class="coupon-subject">
+                        <view class="coupon-info" id="coupon-info">{{item.tmplTitle}}</view>
+                        <view>
+                            <view class="coupon-title">{{item.discountStr}}</view>
+                            <view class="coupon-date">有效日期 {{item.expireTimeStr}}</view>
+                        </view>
+                    </view>
+                    <view class="coupon-separation"></view>
+                    <view class="coupon-description">{{item.tmplDesc}}</view>
+                    <icon class="marquee" color="#3bbb8d" size="26px" type="{{selectedCouponCode==item.id?'success':'circle'}}"></icon>
+                </view>
+                <block wx:if="{{reqInit}}">
+                    <view class="weui-loadmore" hidden="{{!loadProcess}}">
+                        <view class="weui-loading"></view>
+                        <view class="weui-loadmore__tips">正在加载</view>
+                    </view>
+                    <view class="weui-loadmore weui-loadmore_line" hidden="{{dataSize>=1}}">
+                        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">暂无数据</view>
+                    </view>
+                    <view class="weui-loadmore weui-loadmore_line" hidden="{{!(loadingComplete&&dataSize>=1)}}">
+                        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">没有更多了</view>
+                    </view>
+                </block>
+            </scroll-view>
+            <button catchtap="chooseCouponFinish" class="coupon-btn" type="primary">确定使用</button>
+        </view>
+    </view>
+</template>

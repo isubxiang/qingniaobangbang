@@ -1,0 +1,63 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">学校</li>
+        <li class="li2">常用地址</li>
+        <li class="li2 li3">操作常用地址</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('running/addressPublish',array('addr_id'=>$addr_id,'school_id'=>$school_id),'刷新本页','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+<form target="x-frame" action="<{:U('running/addressPublish',array('addr_id'=>$addr_id,'school_id'=>$school_id))}>" method="post">
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<input type="hidden" name="data[addr_id]" value="<{$addr_id}>"/>
+            	<input type="hidden" name="data[school_id]" value="<{$school_id}>"/>
+                
+             
+                <tr>
+                    <td class="tu-left-td">地址名称：</td>
+                    <td class="tu-right-td"><input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="tudou-manageInput" />
+					<code>地址名称，列如：菜鸟驿站</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">地址联系手机：</td>
+                    <td class="tu-right-td"><input type="text" name="data[mobile]" value="<{$detail.mobile|default=''}>" class="tudou-manageInput" />
+					<code>联系手机</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">详细地址：</td>
+                    <td class="tu-right-td"><input type="text" name="data[addr]" value="<{$detail.addr|default=''}>" class="tudou-manageInput" />
+					<code>详细地址，列如：某某学校校门对面小吃街左侧1200米</code>
+                    </td>
+                </tr>
+                <tr>
+                <td class="tu-left-td">经纬度：</td>
+                <td class="tu-right-td">
+                    <div class="lt">
+                        经度<input type="text" name="data[lng]" id="data_lng" value="<{$detail.lng|default=''}>" class="tudou-sc-add-text-name w210 w100" />
+                        纬度<input type="text" name="data[lat]" id="data_lat" value="<{$detail.lat|default=''}>" class="tudou-sc-add-text-name w210 w100" />
+                    </div>
+                    <a style="margin-left: 10px;" mini="select"  w="600" h="600" href="<{:U('public/maps',array('lat'=>$detail['lat'],'lng'=>$detail['lng']))}>" class="seleSj">选择地图</a>
+                    <code>可不选择</code>
+                </tr>
+            
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认操作" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

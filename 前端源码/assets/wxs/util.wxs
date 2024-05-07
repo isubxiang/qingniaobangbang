@@ -1,0 +1,155 @@
+var makeArray = (function(base, len, dept) {
+    var arr = [];
+    for (var i = 0; i < len; i += (dept || 1)) {
+        arr.push(base + i)
+    };
+    return (arr)
+});
+var arrayIndexOf = (function(arr, item) {
+    return (arr.indexOf(item))
+});
+var getTimeStamp = (function(date) {
+    var ticks = getDate(date);
+    return (ticks.toString().substr(0, 10))
+});
+var fromTimeStamp = (function(tick) {
+    tick += '000';
+    tick = parseInt(tick);
+    return (getDate(tick))
+});
+var formatDate = (function(date, level, options) {
+    if (date) {
+        var pad = (function(n) {
+            n = n.toString();
+            return (n[(1)] ? n : '0' + n)
+        });
+        if (typeof(date) == "string") {
+            date = date.replace('T', ' ').split('+')[(0)];
+            var arr = date.split(' ');
+            var arr1 = arr[(0)].split('-');
+            var y = parseInt(arr1[(0)]);
+            var m = parseInt(arr1[(1)]);
+            var d = parseInt(arr1[(2)]);
+            var h = 0;
+            var mi = 0;
+            var s = 0;
+            if (arr.length > 1) {
+                var arr2 = arr[(1)].split(':');
+                h = parseInt(arr2[(0)]), mi = parseInt(arr2[(1)]), s = parseInt(arr2[(2)])
+            };
+            date = getDate(y, m - 1, d, h, mi, s)
+        } else {
+            date = getDate(date)
+        };
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var hour = date.getHours();
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        var arrDate = [];
+        var arrTime = [];
+        switch (level || "day") {
+            case "s":
+                ;
+            case "second":
+                arrTime.push(second);
+            case "m":
+                ;
+            case "minute":
+                arrTime.push(minute);
+            case "h":
+                ;
+            case "H":
+                ;
+            case "hour":
+                arrTime.push(hour);
+            case "d":
+                ;
+            case "day":
+                arrDate.push(day);
+            case "M":
+                ;
+            case "month":
+                arrDate.push(month);
+            case "y":
+                ;
+            case "Y":
+                ;
+            case "year":
+                arrDate.push(year);
+        };
+        var strDate = arrDate.reverse().map(pad).join('-');
+        var strSplit = ' ';
+        var strTime = '';
+        if (options && options.length) {
+            var tmp = ',' + options + ',';
+            if (tmp.indexOf(',time,') < 0) {
+                if (tmp.indexOf(',cn,') >= 0) {
+                    strDate = '';
+                    for (var i = 0; i < arrDate.length; ++i) {
+                        strDate += arrDate[((nt_10 = (i), null == nt_10 ? undefined : 'number' === typeof nt_10 ? nt_10 : "" + nt_10))] + (i == 0 ? '年' : (i == 1 ? '月' : '日'))
+                    }
+                }
+            } else {
+                strDate = '', strSplit = ''
+            }
+        };
+        return (strDate + (arrTime.length ? strSplit + arrTime.reverse().map(pad).join(':') : ''))
+    };
+    return ("")
+});
+var addDate = (function(date, val, interval) {
+    var d = date || getDate();
+    if (val) {
+        switch (interval) {
+            case "y":
+                ;
+            case "Y":
+                d.setFullYear(d.getFullYear() + val);
+                break;
+            case "M":
+                d.setMonth(d.getMonth() + val);
+                break;
+            case "h":
+                ;
+            case "H":
+                d.setHours(d.getHours() + val);
+                break;
+            case "m":
+                d.setMinutes(d.getMinutes() + val);
+                break;
+            case "s":
+                d.setSeconds(d.getSeconds() + val);
+                break;
+            default:
+                d.setDate(d.getDate() + val);
+                break;
+        }
+    };
+    return (d)
+});
+var formatMoney = (function(value) {
+    var value = Math.round(parseFloat(value) * 100) / 100;
+    var xsd = value.toString().split(".");
+    if (xsd.length == 1) {
+        value = value.toString() + ".00";
+        return (value)
+    };
+    if (xsd.length > 1) {
+        if (xsd[(1)].length < 2) {
+            value = value.toString() + "0"
+        };
+        return (value)
+    }
+});
+module.exports = ({
+    makeArray: makeArray,
+    arrayIndexOf: arrayIndexOf,
+    getDate: getDate,
+    addDate: addDate,
+    formatDate: formatDate,
+    getTimeStamp: getTimeStamp,
+    fromTimeStamp: fromTimeStamp,
+    formatMoney: formatMoney,
+});

@@ -1,0 +1,76 @@
+
+<view class="search_box">
+    <form>
+        <view class="box">
+            <view class="searchIcon">
+                <image class="ico" src="/assets/img/quan_sou.png"></image>
+            </view>
+            <view bindtap="backup" class="text">
+                <block wx:if="{{title==''}}">搜索商家</block>
+                <text class="black3" wx:else>{{title}}</text>
+            </view>
+        </view>
+    </form>
+</view>
+<scroll-view bindscrolltolower="more" class="page_cont search_contBox" scrollY="true">
+    <view bindtap="todetail" class="shopList" id="{{list.shop_id}}" mode="aspectFill" wx:for="{{lists}}" wx:for-index="shopidx" wx:for-item="list" wx:key="parentid">
+        <view class="top">
+            <view class="left_pic">
+                <image mode="aspectFill" src="{{list.logo}}" style="width:124rpx;height:124rpx;"></image>
+                <image class="tag" src="/assets/img/label_new.png" wx:if="{{list.is_new==1}}"></image>
+                <view class="state" wx:if="{{list.yyst!='1'}}">打烊了</view>
+            </view>
+            <view class="list-text">
+                <view class="shopTitle">
+                    <rich-text class="title" nodes="{{list.title}}"></rich-text>
+                    <text wx:if="{{wordLength2[shopidx]>18}}">...</text>
+                </view>
+                <view class="yuding" wx:if="{{list.tips_label!=''}}">{{list.tips_label}}</view>
+                <view class="peisong" wx:if="{{list.huodong.length>0}}">
+                    <view class="huodong" wx:if="{{HDidx<5}}" wx:for="{{list.huodong}}" wx:for-index="HDidx" wx:for-item="HDlist">{{HDlist.title}}</view>
+                </view>
+            </view>
+            <view class="clear"></view>
+        </view>
+        <view class="productList {{shopidx===isActive?'active':''}}" wx:if="{{list.products.length>0}}">
+            <view class="productLi" wx:for="{{list.products}}" wx:for-index="proIndex" wx:for-item="proList">
+                <view class="productImg">
+                    <image src="{{proList.photo}}"></image>
+                </view>
+                <view class="productInfor">
+                    <view class="proTitle">
+                        <view class="Mb">
+                            <rich-text class="productTitle" nodes="{{proList.title}}"></rich-text>
+                            <view class="mbout">
+                                <view class="mb1"></view>
+                                <view class="mb2"></view>
+                            </view>
+                        </view>
+                        <text class="shengluehao">...</text>
+                    </view>
+                    <view class="sales">已售{{proList.sales}} 赞{{proList.good}}</view>
+                    <view class="productPrice">¥<text>{{proList.price}}</text>
+                    </view>
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+        <view catchtap="zhankai" class="zhankai" data-index="{{shopidx}}" wx:if="{{list.products.length>2}}">
+            <view wx:if="{{shopidx===isActive}}">收起<image src="/assets/img/topBottom2.png"></image>
+            </view>
+            <view wx:else>展开更多商品{{list.products.length}}个<image src="/assets/img/topBottom.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="weui-loadmore" hidden="{{loadhide}}">
+        <image src="/assets/img/loading.gif"></image>
+        <text class="weui-loadmore__tips">正在加载</text>
+    </view>
+    <view bindtap="tosearch" class="morelist" hidden="{{morehidden}}">没有更多啦,试试<text>搜索</text>吧</view>
+    <view class="none-cont" hidden="{{nodata}}">
+        <view class="main">
+            <image src="/assets/img/noorder.png"></image>
+            <view class="black6">没有找到对应的商家~</view>
+        </view>
+    </view>
+</scroll-view>

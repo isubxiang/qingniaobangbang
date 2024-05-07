@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="header">
+        <view class="rule">红包列表</view>
+        <view class="circle">
+            <view class="value"></view>
+            <view class="money-ge">{{model.redPacketCount}}</view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="section">红包明细</view>
+   
+        <block wx:for="{{model.packets}}" wx:key="index">
+            <view class="hr" wx:if="{{index>0}}"></view>
+            <view class="item">
+                <view class="left">
+                    <text class="ellipsis name">{{item.info}}</text>
+                    <view class="time">{{util.formatDate(item.CreatedTime,'minute')}}</view>
+                </view>
+                <view class="money">{{item.money}}</view>
+            </view>
+        </block>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

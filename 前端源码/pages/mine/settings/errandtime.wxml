@@ -1,0 +1,27 @@
+<view class="container">
+    <view class="body">
+        <view class="list">
+            <view bindtap="onDateTap" class="row" hoverClass="navigator-hover">
+                <text class="caption">日期</text>
+                <text class="value">周一至周五</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+            <view class="hr"></view>
+            <picker bindchange="onDeliveryTimeChange" bindcolumnchange="onDeliveryTimeColumnChange" mode="multiSelector" range="{{deliveryTimes}}" rangeKey="text" value="{{deliveryTimeIndex}}">
+                <view class="row row-date">
+                    <text class="caption">开始时间</text>
+                    <text class="value">09:00</text>
+                    <text class="iconfont icon-right_light arrow"></text>
+                </view>
+            </picker>
+            <view class="hr"></view>
+            <picker bindchange="onDeliveryTimeChange" bindcolumnchange="onDeliveryTimeColumnChange" mode="multiSelector" range="{{deliveryTimes}}" rangeKey="text" value="{{deliveryTimeIndex}}">
+                <view class="row">
+                    <text class="caption">结束时间</text>
+                    <text class="value">17:00</text>
+                    <text class="iconfont icon-right_light arrow"></text>
+                </view>
+            </picker>
+        </view>
+    </view>
+</view>

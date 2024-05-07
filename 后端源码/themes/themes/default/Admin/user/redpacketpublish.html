@@ -1,0 +1,71 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">会员管理</li>
+        <li class="li2">会员红包</li>
+        <li class="li2 li3">会员红包操作</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('user/redpacketPublish',array('redpacket_id'=>$detail['redpacket_id']),'刷新本页','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+<form target="x-frame" action="<{:U('user/redpacketPublish',array('redpacket_id'=>$detail['redpacket_id']))}>" method="post">
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<input type="hidden" name="data[redpacket_id]" value="<{$detail.redpacket_id|default=''}>" class="tudou-manageInput"/>
+            	
+                <tr>
+                    <td class="tu-left-td">会员：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" />
+                            <input class="tudou-sc-add-text-name w210 sj" type="text" name="nickname" id="nickname"  value="<{$user.nickname}>" />
+                        </div>
+                        <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="seleSj">选择用户</a>
+                        <code>配送员绑定的会员ID</code>
+                    </td>
+                </tr>   
+                
+                <tr>
+                    <td class="tu-left-td">红包金额：</td>
+                    <td class="tu-right-td"><input type="text" name="data[money]" value="<{:round($detail['money']/100,2)}>" class="tudou-manageInput"/>
+					<code>红包金额</code>
+                    </td>
+                </tr>   
+                <tr>
+                    <td class="tu-left-td">红包备注：</td>
+                    <td class="tu-right-td"><input type="text" name="data[info]" value="<{$detail['info']}>" class="tudou-manageInput"/>
+					<code>红包备注，随意填写</code>
+                    </td>
+                </tr>  
+                <tr>
+                     <td class="tu-left-td">使用状态：</td>
+                     <td class="tu-right-td">
+                     <label><input type="radio" name="data[is_used]" <eq name="detail.is_used" value="1">checked="checked"</eq> value="1"/>已失效</label>
+                     <label><input type="radio" name="data[is_used]" <eq name="detail.is_used" value="0">checked="checked"</eq>  value="0"/>未使用</label>
+                     <code>手动调整使用状态</code>
+                     </td>
+			    </tr>             
+               <tr>
+                    <td class="tu-left-td">排序：</td>
+                    <td class="tu-right-td"><input type="text" name="data[orderby]" value="<{$detail.orderby|default='500'}>" class="tudou-manageInput"/>
+					<code>学校排序</code>
+                    </td>
+                </tr>
+            
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认操作" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

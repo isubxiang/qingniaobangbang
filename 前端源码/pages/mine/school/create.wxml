@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="body">
+        <view class="page student" hidden="{{step!=1}}">
+            <view class="list">
+                <view class="row">
+                    <text class="caption">名称</text>
+                    <input bindblur="onNameBlur" class="input" placeholder="请填写">{{school_name}}</input>
+                </view>
+                <view class="hr"></view>
+                <picker bindchange="onProvinceChange" range="{{provinces}}" value="{{provinceIndex}}">
+                    <text class="caption">省份</text>
+                    <view class="value-left">{{school_provinceName||'请选择'}}<text class="iconfont icon-right_light"></text>
+                    </view>
+                </picker>
+                <view class="hr"></view>
+                <picker bindchange="onCityChange" range="{{cities}}" value="{{cityIndex}}">
+                    <text class="caption">城市</text>
+                    <view class="value-left">{{school_cityName||'请选择'}}<text class="iconfont icon-right_light"></text>
+                    </view>
+                </picker>
+            </view>
+        </view>
+    </view>
+</view>

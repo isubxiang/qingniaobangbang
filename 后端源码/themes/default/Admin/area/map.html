@@ -1,0 +1,260 @@
+<include  file='public:header'/>
+
+<script src="https://cdn.bootcss.com/jquery/1.12.3/jquery.min.js"></script>
+<script type="text/javascript" src="__PUBLIC__/admin/layer/layer.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=LiFSZdkfPQkmwmWGb2gSyzA4b6BESUaP"></script>
+<!--加载鼠标绘制工具-->
+<script type="text/javascript" src="https://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>
+<link rel="stylesheet" href="https://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.css">
+<!--加载计算工具-->
+<script type="text/javascript" src="https://api.map.baidu.com/library/GeoUtils/1.2/src/GeoUtils_min.js"></script>
+<!--加载检索信息窗口-->
+<script type="text/javascript" src="https://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.js"></script>
+
+
+<link rel="stylesheet" href="https://api.map.baidu.com/library/SearchInfoWindow/1.4/src/SearchInfoWindow_min.css">
+
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">区域设置</li>
+        <li class="li2 li3">范围管理</li>
+    </ul>
+</div>
+<div class="main-tu-js  main-sc">
+<p class="attention"><span>注意：</span>当前区域【<{$detail['area_name']}>】这里是新功能用于精准配送</p>
+    
+    
+    
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin: 10px 20px;">
+            <div class="left">
+            	<{:BA('area/map',array('area_id'=>$detail['area_id']),'刷新')}>
+                <input type="text" id="suggestId" class="tu-inpt-text w360" placeholder="请输入关键字">
+                <div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>   
+           </div>
+           
+        </div>
+    
+    <div id="map" style="width:1280px;height:600px;margin-left:20px; margin-bottom:20px"></div>
+    
+    
+    <div class="tu-table-box" style="margin-bottom:20px">
+        <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+            <tr>
+                <td>序号</td>
+                <td>范围名称</td>
+                <td>颜色[自行添加后自动保存]</td>
+                <td>操作</td>
+            </tr>
+            <foreach name="positionList" item="v" key="k">
+                <tr>
+                    <td><{$k}></td>
+                    <td><{$v['name']}></td>
+                    <td><input type="text" value="<{$v['color']}>" onblur="upColor(<{$v['id']}>,<{$detail['area_id']}>,$(this))" class="tu-inpt-text"><span style="display: inline-block;width: 20px;height:20px;background-color:<{$v['color']}>"></span></td>
+                    <td>
+                        <{:BA('area/del',array("id"=>$v["id"]),'删除','act','tu-dou-btn')}>
+                    </td>
+                </tr>
+            </foreach>
+        </table>
+    </div>
+      
+</div>
+    
+    <script>
+        function upColor(id,area_id,event){
+            var color = event.val();
+			var area_id = area_id;
+            var id = id;
+            $.ajax({
+                url:'<{:U("area/upColor")}>',
+                type:'post',
+                dataType:'json',
+                data:{
+                    color:color,
+					area_id:area_id,
+                    id:id
+                },
+                success:function(res){
+                    if(res.status){
+						layer.msg(res.message)
+                        window.location.reload();
+                    }
+    
+                }
+            });
+        }
+        $(function(){
+            var map = new BMap.Map("map");
+            map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+            map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+            map.centerAndZoom("<{$detail['area_name']}>",15);
+    
+            $.ajax({
+                url:'<{:U("area/poList")}>',
+                type:'post',
+                dataType:'json',
+                success:function(res){
+                    if(res){
+                        console.log(res);
+                        var polygon = [];
+                        for(var i=0;i<res.length;i++){
+                            var arr = [];
+                            for(var x=0; x<res[i]['position'].length;x++){
+                                let poi = new BMap.Point(parseFloat(res[i]['position'][x].lng),parseFloat(res[i]['position'][x].lat));
+                                arr.push(poi);
+                            }
+                            polygon[i] = new BMap.Polygon(arr,
+                                //设置区域样式
+                                {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5,fillColor:res[i]['color'],fillOpacity:0.3}
+                            );
+                            map.addOverlay(polygon[i]);
+                        }
+                    }
+    
+                }
+            });
+    
+            function G(id) {
+                return document.getElementById(id);
+            }
+            //建立一个自动完成的对象
+            var ac = new BMap.Autocomplete({
+                "input" : "suggestId",
+                "location" : map
+            });
+            ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+                var str = "";
+                var _value = e.fromitem.value;
+                var value = "";
+                if (e.fromitem.index > -1) {
+                    value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+                }
+                str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+    
+                value = "";
+                if (e.toitem.index > -1) {
+                    _value = e.toitem.value;
+                    value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+                }
+                str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                G("searchResultPanel").innerHTML = str;
+            });
+    
+            var myValue;
+            ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+                var _value = e.item.value;
+                myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+                G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+    
+                setPlace();
+            });
+    
+            function setPlace(){
+                map.clearOverlays();    //清除地图上所有覆盖物
+                function myFun(){
+                    var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                    map.centerAndZoom(pp, 16);
+                    map.addOverlay(new BMap.Marker(pp));    //添加标注
+                }
+                var local = new BMap.LocalSearch(map, { //智能搜索
+                    onSearchComplete: myFun
+                });
+                local.search(myValue);
+            }
+    
+    
+            //右键菜单
+            var menu = new BMap.ContextMenu();
+            var item1=new BMap.MenuItem("撤销" ,function(location){ map.removeOverlay(overlays[overlays.length-1]);overlays.splice(overlays.length-1,1) });
+            menu.addItem(item1);
+            map.addContextMenu(menu);
+            var overlays = [];
+            var overlaycomplete = function(e){
+                var position = [];
+                overlays.push(e.overlay);
+                //获取多边形端点坐标  
+                // if (e.drawingMode == BMAP_DRAWING_RECTANGLE ) {
+                //alert(' 所画的点个数：' + e.overlay.getPath().length);  
+                for(var i=0;i<e.overlay.getPath().length;i++){
+                    let coordinate = new Object();
+                    coordinate.lng = e.overlay.getPath()[i].lng;
+                    coordinate.lat = e.overlay.getPath()[i].lat;
+                    position.push(coordinate);
+                    // alert(" 点"+(i+1)+":经度"+e.overlay.getPath()[i].lng+" 纬度："+e.overlay.getPath()[i].lat);
+                }
+                //prompt层
+    
+                // alert("面积："+BMapLib.GeoUtils.getPolygonArea(e.overlay));
+                // }
+                //关闭绘制模式
+                drawingManager.close();
+                layer.prompt(
+                    {title: '添加区域名称'},
+                    function(val, index){
+                        if(val!==''){
+                            $.ajax({
+                                url:'<{:U("area/pushPosition")}>',
+                                type:'post',
+                                dataType:'json',
+                                data:{
+                                    position:JSON.stringify(position),
+                                    name:val
+                                },
+                                success:function(res){
+                                    if(res.status){
+                                        layer.close(index);
+                                        window.location.reload();
+                                    }
+    
+                                }
+                            });
+                        }else{
+                            layer.close(index);
+                        }
+                    }
+                );
+    
+            };
+            //绘制样式
+            var styleOptions = {
+                strokeColor:"red",    //边线颜色。  
+                fillColor:"red",      //填充颜色。当参数为空时，圆形将没有填充效果。  
+                strokeWeight: 3,       //边线的宽度，以像素为单位。  
+                strokeOpacity: 0.8,    //边线透明度，取值范围0 - 1。  
+                fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。  
+                strokeStyle: 'solid' //边线的样式，solid或dashed。  
+            };
+            //实例化鼠标绘制工具  
+            var drawingManager = new BMapLib.DrawingManager(map, {
+                isOpen: false, //是否开启绘制模式  
+                enableDrawingTool: true, //是否显示工具栏  
+                drawingToolOptions: {
+                    anchor: BMAP_ANCHOR_TOP_RIGHT, //位置  
+                    offset: new BMap.Size(5, 5), //偏离值
+                    drawingModes: [//画覆盖物工具栏上显示的可选项
+                        BMAP_DRAWING_MARKER,
+                        BMAP_DRAWING_CIRCLE,
+                        BMAP_DRAWING_POLYLINE,
+                        BMAP_DRAWING_POLYGON,
+                        BMAP_DRAWING_RECTANGLE
+                    ]
+                },
+                circleOptions: styleOptions, //圆的样式  
+                polylineOptions: styleOptions, //线的样式  
+                polygonOptions: styleOptions, //多边形的样式  
+                rectangleOptions: styleOptions //矩形的样式  
+            });
+            //添加鼠标绘制工具监听事件，用于获取绘制结果  
+            drawingManager.addEventListener('overlaycomplete', overlaycomplete);
+            function clearAll() {
+                for(var i = 0; i < overlays.length; i++){
+                    map.removeOverlay(overlays[i]);
+                }
+                overlays.length = 0
+            }
+        })
+    </script>
+<include  file='public:footer'/>

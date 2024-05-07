@@ -1,0 +1,302 @@
+
+
+<view class="receive rel" wx:if="{{receive==true}}">
+    <view bindtap="receive1"></view>
+    <view class="ab udlr" style="height:\"{{height}};width:{{width}}\"">
+        <image mode="widthFix" src="/assets/img/receive.png"></image>
+    </view>
+</view>
+<view class="infobody">
+    <view style="height:20rpx;background:#fff"></view>
+    <view class="header rel">
+        <view class="user_img fl rel">
+            <image class="ab ud" src="{{post.user_img}}" wx:if="{{post.user_img!=null}}"></image>
+            <image class="ab ud" src="{{post.user_img2}}" wx:elif="{{post.user_img2!=''}}"></image>
+            <image class="ab ud" src="{{post.logo}}" wx:else></image>
+        </view>
+        <view class="user_info fl rel">
+            <view class="info_name">{{post.user_name}}</view>
+            <view class="info_label">
+                <view class="fl color2 color" wx:if="{{post.top==1}}">置顶</view>
+                <view class="fl color2 color" wx:if="{{post.is_renzheng==2}}">已认证</view>
+                <view class="fl color1 color" wx:if="{{post.type_name!=null}}">{{post.type_name}}</view>
+                <view class="fl color1 color" wx:if="{{post.type2_name!=null}}">{{post.type2_name}}</view>
+            </view>
+            <view class="info_name1" wx:if="{{system.is_tzdz=='1'&&post.address!=''}}">
+                <image mode="widthFix" src="/assets/img/xiangqingdizhi@3x.png"></image>
+                <text>{{post.address}}</text>
+            </view>
+        </view>
+    </view>
+    <view class="infodetial">
+        <view class="ionfointro">
+            <text>{{post.details}}</text>
+        </view>
+        <view class="label" wx:if="{{label.length!=0}}">
+            <view wx:for="{{label}}">{{item.label_name}}</view>
+        </view>
+        <view class="imgnum" wx:if="{{post.img!=''}}">
+            <image bindload="image" bindtap="previewImage" data-inde="{{index}}" mode="widthFix" src="{{item}}" wx:for="{{post.img}}"></image>
+        </view>
+        <form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+            <view class="viewnum rel">
+                <image class="views" src="/assets/img/view.png"></image>
+                <view class="viewsnum">{{post.views}}</view>人浏览
+        <image bindtap="thumbs_up" class="zan" src="/assets/img/zan.png" wx:if="{{thumbs_ups==null}}"></image>
+                <image class="zan" src="/assets/img/thumbs_up.png" wx:if="{{thumbs_ups==true}}"></image>
+                <view class="zannum" wx:if="{{thumbs_up==null}}">{{post.givelike}}</view>
+                <view class="zannum" wx:if="{{thumbs_up!=null}}">{{thumbs_up}}</view>
+        人点赞
+        <button class="zan_button ab" formType="submit"></button>
+            </view>
+        </form>
+        <view class="portrait flex2">
+            <view class="portrait_one flex3">
+                <view>{{post.givelike}}</view>
+                <view>赞</view>
+            </view>
+            <view class="portrait_one flex3" wx:for="{{dianzan}}" wx:key="*this">
+                <image class="portrait_img" src="{{item.user_img}}"></image>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="portrait_tel">
+    <view class="flex-bet portrait_teltop">
+        <view class="portrait_telnum">发布时间：{{post.time2}}</view>
+    </view>
+    <block wx:if="{{system.is_bdtel=='1'}}">
+        <view class="flex-bet portrait_teltop" wx:if="{{system.is_ff=='2'}}">
+            <view class="portrait_telnum">联系电话：{{post.user_tel}}</view>
+            <view bindtap="phone" class="content_right" style="background:{{system.color}}">
+                <view class="rel">
+                    <image class="ab udlr" mode="aspectFill" src="/assets/img/phone1.gif"></image>
+                </view>
+                <view>拨打电话</view>
+            </view>
+        </view>
+        <view class="flex-bet portrait_teltop" wx:if="{{system.is_ff=='1'}}">
+            <view class="portrait_telnum" wx:if="{{isff=='1'}}">联系电话：{{post.user_tel}}</view>
+            <view class="portrait_telnum" wx:else>联系电话：***********</view>
+            <view bindtap="phone" class="content_right" style="background:{{system.color}}">
+                <view class="rel">
+                    <image class="ab udlr" mode="aspectFill" src="/assets/img/phone1.gif"></image>
+                </view>
+                <view>拨打电话</view>
+            </view>
+        </view>
+    </block>
+    <view class="portrait_telbot">联系我时，请说是在{{system_name}}上看到的信息喔...</view>
+</view>
+<ad unitId="{{item.src}}" wx:for="{{unitid}}"></ad>
+<view class="shengxia" wx:if="{{post.hb_money>0}}">
+    <view class="content_ling" wx:if="{{post.hb_keyword!=''}}">口令：
+    <text class="section_num">{{post.hb_keyword}}</text>
+    </view>
+    <view class="content_count">
+    已抢
+    <text class="section_num">{{hongbao_len}}</text> /{{post.hb_num}}份，共计
+    <text class="section_num" wx:if="{{hongbao_len<post.hb_num}}">{{price}}</text>
+        <text class="section_num" wx:if="{{hongbao_len==post.hb_num}}">{{post.hb_money}}</text> /{{post.hb_money}}元
+  </view>
+</view>
+<view class="user" wx:for="{{hongbao}}">
+    <view class="user_list flex-bet">
+        <view class="user_text flex-center">
+            <image class="user_img1" src="{{item.img}}"></image>
+            <view class="user_name gobyndsingle">{{item.name}}</view>
+        </view>
+        <view class="flex-center">
+            <image class="user_moimg" src="/assets/img/cost.png"></image>
+            <view class="section_num">{{item.money}}元</view>
+        </view>
+    </view>
+</view>
+<view class="portrait_ctop flex-bet">
+    <view class="flex-center">
+        <view class="portrait_cxian" style="background:{{system.color}}"></view>
+        <view class="portrait_com">评论</view>
+    </view>
+    <view class="flex-center">
+        <image class="portrait_cimg" src="/assets/img/fang.png"></image>
+        <view bindtap="comment" class="portrait_ping">我要评论</view>
+    </view>
+</view>
+<view class="userwords" wx:for="{{criticism}}" wx:for-item="plitem">
+    <image class="userwords_img" src="{{plitem.user_img}}"></image>
+    <view class="userwords_rit">
+        <view class="flex-bet">
+            <view>
+                <view class="userwords_color">{{plitem.name}}</view>
+                <view class="userwords_color2">{{plitem.time}}</view>
+            </view>
+        </view>
+        <view class="userwords_content">
+      {{plitem.details}}
+    </view>
+        
+    </view>
+</view>
+<view class="no_comment" wx:if="{{criticism.length==0}}">
+    <image mode="aspectFill" src="/assets/img/none_commen.png" style="width:19%;height:100rpx;margin-left:40.5%;margin-top:30rpx;"></image>
+    <view style="width:100%;height:40rpx;line-height:20rpx;font-size:24rpx;text-align:center">没有评论喔</view>
+</view>
+<view class="reply" wx:if="{{comment==true}}">
+    <view class="reply_box">
+        <view class="reply_title flex1">发表评论</view>
+        <view class="reply_area">
+            <textarea bindinput="complete" placeholder="请输入留言" placeholderStyle="color:#999;"></textarea>
+        </view>
+        <view class="reply_bot">
+            <view class="reply_liu">
+                <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+                    <button formType="submit">取消</button>
+                </form>
+            </view>
+            <view class="reply_liu reply_hui">
+                <form bindreset="formReset" bindsubmit="formid_two" class="plate_form" reportSubmit="true">
+                    <button formType="submit">发表</button>
+                </form>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="reply" wx:if="{{reply==true}}">
+    <view class="reply_box">
+        <view class="reply_title flex1">留言</view>
+        <view class="reply_area">
+            <textarea bindinput="complete1" placeholder="{{reflex_name}}" placeholderStyle="color:#999;"></textarea>
+        </view>
+        <view class="reply_bot">
+            <view bindtap="reply2" class="reply_liu">
+                <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+                    <button formType="submit">取消</button>
+                </form>
+            </view>
+            <view bindtap="reply3" class="reply_liu reply_hui">
+                <form bindreset="formReset" bindsubmit="SaveFormid" class="plate_form" reportSubmit="true">
+                    <button formType="submit">回复</button>
+                </form>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="reply" wx:if="{{replyhf==true}}">
+    <view class="reply_box">
+        <view class="reply_title flex1">留言</view>
+        <view class="reply_area">
+            <textarea bindinput="complete2" placeholder="{{reflex_name}}" placeholderStyle="color:#999;"></textarea>
+        </view>
+        <view class="reply_bot">
+            <view class="reply_liu">
+                <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+                    <button formType="submit">取消</button>
+                </form>
+            </view>
+            <view bindtap="huifu" class="reply_liu reply_hui">
+                <form bindreset="formReset" bindsubmit="SaveFormid" class="plate_form" reportSubmit="true">
+                    <button formType="submit">回复</button>
+                </form>
+            </view>
+        </view>
+    </view>
+</view>
+<view class="footer">
+    <view bindtap="shouye" class="rel">
+        <view class="icon rel">
+            <image class="ab udlr" mode="widthFix" src="/assets/img/index.png"></image>
+        </view>
+        <view class="nav_title center">首页</view>
+        <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+            <button formType="submit"></button>
+        </form>
+    </view>
+    <view class="rel">
+        <view bindtap="fxbtn" class="icon rel">
+            <button bindtap="openshare" style="width:100%;height:100%"></button>
+            <image class="ab udlr" mode="widthFix" src="/assets/img/nav.png"></image>
+        </view>
+        <view class="nav_title center">转发</view>
+        <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+            <button formType="submit"></button>
+        </form>
+    </view>
+    <view bindtap="Collection" class="rel">
+        <view class="icon rel">
+            <image class="ab udlr" mode="widthFix" src="/assets/img/Already.png" wx:if="{{Collection==true}}"></image>
+            <image class="ab udlr" mode="widthFix" src="/assets/img/collection.png" wx:if="{{Collection==false}}"></image>
+        </view>
+        <view class="nav_title center">
+            <text wx:if="{{Collection==true}}">已收藏</text>
+            <text wx:if="{{Collection==false}}">收藏</text>
+        </view>
+        <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+            <button formType="submit"></button>
+        </form>
+    </view>
+    <view bindtap="comment" class="nav_phone rel" style="background:{{system.color}}">
+        <view>我要评论</view>
+        <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+            <button formType="submit"></button>
+        </form>
+    </view>
+</view>
+<view class="rob_image" wx:if="{{rob_redbag==true}}">
+    <image class="ab udlr" mode="aspectFill" src="/assets/img/red_back.png"></image>
+    <view bindtap="rob_redbag"></view>
+</view>
+<view class="rob_redbag udlr" wx:if="{{rob_redbag==true}}">
+    <view class="rob_head rel">
+        <image class="ab lr" mode="aspectFill" src="{{post.user_img}}"></image>
+    </view>
+    <view class="rob_name">{{post.user_name}}</view>
+    <view class="rob_text" wx:if="{{hongbao_use!=1}}">发了一个{{system.hb_name}}，金额随机</view>
+    <view class="Congratulations rel" wx:if="{{post.hb_type==2&&hongbao_use==3}}">
+        <input bindblur="hb_keyword" class="ab udlr" placeholder="请输入口令" placeholderStyle="color: #f1e3b6;width:100%"></input>
+    </view>
+    <view class="Congratulations" wx:if="{{post.hb_type==1&&hongbao_use==3}}">恭喜发财，大吉大利</view>
+    <view class="Congratulations" wx:if="{{hongbao_use==1}}">手慢了,{{system.hb_name}}派完了</view>
+    <view class="Congratulations" wx:if="{{hongbao_use==2}}">你已经抢过{{system.hb_name}}了</view>
+    <view class="redbag lr" wx:if="{{hongbao_use==3}}">
+        <button wx:if="{{post.hb_type==2&&sure==false}}"></button>
+        <view bindtap="trans1" class="{{post.trans1}}" style="z-index:{{post.trans_1}};display:{{post.dis1}}">
+            <image mode="aspectFill" src="/assets/img/red_one.png"></image>
+        </view>
+        <view bindtap="trans1" class="{{post.trans1}}" style="z-index:{{post.trans_2}};display:{{post.dis2}}">
+            <image mode="aspectFill" src="/assets/img/red_two.png"></image>
+        </view>
+    </view>
+    <view bindtap="trans2" class="see_rob" wx:if="{{hongbao_use!=3}}">查看大家的手气></view>
+    <image class="lr red_small" mode="aspectFill" src="/assets/img/red_small.png" wx:if="{{hongbao_use==3}}"></image>
+</view>
+<view bindtap="rob_redbag" class="redbag_animation" wx:if="{{post.hb_money>0}}">
+    <image mode="aspectFill" src="/assets/img/red_animation_one.gif"></image>
+    <image mode="aspectFill" src="/assets/img/red_animation_two.gif"></image>
+</view>
+<view class="share_red" wx:if="{{share_red==true}}">
+    <view></view>
+    <view class="ab udlr">
+        <button bindtap="zfhbbtn" class="ab" openType="share">{{post.hb_money}}元</button>
+        <image mode="aspectFit" src="/assets/img/share_red.png"></image>
+    </view>
+</view>
+<view catchtap="shareModalClose" class="share-modal {{share_modal_active}}">
+    <view class="share-modal-body">
+        <view class="share-modal-close flex-y-center flex-x-center" style="background:#fff">去邀请好友</view>
+        <view class="flex-row">
+            <view class="flex-grow-1 flex-x-center">
+                <button bindtap="shareModalClose" class="share-bottom" openType="share">
+                    <image src="/assets/img/weixin1.png"></image>
+                    <view>微信</view>
+                </button>
+            </view>
+            <view class="flex-grow-1 flex-x-center">
+                <view bindtap="canvas" class="share-bottom">
+                    <image src="/assets/img/mdm.png"></image>
+                    <view>海报</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="shareModalClose" class="share-modal-close flex-y-center flex-x-center">取消</view>
+    </view>
+</view>

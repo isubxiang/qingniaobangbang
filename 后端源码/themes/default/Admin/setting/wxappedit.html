@@ -1,0 +1,39 @@
+<div class="listBox clfx">
+    <div class="menuManage">
+        <form target="x-frame" action="<{:U('setting/wxappedit',array('id'=>$detail['id']))}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                        <tr>
+                            <td class="tu-left-td">小程序名称：</td>
+                            <td class="tu-right-td"><input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="tudou-sc-add-text-name w200"/>
+                            <code>小程序名称</code>
+                            </td>
+                        </tr>
+                       
+                        <tr>
+                            <td class="tu-left-td">小程序appid：</td>
+                            <td class="tu-right-td"><input type="text" name="data[appid]" value="<{$detail.appid|default=''}>" class="tudou-sc-add-text-name w200"/>
+                            <code>小程序appid</code>
+                            </td>
+                        </tr>
+						<tr>
+                            <td class="tu-left-td">小程序appsecret：</td>
+                            <td class="tu-right-td"><input type="text" name="data[appsecret]" value="<{$detail.appsecret|default=''}>" class="tudou-sc-add-text-name w360"/>
+                            <code>小程序appsecret</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tu-left-td">小程序intro：</td>
+                            <td class="tu-right-td"><input type="text" name="data[intro]" value="<{$detail.intro|default=''}>" class="tudou-sc-add-text-name w360"/>
+							<code>小程序intro</code>
+                            </td>
+                        </tr>
+                        
+                    </table>
+                </div>
+                <div class="sm-qr-tu"><input type="submit" value="确定编辑" class="sm-tudou-btn-input" /></div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+@import "../../list/my/buy/index.wxss";
+
+@import "../../../wuBaseWxss/1.wxss";
+
+@import "annual/index.wxss";
+
+.shop-btn {
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+    border: 0!important;
+    padding: 5px;
+    box-shadow: 0 0 8px 1px #3bbb8d;
+    border-radius: 50%;
+    background-color: #fff!important;
+}
+
+.shop-btn-img {
+    width: 25px;
+    height: 25px;
+    display: block;
+}

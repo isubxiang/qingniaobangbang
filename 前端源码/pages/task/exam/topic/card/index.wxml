@@ -1,0 +1,9 @@
+<view class="top-card" wx:if="{{cardDialog}}">
+    <block wx:for="{{cardList}}" wx:key="*this">
+        <view class="top-card-title">{{item.typeName}}</view>
+        <view class="top-card-box">
+            <view bindtap="chooseCardIndex" class="top-opt top-card-btn {{sitem.css}}" data-index="{{sitem.id}}" wx:for="{{item.subList}}" wx:for-item="sitem" wx:key="*this">{{sitem.id}}</view>
+        </view>
+    </block>
+    <view bindtap="hideCard" class="top-bottom top-return">返回</view>
+</view>

@@ -1,0 +1,6 @@
+<view class="body">
+    <icon color="#ff9800" size="72" type="warn"></icon>
+    <text>{{title}}</text>
+    <view>{{remark}}</view>
+    <navigator class="button" url="../../mine/info/auth" wx:if="{{button}}">{{button}}</navigator>
+</view>

@@ -1,0 +1,104 @@
+<view class="container">
+    <dialog bindclose="onDialogClose" hidden="{{dialogType!='authorize'}}" maskOpacity="0.5">
+        <view class="dialog-authorize">
+            <view class="content">
+                <view class="caption">校园跑腿申请获取以下权限：</view>
+                <view class="desc">• 获得你的公开信息（昵称、头像等）</view>
+            </view>
+            <button bindgetuserinfo="onAuthorizeCallback" openType="getUserInfo">立即授权</button>
+        </view>
+    </dialog>
+    <view class="header">
+        <text class="money money-rmb">{{(model.MoneyFreight||0)+(model.MoneyTip||0)}}</text>
+        <view class="caption">本单{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}</view>
+    </view>
+    <view class="body">
+        
+        <view class="date">
+            <text>{{util.formatDate(model.CreatedTime,'m')}}</text>
+        </view>
+        <view class="demand">
+            <avatar bindtap="onPing" data-uid="{{model.uid}}" color="#ddd" size="90" src="{{model.AvatarUrl}}"></avatar>
+            <view class="content">
+                <block wx:if="{{model.Type==1}}">
+                    <view class="shop">
+                        <image mode="aspectFill" src="{{model.ShopLogoSrc}}"></image>
+                        <text class="name">{{model.ShopName}}</text>
+                    </view>
+                    <view class="menu">{{model.CommodityNames}}</view>
+                </block>
+                <view class="remark">
+                    <text bindtap="onSecretTap" class="iconfont icon-attentionforbid secret" wx:if="{{model.IsSecret}}"></text>{{model.Remark}} </view>
+                <view class="attend">
+                    <block wx:if="{{model.Type==1}}">
+                        <view class="item">
+                            <text class="value">
+                                <text class="advance" wx:if="{{model.IsAdvanceMoney}}">需垫付</text>{{model.Money?model.Money+'元':'-'}}</text>
+                            <view class="caption">
+                                <text class="iconfont icon-pricetag"></text>已付商品费</view>
+                        </view>
+                        <view class="split"></view>
+                    </block>
+                    <block wx:else>
+                        <block wx:if="{{model.Stype==1}}">
+                            <view class="item">
+                                <text class="value">
+                                    <text class="advance" wx:if="{{model.IsAdvanceMoney}}">需垫付</text>{{model.Money?model.Money+'元':'-'}}</text>
+                                <view class="caption">
+                                    <text class="iconfont icon-pricetag"></text>预估商品费</view>
+                            </view>
+                            <view class="split"></view>
+                        </block>
+                        <view class="item">
+                            <text class="value">{{model.Weight?enums.getName(errandWeights,model.Weight):'-'}}</text>
+                            <view class="caption">
+                                <text class="iconfont icon-weight"></text>物品重量</view>
+                        </view>
+
+                        <view class="item" wx:if="{{model.attr_name}}">
+                            <text class="value">{{model.attr_name}}</text>
+                            <view class="caption">
+                                <text class="iconfont icon-check"></text>规格说明</view>
+                        </view>
+
+                    </block>
+                </view>
+            </view>
+        </view>
+        <view class="path">
+            <view class="item item-start">
+                <view class="left">
+                    <text class="iconfont icon-time"></text>
+                </view>
+                <view class="info">{{model.ExpectTimeString}}</view>
+            </view>
+            <block wx:for="{{model.Addresses}}" wx:key="index">
+                <view class="hr"></view>
+                <view class="item">
+                    <view class="left">
+                        <text class="iconfont icon-location"></text>
+                        <view class="text">{{index==0?'前往':index==model.Addresses.length-1?'到达':'然后'}}</view>
+                    </view>
+                    <view class="info">
+                        <text class="addr">{{item.Address}}</text>
+                        <view class="concat" wx:if="{{item.Description}}">{{item.Description}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="footer">
+        <form bindsubmit="onSubmit" reportSubmit="true">
+            <view class="form">
+                <view wx:if="{{model.Status==2&&model.IsForbiddenAccept}}">{{model.ForbiddenAcceptCause}}</view>
+                <button bindtap="onVerifiedTap" wx:if="{{model.Status==2&&model.VerifiedStatus==0}}">立即认证</button>
+                <button formType="submit" wx:if="{{model.Status>1&&model.Status<=8&&model.VerifiedStatus==2&&!model.IsForbiddenAccept}}">立即抢单</button>
+                <button bindtap="onVerifiedTap" wx:if="{{model.Status==2&&model.VerifiedStatus==3}}">查看原因</button>
+                <button class="disabled" wx:if="{{model.Status>2&&!model.UserId}}">{{model.Status>32?'已完成':'已接单'}}</button>
+                <button bindtap="onOrderDetailTap" class="detail" wx:if="{{model.Status>2&&model.UserId>0}}">查看订单详情</button>
+            </view>
+        </form>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />

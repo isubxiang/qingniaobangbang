@@ -1,0 +1,86 @@
+<view class="bgimg">
+    <image mode="widthFix" src="{{yhq.coupon_img}}"></image>
+</view>
+<view class="main">
+    <view class="padding">
+        <view class="qcyx" wx:if="{{hxm!=null}}">核销优惠券</view>
+        <view class="qcyx" wx:if="{{hxm==null}}">全场有效</view>
+        <image class="hximg" src="{{hxm}}" wx:if="{{hxm!=null}}"></image>
+        <form wx:if="{{hxm==null}}" bindreset="formReset" bindsubmit="qrmd" reportSubmit="true">
+            <block wx:if="{{yhq.money!='0.00'}}">
+                <view class="yhqname">{{yhq.money}}元{{yhq.name}}</view>
+                <button class="lqbtn" formType="submit" wx:if="{{yhq.user_state!='1'&&yhq.surplus!='0'}}">{{yhq.money}}元领取</button>
+                <button class="lqbtn1" wx:if="{{yhq.user_state=='1'}}">已领取</button>
+                <button class="lqbtn1" wx:if="{{yhq.user_state!='1'&&yhq.surplus=='0'}}">您手速慢了，已抢光</button>
+            </block>
+            <block wx:else>
+                <view class="yhqname">{{yhq.name}}</view>
+                <button class="lqbtn" disabled="{{mflqdisabled}}" formType="submit" wx:if="{{yhq.user_state!='1'&&yhq.surplus!='0'}}">免费领取</button>
+                <button class="lqbtn1" wx:if="{{yhq.user_state=='1'}}">已领取</button>
+                <button class="lqbtn1" wx:if="{{yhq.user_state!='1'&&yhq.surplus=='0'}}">您手速慢了，已抢光</button>
+            </block>
+        </form>
+        <view class="lqrs" wx:if="{{hxm==null}}">
+            <image src="/assets/img/huodong.png"></image>
+            <view>{{yhq.lqrs}}人已领</view>
+        </view>
+        <view class="smbf" wx:if="{{hxm==null}}">
+            <view class="sm">
+                <view class="yuan"></view>
+                <text>{{yhq.full}}</text>
+            </view>
+            <view class="sm">
+                <view class="yuan"></view>
+                <text>剩余数量：{{yhq.surplus}}张</text>
+            </view>
+            <view class="sm">
+                <view class="yuan"></view>
+                <text>有效期至：{{yhq.end_time}}</text>
+            </view>
+            <view class="sm">
+                <view class="yuan"></view>
+                <text>领券限制：每个用户核销后可继续领取</text>
+            </view>
+            <view class="sm">
+                <view class="yuan"></view>
+                <text>不支持退款</text>
+            </view>
+            <view class="sm">
+                <view class="yuan"></view>
+                <text>无需预约</text>
+            </view>
+        </view>
+    </view>
+    <view class="htitle">
+        <view></view>
+        <view>使用流程</view>
+    </view>
+    <view class="sylc">
+        <view class="lccel">
+            <image src="/assets/img/renqun.png"></image>
+            <view>参与领取</view>
+        </view>
+        <view class="hx"></view>
+        <view class="lccel">
+            <image src="/assets/img/hunqing.png"></image>
+            <view>领取成功</view>
+        </view>
+        <view class="hx"></view>
+        <view class="lccel">
+            <image src="/assets/img/roomc.png"></image>
+            <view>到店消费</view>
+        </view>
+    </view>
+  
+
+    <view class="htitle">
+        <view></view>
+        <view>优惠详情</view>
+    </view>
+    <view class="yhxq">
+        <view>{{yhq.details}}</view>
+        <view class="yhxqimg" wx:if="{{yhq.img!=''}}">
+            <image mode="widthFix" src="{{item}}" wx:for="{{yhq.img}}"></image>
+        </view>
+    </view>
+</view>

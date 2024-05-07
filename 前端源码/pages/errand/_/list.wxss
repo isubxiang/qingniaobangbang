@@ -1,0 +1,149 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header,.body {
+    background: #fff;
+}
+
+.header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100rpx;
+    z-index: 2;
+}
+
+.header scroll-view {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.header .navs {
+    display: inline-flex;
+    height: 100rpx;
+    line-height: 100rpx;
+}
+
+.header .navs view {
+    height: 100%;
+    padding: 0 26rpx;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 30rpx;
+    color: #666;
+    display: inline-block;
+}
+
+.header .navs .first {
+    padding-left: 52rpx;
+}
+
+.header .navs .last {
+    padding-right: 52rpx;
+}
+
+.header .navs .actived text {
+    padding: 4rpx 20rpx;
+    background: #06c1ae;
+    border-radius: 10rpx;
+    color: #fff;
+}
+
+.body {
+    margin-top: 100rpx;
+}
+
+.body-list .item {
+    display: flex;
+    padding: 24rpx 0 24rpx 28rpx;
+}
+
+.body-list .item .left {
+    flex: 1;
+    margin-right: 20rpx;
+}
+
+.body-list .item .content {
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+
+.body-list .item .content .secret {
+    position: static;
+    background: #06c1ae;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 40rpx;
+    width: 40rpx;
+    height: 40rpx;
+    display: inline-block;
+    text-align: center;
+    font-size: 28rpx;
+    margin-right: 4rpx;
+}
+
+.body-list .item .type {
+    color: #fff;
+    background: #ddd;
+    font-size: 24rpx;
+    padding: 2rpx 10rpx;
+    border-radius: 4rpx;
+    margin-right: 10rpx;
+}
+
+.body-list .item .desc {
+    font-size: 26rpx;
+    color: #aaa;
+    margin-top: 16rpx;
+    line-height: 40rpx;
+}
+
+.body-list .item .time {
+    font-size: 22rpx;
+    color: #ccc;
+    margin-right: 20rpx;
+}
+
+.body-list .item .right {
+    padding-right: 30rpx;
+}
+
+.body-list .item .right view {
+    font-size: 24rpx;
+    color: #666;
+    text-align: center;
+}
+
+.body-list .item .right .money {
+    color: #ff9800;
+    font-size: 30rpx;
+}
+
+.body-list .item .right button {
+    background: #06c1ae;
+    border-radius: 10rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    width: 160rpx;
+    font-size: 32rpx;
+    margin-top: 10rpx;
+    padding: 0;
+}
+
+.body-list .item .right button.disabled {
+    background: #d0d0d0;
+    color: #f7f7f7;
+}
+
+.body-list .item .right button.accepted {
+    border: none;
+    background: #f0f0f0;
+    color: #888;
+}
+
+.body-list .item .right button.finished {
+    border: none;
+    background: none;
+    color: #888;
+}

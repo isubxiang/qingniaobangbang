@@ -1,0 +1,51 @@
+<view class="container">
+    <view class="header">
+        <view class="header-bg">
+            <view class="balance">
+                <view>
+        {{util.formatMoney(model.MoneyUsable||0)}}
+        <navigator class="more" url="withdraw">提现<text class="iconfont icon-right_light"></text>
+                    </navigator>
+                </view>
+            </view>
+            <view class="month">
+                <view class="item outgo">
+                    <view>本月支出</view>
+                    <text class="money money-yuan">{{model.MonthOutlay}}</text>
+                </view>
+                <view class="line"></view>
+                <view class="item income">
+                    <view>本月收入</view>
+                    <text class="money money-yuan money-in">{{util.formatMoney(model.MonthIncome||0)}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="item-dot first">
+            <block wx:if="{{model.Logs.length}}">
+                <navigator url="../../errand/_/list">开支太大，没有收入？
+赶紧去赚点钱花花吧！</navigator>
+            </block>
+        </view>
+
+
+        <view class="item" wx:for="{{model.Logs}}" wx:key="index">
+            <view class="detail">
+                <view>
+                    <text class="type">{{item.TradeName}}</text>
+                    <text class="money money-yuan}">{{item.MoneyOperate}}</text>
+                </view>
+                <text class="time">
+                    <text class="iconfont icon-time"></text>{{util.formatDate(item.CreatedTime,'minute',true)}}</text>
+            </view>
+        </view>
+
+
+        
+        <view class="item-dot last" wx:if="{{lastPage}}">
+            <view class="text">没有更多记录</view>
+        </view>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

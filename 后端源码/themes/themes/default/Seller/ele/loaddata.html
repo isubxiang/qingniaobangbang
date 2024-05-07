@@ -1,0 +1,121 @@
+<foreach name="list" item="var">
+<li class="line">
+
+    <dt><a class="x3">订单ID：<{$var.running_id}></a><a class="x9 text-right">创建时间：<{$var.create_time|date="Y-m-d H:i",###}></a></dt>
+    
+    <foreach name="var.product" item="good"><dd class="zhong">
+        <div class="x2"><img src="<{:config_img($good['products']['photo'])}>" style="width:90%;"></div>
+        <div class="10">
+            <p class="text-gray"><{$good['product_name']}></p>
+            <p class="text-gray">单价：&yen;<{:round($good['price']/100,2)}>元 * <{$good['quantity']}> 份</p>
+        </div>
+        </dd>
+    </foreach>
+    
+    <dt>
+    <div class="x12">
+        <p class="text-small">
+            <span>状态码：<a class="text-red"><{$var['orderstatus']}></a></span>
+            <span>菜品费用：<a class="text-gray">&yen;<{:round($var['money']/100,2)}>元</a></span>
+            <span>小费：<a class="text-gray">&yen;<{:round($var['moneytip']/100,2)}>元</a></span>
+            <span>配送费：<a class="text-gray">&yen;<{:round($var['moneyfreight']/100,2)}>元</a></span>
+            
+            <if condition="$var['redpacket_money']">
+            	<span>红包抵扣金额：<a class="text-gray">&yen;<{:round($var['redpacket_money']/100,2)}>元</a></span>
+            </if>
+            
+            <span>用户总支付：<a class="text-red">&yen;<{:round($var['moneypayment']/100,2)}>元</a></span>
+        </p>
+        <p class="text-small">
+            <span>标题：<a class="text-gray"><{$var['title']}></a></span>
+        </p>
+        <if condition="$var['Remark']">
+        <p class="text-small">
+            <span>备注：<a class="text-dot"><{$var['remark']}></a></span>
+        </p>
+        </if>
+        <if condition="$var['d']['RealName']">
+        <p class="text-small">
+            <span>配送员姓名：<a class="text-dot"><{$var.d.realname}></a></span>
+        </p>
+        <p class="text-small">
+            <span>配送员电话：<a class="text-dot"><{$var.d.phonenumber}></a></span>
+        </p>
+        </if>
+    </div>
+    </dt>
+    <dt>
+    <div class="x12">
+        <p class="text-gray">
+            收货地址：<{$var['name']}><{$var['mobile']}><{$var['addr']}>
+        </p>
+        <if condition="$var['labels']">
+        <p class="text-gray">
+            点评标签：<{$var['labels']}>
+        </p>
+        </if>
+        <if condition="$var['content']">
+        <p class="text-gray">
+            点评内容：<{$var['content']}>
+        </p>
+        </if>
+        <p class="text-gray">
+            订单类型：<if condition="$var['orderType'] eq 1">外卖配送<else/>到店自取</if>
+        </p>
+    </div>
+    </dt>
+    <dl>
+        <p class="text-right padding-top x12">
+            <if condition="($var['OrderStatus'] gt 2) AND ($var['is_ele_pei'] eq 0)">
+            <a id="is_pei<{$var.running_id}>" class="button button-small bg-yellow">配送员信息</a>
+            <script type="text/javascript">
+                        $('#is_pei<{$var.running_id}>').mouseover(function(){
+                            var n = '<{$var.d.RealName}>';
+                            var m = '<{$var.d.phoneNumber}>';
+                            layer.tips('配送员姓名：'+n+'<br>电话：'+m+'',$(this),{
+                             tips: [2,'#7a7a7a']
+                            });
+                        })
+                    </script>
+            </if>
+            <if condition="$var['OrderStatus'] eq 1">
+            <a class="button button-small border-blue">等待付款</a>
+            <elseif condition="$var['OrderStatus'] eq 2"/>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/cancel',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-blue">取消订单</a>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/taking',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-dot">确认接单</a>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/refund',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-green">强制退款</a>
+            <a class="button button-small border-yellow">待接单</a>
+            <elseif condition="$var['OrderStatus'] eq 8"/>
+            <a class="button button-small border-dot">已确认接单</a>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/refund',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-green">强制退款</a>
+            <elseif condition="$var['OrderStatus'] eq 16"/>
+            <a class="button button-small border-gray">已发货</a>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/complete',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-blue">确认收货</a>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/refund',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-green">强制退款</a>
+            <elseif condition="$var['OrderStatus'] eq 32"/>
+            <a class="button button-small border-yellow">已接单</a>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/refund',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-green">强制退款</a>
+            <elseif condition="$var['OrderStatus'] eq 64"/>
+            <a class="button button-small border-blue">待评价</a>
+            <elseif condition="$var['OrderStatus'] eq 128"/>
+            <a class="button button-small border-gray">已完成</a>
+            <elseif condition="$var['OrderStatus'] eq 256"/>
+            <a class="button button-small border-gray">付款超时</a>
+            <elseif condition="$var['OrderStatus'] eq 512"/>
+            <a class="button button-small border-gray">用户取消</a>
+            <elseif condition="$var['OrderStatus'] eq 1024"/>
+            <a class="button button-small border-gray">商家取消</a>
+            <elseif condition="$var['OrderStatus'] eq 2048"/>
+            <a class="button button-small border-gray">过期取消</a>
+            <elseif condition="$var['OrderStatus'] eq 4096"/>
+            <a class="button button-small border-gray">后台取消</a>
+            <elseif condition="$var['OrderStatus'] eq 8192"/>
+            <a class="button button-small border-gray">原路退款失败</a>
+            </if>
+            <a id="www-hatudou-com-url-btn" href="<{:U('ele/combinationElePrint',array('running_id'=>$var['running_id'],'status'=>$status))}>" class="button button-small bg-blue">打印订单</a>
+        </p>
+    </dl>
+    </li>
+<div class="blank-10 bg">
+</div>
+</foreach>

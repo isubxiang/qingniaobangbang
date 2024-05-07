@@ -1,0 +1,289 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header {
+    background: #fff;
+    padding: 40rpx 60rpx;
+}
+
+.header .nav {
+    display: flex;
+}
+
+.header .nav .step {
+    color: #ddd;
+    font-size: 26rpx;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.header .nav .step .line {
+    height: 1rpx;
+    width: 100%;
+    position: absolute;
+    top: 16rpx;
+    left: 50%;
+    z-index: 1;
+    background: #ddd;
+}
+
+.header .nav .step .dot {
+    background: #ddd;
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 50%;
+    margin-bottom: 20rpx;
+    position: relative;
+    z-index: 2;
+}
+
+.header .nav .actived .dot {
+    background: #06c1ae;
+}
+
+.header .nav .actived {
+    color: #06c1ae;
+}
+
+.body .list {
+    background: #fff;
+    margin-top: 30rpx;
+}
+
+.body .section {
+    height: 30rpx;
+    background: #f0f0f0;
+}
+
+.body .img {
+    width: 100%;
+    margin-top: 30rpx;
+    display: flex;
+    height: 360rpx;
+}
+
+.body .img .demo {
+    width: 360rpx;
+    height: 100%;
+    margin-right: 20rpx;
+}
+
+.body .img .logo2 {
+    background:#06c1ae;
+    height:50rpx;
+    line-height:50rpx;
+    padding:5rpx;
+    color:#fff;
+    border-radius:5rpx;
+    margin-top: 60rpx;
+}
+
+.body .img .logo {
+    border-radius:5rpx;
+    max-width:350rpx;
+    max-height:360rpx;
+}
+
+
+.body .img navigator {
+    background: #ddd;
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.body .img navigator image {
+    width: 100%;
+    height: 100%;
+}
+
+.body .img navigator text {
+    font-size: 64rpx;
+    margin-bottom: 20rpx;
+}
+
+.body .radio-group label {
+    padding-right: 40rpx;
+}
+
+.body .student picker {
+    height: 100rpx;
+    line-height: 100rpx;
+    padding: 0 40rpx;
+}
+
+.body .student .picker {
+    padding: 0;
+}
+
+.body .mobile .top {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30rpx;
+}
+
+.body .mobile .top image {
+    width: 180rpx;
+    height: 250rpx;
+    margin: 150rpx 0;
+}
+
+.body .mobile .top button {
+    background: #06c1ae;
+    color: #fff;
+    line-height: 90rpx;
+    width: 360rpx;
+    border-radius: 10rpx;
+}
+
+.body .mobile .top .lnk {
+    margin-top: 40rpx;
+    padding: 2rpx 10rpx;
+    color: #666;
+    border-radius: 10rpx;
+    margin-bottom: 120rpx;
+}
+
+.body .mobile input {
+    background: #fff;
+    border-radius: 10rpx;
+    font-size: 30rpx;
+    height: 90rpx;
+    padding: 0 30rpx;
+    border: 2rpx solid #ddd;
+}
+
+.finish {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-top: 90rpx;
+}
+
+.body .finish text {
+    font-size: 36rpx;
+    color: #06c1ae;
+    margin-top: 30rpx;
+}
+
+.body .finish view {
+    width: 80%;
+    font-size: 28rpx;
+    color: #666;
+    margin-top: 100rpx;
+}
+
+.footer form {
+    width: 100%;
+}
+
+.footer .btns {
+    padding: 40rpx 30rpx 30rpx;
+    display: flex;
+}
+
+.footer button {
+    background: #06c1ae;
+    font-size: 36rpx;
+    color: #fff;
+    height: 100%;
+    border-radius: 10rpx;
+    flex: 1;
+    border: 1rpx solid #06c1ae;
+}
+
+.footer button.prev {
+    background: #fff;
+    color: #06c1ae;
+    margin-right: 40rpx;
+}
+
+.smscode {
+    background: #fff;
+    padding: 100rpx 40rpx 40px;
+    text-align: center;
+    left: 40rpx;
+    right: 40rpx;
+    top: 50%;
+    position: fixed;
+    margin-top: -240rpx;
+}
+
+.smscode .close {
+    text-align: right;
+    position: absolute;
+    top: 20rpx;
+    right: 20rpx;
+    color: #aaa;
+}
+
+.smscode .caption {
+    font-size: 36rpx;
+    color: #888;
+}
+
+.smscode .nums {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 50rpx;
+    padding-bottom: 20rpx;
+}
+
+.smscode .nums view {
+    display: block;
+    width: 100rpx;
+    height: 100rpx;
+    border: 2rpx solid #ddd;
+    position: relative;
+    line-height: 100rpx;
+    font-size: 60rpx;
+}
+
+.smscode .nums input {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    text-align: center;
+    font-size: 50rpx;
+    border: 0;
+}
+
+.smscode .desc {
+    text-align: center;
+    font-size: 30rpx;
+    color: #888;
+    margin-top: 30rpx;
+}
+
+.smscode .desc .resend {
+    color: #3aabea;
+}
+
+
+
+.body .agree {
+    padding: 30rpx 40rpx;
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.body .agree .iconfont {
+    color: #06c1ae;
+    margin-right: 10rpx;
+}
+
+.body .agree .contract {
+    color: #666;
+    display: inline;
+}

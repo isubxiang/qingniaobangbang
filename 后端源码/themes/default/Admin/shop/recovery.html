@@ -1,0 +1,86 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">商家</li>
+        <li class="li2">商家管理</li>
+        <li class="li2 li3">商家回收站</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>这个删除后商家数据就彻底删除了，请谨慎操作！删除后无法恢复！操作前必须备份数据库，否则后果自负！删除后会员就可以重新添加商家啦~</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('shop/create','','添加申请')}>
+            </div>
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('shop/recovery')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>关键字(电话或商户名称)</span>
+                        <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" /><input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="shop_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>管理者(电话)</td>
+                    <td>商铺名称(区域商圈)</td>
+                    <td>分类(商铺标签)</td>
+                    <td>商铺LOGO</td>
+                    <td>入住时间</td>
+                    <td class="w200">操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_shop_id" type="checkbox" name="shop_id[]" value="<{$var.shop_id}>" /></td>
+                        <td><{$var.shop_id}></td>
+                        <td>
+                        ID：<{$users[$var['user_id']]['account']}>(<{$var.user_id}>)<br/>
+                        电话：<{$var.tel}>
+                        </td>
+                        <td>
+                        名称：<{$var.shop_name}><br/>
+                        城市：<{$citys[$var['city_id']]['name']}>-<{$areas[$var['area_id']]['area_name']}>-<{$business[$var['business_id']]['business_name']}>
+                        </td>
+                        <td>
+                       分类：<{$cates[$var['cate_id']]['cate_name']}><br/>
+                       tag: <{$var.tags}>
+                        </td>
+                        <td><img style="padding:2px; height:60px; width:60px;" src="<{:config_img($var['logo'])}>" /></td>
+                        
+                    <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                    <td class="w150">
+                                 
+					<{:BA('shop/recovery2',array("shop_id"=>$var["shop_id"]),'恢复','act','tu-dou-btn-small')}>
+                    <{:BA('shop/edit',array("shop_id"=>$var["shop_id"]),'编辑','','tu-dou-btn-small')}>
+                    <{:BA('shop/delete2',array("shop_id"=>$var["shop_id"]),'删除','act','tu-dou-btn-small')}>
+                    <a target="_blank" class="tu-dou-btn-small" href="<{:U('shop/login',array('shop_id'=>$var['shop_id']))}>">管理</a>
+                    </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <{:BA('shop/delete','','批量删除','list',' a2')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+
+
+
+

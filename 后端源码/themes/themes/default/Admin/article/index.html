@@ -1,0 +1,81 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">当前位置</li>
+        <li class="li2"> 跑腿文章</li>
+        <li class="li2 li3">文章列表</li>
+
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span> 主要是前台的跑腿协议，其他文章不要去添加，默认调用这里的第一条数据，已就是说最先发布的低一篇文章切记，已就是说取ID最低值</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('article/create','','添加内容')}>
+            </div>
+            <div class="right">
+                <form class="" method="post"  action="<{:U('article/index')}>"> 
+                    <div class="seleHidden" id="seleHidden">
+                       
+                       <div class="seleK">
+                       <label>
+                            <span>订单分类</span>
+                            <select name="cate_id" class="select w110">
+                                 
+                                <foreach name="getCateIds" key="key" item="item">
+                                    <option <eq name="cate_id" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                                </foreach>
+                            </select>
+                        </label>
+                        
+                        
+                        <span>关键字</span>
+                        <input type="text"  class="tu-inpt-text" name="keyword" value="<{$keyword}>" />
+                        <input type="submit" value=" 搜索"  class="inpt-button-tudou"/>
+                        </div>
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <form  target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="article_id" /></td>
+                        <td class="w50">文章ID</td>
+                        <td>分类</td>
+                        <td>复制URL</td>
+                        <td>标题</td>
+                        <td>创建时间</td>
+                        <td>操作</td>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_article_id" type="checkbox" name="article_id[]" value="<{$var.article_id}>" /> </td>
+                            <td><{$var.article_id}></td>
+                            <td><{$getCateIds[$var['cate_id']]}></td>
+                            <td><{$CONFIG['site']['host']}>/wap/news/detail/article_id/<{$var.article_id}></td>
+                            <td><{$var.title}></td>
+                            <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                            <td>
+                                <{:BA('article/edit',array("article_id"=>$var["article_id"]),'编辑','','tu-dou-btn')}>
+                                <{:BA('article/delete',array("article_id"=>$var["article_id"]),'删除','act','tu-dou-btn')}>
+                                <{:BA('wap/news/detail',array("article_id"=>$var["article_id"]),'查看文章','','tu-dou-btn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('article/delete','','批量删除','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>  
+

@@ -1,0 +1,147 @@
+<view class="container">
+    <modal bindcancel="onModalCancel" bindconfirm="onModalConfirm" confirmColor="#06c1ae" confirmText="立即切换" hidden="{{modalType!='switchSchool'}}" title="">
+        <view class="modal-switch-school">
+            <image mode="widthFix" src="/assets/img/location.png"></image>
+            <view>当前定位，离你最近的学校是：</view>
+            <view class="school">{{nearestSchool&&nearestSchool.Name}}</view>
+        </view>
+    </modal>
+    <dialog bindclose="onDialogClose" closeButtonColor="#ea3339" closeButtonPosition="bottom" hidden="{{dialogType!='modal'}}" maskOpacity="0.5">
+        <view class="dialog-ad" style="width:{{model.PopupAd.Width*2}}rpx;height:{{model.PopupAd.Height*2}}rpx;">
+            <image catchtap="onDialogAdTap" src="{{model.PopupAd.Src}}"></image>
+            <view catchtap="onDialogAdDisappear" class="disappear">
+                <text class="iconfont icon-round{{!!disappearPopup?'checkfill':''}}"></text>不再弹出</view>
+        </view>
+    </dialog>
+    <view class="overlay" hidden="{{!showOverlay}}">
+        <form bindsubmit="onOverlaySubmit" reportSubmit="true">
+            <view class="notice">
+                <view class="info">
+                    <view>请直接点击具体类目下单</view>
+                    <text wx:if="{{categories.length>1}}">小技巧：类目上左右滑动，发现更多功能</text>
+                </view>
+                <button formType="submit">我知道了</button>
+            </view>
+        </form>
+    </view>
+    <view class="header">
+
+
+      <view class="banner">
+        <swiper autoplay="true" circular="true" duration="{{1000}}" indicatorActiveColor="red" indicatorColor="rgba(255, 255, 255,.3)" indicatorDots="true" interval="5000" style="height:350rpx">
+            <swiper-item wx:for="{{banner}}" wx:key="i" wx:if="{{banner.length}}">
+                <image bindtap="jumps" data-appid="{{item.appid}}" data-id="{{item.id}}" data-name="{{item.xcx_name}}" data-src="{{item.src}}" data-type="{{item.state}}" data-wb_src="{{item.wb_src}}"  mode="widthFix" src="{{item.Src}}" style="width:750rpx; height:350rpx"></image>
+            </swiper-item>
+        </swiper>
+        <view class="home-fixed {{nav}}">
+            <view bindtap="goPositionPage" class="home-position">
+                <view class="home-communtiy" bindtap="onSchoolTap">
+                    <image src="/assets/img/position1.png" style="width:22rpx; height:28rpx" wx:if="{{nav=='nav'}}"></image>
+                    <image src="/assets/img/position.png" style="width:23rpx; height:27rpx" wx:if="{{nav=='nav-c'}}"></image>
+                    {{school_name||'定位中...'}}
+                    </view>
+                <view class="home-downicon">
+                    <image src="/assets/img/{{nav=='nav'?'up':'down'}}.png" style="width:20rpx; height:12rpx"></image>
+                </view>
+            </view>
+        </view>
+    </view>
+
+
+        <view class="header-content" style="margin-bottom:10rpx">
+            <view class="input">
+                <view class="form">
+                    <text class="dot"></text>
+                    <view bindtap="onQuestTap" class="txt">{{!setting.index_nav_name?'想让同学帮您做点什么？':setting.index_nav_name}}</view>
+                </view>
+                <swiper bindchange="onCategoryChange" style="height:{{(categories[0].length>4?(110+16)*2+10:categories[0].length>0?110+16+10:0)+(categories.length>1?30:0)}}rpx">
+
+
+                    <swiper-item wx:for="{{categories}}" wx:for-index="i" wx:key="i" class="{{!is_index_category_type?'swiper':swiper2}}">
+
+                        <view bindtap="onCategoryItemTap" class="item finished{{item.is_index_category_type}}" data-type="{{item.is_index_category_type}}"  data-url="{{item.Url}}" data-id="{{item.id}} "hoverClass="navigator-hover" style="{{item.Keyword?null:'visibility:hidden'}}" wx:for="{{categories[i]}}" wx:key="Keyword">
+
+                            
+                            <text class="hot" wx:if="{{item.IsHot&&setting.is_index_category_type==0}}">HOT</text>
+                            <text class="tag" wx:if="{{!item.IsHot&&item.Tag&&item.Tag.length&&setting.is_index_category_type==0}}">{{item.Tag}}</text>
+                            <text class="key" wx:if="{{setting.is_index_category_type==0}}">{{item.Keyword}}</text>
+                            <text class="detail" wx:if="{{item.Detail&&setting.is_index_category_type==0}}">{{item.Detail}}</text>
+
+                            <image class="udlr" src="{{item.Src}}" wx:if="{{setting.is_index_category_type==1}}"></image>
+                            <text class="Keyword" wx:if="{{setting.is_index_category_type==1}}">{{item.Keyword}}</text>
+
+                        </view>
+                    </swiper-item>
+
+
+
+                </swiper>
+                <view class="swiper-bar" wx:if="{{categories.length>1}}">
+                    <view class="{{categoryIndex==index?'actived':''}}" wx:for="{{categories}}" wx:key="index"></view>
+                </view>
+            </view>
+        </view>
+   
+    </view>
+    <view class="body">
+        <view class="body-top">
+            <view class="caption">
+                <text class="title">
+                    <text class="iconfont icon-verticalline"></text>赚{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}</text>
+                <view class="desc">人人都是{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}猎人</view>
+                <navigator class="more" url="list">查看全部<text class="iconfont icon-right_light arrow"></text>
+                </navigator>
+            </view>
+            <navigator class="best" url="../ranking/index" wx:if="{{model.BestDeliverers&&model.BestDeliverers.length>1}}">
+                <view class="user {{index==0?'golden':'silver'}}" wx:for="{{model.BestDeliverers}}" wx:key="Id">
+                    <text class="iconfont icon-medal_fill_light medal"></text>
+                    <avatar size="60" src="{{item.AvatarUrl}}"></avatar>
+                    <view class="profile">
+                        <view class="ellipsis name">{{item.NickName}}</view>
+                        <view class="ellipsis school">{{item.SchoolName}}</view>
+                    </view>
+                    <view class="income">
+                        <view>月赚</view>
+                        <text class="money money-rmb">{{item.MoneyIncome}}</text>
+                    </view>
+                </view>
+                <text class="iconfont icon-right_light arrow"></text>
+            </navigator>
+        </view>
+        <view class="body-list">
+            <block wx:for="{{model.ErrandOrders}}" wx:key="Id">
+                <view class="hr"></view>
+                <view bindtap="onItemTap" class="item" data-index="{{index}}">
+                    <view class="left ellipsis">
+                        <text class="content">
+                            <text class="iconfont icon-attentionforbid secret" wx:if="{{item.IsSecret}}"></text>{{item.Remark}}</text>
+                        <view class="desc">
+                            <text class="type">{{item.Type==1?'外卖跑腿':item.cateName}}</text>
+                            <text class="time">{{item.CreatedTimeString}}</text>{{item.Description}}</view>
+                    </view>
+                    <view class="right">
+                        <view>{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}：<text class="money money-rmb">{{item.MoneyFreight+item.MoneyTip}}</text>
+                        </view>
+                        <button catchtap="onItemSubmitTap" class="{{item.Status>32?'finished':item.Status>8?'accepted':item.IsForbiddenAccept?'disabled':''}}" data-index="{{index}}" type="primary" wx:if="{{model.IsLogin}}">{{item.Status>32?'已完成':item.Status>8?'已接单':item.IsForbiddenAccept?'限制抢单':'抢单'}}</button>
+                    </view>
+                </view>
+            </block>
+        </view>
+    </view>
+    <view class="empty" wx:if="{{!model.BestDeliverers||model.BestDeliverers.length==0}}">
+        <text class="iconfont icon-time"></text>
+        <view>加载中…</view>
+    </view>
+</view>
+
+<view class="hydlzhezhao" wx:if="{{hydl==true}}"></view>
+  <view class="hydlbd" wx:if="{{hydl==true}}">
+      <image class="hydlimg" src="{{System.tc_img}}"></image>
+      <view class="hydl">
+          <view class="hydltt">平台公告</view>
+          <view class="hydlnr">{{!setting.wxapp.is_index_pop_title?'公告为空？':setting.wxapp.is_index_pop_title}}</view>
+      </view>
+      <button bindtap="hydl" class="hydlqueren" style="background:{{System.color}}">关闭</button>
+  </view>
+
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />

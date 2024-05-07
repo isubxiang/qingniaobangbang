@@ -1,0 +1,81 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">学校</li>
+        <li class="li2">常用地址</li>
+        <li class="li2 li3">常用列表</li>
+    </ul>
+</div>
+
+
+
+<div class="main-tu-js main-sc">
+<p class="attention"><span>注意：</span> 这里是常用地址列表，当前学校【<{$Name}>】</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('running/address',array('school_id'=>$school_id),'刷新本页','','',600,360)}>
+                <{:BA('running/addressPublish',array('school_id'=>$school_id),'添加地址','','',600,360)}>
+            </div>
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('running/address',array('school_id'=>$school_id))}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                            
+                            <label>
+                                    <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                    <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                    <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                                </label>
+                             <label> 
+
+                            <span>关键字</span>
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text"/>
+                            <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="addr_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>学校ID</td>
+                    <td>学校名称</td>
+                    <td>地址名称</td>
+                    <td>联系手机</td>
+                    <td>详细地址</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_addr_id" type="checkbox" name="addr_id[]" value="<{$var.addr_id}>" /></td>
+                        <td><{$var.addr_id}></td>
+                        <td><{$var.SchoolId}></td>
+                        <td><{$var['school']['Name']}></td>
+                        <td><{$var.name}></td>
+                        <td><{$var.mobile}></td>
+                        <td><{$var.addr}></td>
+                        <td>
+                        	<{:BA('running/addressPublish',array("addr_id"=>$var["addr_id"],"school_id"=>$var["school_id"]),'编辑','','tu-dou-btn')}>
+                            <{:BA('running/addressDelete',array("addr_id"=>$var["addr_id"],"school_id"=>$var["school_id"]),'删除','act','tu-dou-btn')}>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

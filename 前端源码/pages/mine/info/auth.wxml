@@ -1,0 +1,167 @@
+<view class="container">
+    <dialog bindclose="onDialogClose" hidden="{{dialogType!='authorize'}}" maskOpacity="0.5">
+        <view class="dialog-authorize">
+            <view class="content">
+                <view class="caption">校园跑腿申请获取以下权限：</view>
+                <view class="desc">• 获得你的公开信息（昵称、头像等）</view>
+            </view>
+            <button bindgetuserinfo="onAuthorizeCallback" openType="getUserInfo">立即授权</button>
+        </view>
+    </dialog>
+    <dialog hidden="{{dialogType!='smsCode'}}">
+        <view class="smscode">
+            <view bindtap="onDialogClose" class="close">关闭</view>
+            <view class="caption">请输入收到的短信验证码</view>
+            <input bindblur="onSmsCodeBlur" bindinput="onSmsCodeInput" cursorSpacing="{{dialogType=='smsCode'&&smsCodeInputFocus?80:0}}" focus="{{dialogType=='smsCode'&&smsCodeInputFocus}}" hidden="true" type="number">{{smsCode}}</input>
+            <view class="nums">
+                <view bindtap="onSmsCodeTap" data-index="0">{{smsCode.length?smsCode[0]:''}}</view>
+                <view bindtap="onSmsCodeTap" data-index="1">{{smsCode.length?smsCode[1]:''}}</view>
+                <view bindtap="onSmsCodeTap" data-index="2">{{smsCode.length?smsCode[2]:''}}</view>
+                <view bindtap="onSmsCodeTap" data-index="3">{{smsCode.length?smsCode[3]:''}}</view>
+            </view>
+            <view class="desc">
+                <text>没有收到短信验证码？</text>
+                <text bindtap="onResendTap" class="resend resend-disabled">点击这里重发{{smsCodeSentTick>0?'('+smsCodeSentTick+')':''}}</text>
+            </view>
+        </view>
+    </dialog>
+    <view class="header">
+        <view class="nav">
+            <view class="step{{step==0?' actived':''}}">
+                <view class="line"></view>
+                <view class="dot"></view>
+                <text class="name">实名认证</text>
+            </view>
+            <view class="step{{step==1?' actived':''}}">
+                <view class="line"></view>
+                <view class="dot"></view>
+                <text class="name">其他认证</text>
+            </view>
+            <view class="step{{step==2?' actived':''}}">
+                <view class="line"></view>
+                <view class="dot"></view>
+                <text class="name">绑定手机</text>
+            </view>
+            <view class="step{{step==3?' actived':''}}">
+                <view class="dot"></view>
+                <text class="name">完成</text>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="page realname" hidden="{{step!=0}}">
+            <view class="list">
+                <view class="row">
+                    <text class="caption">姓名</text>
+                    <input bindinput="onIdCardNameInput" class="input" placeholder="你的真实姓名">{{idCard_name}}</input>
+                </view>
+                <view class="hr"></view>
+                <view class="row">
+                    <text class="caption">性别</text>
+                    <view class="value-left">
+                        <radio-group bindchange="onGenderChange" class="radio-group">
+                            <label class="radio">
+                                <radio checked="{{idCard_gender==1}}" color="#06c1ae" value="1"></radio>男
+              </label>
+                            <label class="radio">
+                                <radio checked="{{idCard_gender==2}}" color="#06c1ae" value="2"></radio>女
+              </label>
+                        </radio-group>
+                    </view>
+                </view>
+                <view class="hr"></view>
+                <view class="row">
+                    <text class="caption">{{idCard_code_name}}</text>
+                    <input bindinput="onIdCardCodeInput" class="input" placeholder="{{idCard_code_placeholder}}" type="idcard">{{idCard_code}}</input>
+                </view>
+
+                 <view class="hr"></view>
+                 <view class="agree">
+                 <text bindtap="onServiceContract" class="iconfont icon-round{{acceptAgreement?'checkfill':''}}"></text>同意并接受<text bindtap="onServiceContractLink" class="contract">《跑腿服务协议》</text>
+              </view>
+
+
+            </view>
+
+        </view>
+        <view class="page student" hidden="{{step!=1}}">
+            <view class="list">
+                <view class="row" wx:if="{{is_studentCard_code=='1'}}">
+                    <text class="caption">学号</text>
+                    <input bindinput="onStudentCardCodeInput" class="input" placeholder="请输入学号">{{studentCard_code}}</input>
+                </view>
+                <view class="hr" wx:if="{{is_studentCard_code=='1'}}"></view>
+
+                <navigator class="row" url="../school/select">
+                    <text class="caption">学校</text>
+                    <view class="value-left{{!studentCard_schoolName?' value-holder':''}}">{{studentCard_schoolName||'请选择'}}<text class="iconfont icon-right_light"></text>
+                    </view>
+                </navigator>
+                <view class="hr"></view>
+
+                <view class="row" wx:if="{{is_studentCard_faculty=='1'}}">
+                    <text class="caption">院系</text>
+                    <input bindinput="onStudentCardFacultyInput" class="input" placeholder="请填写">{{studentCard_faculty}}</input>
+                </view>
+                <view class="hr" wx:if="{{is_studentCard_faculty=='1'}}"></view>
+
+                <view class="row" wx:if="{{is_studentCard_major=='1'}}">
+                    <text class="caption">专业</text>
+                    <input bindinput="onStudentCardMajorInput" class="input" placeholder="请填写">{{studentCard_major}}</input>
+                </view>
+                <view class="hr" wx:if="{{is_studentCard_major=='1'}}"></view>
+
+                <picker bindchange="onDateChange" end="{{studentCard_enrollmentDate_max}}" fields="month" mode="date" start="{{studentCard_enrollmentDate_min}}" value="{{studentCard_enrollmentDate}}" wx:if="{{is_studentCard_enrollmentDate=='1'}}">
+                    <view class="row picker">
+                        <text class="caption">入校年月</text>
+                        <view class="value-left{{!studentCard_enrollmentDate?' value-holder':''}}">{{!studentCard_enrollmentDate?'请选择':studentCard_enrollmentDate}}<text class="iconfont icon-right_light"></text>
+                        </view>
+                    </view>
+                </picker>
+            </view>
+
+
+
+     
+            <view class="img" bindtap="choose" wx:if="{{is_logo=='1'}}">
+                <image class="demo" src="/assets/img/photo_studentcard_demo.png"></image>
+                    <image mode="aspectFill" class="logo" src="{{logo||''}}" wx:if="{{!!logo}}"></image>
+                    <block wx:else>
+                        <text class="iconfont icon-plus_cart"></text>
+                        <view class="logo2">{{is_logo_name||'上传学生证'}}</view>
+                    </block>
+            </view>
+
+            <view class="img" bindtap="payCode" wx:if="{{is_auth_pay_code=='1'}}">
+                <image class="demo" src="/assets/img/photo_studentcard_demo2.png"></image>
+                    <image mode="aspectFill" class="logo" src="{{payCode||''}}" wx:if="{{!!payCode}}"></image>
+                    <block wx:else>
+                        <text class="iconfont icon-plus_cart"></text>
+                        <view class="logo2">上传收款二维码</view>
+                    </block>
+            </view>
+        </view>
+
+        <view class="page mobile" hidden="{{step!=2}}">
+            <view class="top">
+                <image src="/assets/img/account_bindmobile.png"></image>
+                <button bindgetphonenumber="onGetPhoneNumber" openType="getPhoneNumber">绑定微信手机号提交认证</button>
+                <view bindtap="onPrevTap" class="lnk" hoverClass="navigator-hover">
+                    <text class="iconfont icon-back_light"></text>返回上一步</view>
+            </view>
+        </view>
+        <view class="page finish" hidden="{{step!=3}}">
+            <icon color="#06c1ae" size="80" type="waiting"></icon>
+            <text>提交成功</text>
+            <view>我们会尽快审核，预计在2个工作日内完成，请关注手机短信通知。</view>
+        </view>
+    </view>
+    <view class="footer" wx:if="{{step<2}}">
+        <form bindsubmit="onNextTap" reportSubmit="true">
+            <view class="btns">
+                <button bindtap="onPrevTap" class="prev" wx:if="{{step>0}}">上一步</button>
+                <button disabled="{{todoStep<=step}}" formType="submit">下一步</button>
+            </view>
+        </form>
+    </view>
+</view>

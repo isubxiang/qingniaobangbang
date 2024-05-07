@@ -1,0 +1,22 @@
+.body {
+    background: #fff;
+    margin-top: 30rpx;
+    position: relative;
+}
+
+.body .stamp {
+    position: absolute;
+    right: 60rpx;
+    top: 60rpx;
+    border: 8rpx solid #ddd;
+    color: #ddd;
+    font-size: 40rpx;
+    font-weight: 700;
+    border-radius: 10rpx;
+    transform: rotate(30deg);
+    width: 140rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    opacity: 0.6;
+}

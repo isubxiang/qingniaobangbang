@@ -1,0 +1,195 @@
+<include  file='public:header'/>   
+
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="javascript:history.back(-1);"><i class="iconfont icon-angle-left"></i></a>
+	</div>
+	<div class="top-title">
+		外卖基本设置
+	</div>
+</header>
+
+<style>
+.fabu-form .form-content {border: none;resize: none;width: 100%;height: 80px;padding: 10px;font-size: 12px;}
+.fabu-form .form-content1 {border: none;resize: none;width: 100%;height: 150px;padding: 10px;font-size: 12px;}
+.radio{width:20px;height:20px;}
+.text-input2{width:100%; margin-left:5px;}
+.text-input-name{ width:100%}
+</style>
+
+<form class="fabu-form" method="post" id="ajaxForm" action="<{:U('ele/gears')}>">
+
+<div class="blank-10 bg"></div>
+
+
+  <div class="row">
+    <div class="line">
+       <span class="x5">是否营业：</span>
+       <span class="x7">
+           <label><span>打烊中</span>
+           <input class="radio" type="radio" name="is_open" value="0" <eq name="ele.is_open" value="0"> checked="checked" </eq>/>
+           </label>
+           <label><span style="margin-left:20px;">营业中</span>
+           <input class="radio" type="radio" name="is_open" value="1" <eq name="ele.is_open" value="1"> checked="checked" </eq>/>
+           </label>
+       </span>
+    </div>
+ </div>
+ <p class="margin"><span class="text-dot">* 营业时间段设置范本：08:00-12:30,13:00-23:00 特别主题是英文状态下输入的：号跟-号，否则会出错，首先开启上面的营业状态然后设置下面的营业时间，留空默认全天开启</span></p>
+ <div class="row">
+	<div class="line">
+		<span class="x3">营业时间段设置：</span>
+		<span class="x9">
+			<input type="text" class="text-input-name" name="busihour" value="<{$ele[busihour]}>"/>
+		</span>
+	</div>
+ </div>
+ <div class="blank-10 bg"></div>  
+ 
+ 
+ <div class="row">
+    <div class="line">
+       <span class="x5">自动接单：</span>
+       <span class="x7">
+           <label><span>关闭</span>
+           <input class="radio" type="radio" name="is_taking" value="0"<eq name="SHOP.is_taking" value="0"> checked="checked"</eq>/>
+           </label>
+           <label><span style="margin-left:20px;">开启</span>
+           <input class="radio" type="radio" name="is_taking" value="1" <eq name="SHOP.is_taking" value="1"> checked="checked"</eq>/>
+           </label>
+       </span>
+    </div>
+ </div>
+ 
+
+  <div class="row">
+	<div class="line">
+		<span class="x5">起送价：<span class="text-dot">*</span></span>
+		<span class="x7">
+			<input type="text" class="text-input" name="since_money" value="<{:round($ele[since_money]/100,2)}>"/>
+		</span>
+	</div>
+ </div>
+ 
+ 
+ <div class="row">
+	<div class="line">
+		<span class="x5">配送费：<span class="text-dot">*</span></span>
+		<span class="x7">
+			<input type="text" class="text-input" name="logistics" value="<{:round($ele[logistics]/100,2)}>"/>
+		</span>
+	</div>
+ </div>
+ 
+  <div class="row">
+	<div class="line">
+		<span class="x5">满多钱免配送费：</span>
+		<span class="x7">
+			<input type="text" class="text-input" name="logistics_full" value="<{:round($ele[logistics_full]/100,2)}>"/>
+		</span>
+	</div>
+ </div> 
+ 
+         
+  
+  
+  
+  <em class="text-small text-gray"><em>
+    <div class="blank-10"></div>
+    <p class="margin"><span class="text-dot">*</span> 下面内容选填，易连云配置5个参数，飞蛾云配置3个参数，只能选择其中一个打印机，购买打印机电话：<{$CONFIG.site.tel}></p>
+    <div class="blank-10"></div>
+    <div class="blank-10 bg"></div>
+    
+      <div class="row">
+        <div class="line">
+           <span class="x4">是否开启打印：</span>
+           <span class="x8">
+               <label><span>开启</span>
+               <input style="width:26px;height:26px;" type="radio" <eq name="SHOP.is_ele_print" value="1"> checked="checked" </eq>name="is_ele_print"  value="1"/>
+               </label>
+               <label><span style="margin-left:30px;">关闭</span>
+               <input style="width:26px;height:26px;" type="radio" <eq name="SHOP.is_ele_print" value="0"> checked="checked" </eq>name="is_ele_print"  value="0"/>
+               </label>
+           </span>
+        </div>
+     </div>
+    
+     
+     <div class="row">
+        <div class="line">
+           <span class="x4">打印机类型：</span>
+           <span class="x8">
+               <label><span>易连云打印机</span>
+               <input style="width:26px;height:26px;" type="radio" <eq name="SHOP.is_ele_print_type" value="0">checked="checked"</eq> name="is_ele_print_type"  value="0"/>
+               </label>
+               <label><span style="margin-left:30px;">飞蛾打印机</span>
+               <input style="width:26px; height:26px;" type="radio" <eq name="SHOP.is_ele_print_type" value="1">checked="checked"</eq> name="is_ele_print_type" value="1"/>
+               </label>
+           </span>
+        </div>
+     </div>
+    
+    
+    <div class="row">
+        <div class="line">
+            <span class="x4">易连云打印标识(apiKey)：</span>
+            <span class="x8">
+                <input type="text" class="text-input-name" name="data[apiKey]" value="<{$SHOP.apiKey|default=''}>" />
+            </span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class="line">
+            <span class="x4">易连云密钥(apiKey)：</span>
+            <span class="x8">
+                <input type="text" class="text-input-name" name="data[mKey]" value="<{$SHOP.apiKey|default=''}>" />
+            </span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class="line">
+            <span class="x4">易连云密钥(mKey)/飞鹅云注册账号后生成的UKEY</span>
+            <span class="x8">
+                <input type="text" class="text-input-name" name="data[mKey]" value="<{$SHOP.mKey|default=''}>" />
+            </span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class="line">
+            <span class="x4">易连云用户id(partner)/飞蛾后台注册账户：</span>
+            <span class="x8">
+                <input type="text" class="text-input-name" name="data[partner]" value="<{$SHOP.partner|default=''}>" />
+            </span>
+        </div>
+    </div>
+    
+    
+    
+    <div class="row">
+        <div class="line">
+            <span class="x4">易连云打印机终端号/飞蛾打印机编号：</span>
+            <span class="x8">
+                <input type="text" class="text-input-name" name="data[machine_code]" value="<{$SHOP.machine_code|default=''}>" />
+            </span>
+        </div>
+    </div>
+
+	<div class="container">
+      <div class="blank-30"></div>
+      <button type="submit" class="button button-block button-big bg-dot">确认更新设置</button>
+      <div class="blank-30"></div>
+  </div> 
+  
+</form>
+
+
+<include file="public:footer"/>

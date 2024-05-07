@@ -1,0 +1,95 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"coverView": true,
+		"autoAudits": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.10.4",
+	"appid": "wx9d0412b0183467da",
+	"projectname": "%E8%B7%91%E8%85%BF%E5%90%8C%E5%AD%A62019",
+	"cloudfunctionTemplateRoot": "",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"scripts": {},
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"list": []
+		},
+		"gamePlugin": {
+			"current": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 0,
+			"list": [
+				{
+					"id": -1,
+					"name": "信息首页",
+					"pathName": "pages/thread/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "核销优惠券测试",
+					"pathName": "pages/coupon/hexiao",
+					"query": "id=123",
+					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/thread/detail",
+					"pathName": "pages/thread/detail",
+					"query": "user_id=26&id=65&type=1",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/live/index",
+					"pathName": "pages/live/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "评价页面",
+					"pathName": "pages/errand/_/ping",
+					"query": "uid=26",
+					"scene": null
+				}
+			]
+		}
+	}
+}

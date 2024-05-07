@@ -1,0 +1,91 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">配送员</li>
+        <li class="li2">尾款订单</li>
+        <li class="li2 li3">尾款订单列表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('delivery/tail')}>">
+                    <div class="seleHidden" id="seleHidden">
+          				<div class="seleK">
+                        <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                          
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>"/>
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>" class="text "/>
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label>
+                       
+                        <label>
+                            <span>关键字</span>
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                            <input type="submit" value="搜索"  class="inpt-button-tudou" />
+                        </label>
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="id" /></td>
+                    <td class="w50">ID</td>
+                    <td>配送订单ID</td>
+                    <td>配送员名称</td>
+                    <td>配送员电话</td>
+                    <td>原始订单ID</td>
+                    <td>支付人会员ID</td>
+                    <td>支付人会员昵称</td>
+                    <td>支付价格</td>
+                    <td>支付时间</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_id" type="checkbox" name="id[]" value="<{$var.id}>"/></td>
+                        <td><{$var.id}></td>
+                        <td><{$var.order_id}></td>
+                        <td><{$var.d.name}></td>
+                        <td><{$var.d.mobile}></td>
+                        <td><{$var.type_order_id}></td>
+                        <td><{$var.user_id}></td>
+                        <td><{$var.user.nickname}></td>
+                        <td><{:round($var['price']/100,2)}></td>
+                        <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                        <td>
+                            <a target="_blank" href="<{:U('user/manage',array('user_id'=>$var['user_id']))}>" class="tu-dou-btn-small">管理用户</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

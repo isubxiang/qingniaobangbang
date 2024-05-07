@@ -1,0 +1,112 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">跑腿信息</li>
+        <li class="li2 li3">跑腿管理</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>这里是新版支持多学校的分类，右侧的规格只适合跑腿</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('runningcate/create','','添加分类')}>  
+                
+                <a href="<{:U('runningcate/index',array('p'=>$p))}>">刷新</a>
+                <a <eq name="school_id" value="">class="on"</eq> href="<{:U('runningcate/index',array('school_id'=>$key))}>">全部学校</a>
+                <foreach name="schools" key="key" item="item">
+                   <a <eq name="school_id" value="$item['school_id']">class="on"</eq> href="<{:U('runningcate/index',array('school_id'=>$item['school_id']))}>"><{$item.Name}></a>
+                </foreach>
+                
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('runningcate/index')}>">
+                  <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                		     <label>
+                                <span>频道选择：</span>
+                                <select class="select w120" name="channel_id">
+                                 <option <eq name="channel_id" value="999">selected="selected"</eq> value="999">请选择分类</option>
+                                	<foreach name="channel_ids" key="key" item="item">
+                                        <option <eq name="channel_id" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                                    </foreach>
+                                </select>
+                            </label>
+                            
+                             <label>
+                                    <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                    <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                    <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                                </label>
+                             
+                         <label>
+                            <input type="text"  class="tu-inpt-text" name="keyword" value="<{$keyword}>"/>
+                            <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                          </label> 
+                        
+                    	</div>
+        			</div>
+                </form>
+            </div>
+        </div>
+        <form  target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="cate_id" /></td>
+                        <td class="w50">跑腿ID</td>
+                        <td>学校ID</td>
+                        <td>学校名称</td>
+                        <td>跑腿名称</td>
+                        <td>标签</td>
+                        <td class="w360">Url</td>
+                        <td>最低运费</td>
+                        <td>结算佣金</td>
+                        <td>排序</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_cate_id" type="checkbox" name="cate_id[]" value="<{$var.cate_id}>" /></td>
+                            <td><{$var.cate_id}></td>
+                            <td><{$var.school_id}></td>
+                            <td><{$var.school.Name}></td>
+                            <td><{$var.cate_name}></td>
+                            <td><{$var.Tag}></td>
+                            <td class="w360"><{$var.Url}></td>
+                            <td style="color:red"> &yen; <{:round($var['price']/100,2)}> 元</td>
+                            <td style="color:red"><{$var['rate']}>%</td>
+                            <td style="padding-left:10px;"><input name="orderby[<{$var.cate_id}>]" value="<{$var.orderby}>" type="text" class="remberinput w80" /></td>
+                            <td>
+                                <{:BA('runningcate/edit',array("cate_id"=>$var["cate_id"]),'编辑','','tu-dou-btn-small')}>
+                                <{:BA('running/index',array("school_id"=>$var["school_id"]),'订单列表','','tu-dou-btn-small')}>
+                                <{:BA('running/delivery',array("school_id"=>$var["school_id"]),'配送员列表','','tu-dou-btn-small')}>
+                                <{:BA('runningcate/delete',array("cate_id"=>$var["cate_id"]),'删除','act','tu-dou-btn-small')}>
+                                
+                                <eq name="var.is_show" value="1">
+                                    <{:BA('runningcate/is_show',array("cate_id"=>$var["cate_id"],'p'=>$p),'影藏[开启显示]','act','tu-dou-btn-small')}>
+                                <else/>
+                                    <{:BA('runningcate/is_show',array("cate_id"=>$var["cate_id"],'p'=>$p),'显示[关闭显示]','act','tu-dou-btn-small-waring')}>
+                                </eq>
+                                
+                                <eq name="var.is_system" value="0">
+                                	<{:BA('runningcate/setting',array("cate_id"=>$var["cate_id"]),'规格配置','','tu-dou-btn-small')}>
+                                </eq>
+                                
+                             </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('runningcate/delete','','批量删除','list','a2')}>
+                    <{:BA('runningcate/update','','批量更新排序','list','a2')}>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

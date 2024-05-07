@@ -1,0 +1,8 @@
+<view class="container">
+    <view class="body">
+        <view class="empty">
+            <text class="iconfont icon-empty"></text>
+            <view>没有收到任何消息</view>
+        </view>
+    </view>
+</view>

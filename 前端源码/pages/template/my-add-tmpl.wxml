@@ -1,0 +1,19 @@
+<template name="my-add">
+    <view bindtap="myAddClose" catchtouchmove="preventTouchMove" class="modal-auth-mask" wx:if="{{myAddShow}}">
+        <view catchtap="preventTouchMove" class="dz-wrap">
+            <view class="dz-head">
+                <view>选择地址</view>
+                <text bindtap="myAddClose" class="dz-close">取消</text>
+            </view>
+            <scroll-view class="dz-body" scrollY="true" style="height:500rpx;">
+                <view catchtap="chooseMyAdd" class="dz-list" data-address="{{item.address}}" data-person="{{item.contactPerson}}({{item.phoneNum}})" wx:for="{{myAddList}}" wx:key="id">
+                    <view class="dz-n">{{item.contactPerson}}({{item.phoneNum}})</view>
+                    <view class="dz-de">{{item.address}}</view>
+                </view>
+            </scroll-view>
+            <view bindtap="addOtherAdd" class="par-btn">
+                添加其他地址
+            </view>
+        </view>
+    </view>
+</template>

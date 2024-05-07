@@ -1,0 +1,5 @@
+<view class="body">
+    <icon color="#3aabea" size="72" type="waiting"></icon>
+    <text class="title">付款完成</text>
+    <view>请稍后，<text>{{second}}</text>秒钟后将自动跳转到订单</view>
+</view>

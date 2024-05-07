@@ -1,0 +1,45 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">红包优惠券</li>
+        <li class="li2">红包优惠券管理</li>
+        <li class="li2 li3">发放红包优惠券</li>
+    </ul>
+</div>
+<div class="main-tudou-sc-add ">
+
+    <div class="tu-table-box">
+
+        <form target="x-frame" action="<{:U('coupon/deliver',array('coupon_id'=>$detail['coupon_id']))}>" method="post">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+            
+                 <tr>
+                    <td class="tu-left-td">选择会员：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" />
+                            <input class="tudou-sc-add-text-name w210 sj" type="text" name="nickname" id="nickname"  value="<{$user.nickname}>" />
+                        </div>
+                        <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="seleSj">选择用户</a>
+                        <code>选择赠送的用户</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td  class="tu-left-td">赠送数量：</td>
+                    <td class="tu-right-td"><input type="text" name="data[num]" value="1" class="tudou-manageInput" />
+
+                    </td>
+                </tr>
+                
+                
+
+    			</table>
+            <div style="margin-left:140px;margin-top:20px">
+            <input type="submit" value="确认发放" class="sm-tudou-btn-input" />
+            <div>
+	</form>
+</div>
+</div>
+<include  file='public:footer'/>       

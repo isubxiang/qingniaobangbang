@@ -1,0 +1,26 @@
+<import src="../../../template/load-tmpl.wxml"></import>
+<scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;">
+    <view class="use-list" wx:for="{{examList}}" wx:key="paperId">
+        <view bindtap="chooseItem" data-id="{{item.paperId}}">
+            <view class="use-box cha-title user-border-none">
+                <view class="cha-title-text">
+                    <view class="ms-nav-mn">
+                        <text class="que-list-title">{{item.paperName}}</text>
+                    </view>
+                    <view class="que-list-bottom">
+                        <view class="ms-nav-content">练习时间：{{item.createTimeStr}}</view>
+                    </view>
+                </view>
+                <image class="cha-img" src="/assets/img/right.png"></image>
+            </view>
+            <view class="cha-title use-botton ms-info-text">
+                <view>
+                    <text class="ms-nav-dt">答题数：{{item.answerNum}}</text>
+                    <text class="ms-nav-mn que-margin">正确率：{{item.rightRatio}}</text>
+                </view>
+                <text class="ms-nav-zt">{{item.scoreStr}}分</text>
+            </view>
+        </view>
+    </view>
+    <template is="load-tmpl" data="{{reqInit:reqInit,loadProcess:loadProcess,dataSize:examList.length,loadingComplete:loadingComplete}}"></template>
+</scroll-view>

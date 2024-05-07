@@ -1,0 +1,157 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+     <li class="li1">设置</li>
+        <li class="li2">管理员设置</li>
+        <li class="li2 li3">编辑管理员</li>
+    </ul>
+</div>
+
+<div class="listBox clfx" style="width:800px;">
+    <div class="menuManage">
+        <form target="x-frame" action="<{:U('admin/edit',array('admin_id'=>$detail['admin_id']))}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+
+                        <tr>
+                            <td class="tu-left-td">用户名：</td>
+                            <td class="tu-right-td"><{$detail.username|default=''}>
+                            </td>
+                        </tr>
+                        
+                         <tr>
+                            <td class="tu-left-td">密码：</td>
+                            <td class="tu-right-td"><input type="password" name="data[password]" value="******" class="tudou-sc-add-text-name w300"/>
+							<code>后台登录密码，建议越复杂越好</code>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="tu-left-td">绑定会员账户：</td>
+                            <td class="tu-right-td">
+                                <div class="lt">
+                                    <input type="hidden" id="user_id" name="data[user_id]" value="<{$detail.user_id|default=''}>" class="tudou-manageInput"/>
+                                    <input class="tudou-sc-add-text-name sj" type="text" name="nickname" id="nickname"  value="<{$user.nickname}>" />
+                                </div>
+                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="seleSj">选择绑定会员账户</a>
+                            </td>
+                        </tr> 
+                        
+                        <tr>
+                            <td class="tu-left-td">管理员类型：</td>
+                            <td class="tu-right-td">
+                                <select name="data[type]" class="seleFl w150" id="type">
+                                   <option value="0" <eq name="detail.type" value="0">selected="selected"</eq> >==请选择管理员==</option>
+                                   <option value="1" <eq name="detail.type" value="1">selected="selected"</eq> >系统管理员</option>
+                                   <option value="2" <eq name="detail.type" value="2">selected="selected"</eq> >分站管理员</option>
+                                </select>
+                                <code>管理员类型必须选择</code>
+                            </td>
+                        </tr>
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        </table>
+                        
+                    <table class="school" style="display:none;" bordercolor="#F00"  cellspacing="0" width="100%" style="border-collapse:collapse; margin:0px; vertical-align:middle; background-color:#FFF; color:#F00">
+                        <tr>
+                            <td class="tu-left-td">选择学校：</td>
+                            <td class="tu-right-td">
+                               <select id="school_id" name="data[school_id]" class="seleFl w210">
+                               <option value="0">请选择学校...</option>
+                                <foreach name="schools" item="var">
+                                 <option value="<{$var.school_id}>"  <eq name="var.school_id" value="$detail.school_id">selected="selected"</eq> ><{$var.Name}></option>                
+                                </foreach>
+                                </select>
+                                <code>学校必须选择否则报错</code>
+                            </td>
+                          </tr>  
+                
+                    </table>
+                        
+                        
+                        
+                     <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+                        <tr>
+                            <td class="tu-left-td">管理员角色：</td>
+                            <td class="tu-right-td">
+                                <select name="data[role_id]" class="seleFl w150" id="role_id">
+                                <option value="0">==请选择角色==</option> 
+                                </select>
+                                <code>必须选择正确的角色</code>
+                            </td>
+                        </tr>
+                      </table>  
+                        
+                        
+                     <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+                        <tr>
+                            <td class="tu-left-td">手机：</td>
+                            <td class="tu-right-td"><input type="text" name="data[mobile]" value="<{$detail.mobile|default=''}>" class="tudou-sc-add-text-name w150" />
+                                <code>手机不能为空</code>
+                            </td>
+                        </tr>
+                    </table>
+
+
+                    </table>
+                </div>
+                <div class="sm-qr-tu"><input type="submit" value="确定编辑" class="sm-tudou-btn-input" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+	$(document).ready(function(e){
+		$("#school_id").change(function(){
+			var type = $('#type').val();
+			if(type == '2'){
+				$('.school').css('display','block'); 
+			}else{
+				$('.school').css('display','none'); 
+			}
+			var school_id = $('#school_id').val();
+			_getRoleIdHtml(type,school_id);
+		});
+
+		var school_id =$('#school_id').val();
+		var type =$('#type').val();
+		_getRoleIdHtml(type,school_id);
+	
+		$("#type").change(function(){
+			var type = $(this).val();
+			if(type == '2'){
+				$('.school').css('display','block'); 
+			}else{
+				$('.school').css('display','none'); 
+			}
+			var school_id = $('#school_id').val();
+			_getRoleIdHtml(type,school_id);
+		});
+	});		
+	
+	//获取表单
+	function _getRoleIdHtml(type,school_id){
+		
+		if(type == '2'){
+			$('.school').css('display','block'); 
+		}
+			
+		var admin_id ="9999";
+		var url = '/admin/admin/getRoles/admin_id/'+admin_id+'/type/'+type+'/school_id/'+school_id;
+		$.get(url,function (data){
+			$("#role_id").html(data);
+		}, 'html');
+	}
+	
+</script>
+<include  file='public:footer'/> 
+

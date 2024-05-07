@@ -1,0 +1,37 @@
+<view class="container">
+    <dialog hidden="{{dialogType!='smsCode'}}">
+        <view class="smscode">
+            <view bindtap="onDialogClose" class="close">关闭</view>
+            <view class="caption">请输入收到的短信验证码</view>
+            <input bindblur="onSmsCodeBlur" bindinput="onSmsCodeInput" cursorSpacing="{{showDialog&&smsCodeInputFocus?80:0}}" focus="{{showDialog&&smsCodeInputFocus}}" hidden="true" type="number">{{smsCode}}</input>
+            <view class="nums">
+                <view bindtap="onSmsCodeTap" data-index="0">{{smsCode.length?smsCode[0]:''}}</view>
+                <view bindtap="onSmsCodeTap" data-index="1">{{smsCode.length?smsCode[1]:''}}</view>
+                <view bindtap="onSmsCodeTap" data-index="2">{{smsCode.length?smsCode[2]:''}}</view>
+                <view bindtap="onSmsCodeTap" data-index="3">{{smsCode.length?smsCode[3]:''}}</view>
+            </view>
+            <view class="desc">
+                <text>没有收到短信验证码？</text>
+                <text bindtap="onResendTap" class="resend resend-disabled">点击这里重发{{smsCodeSentTick>0?'('+smsCodeSentTick+')':''}}</text>
+            </view>
+        </view>
+    </dialog>
+    <view class="body">
+        <icon color="#ff9800" size="72" type="success" wx:if="{{success}}"></icon>
+        <view class="title{{success?' title-success':''}}">{{success?'绑定成功':'手机绑定'}}</view>
+        <block wx:if="{{!success}}">
+            <view class="desc">{{msg}}</view>
+            <view class="content">
+                <button bindgetphonenumber="onGetPhoneNumber" openType="getPhoneNumber" wx:if="{{!inputMobile}}">{{isRebind?'更新微信手机号':'绑定微信手机号'}}</button>
+                <block wx:else>
+                    <view class="input">
+                        <input bindinput="onMobileInput" maxlength="11" placeholder="你的手机号" type="number">{{mobile}}</input>
+                        <view bindtap="onInputNextTap" hoverClass="navigator-hover">下一步</view>
+                    </view>
+                    <view bindtap="onBackSwitchTap" class="lnk" hoverClass="navigator-hover">
+                        <text class="iconfont icon-back_light"></text>绑定微信手机号</view>
+                </block>
+            </view>
+        </block>
+    </view>
+</view>

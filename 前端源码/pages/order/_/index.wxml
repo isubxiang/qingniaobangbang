@@ -1,0 +1,78 @@
+<view class="container">
+    <view class="header" wx:if="{{isMerchant||isDelivery}}">
+        <view bindtap="onTabChanged" class="{{tabIndex!=index?'':'actived'}}" data-index="{{index}}" hidden="{{!isMerchant&&index==0||!isDelivery&&index==1}}" wx:for="{{orderListTypes}}" wx:key="Value">
+            <text>{{item.Name}}</text>
+        </view>
+        <text animation="{{tabAnimation}}" class="line" style="width:{{isMerchant&&isDelivery?33.33:50}}%">
+            <text></text>
+        </text>
+    </view>
+    <view class="body" style="{{isMerchant||isDelivery?'margin-top: 92rpx':''}}">
+        <block wx:for="{{orders[tabIndex]}}" wx:key="Id">
+            <view class="section-header" wx:if="{{tabIndex<2&&( index==0||util.formatDate(orders[tabIndex][index-1].CreatedTime,'d')!=util.formatDate(item.CreatedTime,'d') )}}">{{util.formatDate(item.CreatedTime,'d')}}</view>
+            <view class="hr" wx:else></view>
+            <navigator class="section" url="info?id={{item.Id}}&status={{item.Status}}">
+                <image class="avatar" bindtap="onPing" data-uid="{{item.uid}}" mode="aspectFill" src="{{item.AvatarUrl}}"></image>
+                <view class="info">
+                    <view class="caption">
+                        <view class="user">
+                            <text class="name">{{item.NickName}}</text>
+                            <text class="type">{{item.Type==1?'外卖跑腿':item.cateName}}</text>
+                        </view>
+                        <view class="status{{item.Status<=1?' status-ready':item.Status>=256?' status-cancel':''}}">{{item.Status<256?enums.getName(orderStatus,item.Status):'已取消'}}</view>
+                    </view>
+                    <view class="shop" wx:if="{{item.Type==1}}">
+                        <view class="serial" wx:if="{{tabIndex<2}}">
+                            <view class="code">#<text>{{item.Serial}}</text>
+                            </view>
+                            <view class="advance">{{item.IsAdvanceMoney?'需垫付':'直接取货'}}</view>
+                        </view>
+                        <view class="items" wx:if="{{tabIndex==0}}">
+                            <view class="item" wx:for="{{stringUtil.split(item.CommodityNames,'、')}}" wx:for-index="i" wx:for-item="n" wx:key="i">
+                                <text wx:for="{{stringUtil.lastSplit(n,'x')}}" wx:for-index="j" wx:for-item="m" wx:key="j">{{(j==1?'x':'')+m}}</text>
+                            </view>
+                        </view>
+                        <block wx:else>
+                            <image mode="aspectFill" src="{{item.ShopLogoSrc}}"></image>
+                            <view class="shop-info">
+                                <view class="cost">
+                                    <text class="name">{{item.ShopName}}</text>
+                                    <text class="money money-rmb">{{item.Money}}</text>
+                                </view>
+                                <view class="ellipsis">{{item.CommodityNames}}</view>
+                            </view>
+                        </block>
+                    </view>
+                    <view class="remark" wx:else>{{item.Remark}} <text class="attr-name" wx:if="{{item.attr_name}}">{{item.attr_name}}</text></view>
+                    <view class="props">
+                        <view class="fee" wx:if="{{tabIndex==0}}">总价<text class="money money-rmb">{{item.Money}}</text>
+                        </view>
+                        <view class="fee" wx:else>{{tabIndex!=1?'跑腿费':'赏金'}}<text class="money money-rmb">{{item.MoneyFreight+item.MoneyTip}}</text>
+                        </view>
+                        <view class="time">{{util.formatDate(item.CreatedTime,'m')}}</view>
+                        <button catchtap="onPaymentTap" class="btn" data-id="{{item.Id}}" wx:if="{{item.Status<2}}">立即付款</button>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+        <view class="empty" wx:if="{{!orders[tabIndex].length}}">
+            <text class="iconfont icon-empty"></text>
+            <view>没有找到订单记录</view>
+        </view>
+    </view>
+</view>
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />
+<wxs module="util" src="../../../assets/wxs/util.wxs" />
+<wxs module="stringUtil">
+var strSplit = (function(str, sep) {
+    return (str.split(sep))
+});
+var strLastSplit = (function(str, sep) {
+    var pos = str.lastIndexOf(sep);
+    return ([str.substring(0, pos), str.substring(pos + 1)])
+});
+module.exports = ({
+    "split": strSplit,
+    "lastSplit": strLastSplit,
+});
+</wxs>

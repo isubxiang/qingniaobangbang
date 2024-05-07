@@ -1,0 +1,60 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">站点功能</li>
+        <li class="li2">功能开关</li>
+    </ul>
+</div>
+
+<div class="main-tu-js main-sc">
+
+    <p class="attention"><span>注意：</span>支持大部分板块，关闭后只是前台用户看不到，后台还是可看到功能列表。第一步您应该来这里配置功能！</p>
+
+    <form  target="x-frame" action="<{:U('setting/operation')}>" method="post">
+
+        <div class="tu-table-box">
+
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+<tr>
+<td class="tu-left-td">直接关闭PC：</td>
+<td class="tu-right-td">
+<label><input type="radio" name="data[pchome]" <eq name="CONFIG.operation.pchome" value="1">checked="checked"</eq> value="1"  />开启PC</label>
+<label><input type="radio" name="data[pchome]"  <eq name="CONFIG.operation.pchome" value="0">checked="checked"</eq>  value="0"  />关闭PC</label>
+<code>建议关闭PC，一般只用wap下单，PC没有开启的必要，强烈建议哦</code>
+</td>
+</tr>               
+                
+                
+<tr>
+<td class="tu-left-td">商城频道：</td>
+<td class="tu-right-td">
+<label><input type="radio" name="data[mall]" <eq name="CONFIG.operation.mall" value="1">checked="checked"</eq> value="1"  />开启</label>
+<label><input type="radio" name="data[mall]"  <eq name="CONFIG.operation.mall" value="0">checked="checked"</eq>  value="0"  />关闭</label>
+<code>针对本地的商城，目前支持多属性，快递发货，已支持抢单，一般可开启这个频道，如果没有必要的用户可以不开启。</code>
+</td>
+</tr> 
+
+              
+<tr>
+<td class="tu-left-td">外卖频道：</td>
+<td class="tu-right-td">
+<label><input type="radio" name="data[ele]" <eq name="CONFIG.operation.ele" value="1">checked="checked"</eq> value="1"  />开启</label>
+<label><input type="radio" name="data[ele]"  <eq name="CONFIG.operation.ele" value="0">checked="checked"</eq>  value="0"  />关闭</label>
+<code>最近优化比较多的板块，完美运营的板块，本地运营可以开启，当然，您已可以关闭。</code>
+</td>
+</tr> 
+            
+
+            </table>
+
+        </div>
+
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+
+    </form>
+
+</div>
+
+<include  file='public:footer'/>       

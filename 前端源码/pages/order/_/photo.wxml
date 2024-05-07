@@ -1,0 +1,11 @@
+
+<view class="schoollist">
+  <block wx:for="{{model.files}}" wx:key="item">
+    <view class="school-list">
+        <view class="school-list-info" index="{{index}}">
+          <image class="school-list-photo" bindtap="previewImage" data-id="{{item.running_id}}" data-inde="{{index}}" src="{{item.srcImg}}"/>
+          <text class="school-list-desc">{{item.name}}</text>
+        </view>
+    </view>
+  </block>
+</view>

@@ -1,0 +1,73 @@
+<view class="container">
+    <view class="header" wx:if="{{isMerchant||isDelivery}}">
+        <view bindtap="onTabChanged" class="{{tabIndex!=index?'':'actived'}}" data-index="{{index}}" hidden="{{!isMerchant&&index==0||!isDelivery&&index==1}}" wx:for="{{pingListTypes}}" wx:key="Value">
+            <text>{{item.Name}}</text>
+        </view>
+        <text animation="{{tabAnimation}}" class="line" style="width:{{isMerchant&&isDelivery?33.33:50}}%">
+            <text></text>
+        </text>
+    </view>
+    <view class="body" style="{{isMerchant||isDelivery?'margin-top: 92rpx':''}}">
+        <block wx:for="{{orders[tabIndex]}}" wx:key="Id">
+            <view class="section-header" wx:if="{{tabIndex<2&&( index==0||util.formatDate(orders[tabIndex][index-1].CreatedTime,'d')!=util.formatDate(item.endTime,'d') )}}">{{util.formatDate(item.endTime,'d')}}</view>
+            <view class="hr" wx:else></view>
+
+            <view class="section">
+                <image class="avatar" mode="aspectFill" src="{{item.face}}"></image>
+                <view class="info">
+                    <view class="caption">
+                        <view class="user">
+                            <text class="name">{{item.userName}}</text>
+                            <text class="type">{{item.Type==1?'外卖跑腿':item.cateName}}</text>
+                        </view>
+                    </view>
+
+
+                    <view class="left">
+                          <text class="score">
+                              <text class="iconfont icon-star_fill"></text>
+                              <text class="iconfont icon-star_fill"></text>
+                              <text class="iconfont icon-star_fill"></text>
+                              <text class="iconfont icon-star_fill"></text>
+                              <text class="iconfont icon-star_half"></text>
+                              <text class="value">{{item.score}}</text>
+                          </text>
+                   </view>
+
+                    <view class="props">
+                        <view class="time" wx:for="{{item.labels}}">{{item}}</view>
+                    </view>
+                    
+                    <view class="shop">
+                         <text class="name">{{item.content}}</text>
+                    </view>
+                    <view class="props">
+                        <view class="time">评价时间：{{util.formatDate(item.CreatedTime,'m')}}</view>
+                    </view>
+                </view>
+                
+            </view>
+
+            
+        </block>
+        <view class="empty" wx:if="{{!orders[tabIndex].length}}">
+            <text class="iconfont icon-empty"></text>
+            <view>没有找到订单记录</view>
+        </view>
+    </view>
+</view>
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />
+<wxs module="util" src="../../../assets/wxs/util.wxs" />
+<wxs module="stringUtil">
+var strSplit = (function(str, sep) {
+    return (str.split(sep))
+});
+var strLastSplit = (function(str, sep) {
+    var pos = str.lastIndexOf(sep);
+    return ([str.substring(0, pos), str.substring(pos + 1)])
+});
+module.exports = ({
+    "split": strSplit,
+    "lastSplit": strLastSplit,
+});
+</wxs>

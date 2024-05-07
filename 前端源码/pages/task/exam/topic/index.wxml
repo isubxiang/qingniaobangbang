@@ -1,0 +1,117 @@
+<import src="../../../../wxParse/wxParse.wxml"></import>
+<view class="topic-title" wx:if="{{navName!=''}}">{{navName}}</view>
+<swiper bindchange="bindSwiperChange" class="top-body" current="{{position}}">
+    <swiper-item class="top-auto" wx:for="{{questList}}" wx:key="id">
+        <view class="top-head">
+            {{item.qtypeStr}}
+            <view class="que-color">
+                <text class="ms-nav-dt top-font">{{index+1}}</text>
+                / {{questList.length}}
+            </view>
+        </view>
+        <view class="top-wrap">
+            <template is="wxParse" data="{{wxParseData:item['pqname'].nodes}}"></template>
+            <view bindtap="chooseQuest" class="top-list" data-letter="A" wx:if="{{item.qa&&item.qa!=''}}">
+                <view class="top-opt {{item.questType==2?'top-opt-fillet':''}} {{helper.csOf(item.sanswer,item.answer,'A')}} {{multiArrObj.A?'active':''}}">
+                    A
+                </view>
+                <template is="wxParse" data="{{wxParseData:item['pqa'].nodes}}"></template>
+            </view>
+            <view bindtap="chooseQuest" class="top-list" data-letter="B" wx:if="{{item.qb&&item.qb!=''}}">
+                <view class="top-opt {{item.questType==2?'top-opt-fillet':''}} {{helper.csOf(item.sanswer,item.answer,'B',multiArrObj)}} {{multiArrObj.B?'active':''}}">
+                    B
+                </view>
+                <template is="wxParse" data="{{wxParseData:item['pqb'].nodes}}"></template>
+            </view>
+            <view bindtap="chooseQuest" class="top-list" data-letter="C" wx:if="{{item.qc&&item.qc!=''}}">
+                <view class="top-opt {{item.questType==2?'top-opt-fillet':''}} {{helper.csOf(item.sanswer,item.answer,'C',multiArrObj)}} {{multiArrObj.C?'active':''}}">
+                    C
+                </view>
+                <template is="wxParse" data="{{wxParseData:item['pqc'].nodes}}"></template>
+            </view>
+            <view bindtap="chooseQuest" class="top-list" data-letter="D" wx:if="{{item.qd&&item.qd!=''}}">
+                <view class="top-opt {{item.questType==2?'top-opt-fillet':''}} {{helper.csOf(item.sanswer,item.answer,'D',multiArrObj)}} {{multiArrObj.D?'active':''}}">
+                    D
+                </view>
+                <template is="wxParse" data="{{wxParseData:item['pqd'].nodes}}"></template>
+            </view>
+            <view bindtap="chooseQuest" class="top-list" data-letter="E" wx:if="{{item.qe&&item.qe!=''}}">
+                <view class="top-opt {{item.questType==2?'top-opt-fillet':''}} {{helper.csOf(item.sanswer,item.answer,'E',multiArrObj)}} {{multiArrObj.E?'active':''}}">
+                    E
+                </view>
+                <template is="wxParse" data="{{wxParseData:item['pqe'].nodes}}"></template>
+            </view>
+            <view bindtap="chooseQuest" class="top-list" data-letter="F" wx:if="{{item.qf&&item.qf!=''}}">
+                <view class="top-opt {{item.questType==2?'top-opt-fillet':''}} {{helper.csOf(item.sanswer,item.answer,'F',multiArrObj)}} {{multiArrObj.F?'active':''}}">
+                    F
+                </view>
+                <template is="wxParse" data="{{wxParseData:item['pqf'].nodes}}"></template>
+            </view>
+            <view class="top-margin-top" wx:if="{{item.used}}">
+                您的答案：{{item.sanswer}}
+                <icon class="que-margin" color="{{item.rightFlag?'#3bbb8d':'#FF0000'}}" size="16" type="{{item.rightFlag?'success_no_circle':'cancel'}}"></icon>
+            </view>
+            <block wx:if="{{item.showAnswer||item.used}}">
+                参考答案：{{item.answer}}
+                <view wx:if="{{item['explain']!=''}}">
+                    题目解析：
+                    <template is="wxParse" data="{{wxParseData:item['pexplain'].nodes}}"></template>
+                </view>
+            </block>
+        </view>
+    </swiper-item>
+    <swiper-item class="top-auto" wx:if="{{reqInit}}">
+        <view class="top-head que-color">
+            系统评分
+        </view>
+        <view class="top-wrap">
+            <view class="top-key">答题总数：
+                <text class="ms-nav-dt">{{assess.total}}</text>
+            </view>
+            <view class="top-key">答题正确：
+                <text class=" ms-nav-zt">{{assess.rightNum}}</text>
+            </view>
+            <view class="top-key ">答题错误：
+                <text class="ms-nav-ym">{{assess.errNum}}</text>
+            </view>
+            <view class="top-key ">正确率：
+                <text class="ms-nav-mn">{{assess.rightRatio}}</text>
+            </view>
+        </view>
+    </swiper-item>
+</swiper>
+<view class="top-bottom">
+    <view bindtap="showAnswer">
+        <image class="top-bottom-img" src="/assets/img/ckda.png"></image>
+        <view>查看答案</view>
+    </view>
+    <view bindtap="showCard">
+        <image class="top-bottom-img" src="/assets/img/dtk.png"></image>
+        <view>答题卡</view>
+    </view>
+    <view bindtap="resetPaper">
+        <image class="top-bottom-img" src="/assets/img/top-redo.png"></image>
+        <view>重做一遍</view>
+    </view>
+</view>
+<view class="top-card" wx:if="{{cardDialog}}">
+    <block wx:for="{{cardList}}" wx:key="*this">
+        <view class="top-card-title">{{item.typeName}}</view>
+        <view class="top-card-box">
+            <view bindtap="chooseCardIndex" class="top-opt top-card-btn {{sitem.css}}" data-index="{{sitem.id}}" wx:for="{{item.subList}}" wx:for-item="sitem" wx:key="*this">{{sitem.id}}
+            </view>
+        </view>
+    </block>
+    <view bindtap="hideCard" class="top-bottom top-return">返回</view>
+</view>
+<view bindtap="examErrDel" class="ms-bottom top-remove" wx:if="{{errFlag==1}}">移除</view>
+<wxs module="helper">
+function csOf(sanswer, answer, item) {
+    if (sanswer != undefined && answer != undefined) {
+        return (sanswer.indexOf(item) != -1 && answer.indexOf(item) != -1 ? 'select' : sanswer.indexOf(item) != -1 ? 'err' : '')
+    } else {
+        return ("")
+    }
+};
+module.exports.csOf = csOf;
+</wxs>

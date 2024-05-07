@@ -1,0 +1,32 @@
+<style>
+footer {height: inherit;}
+</style>
+    <footer class="foot-fixed">		
+    <a class="foot-item  <eq name="ctl" value="index">active</eq>" href="<{:U('index/index')}>">		
+    	<span class="icon-shouye iconfont"></span>		
+        	<span class="foot-label">首页</span>		
+            </a>
+            <a class="foot-item <eq name="act" value="create">active</eq>" href="<{:u('ele/create')}>">		
+            	<span class="iconfont icon-fabu"></span>			
+                <span class="foot-label">上菜</span>
+            </a>	
+            <a class="foot-item"  href="<{:U('ele/index')}>">			
+                <span class="iconfont icon-waimai1"></span>			
+                <span class="foot-label">菜品</span>		
+            </a>	
+
+            <a class="foot-item <eq name="act" value="order">active</eq>" href="<{:U('ele/order',array('status'=>2))}>">			
+                <span class="iconfont icon-kecheng"></span>			
+                <span class="foot-label">订单</span>		
+            </a>	
+            
+            <a class="foot-item <eq name="act" value="gears">active</eq>" href="<{:U('ele/gears')}>">		
+                <span class="iconfont icon-guanli"></span>			
+                <span class="foot-label">设置</span>		
+            </a>	
+            
+            </footer>	
+            <include file="public:reminds"/>
+           <iframe id="x-frame" name="x-frame" style="display:none;"></iframe>
+          </body>
+      </html>

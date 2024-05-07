@@ -1,0 +1,35 @@
+<view class="page">
+    <view class="money-box">
+        <text class="money-note">合计：</text>
+        <text class="money-text">￥</text>
+        <text class="money-text money-number">{{totalStr}}</text>
+    </view>
+    <view class="head">
+        <view class="bal-time">
+            <picker bindchange="bindMultiPickerChange" mode="multiSelector" range="{{multiArray}}" value="{{multiIndex}}">
+                <view class="bal-time-text">
+                    {{multiArray[0][ multiIndex[0] ]}}年{{multiArray[1][ multiIndex[1] ]}}月
+                </view>
+            </picker>
+            <image class="bal-more" src="/assets/img/bal-time.png"></image>
+        </view>
+        <view class="">
+            <text catchtap="catClick" class="had-text {{negFlag==0?'active':''}}" data-state="0">收入</text>
+            <text catchtap="catClick" class="had-text {{negFlag==1?'active':''}}" data-state="1">支出</text>
+        </view>
+    </view>
+    <view class="body">
+        <view class="list" wx:for="{{listItem}}" wx:key="*this">
+            <view class="hr" wx:if="{{index!=0}}"></view>
+            <view class="item">
+                <view class="left">
+                    <text class="ellipsis name">{{item.dataTypeStr}}</text>
+                </view>
+                <view class="money {{negFlag==1?'money-out':'money-in'}}">{{item.sumNumStr}}</view>
+            </view>
+        </view>
+        <view class="no-data" wx:if="{{listItem.length==0&&reqInit}}">
+            暂无数据
+        </view>
+    </view>
+</view>

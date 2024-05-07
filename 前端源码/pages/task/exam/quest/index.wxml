@@ -1,0 +1,45 @@
+<import src="../../../template/load-tmpl.wxml"></import>
+<view bindtap="chooseRegion" class="ms-head-scroll">
+    <view class="ms-head-text que-color">
+        <text class="ms-nav-dt">{{selectRegionName}}</text>
+        <image class="ms-head-img" src="/assets/img/exam-bottom.png"></image>
+    </view>
+    <view class="ms-head-text que-color">
+        <text class="ms-nav-mn">{{selectYear}}</text>
+        <image class="ms-head-img" src="/assets/img/exam-bottom.png"></image>
+    </view>
+</view>
+<scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;">
+    <view class="cha-box" wx:for="{{examList}}" wx:key="id">
+        <image class="cha-new" src="/assets/img/new.png" wx:if="{{item.newFlag==1}}"></image>
+        <view bindtap="chooseExam" class="cha-title" data-id="{{item.id}}" data-index="{{index}}">
+            <view class="cha-title-text">
+                <view>{{item.examName}}</view>
+                <view class="que-list-bottom">
+                    <view class="ms-nav-content top-font ms-nav-dt">整套价格<text catchtap="buyExam" class="ms-nav-zt" data-id="{{item.id}}">【立即购买】</text>
+                    </view>
+                    <view class="">
+                        <text class="que-list-money">{{item.disPriceStr}}</text>
+                        <text class="que-list-price">{{item.orgPriceStr}}</text>
+                    </view>
+                </view>
+            </view>
+            <image class="cha-img" src="{{item.expand?'/assets/img/exam-top.png':'/assets/img/exam-bottom.png'}}"></image>
+        </view>
+        <view class="cha-body" wx:if="{{item.expand}}">
+            <view catchtap="choosePaper" class="que-list" data-id="{{sitem.id}}" data-name="{{sitem.paperName}}" data-pid="{{item.id}}" wx:for="{{item.subList}}" wx:for-item="sitem" wx:key="id">
+                <view class="que-list-title">{{sitem.paperName}}</view>
+                <view class="que-list-bottom">
+                    <view class="ms-nav-content">共{{sitem.totalQuest}}题
+                <text class="que-margin">{{sitem.examNum}}人做过</text>
+                    </view>
+                    <view class="">
+                        <text class="que-list-money">{{sitem.priceStr}}</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+    <template is="load-tmpl" data="{{reqInit:reqInit,loadProcess:loadProcess,dataSize:examList.length,loadingComplete:loadingComplete}}"></template>
+</scroll-view>
+<include src="../../../template/exam-region-tmpl.wxml"></include>

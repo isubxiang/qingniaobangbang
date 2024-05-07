@@ -1,0 +1,35 @@
+<template name="pay-info">
+    <view class="contact">
+        <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">累计费用</label>
+                </view>
+                <view class="weui-cell__bd">
+                    {{feeMinValue}}元
+                </view>
+            </view>
+            <view bindtap="fundClick" class="weui-cell">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">账户余额</label>
+                    <view wx:if="{{!rechargeHide}}">
+                        <button catchtap="rechargeClick" class="change-recharge">去充值</button>
+                    </view>
+                </view>
+                <view class="weui-cell__bd change-add">
+                    <text class="">可用余额：{{fundStr}}元</text>
+                    <icon class="change-img change-margin-right" color="#3bbb8d" type="{{payType=='fund'?'success':'circle'}}"></icon>
+                </view>
+            </view>
+            <view bindtap="wxPayClick" class="weui-cell">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">{{payAgent}}</label>
+                </view>
+                <view class="weui-cell__bd change-add">
+                    <text class=""></text>
+                    <icon class="change-img change-margin-right" color="#3bbb8d" type="{{payType=='wx'?'success':'circle'}}"></icon>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

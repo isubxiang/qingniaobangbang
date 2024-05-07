@@ -1,0 +1,44 @@
+<template name="pay-info">
+    <view class="contact">
+        <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">打赏费用</label>
+                </view>
+                <view class="weui-cell__bd">
+                    <input bindblur="feeInputEvent" bindconfirm="feeInputEvent" class="money-color" name="totalFee" placeholder="请输入金额" type="digit" value="{{feeMinValue}}"></input>
+                </view>
+            </view>
+            <view class="weui-cell" wx:if="{{selectedCouponCode!='-2'}}">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">优惠券抵用</label>
+                </view>
+                <view bindtap="chooseCoupon" class="weui-cell__bd change-add">
+                    <text class="green-color">{{couponMsg}}</text>
+                    <image class="change-img" src="/img/right.png"></image>
+                </view>
+            </view>
+            <view bindtap="fundClick" class="weui-cell" wx:if="{{payVisible}}">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">账户余额</label>
+                    <view wx:if="{{!rechargeHide}}">
+                        <button catchtap="rechargeClick" class="change-recharge">去充值</button>
+                    </view>
+                </view>
+                <view class="weui-cell__bd change-add">
+                    <text class="">可用余额：{{fundStr}}元</text>
+                    <icon class="change-img change-margin-right" color="#3bbb8d" type="{{payType=='fund'?'success':'circle'}}"></icon>
+                </view>
+            </view>
+            <view bindtap="wxPayClick" class="weui-cell" wx:if="{{payVisible}}">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">{{payAgent}}</label>
+                </view>
+                <view class="weui-cell__bd change-add">
+                    <text class=""></text>
+                    <icon class="change-img change-margin-right" color="#3bbb8d" type="{{payType=='wx'?'success':'circle'}}"></icon>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

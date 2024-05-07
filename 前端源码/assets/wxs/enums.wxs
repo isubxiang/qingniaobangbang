@@ -1,0 +1,32 @@
+var getNames = (function() {
+    var names = [];
+    for (var i = 0; i < arr.length; ++i) {
+        names.push(arr[((nt_0 = (i), null == nt_0 ? undefined : 'number' === typeof nt_0 ? nt_0 : "" + nt_0))].Name)
+    };
+    return (names)
+});
+var getValues = (function() {
+    var values = [];
+    for (var i = 0; i < arr.length; ++i) {
+        values.push(arr[((nt_1 = (i), null == nt_1 ? undefined : 'number' === typeof nt_1 ? nt_1 : "" + nt_1))].Values)
+    };
+    return (values)
+});
+var getName = (function(arr, value) {
+    for (var i = 0; i < arr.length; ++i) {
+        if (arr[((nt_2 = (i), null == nt_2 ? undefined : 'number' === typeof nt_2 ? nt_2 : "" + nt_2))].Value == value) return (arr[((nt_3 = (i), null == nt_3 ? undefined : 'number' === typeof nt_3 ? nt_3 : "" + nt_3))].Name);
+    };
+    return (null)
+});
+var getValue = (function(arr, name) {
+    for (var i = 0; i < arr.length; ++i) {
+        if (arr[((nt_4 = (i), null == nt_4 ? undefined : 'number' === typeof nt_4 ? nt_4 : "" + nt_4))].Name == value) return (arr[((nt_5 = (i), null == nt_5 ? undefined : 'number' === typeof nt_5 ? nt_5 : "" + nt_5))].Value);
+    };
+    return (null)
+});
+module.exports = ({
+    getNames: getNames,
+    getValues: getValues,
+    getName: getName,
+    getValue: getValue,
+});

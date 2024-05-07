@@ -1,0 +1,65 @@
+<include  file='public:header'/>
+<div class="main-tu-js main-sc">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="right">    
+                <form class="search_form" method="post" action="<{:U('ele/select')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <span>关键字</span>
+                        <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                        <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50">ID</td>
+                    <td>商家名称</td>
+                    <td>配送费</td>
+                    <td>起送价</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input type="radio" name="shop_id"   rel="<{$var.shop_name}>" value="<{$var.shop_id}>" /><{$var.shop_id}></td>
+                        <td><{$var.shop_name}></td>
+                        <td><{:round($var['logistics']/100,2)}></td>
+                        <td><{:round($var['since_money']/100,2)}></td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <input style="border:1px solid #dbdbdb; width: 100px; height: 38px; line-height: 38px; text-align: center;" type="button" id="select_btn" class="tu-dou-btn" value="确定选择" />
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+    $(document).ready(function(e){
+        $("#select_btn").click(function () {
+            $("input[name='shop_id']").each(function(a){
+                if ($(this).prop("checked") == true){
+                    parent.selectCallBack('shop_id', 'shop_name', $(this).val(), $(this).attr('rel'));
+                }
+            });
+        });
+
+    });
+</script>
+<include  file='public:footer'/>  
+
+
+
+
+
+
+

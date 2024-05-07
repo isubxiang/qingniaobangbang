@@ -1,0 +1,10 @@
+<loading wx:if="{{jjz}}">海报生成中...</loading>
+<view class="imagePathBox" style="background:{{color}};z-index: 0;"></view>
+<view class="imagePathBox" hidden="{{maskHidden==false}}">
+    <image class="shengcheng" src="{{imagePath}}"></image>
+    <button bindtap="baocun" class="baocun">保存相册，分享到朋友圈</button>
+</view>
+<view class="canvas-box">
+    <canvas canvasId="mycanvas" style="width: 375px;height: 667px;position:fixed;top:9999px"></canvas>
+</view>
+<canvas canvasId="ctx" style="top:-10000000000000000px;"></canvas>

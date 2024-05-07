@@ -1,0 +1,115 @@
+<table class="table table-bordered" id="goods_spec_table1">                                
+    <tr>
+        <td colspan="2"><b>商品规格:</b></td>
+    </tr>
+    <foreach name="specList" item="vo" key="k" >
+    <tr>
+        <td><{$vo[name]}>:</td>
+        <td>                            
+            <foreach name="vo[spec_item]" item="vo2" key="k2" >                            
+                <button type="button" data-spec_id='<{$vo[id]}>' data-item_id='<{$k2}>' class="btn <?php 
+                             if(in_array($k2,$items_ids))                         
+                                    echo 'btn-success'; 
+                             else 
+                                echo 'btn-default';                          
+                             ?>" >
+                    <{$vo2}>
+                </button>                                                        
+                                                  
+                &nbsp;&nbsp;&nbsp;            
+            </foreach>         
+        </td>
+    </tr>                                    
+    </foreach>    
+</table>
+<div id="goods_spec_table2"></div>
+
+<script>
+    
+    function GetUploadify3(k){        
+        cur_item_id = k; //当前规格图片id 声明成全局 供后面回调函数调用
+        GetUploadify(1,'','goods','call_back3');
+    }
+    function call_back3(fileurl_tmp){
+        $("#item_img_"+cur_item_id).attr('src',fileurl_tmp); //  修改图片的路径
+        $("input[name='item_img["+cur_item_id+"]']").val(fileurl_tmp); // 输入框保存一下 方便提交
+    }    
+   $("#ajax_spec_data button").click(function(){
+	   if($(this).hasClass('btn-success')){
+		   $(this).removeClass('btn-success');
+		   $(this).addClass('btn-default');		   
+	   }else{
+		   $(this).removeClass('btn-default');
+		   $(this).addClass('btn-success');		   
+	   }
+	   ajaxGetSpecInput();	  	   	 
+});
+	
+
+function ajaxGetSpecInput()
+{
+	  var spec_arr = {};	  
+	$("#goods_spec_table1  button").each(function(){
+	    if($(this).hasClass('btn-success'))	
+		{
+			var spec_id = $(this).data('spec_id');
+			var item_id = $(this).data('item_id');
+			if(!spec_arr.hasOwnProperty(spec_id))
+			spec_arr[spec_id] = [];
+		    spec_arr[spec_id].push(item_id);
+		}		
+	});
+		ajaxGetSpecInput2(spec_arr); 
+	
+}
+	
+	
+
+function ajaxGetSpecInput2(spec_arr)
+{		
+	
+	$.ajax({
+			type:'POST',
+			data:{'spec_arr':spec_arr},
+			url:" <{:U('goods/ajaxGetSpecInput',array('goods_id'=>$_GET['goods_id']))}>",
+			success:function(data){                            
+				   $("#goods_spec_table2").html('')
+				   $("#goods_spec_table2").append(data);
+				   hbdyg();  
+			}
+	});
+}
+	
+ function hbdyg() {
+            var tab = document.getElementById("spec_input_tab"); 
+            var maxCol = 2, val, count, start;  
+            if (tab != null) {
+                for (var col = maxCol - 1; col >= 0; col--) {
+                    count = 1;
+                    val = "";
+                    for (var i = 0; i < tab.rows.length; i++) {
+                        if (val == tab.rows[i].cells[col].innerHTML) {
+                            count++;
+                        } else {
+                            if (count > 1) { 
+                                start = i - count;
+                                tab.rows[start].cells[col].rowSpan = count;
+                                for (var j = start + 1; j < i; j++) {
+                                    tab.rows[j].cells[col].style.display = "none";
+                                }
+                                count = 1;
+                            }
+                            val = tab.rows[i].cells[col].innerHTML;
+                        }
+                    }
+                    if (count > 1) { 
+                        start = i - count;
+                        tab.rows[start].cells[col].rowSpan = count;
+                        for (var j = start + 1; j < i; j++) {
+                            tab.rows[j].cells[col].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+</script> 

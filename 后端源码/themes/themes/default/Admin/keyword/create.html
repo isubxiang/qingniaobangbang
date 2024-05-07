@@ -1,0 +1,35 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">运营</li>
+        <li class="li2">关键字管理</li>
+        <li class="li2 li3">添加关键字</li>
+    </ul>
+</div>
+<form  target="x-frame" action="<{:U('keyword/create')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">关键字：</td>
+                    <td class="tu-right-td"><input type="text" name="data[keyword]" value="<{$detail.keyword|default=''}>" class="tudou-manageInput w200" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">类型：</td>
+                    <td class="tu-right-td"><select name="data[type]" id="type" class="tu-manage-select w200">
+                            <foreach name="types" item="item" key="i">
+                                <option value="<{$i}>">
+                                    <{$item}>
+                                </option>
+                            </foreach> 
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认添加" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+
+<include  file='public:footer'/>       

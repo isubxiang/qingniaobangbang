@@ -1,0 +1,155 @@
+<include  file='public:header'/> 
+
+<link rel="stylesheet" type="text/css" href="/static/default/webuploader/webuploader.css">
+<script src="/static/default/webuploader/webuploader.min.js"></script>
+
+  
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="javascript:history.back(-1);"><i class="iconfont icon-angle-left"></i></a>
+	</div>
+	<div class="top-title">
+		基本设置
+	</div>
+</header>
+
+
+<style>
+.fabu-form .form-content {border: none;resize: none;width: 100%;height: 80px;padding: 10px;font-size: 12px;}
+.fabu-form .form-content1 {border: none;resize: none;width: 100%;height: 150px;padding: 10px;font-size: 12px;}
+.shuxing{width:20px; height: 20px;margin-bottom:10px;}
+.panel-list li em {float:inherit; margin-left:5px;}
+#data_address_val{ border:none; padding:10px;idth: 100%; margin-left:5px;}
+</style>
+
+
+<form class="fabu-form" method="post"  target="x-frame" action="<{:U('shop/about')}>">
+
+	<div class="blank-10"></div>
+	<div class="Upload-img-box">
+		<div id="fileToUpload1">LOGO</div>
+		<div class="Upload-img">
+			<div class="list-img loading1">
+				<img src="<{:config_img($SHOP['logo'])}>">
+                <input type="hidden" name="data[logo]" value="<{$detail.logo}>"/>
+			</div>
+			<div class="list-img jq_photo1" style="display:none;">
+			</div>
+		</div>
+	</div>
+	<script>
+        var uploader = WebUploader.create({                 
+			auto: true,                             
+			swf: '/static/default/webuploader/Uploader.swf',                             
+			server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+			pick: '#fileToUpload1',                             
+			resize: true,    
+        });
+        uploader.on('uploadSuccess',function(file,resporse){
+            $(".loading1").hide();
+            var str = '<img src="'+resporse.url+'"><input type="hidden" name="data[logo]" value="' + resporse.url + '"/>';
+            $(".jq_photo1").show().html(str);
+        });
+    </script>
+    
+    
+    <div class="blank-10"></div>
+	<div class="Upload-img-box">
+		<div id="fileToUpload2">缩略图</div>
+		<div class="Upload-img">
+			<div class="list-img loading2">
+				<img src="<{:config_img($SHOP['photo'])}>">
+                <input type="hidden" name="data[photo]" value="<{$detail.photo}>"/>
+			</div>
+			<div class="list-img jq_photo2" style="display:none;">
+			</div>
+		</div>
+	</div>
+	<script>
+        var uploader = WebUploader.create({                 
+			auto: true,                             
+			swf: '/static/default/webuploader/Uploader.swf',                             
+			server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+			pick: '#fileToUpload2',                             
+			resize: true,    
+        });
+        uploader.on('uploadSuccess',function(file,resporse){
+            $(".loading2").hide();
+            var str = '<img src="'+resporse.url+'"><input type="hidden" name="data[photo]" value="' + resporse.url + '"/>';
+            $(".jq_photo2").show().html(str);
+        });
+    </script>
+    
+    
+  
+    
+    
+
+<div class="blank-10 bg"></div>    
+<div class="row">
+	<div class="line">
+		<span class="x3">店铺地址：</span>
+		<span class="x9">
+			<input type="text" class="text-input" name="data[addr]" id="data_addr" value="<{$SHOP.addr|default=''}>" />
+		</span>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="line">
+		<span class="x3">联系人：</span>
+		<span class="x9">
+			<input type="text" class="text-input" name="data[contact]" value="<{$SHOP.contact|default=''}>" />
+		</span>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="line">
+		<span class="x3">店铺电话：</span>
+		<span class="x9">
+			<input type="text" class="text-input" name="data[tel]" value="<{$SHOP.tel|default=''}>" />
+		</span>
+	</div>
+</div>
+
+
+
+<div class="row">
+	<div class="line">
+		<span class="x3">店铺手机号码：</span>
+		<span class="x9">
+			<input type="text" class="text-input" name="data[mobile]" value="<{$SHOP.mobile|default=''}>" />
+		</span>
+	</div>
+</div>
+
+
+
+    
+    
+
+<p><span class="text-dot">*</span> 店铺介绍</p>
+<div class="blank-10 bg"></div>
+<div class="line border-bottom">
+	<textarea class="form-content1" name="details" placeholder="店铺介绍，建议不超过200字"><{:cleanhtml($ex['details'])}></textarea>
+</div> 
+<div class="blank-10 bg"></div>  
+
+
+
+
+
+	<div class="container">
+		<div class="blank-10"></div>
+		<button  type="submit" class="button button-block button-big bg-dot">确认编辑</button>
+		<div class="blank-30"></div>
+	</div>
+</form>
+
+  
+<include  file='public:footer'/>

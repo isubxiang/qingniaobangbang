@@ -1,0 +1,130 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">主题</li>
+        <li class="li2">主题管理</li>
+        <li class="li2 li3">帖子列表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>新版支持多种纬度搜索功能，当前搜索结果<b style="color:#F00; font-size:24px"><{$count}></b>条</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('threadpost/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                        <label>
+                            <span>分类：</span>
+                            <select id="cate_id" name="cate_id" class="select w100">
+                                <option value="0">请选择...</option>
+                                <foreach name="cates" item="var">
+                                    <option value="<{$var.cate_id}>"  <eq name="var.cate_id" value="$cate_id">selected="selected"</eq> ><{$var.cate_name}></option>                
+                                    <foreach name="var.thread" item="var2">
+                                        <option value="<{$var2.thread_id}>"  <eq name="var2.thread_id" value="$thread_id">selected="selected"</eq> >&nbsp;&nbsp;<{$var2.thread_name}></option>
+                                    </foreach>
+                                </foreach>
+                            </select>
+                        </label>
+                        
+                        
+                       <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text"/>
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label> 
+                        
+                        <label>
+                            <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>"/>
+                            <input type="text" name="Name" id="Nme"  value="<{$Name}>"  class="text"/>
+                            <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                        </label>
+                        
+                        <label>
+                            <span>审核状态</span>
+                            <select name="audit" class="select w110">
+                               <option value="999">=选择审核状态==</option>
+                               <option <eq name="audit" value="0">selected="selected"</eq>  value="0">未审核</option>
+                               <option <eq name="audit" value="1">selected="selected"</eq>  value="1">已审核</option>
+                            </select>
+						</label>
+                    
+                    
+                        <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text"/>
+                        <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                      </div>   
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="post_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>学校ID</td>
+                    <td>帖子分类</td>
+                    <td>所属贴吧</td>
+                    <td>标题</td>
+                    <td>图片</td>
+                    <td>发帖人</td>
+                    <td>打赏人数</td>
+                    <td>评论人数</td>
+                    <td>点赞人数</td>
+                    <td>审核状态</td>
+                    <td style="color:red">支付金额</td>
+                    <td>支付状态</td>
+                    <td>创建时间</td>
+                    <td class="w360">操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_post_id" type="checkbox" name="post_id[]" value="<{$var.post_id}>" /></td>
+                        <td><{$var.post_id}></td>
+                        <td><{$var.school_id}></td>
+                        <td><{$var.cate.cate_name}></td>
+                        <td><{$var.thread.thread_name}></td>
+                        <td><{$var.title}></td>
+                        <td><a href="<{:config_weixin_img($var['photo'])}>" class="tooltip"><img src="<{:config_img($var['photo'])}>" class="w80"></a></td>
+                        <td><{$users[$var['user_id']]['nickname']|default='系统管理员'}></td>
+                        <td><{$var.donate_num}></td>
+                        <td><{$var.reply_num}></td>
+                        <td><{$var.zan_num}></td>
+                        <td><eq name="var.audit" value="1">已审核<else/>未审核</eq></td>
+                        <td style="color:red"><{$var.money}></td>
+                        <td><eq name="var.status" value="1">已支付<else/>未支付</eq></td>
+                        <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                        <td>
+                            <if condition="$var['audit'] neq 1"><{:BA('threadpost/audit',array("post_id"=>$var["post_id"]),'审核','act','tu-dou-btn')}></if>
+                            <{:BA('threadpost/edit',array("post_id"=>$var["post_id"]),'编辑','','tu-dou-btn')}>
+                            <{:BA('threadpost/comments',array("post_id"=>$var["post_id"]),'回复列表','','tu-dou-btn')}>
+                            <{:BA('threadpost/delete',array("post_id"=>$var["post_id"]),'删除','act','tu-dou-btn')}>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <{:BA('threadpost/delete','','批量删除','list',' a2')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

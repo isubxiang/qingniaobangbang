@@ -1,0 +1,90 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">系统</li>
+        <li class="li2">管理员管理</li>
+        <li class="li2 li3">管理员登录日志</li>
+    </ul>
+</div>
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里是管理员登录，当前搜索结果<{$count}>条</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr">
+            <div class="right">
+                <form method="post" action="<{:U('admin/log')}>">
+                 <div class="seleHidden" id="seleHidden">
+                 
+                 
+                 
+                        <div class="seleK">
+                        <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        
+                        	<label>
+                                <span>类型：</span>
+                                <select class="select w120" name="type">
+                                    <option <eq name="type" value="999">selected="selected"</eq> value="999">请选择</option>
+                                    <option <eq name="type" value="1">selected="selected"</eq>  value="1">会员</option>
+                                    <option <eq name="type" value="2">selected="selected"</eq>  value="2">管理员</option>
+                                    <option <eq name="type" value="3">selected="selected"</eq>  value="3">ajax请求</option>
+                                </select>
+                            </label>
+                            
+                            
+                			<label>
+                                <span>登录状态：</span>
+                                <select class="select w120" name="audit">
+                                    <option <eq name="audit" value="999">selected="selected"</eq> value="999">请选择</option>
+                                    <option <eq name="audit" value="0">selected="selected"</eq>  value="0">失败</option>
+                                    <option <eq name="audit" value="1">selected="selected"</eq>  value="1">成功</option>
+                                </select>
+                            </label>
+                            </div>
+        				</div> 
+                    <input type="text"  class="tu-inpt-text" name="keyword" value="<{$keyword}>"/>
+                    <input type="submit" value="  搜索"  class="inpt-button-tudou" />
+                </form>
+            </div>
+        </div>
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50">ID</td>
+                        <td>类型</td>
+                        <td>登录用户名</td>
+                        <td>登录密码</td>
+                        <td>登录时间</td>
+                        <td>登录IP</td>
+                        <td>登录状态</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><{$var.id}></td>
+                            <td>
+                                <eq name="var.type" value="1">会员</eq>
+                                <eq name="var.type" value="2">管理员</eq>
+                                <eq name="var.type" value="3">ajax请求</eq>
+                            </td>
+                            <td><{$var.username}></td>
+                            <td><{$var.password}></td>
+                            <td><{$var.last_time|date="Y-m-d H:i:s",###}></td>
+                            <td><{$var.last_ip}>(<{$var.last_ip_area}>)</td>
+                            <td><eq name="var.audit" value="0">失败<else/>成功</eq></td>
+                        </tr>
+                    </foreach>
+
+                </table>
+                <{$page}>
+            </div>
+        </form>
+
+    </div>
+</div>
+<include  file='public:footer'/>       

@@ -1,0 +1,100 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">商家</li>
+        <li class="li2">优惠买单</li>
+        <li class="li2 li3">编辑优惠买单</li>
+    </ul>
+</div>
+        <form target="x-frame" action="<{:U('shopyouhui/edit',array('yh_id'=>$detail['yh_id']))}>" method="post">
+        <div class="main-tudou-sc-add">
+        <div class="tu-table-box"> 
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+      	
+        <tr>
+            <td class="tu-left-td">商家：</td>
+            <td class="tu-right-td"> <div class="lt">
+               <input type="hidden" id="shop_id" name="data[shop_id]" value="<{$detail.shop_id|default=''}>"/>
+               <input type="text" id="shop_name" name="shop_name" value="<{$shops.shop_name}>"   disabled="disabled" class="tudou-manageInput" />
+                </div>
+            </td>
+       </tr>
+                
+                
+        <tr>
+          <td class="tu-left-td">优惠状态：</td>
+            <td class="tu-right-td">
+                 <if condition="$detail[is_open] eq 1"><span style="color: green;">开启中</span><else/><span style="color: red;">关闭</span></if>
+            </td>
+        </tr>    
+        
+        <!--增加开始-->
+        <tr>
+          <td class="tu-left-td">优惠类型：</td>
+            <td class="tu-right-td">
+                <input class="yh_type" type="radio" rel="0" name="data[type_id]" value="0" <if condition="$detail[type_id]" value="0">checked="checked"</if>  class="cjinput" />折扣
+				<input class="yh_type" type="radio" rel="1" name="data[type_id]" value="1" <if condition="$detail[type_id]" value="1">checked="checked"</if>  class="cjinput" />满减
+
+            </td>
+        </tr>
+        
+        
+        <tr class="jq_tr jq_tr_0">
+           <td class="tu-left-td" >折扣优惠：</td>
+            <td class="tu-right-td">
+              <input type="hidden" name="data[yh_id]" value="<{$detail.yh_id}>"/>
+              <input type="text" name="data[discount]" value="<{$detail.discount|default=''}>" class="tudou-sc-add-text-name" />
+            </td>
+        </tr>
+        
+       <tr class="jq_tr jq_tr_0">
+           <td class="tu-left-td" >扣除折扣：</td>
+            <td class="tu-right-td">
+              <input type="text" name="data[deduction]" value="<{$detail.deduction|default=''}>" class="tudou-sc-add-text-name" />
+              <code>注意，这里一般是0.2-0.6,不太写多了，扣点之前跟商家沟通下</code>
+            </td>
+        </tr>        
+        
+         <tr class="jq_tr jq_tr_1">
+           <td class="tu-left-td" >满减优惠：</td>
+            <td class="tu-right-td">
+               <input type="hidden" name="data[yh_id]" value="<{$detail.yh_id}>"/>
+               满<input type="text" name="data[min_amount]" value="<{$detail.min_amount|default=''}>" class="tudou-sc-add-text-name" />
+               减<input type="text" name="data[amount]" value="<{$detail.amount|default=''}>" class="tudou-sc-add-text-name" />
+            </td>
+        </tr>
+        
+        <tr class="jq_tr jq_tr_1">
+           <td class="tu-left-td" >网站抽成：</td>
+            <td class="tu-right-td">
+              <input type="text" name="data[vacuum]" value="<{$detail.vacuum|default=''}>" class="tudou-sc-add-text-name" />
+            </td>
+        </tr>        
+        
+     
+       
+		<script>
+            $(document).ready(function(){
+                var fullcut = "<{$detail.type_id}>";
+                if(fullcut == 1){
+                    var tag = 1;
+                }else{
+                    var tag = 0;
+                }
+                $(".yh_type").click(function(){
+                    $(".jq_tr").hide();
+                    $(".jq_tr_"+$(this).attr('rel')).show();
+                })
+                
+                 $(".yh_type").eq(tag).click();
+            })
+        </script>
+        
+       
+    </table>
+            <div class="sm-qr-tu"><input type="submit" value="确认编辑" class="sm-tudou-btn-input" /></div>
+    </form>
+    </div>
+    </div>
+<include  file='public:footer'/>       

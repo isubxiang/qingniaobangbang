@@ -1,0 +1,119 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+page {
+    background: #fff;
+}
+
+.header {
+    text-align: center;
+    background: #06c1ae;
+    padding-bottom: 40rpx;
+}
+
+.header view {
+    font-size: 36rpx;
+    margin-bottom: 16rpx;
+    color: #fff;
+}
+
+.header text {
+    color: #fff;
+    opacity: 0.6;
+    font-size: 26rpx;
+}
+
+.body .score {
+    text-align: center;
+    padding: 24px 0;
+}
+
+.body .score .stars {
+    color: #aaa;
+    margin-bottom: 10rpx;
+}
+
+.body .score .stars text {
+    font-size: 64rpx;
+    margin: 0 4rpx;
+}
+
+.body .score .stars .icon-star_fill {
+    color: #ff9800;
+}
+
+.body .score .text {
+    font-size: 24rpx;
+    color: #999;
+}
+
+.body .content {
+    padding: 0 30rpx;
+}
+
+.body textarea {
+    height: 160rpx;
+    border: 1px solid #ddd;
+    border-radius: 8rpx;
+    padding: 20rpx;
+    display: block;
+    width: auto;
+}
+
+.body .labels {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 12rpx;
+    margin-top: 18rpx;
+}
+
+.body .labels .item {
+    white-space: nowrap;
+    border-radius: 8rpx;
+    padding: 2rpx 10rpx;
+    margin-top: 18rpx;
+    margin-right: 18rpx;
+    font-size: 26rpx;
+    border: 1rpx solid #999;
+    color: #999;
+}
+
+.body .labels .merit {
+    border-color: #06c1ae;
+    color: #06c1ae;
+}
+
+.body .labels .fault {
+    border-color: #ff9800;
+    color: #ff9800;
+}
+
+.body .labels .disabled {
+    opacity: 0.3;
+}
+
+.body .labels .checked {
+    color: #fff;
+}
+
+.body .labels .merit.checked {
+    background: #06c1ae;
+}
+
+.body .labels .fault.checked {
+    background: #ff9800;
+}
+
+.body .labels .common.checked {
+    background: #999;
+}
+
+.body .labels .iconfont {
+    font-size: 24rpx;
+    margin-left: 6rpx;
+}
+
+.body button {
+    border-radius: 10rpx;
+    margin-top: 50rpx;
+    margin: 40px 20px 0 20px;
+}

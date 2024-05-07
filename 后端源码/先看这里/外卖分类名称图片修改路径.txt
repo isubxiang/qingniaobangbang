@@ -1,0 +1,41 @@
+
+
+1：外卖分类文字修改：\Tudou\Lib\Model\EleModel.class.php
+
+
+  public function getEleCate(){
+        return array(
+			'1' => '中餐外送', 
+			'2' => '面点汤粉', 
+			'3' => '馋嘴小吃', 
+			'4' => '甜点饮料', 
+			'5' => '夜宵夜宵', 
+			'6' => '水果鲜花',
+			'7' => '日用超市',
+			'8' => '健康保健',
+		);
+    }
+
+
+只修改文字，其他不变
+
+
+
+2：外卖分类图片\static\default\wap\image\ele\ele_cate_2.png
+
+ele_cate_2.png  ======   '1' => '中餐外送', 
+ele_cate_3.png	======   '2' => '面点汤粉', 
+ele_cate_4.png	======   '3' => '馋嘴小吃', 
+ele_cate_5.png	======   '4' => '甜点饮料', 
+ele_cate_6.png	======   '5' => '夜宵夜宵', 
+ele_cate_7.png	======   '6' => '水果鲜花', 
+ele_cate_8.png	======   '7' => '日用超市', 
+ele_cate_9.png	======   '8' => '健康保健',
+
+
+
+
+
+
+
+

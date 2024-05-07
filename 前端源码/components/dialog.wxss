@@ -1,0 +1,76 @@
+.dialog-container {
+    position: fixed;
+    z-index: 112;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dialog-mask {
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #888;
+    opacity: 0.5;
+}
+
+.dialog .container {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 2;
+}
+
+.dialog .header {
+    font-size: 36rpx;
+    line-height: 100rpx;
+    padding-top: 10rpx;
+    text-indent: 30rpx;
+    text-align: center;
+}
+
+.dialog .body {
+    min-width: 200rpx;
+    min-height: 40rpx;
+}
+
+.dialog .footer {
+    background: #06c1ae;
+}
+
+.dialog .close {
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+}
+
+.dialog .close .iconfont {
+    color: #fff;
+    font-size: 72rpx;
+}
+
+.dialog .close-top {
+    top: -50rpx;
+    right: -30rpx;
+    text-align: right;
+}
+
+.dialog .close-bottom {
+    bottom: -120rpx;
+    text-align: center;
+}
+
+.dialog .close-none {
+    display: none;
+}
+
+@import "../wuBaseWxss/1.wxss";
+
+@import "../wuBaseWxss/0.wxss";

@@ -1,0 +1,50 @@
+<view class="container">
+    <view class="body">
+        <map bindmarkertap="onMakerTap" class="map{{queryMode?' map-query':''}}" id="map" latitude="{{locationInfo&&locationInfo.latitude}}" longitude="{{locationInfo&&locationInfo.longitude}}" markers="{{markers}}" scale="14" showLocation="true">
+            <cover-view bindtap="onQueryTap" class="query" wx:if="{{showCommon||showNearest}}">
+                <cover-view>{{queryString||'搜索'}}</cover-view>
+            </cover-view>
+        </map>
+        <view class="addr-query" hidden="{{!queryMode}}">
+            <view class="info">
+                <text class="title">{{queryAddress.Name}}</text>
+                <view class="addr">{{queryAddress.Address}}</view>
+            </view>
+            <form bindsubmit="onQuerySelectTap" reportSubmit="true">
+                <view class="btns">
+                    <button formType="submit" type="primary">选定地址</button>
+                    <button bindtap="onQueryCancelTap" class="cancel" type="default">取消</button>
+                </view>
+            </form>
+        </view>
+        <view class="list" hidden="{{queryMode}}">
+            <view class="tab" wx:if="{{(showUser?1:0)+(showCommon?1:0)+(showNearest?1:0)>1}}">
+                <view bindtap="onTabTap" class="{{tabIndex==0?'actived':''}}" data-index="0" hoverClass="navigator-hover" wx:if="{{showCommon}}">常用的</view>
+                <view bindtap="onTabTap" class="{{tabIndex==1?'actived':''}}" data-index="1" hoverClass="navigator-hover" wx:if="{{showUser}}">我的地址</view>
+                <view bindtap="onTabTap" class="{{tabIndex==2?'actived':''}}" data-index="2" hoverClass="navigator-hover" wx:if="{{showNearest}}">附近的</view>
+            </view>
+            <scroll-view scrollY="true" style="height:{{( screenHeight-220-( (showUser?1:0)+(showCommon?1:0)+(showNearest?1:0)>1?40:0 ) )*2}}rpx">
+                <block wx:for="{{addresses}}" wx:key="Id">
+                    <view bindtap="onItemTap" class="item{{selectedIndex==index?' checked':''}}" data-index="{{index}}" hoverClass="navigator-hover">
+                        <view class="left" wx:if="{{tabIndex==1}}">
+                            <text class="title">{{item.Linkman}}<text wx:if="{{item.Phone}}">{{item.Phone}}</text>
+                            </text>
+                            <view class="addr">{{item.Address||''}}</view>
+                        </view>
+                        <view class="left" wx:else>
+                            <text class="title">{{item.Name||''}}</text>
+                            <view class="addr">{{item.Address||''}}</view>
+                        </view>
+                        <view catchtap="onItemEditTap" class="font-blue edit" data-index="{{index}}" wx:if="{{tabIndex==1}}">编辑</view>
+                    </view>
+                    <view class="hr"></view>
+                </block>
+                <form bindsubmit="onAddAddressTap" reportSubmit="true">
+                    <button class="add" formType="submit">
+                        <text class="iconfont icon-roundadd add"></text>新增我的地址
+          </button>
+                </form>
+            </scroll-view>
+        </view>
+    </view>
+</view>

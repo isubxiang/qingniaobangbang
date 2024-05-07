@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="body">
+        <view class="location">
+            <text class="caption">当前定位：</text>
+            <text bindtap="onItemTap" class="create" data-id="{{school_id}}">{{school_name||'正在定位...'}}</text>
+            <text bindtap="onLocationTap" class="relocate">[重新定位]</text>
+        </view>
+        <view class="list">
+            <block wx:for="{{model}}" wx:key="Id">
+                <view class="hr" wx:if="{{index>0}}"></view>
+                <view bindtap="onItemTap" class="row" data-index="{{index}}" hoverClass="navigator-hover">
+                    <text class="caption">{{item.Name}}</text>
+                    <view class="value">
+                        <text class="iconfont icon-right_light"></text>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="none">
+            <text>没有找到你所在的{{!setting.wxapp.titleName?'学校':setting.wxapp.titleName}}？</text>
+            <text bindtap="onCreateTap" class="create">点击创建</text>
+        </view>
+    </view>
+</view>

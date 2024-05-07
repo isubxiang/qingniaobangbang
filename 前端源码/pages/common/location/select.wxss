@@ -1,0 +1,148 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+page {
+    height: 100%;
+}
+
+.body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.body map {
+    width: 100%;
+    height: 500rpx;
+}
+
+.body map.map-query {
+    height: auto;
+    flex: 1;
+}
+
+.body .query {
+    width: 80%;
+    height: 64rpx;
+    background: #fff;
+    border: 1rpx solid #ddd;
+    border-radius: 35rpx;
+    color: #888;
+    margin: 20rpx auto 0;
+    opacity: 0.9;
+}
+
+.body .query cover-view {
+    height: 100%;
+    line-height: 64rpx;
+    margin: 0 35rpx;
+}
+
+.body map.map-query .query {
+    color: #000;
+}
+
+.body .addr-query {
+    padding: 20rpx 30rpx;
+    background: #fff;
+}
+
+.body .addr-query .btns {
+    text-align: center;
+    padding-top: 30rpx;
+    margin-top: 30rpx;
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.body .addr-query .btns button {
+    width: 240rpx;
+    height: 90rpx;
+    border-radius: 45rpx;
+    margin: 0 20rpx;
+    display: inline-block;
+}
+
+.body .addr-query .btns button.cancel {
+    background: #ddd;
+}
+
+.body .tab {
+    display: flex;
+}
+
+.body .tab view {
+    flex: 1;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    border-bottom: 1rpx solid #f0f0f0;
+}
+
+.body .tab view.actived {
+    border-bottom-color: #06c1ae;
+    color: #06c1ae;
+}
+
+.body .list {
+    flex: 1;
+}
+
+.body .list {
+    background: #fff;
+}
+
+.body .list .item {
+    padding: 20rpx 30rpx;
+    display: flex;
+}
+
+.body .list .item .left {
+    flex: 1;
+}
+
+.body .list .item .title text {
+    margin-left: 6rpx;
+}
+
+.body .list .item .edit {
+    line-height: 45px;
+    padding-left: 10rpx;
+}
+
+.body .list .item .iconfont {
+    padding-top: 30rpx;
+    font-size: 36rpx;
+    color: #06c1ae;
+    display: none;
+}
+
+.body .list .checked .iconfont {
+    display: block;
+}
+
+.body .title {
+    font-size: 32rpx;
+}
+
+.body .addr {
+    font-size: 28rpx;
+    color: #888;
+    margin-top: 6rpx;
+}
+
+.body .addr text {
+    margin-left: 20rpx;
+}
+
+.body .add {
+    margin-top: 20rpx;
+    padding: 20rpx 0;
+    text-align: center;
+    color: #06c1ae;
+    font-size: 32rpx;
+    background: #fff;
+}
+
+.body .add .iconfont {
+    margin-right: 10rpx;
+    font-size: 40rpx;
+}

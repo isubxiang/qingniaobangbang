@@ -1,0 +1,46 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.body .list {
+    margin-top: 30rpx;
+    background: #fff;
+}
+
+.body .item {
+    padding: 20rpx 40rpx;
+    display: flex;
+}
+
+.body .item .left {
+    flex: 1;
+}
+
+.body .item .content {
+    font-size: 30rpx;
+}
+
+.body .item .contact {
+    color: #666;
+    font-size: 26rpx;
+    margin-top: 10rpx;
+}
+
+.body .item .contact text {
+    margin-right: 20rpx;
+}
+
+.body .item .arrow {
+    height: 84rpx;
+    line-height: 84rpx;
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.body .row {
+    padding-left: 30rpx;
+}
+
+.body .row .add {
+    margin-right: 10rpx;
+    color: #06c1ae;
+    font-size: 36rpx;
+}

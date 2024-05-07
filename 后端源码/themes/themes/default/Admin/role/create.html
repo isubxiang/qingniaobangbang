@@ -1,0 +1,60 @@
+<include  file='public:header'/>    
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">系统</li>
+        <li class="li2">角色管理</li>
+        <li class="li2 li3">添加角色</li>
+    </ul>
+</div>
+
+<div class="listBox clfx">
+    <div class="menuManage">
+        <form  target="x-frame" action="<{:U('role/create')}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                        
+                 <tr>
+                    <td class="tu-left-td">角色名称：</td>
+                    <td class="tu-right-td">
+                        <input name="data[role_name]" type="text" class="tudou-manageInput" />
+                    </td>
+                 </tr>
+                 
+                 <tr>
+                    <td class="tu-left-td">管理员类型：</td>
+                    <td class="tu-right-td">
+                        <select name="data[type]" class="seleFl w150" id="type">
+                           <option value="0" <eq name="detail.type" value="0">selected="selected"</eq> >==请选择管理员==</option>
+                           <option value="1" <eq name="detail.type" value="1">selected="selected"</eq> >系统管理员</option>
+                           <option value="2" <eq name="detail.type" value="2">selected="selected"</eq> >分站管理员</option>
+                        </select>
+                        <code>管理员类型必须选择</code>
+                    </td>
+                </tr>
+                
+                   <tr>
+                    <td class="tu-left-td">选择学校：</td>
+                    <td class="tu-right-td">
+                       <select id="grade_id" name="data[school_id]" class="seleFl w210">
+                       <option value="0">请选择学校...</option>
+                        <foreach name="schools" item="var">
+                         <option value="<{$var.school_id}>"  <eq name="var.school_id" value="$detail.school_id">selected="selected"</eq> ><{$var.Name}></option>                
+                        </foreach>
+                        </select>
+                        <code>学校必须选择否则报错</code>
+                    </td>
+                  </tr>  
+                
+               </table>
+              </div>
+            <div class="sm-qr-tu"><input type="submit" value="创建角色" class="sm-tudou-btn-input" /></div>
+          </div>
+        </form>
+    </div>
+</div>
+
+
+</script>
+
+<include  file='public:footer'/> 

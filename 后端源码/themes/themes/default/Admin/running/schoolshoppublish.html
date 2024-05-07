@@ -1,0 +1,52 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿系统</li>
+        <li class="li2">学校管理</li>
+        <li class="li2 li3">学校列表</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('running/schoolShopPublish',array('school_id'=>$school_id),'刷新本页','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+<form target="x-frame" action="<{:U('running/schoolShopPublish',array('school_id'=>$school_id))}>" method="post">
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<input type="hidden" name="data[id]" value="<{$list.id|default=''}>" class="tudou-manageInput"/>
+            	<input type="hidden" name="data[school_id]" value="<{$school_id}>" class="tudou-manageInput"/>
+                
+                <tr>
+                    <td  width="150" class="tu-left-td">商家：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="shop_id" name="data[shop_id]" value="<{$list.shop_id|default=''}>"/>
+                            <input type="text" id="shop_name" name="shop_name" value="<{$shop.shop_name|default=''}>" class="tudou-manageInput w200" />
+                        </div>
+                        <a mini="select"  w="1000" h="600" href="<{:U('ele/select')}>" class="seleSj">选择商家</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="tu-left-td">排序：</td>
+                    <td class="tu-right-td"><input type="text" name="data[orderby]" value="<{$$list.orderby|default='500'}>" class="tudou-manageInput" />
+					<code>学校排序</code>
+                    </td>
+                </tr>
+                
+
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认操作" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

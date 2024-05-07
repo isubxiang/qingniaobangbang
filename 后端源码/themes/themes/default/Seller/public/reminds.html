@@ -1,0 +1,66 @@
+<script src="/static/default/wap/js/jquery.timers-1.2.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
+
+
+<script>
+ $('<audio id="payMp3"><source src="/static/default/mp3/1.mp3" type="audio/mpeg"></audio>').appendTo('body');
+ var isIOS = isIOS();
+ 
+  $(document).ready(function(){
+	  
+	  
+	 //ios播放
+	 function autoPlayAudio(){
+        wx.config({
+            debug: false,
+            appId: '',
+			timestamp: '',
+			nonceStr: '',
+			signature: '',
+            jsApiList: []
+        });
+		wx.ready(function() {
+			var globalAudio=document.getElementById("payMp3");
+			globalAudio.play();
+		});
+    };
+	
+	//选择播放
+	function autoPlayMp3(status,message){
+		layer.msg(message,{icon:6,time:5000});
+		if(isIOS == true){
+			 autoPlayAudio(); 
+		 }else{
+			 $('#payMp3')[0].play();
+		 }
+	}
+
+	function showReminds(){
+	   var shop_id = "<{$SHOP['shop_id']}>";
+	   var type = "1";
+       $.post('<{:U("app/api/reminds")}>',{shop_id:shop_id,type:type},function(result){
+          if(result.status == '1'){
+			  autoPlayMp3(result.status,result.message);
+          }else if(result.status == '2'){
+			 autoPlayMp3(result.status,result.message);
+		  }else if(result.status == '3'){
+			 autoPlayMp3(result.status,result.message);
+		  }else if(result.status == '4'){
+			 autoPlayMp3(result.status,result.message);
+		  }else if(result.status == '5'){
+			 autoPlayMp3(result.status,result.message);
+		  }else if(result.status == '6'){
+			 autoPlayMp3(result.status,result.message);
+		  }else if(result.status == '7'){
+			 autoPlayMp3(result.status,result.message);
+		  }
+      },'json');
+	};
+	$('body').everyTime('2das','B',function(){
+		showReminds()//执行函数
+	},5);
+  })
+</script>
+
+
+

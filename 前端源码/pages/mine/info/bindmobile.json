@@ -1,0 +1,7 @@
+{
+    "navigationBarTitleText": "手机绑定",
+    "component": true,
+    "usingComponents": {
+        "dialog": "/components/dialog"
+    }
+}

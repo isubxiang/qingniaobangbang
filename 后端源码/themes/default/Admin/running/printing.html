@@ -1,0 +1,208 @@
+<include  file='public:header'/>
+
+<style>
+
+.tu-left-td{width:180px;}
+.profit{text-align:center; color:#000; font-weight:bold; background:#f5f5f5;}
+.main-tudou-sc-add .tu-table-box table tr td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr {
+    border: 1px solid #fff !important;
+}
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr {
+    border: 1px solid #eee;
+}
+.tu-left-td {
+    line-height:24px;
+}
+table {
+    border-color: #eee;
+}
+.sogn{ height:30px}
+</style>
+
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿系统</li>
+        <li class="li2">订单管理</li>
+        <li class="li2 li3">打印操作</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('running/index',array('running_id'=>$var['running_id'],'p'=>$p,'colour'=>'#eee'),'返回订单列表','','',600,360)}>
+                <{:BA('running/Printing',array('running_id'=>$var['running_id'],'p'=>$p),'刷新当前页面','','',600,360)}>
+                <{:BA('setting/config',array('running_id'=>$var['running_id'],'p'=>$p),'快递API配置','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+       
+                <tr>
+                	<td class="tu-left-td">订单信息：</td>
+                    <td class="tu-right-td"> 订单号： <{$var.running_id}>  &nbsp;&nbsp;&nbsp; 订单号：<{$var.Code}>  &nbsp;&nbsp;&nbsp; 分类ID：<{$var.cate_id}> &nbsp;&nbsp;&nbsp; 学校ID：<{$var.school_id}></td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">快递公司编码：</td><td class="tu-right-td"><{$var['ShipperCode']}></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">快递单号：</td><td class="tu-right-td"><{$var['OrderCode']}></td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">电子面单打印状态：</td><td class="tu-right-td">
+                        <eq name="IsPrinting" value="1">
+                            已打印 
+                        <else/>
+                            未打印
+                        </eq>
+                    </td>
+                </tr>
+                 <tr>
+                	<td class="tu-left-td">电子面单打印返回码：</td><td class="tu-right-td"><{$var['PrintingInfo']}></td>
+                </tr>
+                
+                
+                
+                <tr><td class="tu-right-td profit" colspan="2">打印电子面单，必须先申请快递鸟的API信息后能成功打印电子面单，当前功能仅限于跑腿订单</td></tr>
+                <input type="hidden" id="running_id" name="running_id" value="<{$var['running_id']}>"/>
+                <input type="hidden" id="p" name="p" value="<{$p}>"/>
+                <tr>
+                    <td class="tu-left-td">选择快递公司：</td>
+                    <td class="tu-right-td">
+                        <select name="ShipperCode" id="ShipperCode" class="tudou-sc-add-text-name sogn">
+                            <option value="0">==请选择快递接口==</option>
+                            <option <eq name="ShipperCode" value="EMS">selected="selected"</eq> value="EMS">EMS</option>
+                            <option <eq name="ShipperCode" value="SF">selected="selected"</eq> value="SF">顺丰速运</option>
+                            <option <eq name="ShipperCode" value="YZBK">selected="selected"</eq> value="YZBK">邮政国内标快</option>
+                            <option <eq name="ShipperCode" value="YZPY">selected="selected"</eq> value="YZPY">邮政快递包裹</option>
+                            <option <eq name="ShipperCode" value="ZJS">selected="selected"</eq> value="ZJS">宅急送</option>
+                            <option <eq name="ShipperCode" value="STO">selected="selected"</eq> value="STO">申通快递</option>
+                            <option <eq name="ShipperCode" value="DBL">selected="selected"</eq> value="DBL">德邦快递</option>
+                            <option <eq name="ShipperCode" value="SF">selected="selected"</eq> value="SF">顺丰速运</option>
+                            <option <eq name="ShipperCode" value="JD">selected="selected"</eq> value="JD">京东快递</option>
+                            <option <eq name="ShipperCode" value="HHTT">selected="selected"</eq> value="HHTT">天天快递</option>
+                            <option <eq name="ShipperCode" value="ZTO">selected="selected"</eq> value="ZTO">申通快递</option>
+                            <option <eq name="ShipperCode" value="YD">selected="selected"</eq> value="YD">韵达快递</option>
+                            <option <eq name="ShipperCode" value="HTKY">selected="selected"</eq> value="HTKY">百世快递</option>
+                            <option <eq name="ShipperCode" value="YTO">selected="selected"</eq> value="YTO">圆通快递</option>
+                            <option <eq name="ShipperCode" value="UC">selected="selected"</eq> value="UC">优速快递</option>
+                            <option <eq name="ShipperCode" value="ANE">selected="selected"</eq> value="ANE">安能快递</option>
+                        </select>
+                        <code>快递公司必选</code>
+                        <input type="text" name="OrderCode" id="OrderCode" value="" placeholder="填写快递单号" class="tudou-sc-add-text-name"/>
+                        <code>←这填写单号</code>
+                        <div class="sm-qr-tu"><a style="text-align:center; height:30px; line-height:30px" onclick="PrintOrder(<{$var['running_id']}>)" class="tu-dou-btn-small-waring w360">打印电子面单</a></div>
+                    </td>
+                </tr>   
+               
+               <script>
+			   //打印操作
+				function PrintOrder(running_id){
+					var running_id = $('#running_id').val();
+					var ShipperCode = $('#ShipperCode').val();
+					var OrderCode = $('#OrderCode').val();
+					var p = $('#p').val();
+					
+					if(running_id == ''){
+						parent.layer.msg('ID不存在',{icon:2});
+						return false;
+					}
+					if(ShipperCode == '' || ShipperCode == '0'){
+						parent.layer.msg('物流公司必须选择',{icon:2});
+						return false;
+					}
+					if(OrderCode == ''){
+						parent.layer.msg('物流单号必须填写',{icon:2});
+						return false;
+					}
+					
+					var senddata = 'running_id=' + running_id + '&ShipperCode=' + ShipperCode+ '&OrderCode=' + OrderCode + '&p=' + p;
+					
+					$.ajax({
+						url: "<{:U('running/PrintOrder')}>",
+						type: 'post',
+						data: senddata,
+						success: function(data){
+						  if(data.status == 'success'){
+							 parent.layer.msg(data.msg,{icon:1});
+								setTimeout(function () {
+								  window.location.href = data.url;
+								}, 1000)
+						  }else{
+							parent.layer.msg(data.msg,{icon:2});
+						  }
+						}
+					});
+				}
+			</script>
+              
+                
+                <tr><td class="tu-right-td profit" colspan="2">其他操作</td></tr>
+                <tr>
+                	<td class="tu-left-td"></td>
+                    <td class="tu-right-td">
+                    
+                    <eq name="var.OrderStatus" value="1">
+                        <{:BA('running/deleteOrder',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn')}>
+                        <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn')}>
+                    </eq>
+                    
+                    <eq name="var.OrderStatus" value="2">
+                        <{:BA('running/closedOrder',array("running_id"=>$var["running_id"],"p"=>$p),'关闭订单','act','tu-dou-btn')}>
+                        <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn')}>
+                    </eq>
+                    
+                    <eq name="var.OrderStatus" value="32">
+                        <{:BA('running/completeOrder',array("running_id"=>$var["running_id"],"p"=>$p),'完成订单','act','tu-dou-btn-small-waring')}>
+                    </eq>
+                    
+                    
+                    <eq name="var.OrderStatus" value="256">
+                        <{:BA('running/delete',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn-small')}>
+                    </eq>
+                    <eq name="var.OrderStatus" value="2048">
+                        <{:BA('running/delete',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn-small')}>
+                    </eq>
+                    
+                    <eq name="var.OrderStatus" value="128">
+                        <{:BA('delivery/finance',array("order_id"=>$var["running_id"],"delivery_id"=>$var["cid"],"p"=>$p),'财务','','tu-dou-btn-small')}>
+                    </eq>
+                    
+                    <eq name="var.Type" value="1">
+                        <{:BA('running/product',array("running_id"=>$var["running_id"],"shop_id"=>$var["ShopId"],"source"=>"index","p"=>$p),'订单明细','','tu-dou-btn-small')}>
+                    </eq>
+                    
+                    <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn-small')}>
+                    <{:BA('running/complete',array("running_id"=>$var["running_id"],"p"=>$p),'强制完成','act','tu-dou-btn-small')}>
+                    
+                    
+                    
+                    <eq name="var.files" value="1">
+                        <{:BA('running/files',array("running_id"=>$var["running_id"],"p"=>$p),'附件','','tu-dou-btn-small-waring')}>
+                    </eq>
+                    <{:BA('running/detail',array("running_id"=>$var["running_id"],"p"=>$p),'订单详情','','tu-dou-btn-small-waring')}>
+                    <{:BA('running/Printing',array("running_id"=>$var["running_id"],"p"=>$p),'刷新当前页面','','tu-dou-btn-small')}>
+                    <{:BA('running/index',array("running_id"=>$var["running_id"],"p"=>$p),'返回订单列表','','tu-dou-btn-small')}>
+                    
+                    
+                    </td>
+                </tr>
+             
+            </table>
+        </div>
+    </div>
+
+<include  file='public:footer'/>       
+

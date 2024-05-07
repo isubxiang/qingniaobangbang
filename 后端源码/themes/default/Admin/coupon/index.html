@@ -1,0 +1,119 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">运营</li>
+        <li class="li2"> 红包优惠券</li>
+        <li class="li2 li3"> 红包优惠券列表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>新版增加了满多少钱减去多少钱，请不要乱设置哦</p>
+    <div class="tudou-js-nr">
+
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <{:BA('coupon/create','','添加红包优惠券')}>
+            </div>
+            <div class="right">
+                <form action="<{:U('coupon/index')}>" method="post" style="float:left;">  
+                    <div class="seleHidden" id="seleHidden">
+                       <div class="seleK">
+                       
+                        <label>
+                            <span>状态</span>
+                            <select name="audit" class="select w100">
+                                <option value="0"  >全部</option>
+                                <option value="-1" <eq name="audit" value="-1">selected="selected"</eq> >等待审核</option>
+                                <option value="1" <eq name="audit" value="1">selected="selected"</eq>>正常</option>
+                            </select>
+                        </label>
+                        <label>
+                            <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                            <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                            <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                        </label>
+                        <label>
+                            <span>用户</span>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text" />
+                            <a  href="<{:U('user/select')}>" mini='select' w='800' h='600' class="sumit lt ">选择用户</a>
+                       </label>
+                        <label>
+                            <span>关键字:</span>
+                            <input type="text"  class="tu-inpt-text"   name="keyword" value="<{$keyword|default=''}>" />
+                            <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                        </label>
+                    </div>
+                    
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="coupon_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>学校ID</td>
+                    <td>商家</td>
+                    <td>标题</td>
+                    <td>红包优惠券图片</td>
+                    <td>满多少钱</td>
+                    <td>减多少钱</td>
+                    <td>购买金额</td>
+                    <td>过期日期</td>
+                    <td>浏览量</td>
+                    <td>下载量</td>
+                    <td>是否审核</td>
+                    <td>创建时间</td>
+                    <td>创建IP</td>
+                    <td>操作</td>
+
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_coupon_id" type="checkbox" name="coupon_id[]" value="<{$var.coupon_id}>" /> </td>
+                        <td><{$var.coupon_id}></td>
+                        <td><{$var['school_id']}></td>
+                        <td><{$var['shop']['shop_name']}></td>
+                        <td><{$var.title}></td>
+                        <td><img src="<{:config_img($var['photo'])}>" class="w80"/></td>
+                        <td>&yen;<{:round($var['full_price']/100,2)}></td>
+                        <td>&yen;<{:round($var['reduce_price']/100,2)}></td>
+                        <td style="color:#F00">&yen;<{:round($var['money']/100,2)}>元</td>
+                        <td><{$var.expire_date}></td>
+                        <td><{$var.views}></td>
+                        <td><{$var.downloads}></td>
+                        <td><eq name="var.audit" value="0">等待审核<else/>正常</eq></td>
+                        <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                        <td><{$var.create_ip}></td>
+                        <td>
+                        	<{:BA('coupon/deliver',array("coupon_id"=>$var["coupon_id"]),'发放红包优惠券','','tu-dou-btn')}>
+                            <{:BA('coupon/edit',array("coupon_id"=>$var["coupon_id"]),'编辑','','tu-dou-btn')}>
+                            <{:BA('coupon/delete',array("coupon_id"=>$var["coupon_id"]),'删除','act','tu-dou-btn')}>
+                            
+                            <{:BA('coupondownload/index',array("coupon_id"=>$var["coupon_id"]),'发放列表','','tu-dou-btn')}>
+                            
+                            <eq name="var.audit" value="0"><{:BA('coupon/audit',array("coupon_id"=>$var["coupon_id"]),'审核','act','tu-dou-btn')}></eq>
+    
+                        </td>
+                    </tr>
+                </foreach>    
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <{:BA('coupon/delete','','批量删除','list','a2')}>
+                <{:BA('coupon/audit','','批量审核','list','tu-dou-btn')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  

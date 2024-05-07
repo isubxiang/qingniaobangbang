@@ -1,0 +1,219 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">功能</li>
+        <li class="li2">广告</li>
+        <li class="li2 li3">新增</li>
+    </ul>
+</div>
+<form  target="x-frame" action="<{:U('ad/create',array('site_id'=>$site_id))}>" method="post">
+    <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+        <tr>
+            <td class="tu-left-td">所属广告位：</td>
+            <td class="tu-right-td">
+                <select name="data[site_id]" class="tu-manage-select">
+                    <foreach name="sites" item="var">
+                        <option value="<{$var.site_id}>" <eq name="var.site_id" value="$site_id">selected="selected"</eq> ><{$var.site_name}>（<{$types[$var['site_type']]}>）</option>
+                    </foreach>
+                </select>
+
+            </td>
+        </tr>
+        
+        
+        <tr>
+            <td class="tu-left-td">选择学校：</td>
+            <td class="tu-right-td">
+                <div class="lt">
+                    <input type="hidden" id="school_id" name="data[school_id]" value="<{$detail.school_id|default=''}>" class="tudou-manageInput"/>
+                    <input class="tudou-sc-add-text-name sj" type="text" name="Name" id="Name"  value="<{$school.Name}>" />
+                </div>
+                <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="seleSj">选择学校</a>
+            </td>
+        </tr> 
+        
+        <tr>
+            <td class="tu-left-td">广告名称：</td>
+            <td class="tu-right-td"><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="tudou-manageInput" />
+
+            </td>
+        </tr><tr>
+            <td class="tu-left-td">链接地址：</td>
+            <td class="tu-right-td"><input type="text" name="data[link_url]" value="<{$detail.link_url|default=''}>" class="tudou-manageInput" />
+
+            </td>
+        </tr>
+        
+        
+        
+        
+        <tr>
+                    <td class="tu-left-td"> 广告图片：</td>
+                 <td class="tu-right-td">
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <input type="hidden" name="data[photo]" value="<{$detail.photo}>" id="data_photo" />
+                        <div id="fileToUpload" >上传广告图</div>
+                    </div>
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <img id="photo_img" width="80" height="80"  src="<{:config_img($detail['photo'])}>" />
+                    </div>
+                    <script>                                                                  
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+						pick: '#fileToUpload',                             
+						resize: true,  
+						compress : {quality: 100}                                         
+					});                                                 
+					uploader.on( 'uploadSuccess', function( file,resporse) {                             
+						$("#data_photo").val(resporse.url);                             
+						$("#photo_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on( 'uploadError', function( file ) {                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+                </td>
+            </tr>
+        <tr>
+    <td class="tu-left-td">代码广告：</td>
+    <td class="tu-right-td"><textarea  name="data[code]" cols="50" rows="10" ><{$detail.code|default=''}></textarea>
+
+    </td>
+</tr><tr>
+    <td class="tu-left-td">开始时间：</td>
+    <td class="tu-right-td"><input type="text" name="data[bg_date]" value="<{$detail.bg_date|default=''}>" onfocus="WdatePicker();"  class="inputData" />
+
+    </td>
+</tr><tr>
+    <td class="tu-left-td">结束时间：</td>
+    <td class="tu-right-td"><input type="text" name="data[end_date]" value="<{$detail.end_date|default=''}>" onfocus="WdatePicker();"  class="inputData" />
+
+    </td>
+</tr>
+
+      <tr>
+          <td class="tu-left-td">是否新窗口打开</td>
+          <td class="tu-right-td">
+             <input type="radio" name="data[is_target]" value="0" checked="checked"/>当前窗口
+			 <input type="radio" name="data[is_target]" value="1" <if condition="$detail[is_target] eq 1">checked="checked"</if> />新窗口
+             <code>开启后再新窗口打开，默认当前窗口打开哦！</code>
+          </td>
+      </tr>
+      
+      
+    			<style>
+                    .profit{text-align: center;color: #333;font-weight: bold; background: #F5F5FB;}
+                </style>
+                    
+                 <tr>
+                    <td class="tu-right-td profit" colspan="2">小程序广告配置</td>
+                 </tr>
+     
+      
+      
+     			 <tr>
+					  <td class="tu-left-td">是否小程序</td>
+					  <td class="tu-right-td">
+                         <input type="radio" name="data[is_wxapp]" value="0" <if condition="$detail[is_wxapp] eq 0">checked="checked"</if>/>否
+			 			 <input type="radio" name="data[is_wxapp]" value="1" <if condition="$detail[is_wxapp] eq 1">checked="checked"</if>/>是
+						 <code>如果是小程序则配置下面的选项</code>
+					  </td>
+				  </tr>
+				  
+				  
+				   <tr>
+					  <td class="tu-left-td">选择跳转路径：</td>
+					  <td class="tu-right-td">
+						   <select name="data[state]" class="admin-sele-Fl  jq_type" style="display: inline-block;">
+							   <option <eq name="detail[state]" value="1">selected="selected"</eq>  value="1">内部网页跳转</option>
+							   <option <eq name="detail[state]" value="2">selected="selected"</eq>  value="2">外部网页跳转</option>
+							   <option <eq name="detail[state]" value="3">selected="selected"</eq>  value="3">关联小程序跳转</option>
+						   </select>
+						  <code>这里必须选择</code>
+					   </td>
+				   </tr>
+				   <script>
+					   $(document).ready(function (){
+						 $(".jq_type").change(function (){
+							if($(this).val() == 1){
+								 $(".jq_type_1").show();
+								 $(".jq_type_2").hide();
+								 $(".jq_type_3").hide();
+							 }else if($(this).val() == 2){
+								 $(".jq_type_1").hide();
+								 $(".jq_type_2").show();
+								 $(".jq_type_3").hide();;
+							  }else{
+								 $(".jq_type_1").hide();
+								 $(".jq_type_2").hide();
+								 $(".jq_type_3").show();
+							  }
+						   });
+						   $(".jq_type").change();
+						});
+					 </script>
+					 <tr class="jq_type_1">
+						 <td class="tu-left-td">内部链接：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[src]" value="<{$detail.src}>" class="tudou-manageInput tudou-manageInput2"/>
+								<code style="color:#F00">分类格式列如：【/pages/errand/apply/index?type=23340&remark=请直接将取件短信粘贴此处。示例：【菜鸟驿站】取件码8888&start=去哪里取件&end=到哪里送货】 这里的type就是当前分类的ID，后面的remark为描述，start为开始地址，end为到货地址说明</code><br>
+                    <code>多商家格式列如：【/pages/shop/_/index?type=1】  后面这个1数字就是外卖分类列表的ID分别是1-8的数字不要乱写</code><br>
+                    <code>单商家格式列如：【/pages/shop/_/index?id=1】  后面这个1数字就是外卖商家的ID，请不要写错，否则打不开</code><br>
+                    <code>外卖商家列表：【/pages/shop/_/list?id=1】  后面这个1数字就是外卖分类的ID，请不要写错，否则打不开</code><br>
+                    <code>拼车：【/pages/shun/shun?id=1】 固定格式请勿修改</code><br>
+                    <code>拼团：【/pages/collage/index?id=1 】固定格式请勿修改</code><br>
+                    <code>信息：【/pages/thread/index?id=1】 固定格式请勿修改，如果设置tabBar请勿填写该链接</code><br>
+                    <code>个人中心推广海报：【/pages/mine/canvas/canvas?id=1】 固定格式请勿修改</code><br>
+                    <code>配送人员入驻：【/pages/mine/info/auth?id=1】 固定格式请勿修改</code><br>
+                    <code>优惠券首页：【/pages/coupon/index?id=1】 固定格式请勿修改</code><br>
+                    <code>优惠券详情：【/pages/coupon/info?id&yhqid=*&sjid=0=1】 固定格式请勿修改*用优惠券ID代替</code><br>
+                    <code>外卖商家列表：【/pages/shop/_/list?id=1】 固定格式请勿修改</code><br>
+                    <code>外卖商家列表带分类ID：【/pages/shop/_/list?id=1&cateId=*&name=*】 固定格式请勿修改cateId分类ID，name分类名称</code><br>
+                    <code>站外链接：【/pages/common/content/web?url=https://paotui.jintaocms.com】 https://paotui.jintaocms.com为您的业务域名，需要小程序后台添加，这样可连接到站外</code><br>
+                    <code>直播连接：【/pages/live/index?id=1】 固定格式请勿修改</code><br>
+						 </td>
+					 </tr>
+					
+					<tr class="jq_type_2">
+						 <td class="tu-left-td">外部链接：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[wb_src]" value="<{$detail.wb_src}>" class="tudou-manageInput tudou-manageInput2"/>
+								<code>
+									*此链接为网页外部跳转链接，需要在小程序后台配置业务域名。
+								</code>
+						 </td>
+					 </tr>
+							
+					 <tr class="jq_type_3">
+						 <td class="tu-left-td">跳转小程序名称：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[xcx_name]" value="<{$detail.xcx_name}>" class="tudou-manageInput"/>
+								<code>跳转的小程序名称</code>
+						 </td>
+					 </tr> 
+					 <tr class="jq_type_3">
+						 <td class="tu-left-td">小程序appid：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[appid]" value="<{$detail.appid}>" class="tudou-manageInput"/>
+								<code>要跳转的小程序appid(只有同一公众号下的关联的小程序之间才可相互跳转)</code>
+						 </td>
+					 </tr>   
+      
+      <tr>
+    <td class="tu-left-td">排序：</td>
+    <td class="tu-right-td"><input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="inputData" />
+
+    </td>
+</tr>
+
+</table>
+<div style="margin-left:140px;margin-top:20px">
+
+    <input type="submit" value="确定编辑" class="sm-tudou-btn-input" />
+</div>
+</form>
+
+
+<include  file='public:footer'/>       

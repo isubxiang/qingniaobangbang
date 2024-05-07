@@ -1,0 +1,89 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿信息</li>
+        <li class="li2">跑腿管理</li>
+        <li class="li2 li3">规格配置</li>
+    </ul>
+</div>
+
+<style>
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr {
+    border: 0px solid #dbdbdb;
+}
+.main-sc .tudou-js-nr .tu-select-nr {
+    border-bottom-color: #ffffff;
+}
+.main-cate .tudou-js-nr .tu-select-nr .left a.on {
+    background-color: #F00;
+}
+</style>
+
+
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>当前分类【<{$detail['cate_name']}>】 分类规格配置，注意一个分类的规格不能超过6个哦，这里的配置后，规格必选，跑腿费 = 基础价格+规格价格 【规格不要随意删除】</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+                <a href="<{:U('runningcate/edit',array('cate_id'=>$detail['cate_id']))}>">详情管理</a>
+                <a class="on" href="<{:U('runningcate/setting',array('cate_id'=>$detail['cate_id']))}>">规格管理</a>
+            </div>
+  		</div>
+	</div>         
+            
+<div class="main-tudou-sc-add" style="margin-top:20px;">
+    <div class="tu-table-box">
+        <form  target="x-frame" action="<{:U('runningcate/setting',array('cate_id'=>$detail['cate_id']))}>" method="post">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+             
+                    <tr>
+                        <td width="140" class="tu-left-td">规格项:</td>
+                        <td>
+                            <table width="600" style="margin-left: 10px;" class="jq_table1">
+                                <tr>
+                                    <td colspan="3" style="text-align: right;">
+                                        <a class="jq_add" rel="1" href="javascript:void(0);">新增一个</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>规格名称</th>
+                                    <th>+价格</th>
+                                    <th>规格排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                <foreach name="attrs" item="item">
+                                    <tr>
+                                        <td align="center"><input class="tudou-manageInput w150" type="text" value="<{$item.attr_name}>" name="old[<{$item.attr_id}>][attr_name]"/></td>
+                                        <td align="center"><input class="tudou-manageInput w150" type="text" value="<{$item.attr_money}>" name="old[<{$item.attr_id}>][attr_money]"/></td>
+                                        <td align="center"><input class="tudou-manageInput w150" type="text" value="<{$item.orderby}>" name="old[<{$item.attr_id}>][orderby]"/></td>
+                                        <td align="center"><a class="jd" mini="act" href="<{:U('runningcate/delattr',array('attr_id'=>$item['attr_id']))}>">删除</a></td>
+                                    </tr>  
+                                </foreach>
+                            </table>
+                        </td>
+                    </tr>
+          
+            
+                <script>
+                    var num_1 = 1;
+                    $(document).ready(function(){
+                        $(document).on('click','.jq_delete', function(){
+                            $(this).parent().parent().remove();
+                        });
+
+                        $(".jq_add").click(function(){
+                            var rel = $(this).attr('rel');
+                            num_1++;
+                            var str = '<tr><td align="center"><input class="tudou-manageInput w150" type="text" name="data[select' + rel + '][' + num_1 + '][attr_name]"/></td><td align="center"><input class="tudou-manageInput w150" type="text" name="data[select' + rel + '][' + num_1 + '][attr_money]"/></td><td align="center"><input class="tudou-manageInput w150" type="text" value="100" name="data[select' + rel + '][' + num_1 + '][orderby]"/></td> <td align="center"><a class="jq_delete" href="javascript:void(0);">删除</a></td></tr> ';
+                            $(".jq_table" + rel).append(str);
+                        });
+                    });
+                </script>   
+               
+            </table>
+            <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input"/></div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

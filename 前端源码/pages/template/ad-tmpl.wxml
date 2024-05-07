@@ -1,0 +1,12 @@
+<template name="shop-ad">
+    <ad adIntervals="30" bindclose="adClose" unitId="adunit-3263cbe608577ca5" wx:if="{{wxFlag}}"></ad>
+    <ad adIntervals="30" bindclose="adClose" unitId="70429c0fe288591a99c99d9bcc44695c" wx:else></ad>
+</template>
+<template name="index-ad">
+    <ad adIntervals="30" bindclose="adClose" unitId="adunit-eb8d26a6c56772b0" wx:if="{{wxFlag}}"></ad>
+    <ad adIntervals="30" bindclose="adClose" unitId="a7123008110f25900fe06dd692b3244d" wx:else></ad>
+</template>
+<template name="my-ad">
+    <ad adIntervals="30" bindclose="adClose" unitId="adunit-3263cbe608577ca5" wx:if="{{wxFlag}}"></ad>
+    <ad adIntervals="30" bindclose="adClose" unitId="42f0d605797f2d487df17162e002c858" wx:else></ad>
+</template>

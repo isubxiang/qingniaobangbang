@@ -1,0 +1,36 @@
+<view class="container">
+    <view class="header">
+        <view class="left">
+            <view class="text">今日{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}</view>
+            <text class="money money-rmb">{{model.TodayIncomeMoney}}</text>
+        </view>
+        <view class="right">
+            <text class="desc">刚刚又有{{model.RecentIncomeMoney}}元擦身而过</text>
+            <navigator class="button" url="/pages/mine/info/auth" wx:if="{{!model.IsAuthenticated}}">立即认证赚{{!setting.wxapp.moneyName?'佣金':setting.wxapp.moneyName}}</navigator>
+            <navigator class="button" url="../_/list" wx:else>前往抢单</navigator>
+        </view>
+    </view>
+    <view class="body">
+        <view class="section">猎人榜单</view>
+        <view class="list">
+            <block wx:if="model.BestDeliverers && model.BestDeliverers.length" wx:for="{{model.BestDeliverers}}" wx:key="index">
+                <view class="hr" wx:if="{{index>0}}"></view>
+
+                <view class="item" bindtap="onPing" data-uid="{{item.uid}}">
+                    <view class="rank">
+                        <text class="iconfont icon-medal_fill_light top_{{index+1}}" wx:if="{{index<3}}"></text>
+                        <text class="value" wx:else>{{index+1}}</text>
+                    </view>
+                    <avatar size="80" src="{{item.AvatarUrl}}"></avatar>
+                    <view class="user">
+                        <text class="name">{{item.NickName}}</text>
+                        <view>{{item.SchoolName}}</view>
+                    </view>
+                    <text class="money money-rmb">{{item.MoneyIncome}}</text>
+                </view>
+
+                
+            </block>
+        </view>
+    </view>
+</view>

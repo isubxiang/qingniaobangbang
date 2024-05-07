@@ -1,0 +1,13 @@
+<view bindtap="chooseRegion" catchtouchmove="preventTouchMove" class="ms-mask" wx:if="{{regionDialog}}">
+    <view catchtap="preventTouchMove" class="ms-sort">
+        <scroll-view scrollY class="ms-sort-left" scrollIntoView="top{{selectTopItem}}">
+            <view catchtap="chooseTop" class="ms-sort-name  {{selectTopItem==item.id?'active':''}}" data-tid="{{item.id}}" id="top{{item.id}}" wx:for="{{topArr}}" wx:key="id">
+                {{item.regionName}}
+            </view>
+        </scroll-view>
+        <scroll-view scrollY class="ms-sort-right">
+            <view catchtap="chooseSub" class="ms-sort-text pub-ms-sort-text {{selectChildItem==item.id?'acitve':''}}" data-id="{{item.id}}" data-pid="{{item.pid}}" data-pname="{{item.pname}}" data-year="{{item.year}}" wx:for="{{subArr}}" wx:key="id">{{item.year}}
+            </view>
+        </scroll-view>
+    </view>
+</view>

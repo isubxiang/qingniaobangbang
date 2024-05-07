@@ -1,0 +1,163 @@
+{
+  "pages": [
+    "pages/errand/_/index",
+    "pages/errand/_/info",
+    "pages/errand/_/list",
+    "pages/errand/_/ping",
+    "pages/errand/apply/index",
+    "pages/errand/ranking/index",
+    "pages/balance/balance",
+    "pages/balance/month/index",
+    "pages/mine/_/index",
+    "pages/mine/canvas/canvas",
+    "pages/car/car",
+    "pages/task/exam/index",
+    "pages/task/exam/quest/index",
+    "pages/task/exam/annual/index",
+    "pages/task/exam/member/index",
+    "pages/task/exam/topic/index",
+    "pages/task/exam/buy/index",
+    "pages/task/exam/used/index",
+    "pages/task/exam/err/index",
+	
+    "pages/mine/account/index",
+    "pages/mine/account/list",
+    "pages/mine/coupon/index",
+    "pages/mine/redpacket/index",
+    "pages/mine/deposit/index",
+
+    "pages/coupon/index",
+    "pages/coupon/hexiao",
+    "pages/coupon/fabu",
+    "pages/coupon/user",
+    "pages/coupon/type",
+    "pages/coupon/info",
+
+    "pages/mine/coin/index",
+    "pages/mine/info/index",
+    "pages/mine/info/bindmobile",
+    "pages/mine/info/student",
+    "pages/mine/info/auth",
+    "pages/mine/address/index",
+    "pages/mine/address/edit",
+    "pages/mine/message/index",
+    "pages/mine/school/select",
+    "pages/mine/school/create",
+    "pages/mine/account/withdraw",
+    "pages/mine/coin/exchange",
+
+
+    "pages/order/_/index",
+    "pages/order/_/info",
+    "pages/order/_/photo",
+    "pages/common/location/select",
+    "pages/common/photo/camera",
+    "pages/common/result/fail",
+    "pages/common/location/search",
+    "pages/common/content/web",
+    "pages/shop/_/index",
+    "pages/shop/_/menu",
+    "pages/shop/_/query",
+    "pages/shop/_/search",
+    "pages/shop/_/shoplist",
+    "pages/shop/_/list",
+    "pages/shop/commit/index",
+    "pages/mine/settings/errand",
+    "pages/mine/settings/index",
+    "pages/mine/settings/display",
+    "pages/mine/settings/errandtime",
+    "pages/common/content/input",
+    "pages/order/_/paycomplete",
+    "pages/order/_/appraise",
+    "pages/thread/index",
+    "pages/thread/lists",
+    "pages/thread/fabu",
+    "pages/thread/edit",
+    "pages/thread/detail",
+    "pages/thread/canvas",
+    "pages/thread/mypost/mypost",
+    "pages/thread/mypost/Collection",
+
+    "pages/collage/canvas",
+    "pages/collage/index",
+    "pages/collage/info",
+    "pages/collage/group",
+    "pages/collage/group_num",
+    "pages/collage/place_order",
+    "pages/collage/yz_code",
+    "pages/collage/nav",
+    "pages/collage/group_order",
+    "pages/collage/order_info",
+
+    "pages/my/news/index",
+
+    "pages/finance/recharge",
+    "pages/finance/rechargesucc",
+
+    "pages/live/index",
+    "pages/live/replay",
+    
+    "pages/shun/shun",
+    "pages/shun/shunfabu/shunfabu",
+    "pages/shun/shuninfo2/shuninfo2",
+    "pages/shun/mine_car/mine_car"
+    
+
+
+  ],
+
+
+  "window": {
+    "navigationBarTitleText": "Demo",
+    "navigationBarBackgroundColor": "#06c1ae",
+    "backgroundColor": "#f0f0f0",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#929292",
+    "selectedColor": "#06c1ae",
+    "list": [
+      {
+        "pagePath": "pages/errand/_/index",
+        "text": "首页",
+        "iconPath": "assets/img/home2.png",
+        "selectedIconPath": "assets/img/home.png"
+      },
+      {
+        "pagePath": "pages/order/_/index",
+        "text": "订单",
+        "iconPath": "assets/img/order2.png",
+        "selectedIconPath": "assets/img/order.png"
+      },
+    
+      {
+        "pagePath": "pages/mine/_/index",
+        "text": "我的",
+        "iconPath": "assets/img/my2.png",
+        "selectedIconPath": "assets/img/my.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 100000,
+    "downloadFile": 100000
+  },
+
+  
+  
+  "navigateToMiniProgramAppIdList": [
+    "wx0c95abbbc01623ba",
+    "wx9d0412b0183467da"
+  ],
+
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "requiredBackgroundModes": [
+    "location"
+  ],
+  "debug": true,
+  "sitemapLocation": "sitemap.json"
+}

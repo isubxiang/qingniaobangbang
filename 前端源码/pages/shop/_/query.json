@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "搜索",
+  "navigationBarBackgroundColor": "#06c1ae",
+  "backgroundColor": "#06c1ae",
+  "backgroundTextStyle": "light",
+  "component": true,
+  "usingComponents": {
+    "popup": "/components/popup"
+  }
+}

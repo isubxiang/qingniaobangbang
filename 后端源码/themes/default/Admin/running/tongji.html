@@ -1,0 +1,88 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">频道</li>
+        <li class="li2">跑腿管理</li>
+        <li class="li2 li3">跑腿统计</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+  <p class="attention"><span>注意：</span>可根据下面的内容进行搜索</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="left">
+            </div>
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('running/tongji')}>">
+                    <div class="seleHidden" id="seleHidden">
+                    <div class="seleK">
+                     	<label>
+                            <span>状态</span>
+                            <select name="OrderStatus" class="select w100">
+                                <option value="999">请选择</option>
+                                <foreach name="getOrderStatus" key="key" item="item">
+                                    <option <eq name="OrderStatus" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                                </foreach>
+                            </select>
+                        </label>
+                        
+                        <label>
+                            <input type="submit" value="搜索"  class="inpt-button-tudou" />
+                        </label>
+                        
+                        
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+          <script src="__PUBLIC__/js/highcharts/highcharts.js"></script>
+        <script src="__PUBLIC__/js/highcharts/modules/exporting.js"></script>
+        <li class="tudou-19forum-one tudou-19forum_style0 masonry-brick  w1080">
+        <div class="tudou-19forum_top tudou-19forum_id1 w1080">
+            <div class="tudou-19forum-div">
+                <script>
+                    $(function (){
+                        $('#container2').highcharts({
+                            title:{
+                            text: '订单时间段（<{$bg_date}> - <{$end_date}>）内趋势',x: - 20},
+                            subtitle:{
+                            text: "<{$CONFIG['site']['sitename']}>",x: - 20},
+                            xAxis:{
+                            categories:[<{$data.day}>]},
+                            yAxis:{title:{text:'单位元'},
+                                plotLines: [{
+                                    value: 0,
+                                    width: 1,
+                                    color: '#808080'
+                                }]
+                            },
+                            series: [{
+                            name: '当日订单总金额',
+                            data: [<{$data['num']}>]
+                            }]
+                        });
+                    });
+                </script>
+                <div id="container2"></div>
+                </div>
+            </div>
+           
+        </div>
+        
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+

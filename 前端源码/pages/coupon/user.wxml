@@ -1,0 +1,67 @@
+<view class="">
+    <view class="list_header">
+        <view bindtap="tabClick" class="list_title {{activeIndex==index?'default':'selsect'}}" id="{{index}}" style="color:{{activeIndex==index?System.color:''}};" wx:for="{{tabs}}">
+            <view>{{item}}</view>
+            <view class="list_border" hidden="{{activeIndex!=index}}" style="background:{{System.color}}"></view>
+        </view>
+    </view>
+    <view class="list" hidden="{{activeIndex!=0}}">
+        <view class="list_imgbk2" hidden="{{items1.length!=0}}">
+            <image class="list_imgbk" mode="aspectFit" src="/assets/img/none_commen.png"></image>
+            <view class="list_imgbk3" style="margin-top:-30rpx;">您暂时还没有可用券哦~</view>
+        </view>
+        <block wx:if="{{items1.length!=0}}">
+            <view class="touch-item" wx:for="{{items1}}">
+                <view class="yhq">
+                    <image src="/assets/img/yhqbgimg.png"></image>
+                    <navigator url="../coupon/info?id={{item.store_id}}">
+                        <view class="yhq-lt">
+                            <image mode="aspectFill" src="{{item.store_logo}}"></image>
+                        </view>
+                        <view class="yhq-bd">
+                            <text class="text1">{{item.store_name}} - {{item.coupons_name}}</text>
+                            <text class="text2 gobyndsingle">满{{item.full}}</text>
+                            <text class="text3 gobyndsingle">减{{item.reduce}}<text style="color:#f44444;font-size: 30rpx;margin-left:10rpx;"></text>元</text>
+                            <text class="text4">有效期至{{item.end_time}}</text>
+                        </view>
+                    </navigator>
+                    <view bindtap="ljsy" class="yhq-rt" data-qid="{{item.id}}" data-sjid="{{item.store_id}}" data-yhqid="{{item.coupons_id}}">立即使用</view>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="list" hidden="{{activeIndex!=1}}">
+        <view class="list_imgbk2" hidden="{{items.length!=0}}">
+            <image class="list_imgbk" mode="aspectFit" src="/assets/img/none_commen.png"></image>
+            <view class="list_imgbk3" style="margin-top:-30rpx;">您暂时还没有失效的券哦~</view>
+        </view>
+        <block wx:if="{{items.length!=0}}">
+            <view class="yhsc">小提示：按住券左滑可删除券哦~</view>
+            <view bindtouchmove="touchmove" bindtouchstart="touchstart" class="touch-item {{item.isTouchMove?'touch-move-active':''}}" data-index="{{index}}" wx:for="{{items}}">
+                <view class="yhq1">
+                    <image src="/assets/img/yhqbgimg.png"></image>
+                    <navigator url="../coupon/info?id={{item.store_id}}">
+                        <view class="yhq1-lt">
+                            <image mode="aspectFill" src="{{item.store_logo}}"></image>
+                        </view>
+                        <view class="yhq1-bd">
+                            <text class="text1">{{item.store_name}} - {{item.coupons_name}}</text>
+                            <text class="text2 gobyndsingle">满{{item.full}}</text>
+                            <text class="text3 gobyndsingle">减{{item.reduce}}<text style="color:#f44444;font-size: 30rpx;margin-left:10rpx;"></text>元</text>
+                            <text class="text4">有效期至{{item.end_time}}</text>
+                        </view>
+                    </navigator>
+                    <view class="yhq1-rt" data-yhqid="{{item.id}}" wx:if="{{item.state=='1'}}">已经核销</view>
+                    <view class="yhq1-rt" data-yhqid="{{item.id}}" style="background:#d5d5d5" wx:elif="{{item.state=='3'}}">已经删除</view>
+                    <view class="yhq1-rt" data-yhqid="{{item.id}}" wx:else>过期失效</view>
+                </view>
+                <view catchtap="del2" class="del" data-yhqid="{{item.id}}">删除</view>
+            </view>
+        </block>
+    </view>
+</view>
+<view class="drawer_screen" wx:if="{{showModal}}"></view>
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModal}}">
+    <view class="drawer_title">为了方便您的使用，需验证您的手机号</view>
+    <button bindgetphonenumber="getPhoneNumber" class="btn_ok" openType="getPhoneNumber">立即验证</button>
+</view>

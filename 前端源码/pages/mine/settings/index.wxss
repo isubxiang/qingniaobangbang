@@ -1,0 +1,6 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.body {
+    margin-top: 30rpx;
+    background: #fff;
+}

@@ -1,0 +1,18 @@
+.weui-msg {
+    padding-top: 10px!important;
+}
+
+.head_amount_desc {
+    font-size: 16px!important;
+}
+
+.recharge-confirm-btn-box {
+    padding: 10px;
+}
+
+.recharge-confirm-btn {
+    font-size: 16px;
+    margin-bottom: 5px;
+    background-color: #3bbb8d!important;
+    color: #fff!important;
+}

@@ -1,0 +1,58 @@
+<view>
+    <view class="weui-navbar2">
+        <view bindtap="navClick" class="weuiitem2 {{activeIndexe==index?'item_on':''}}" id="{{index}}" style="color:{{activeIndexe==index?System.color:''}};" wx:for="{{tabs}}" wx:key="*this">
+            <view>{{item}}</view>
+        </view>
+        <view class="weslider2" style="left: {{sliderLefte}}px; transform: translateX({{sliderOffsete}}px); -webkit-transform: translateX({{sliderOffsete}}px);background:{{System.color}}"></view>
+    </view>
+    <view class="" hidden="{{activeIndexe!=0}}">
+        <view wx:if="{{classification_info.length>0}}">
+            <view class="weui-tab__content content" wx:for="{{classification_info}}">
+                <view class="content_top">
+                    <view class="content_left">
+                        <image class="content_img" src="{{item.user_img}}" wx:if="{{item.user_img!=null}}"></image>
+                        <image class="content_img" src="{{item.user_img2}}" wx:else></image>
+                        <view class="content_zhong">
+                            <view class="content_name">{{item.user_name}}</view>
+                            <view class="content_text">
+                                <view class="content_zheng">{{item.type_name}}</view>
+                            </view>
+                        </view>
+                    </view>
+                    <block wx:if="{{System.is_bdtel=='1'}}">
+                        <view bindtap="phone" class="content_right" data-id="{{item.user_tel}}" style="background:{{System.color}}" wx:if="{{System.is_ff=='2'}}">
+                            <view class="rel">
+                                <image class="ab udlr" mode="aspectFill" src="/assets/img/phone1.gif"></image>
+                            </view>
+                            <view>拨打电话</view>
+                        </view>
+                        <view bindtap="see" class="content_right" data-id="{{item.post_id}}" style="background:{{System.color}}" wx:if="{{System.is_ff=='1'}}">
+                            <view class="rel">
+                                <image class="ab udlr" mode="aspectFill" src="/assets/img/phone1.gif"></image>
+                            </view>
+                            <view>拨打电话</view>
+                        </view>
+                    </block>
+                </view>
+                <view class="content_wen">{{item.details}}
+        </view>
+                <view class="content_picture" wx:if="{{item.img1!=''}}">
+                    <image src="{{item}}" wx:for="{{item.img1}}"></image>
+                </view>
+                <view class="content_chakan">
+                    <view class="content_info">{{item.time}}发布</view>
+                    <view bindtap="see" class="content_info2" data-id="{{item.post_id}}">查看详情>></view>
+                </view>
+            </view>
+        </view>
+        <view class="none" wx:if="{{classification_info.length==0}}">
+            <view class="ab udlr">
+                <view class="rel">
+                    <image class="ab udlr" mode="widthFix" src="/assets/img/tie2.png"></image>
+                </view>
+                <view>暂无已经收藏的信息</view>
+            </view>
+        </view>
+    </view>
+  
+</view>

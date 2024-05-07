@@ -1,0 +1,137 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">拼车</li>
+        <li class="li2">拼车管理</li>
+        <li class="li2 li3">拼车列表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <p class="attention"><span>注意：</span>当前版本拼车支持小程序哦，后台只有删除功能，暂时的，后期功能逐渐增加</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('pinche/index')}>">
+                    <div class="seleHidden" id="seleHidden">
+                   		<div class="seleK"> 
+                        
+                         <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text" />
+                        </label>
+                        
+                         <label>
+                                <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                            </label>
+                         <label> 
+                    
+                     	<label>
+                                <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>"/>
+                                <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text "/>
+                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                            </label>
+                    	<label>
+                            <span>拼车分类：</span>
+                            <select id="cate_id" name="cate_id" class="select w100">
+                               <option value="0">请选择...</option>
+                               <foreach name="getPincheCate" item="var" key="index">  
+                                    <option value="<{$index}>"  <eq name="var.cate_id" value="$cate_id">selected="selected"</eq> ><{$var}></option>
+                               </foreach>
+                            </select>
+                        </label>
+                        <label>
+                            <span>关键字:</span>
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                        </label>
+                        
+                        <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                    </div> 
+                </form>
+                <div class="clear"></div>
+                </div>
+            </div>
+            <div class="clear"></div>
+    </div>
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="pinche_id" /></td>
+                    <td class="w50">ID</td>
+                    <td>学校ID</td>
+                    <td>拼车分类</td>
+                    <td>出发时间</td>
+                    <td>出发地点->目的地->途径地</td>
+                    <td>拼车说明</td>
+                    <td>拼车姓名</td>
+                    <td>拼车电话</td>
+                    <td style="color:red">支付金额</td>
+                    <td>支付状态</td>
+                    <td>发布时间</td>
+                    <td class="w200">操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_pinche_id" type="checkbox" name="pinche_id[]" value="<{$var.pinche_id}>" /></td>
+                        <td><{$var.pinche_id}></td>
+                        <td><{$var.school_id}></td>
+                        <td>
+                            <if condition="empty($var['cate_id'])">
+                            暂无分类
+                            <elseif condition="$var['cate_id'] eq 1"/>
+                            车找人
+                            <elseif condition="$var['cate_id'] eq 2"/>
+                            人找车
+                            <elseif condition="$var['cate_id'] eq 3"/>
+                            车找货
+                            <elseif condition="$var['cate_id'] eq 4"/>
+                            货找车
+                            </if>
+                        </td>
+                        <td><{$var.start_time}>-<{$var.start_time_more}></td>
+                        <td><{$var.goplace}> -> <{$var.toplace}> -> <{$var.middleplace}></td>
+                        <td>
+                            <if condition="$var['cate_id'] eq 1">
+                            可坐<{$var.num_1}>人
+                            <elseif condition="$var['cate_id'] eq 2"/>
+                            需要<{$var.num_2}>位置
+                            <elseif condition="$var['cate_id'] eq 3"/>
+                            可装<{$var.num_3}>吨
+                            <elseif condition="$var['cate_id'] eq 4"/>
+                            需要<{$var.num_4}>吨
+                            </if>
+                        </td>
+                        <td><{$var.name}></td>
+                        <td><{$var.mobile}></td>
+                        <td style="color:red"><{:round($var['money']/100,2)}></td>
+                        <td><eq name="var.status" value="1">已支付<else/>未支付</eq></td>
+                        <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                        
+                        <td class="w150">
+                            <{:BA('pinche/delete',array("pinche_id"=>$var["pinche_id"]),'删除','act','tu-dou-btn')}>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+            <div class="left">
+                <{:BA('pinche/delete','','批量删除','list',' a2')}>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+
+
+
+

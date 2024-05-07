@@ -1,0 +1,13 @@
+<template name="qr-modal">
+    <view bindtap="qrClose" catchtouchmove="preventTouchMove" class="modal-auth-mask" style="flex-direction:column;" wx:if="{{qrModalShow}}">
+        <view catchtap="preventTouchMove" class="modal-qr-content">
+            <image catchtap="previewImage" class="modal-qr-image" mode="aspectFit" src="{{qrSrc}}"></image>
+        </view>
+        <view class="btn-box" wx:if="{{qrSrc!=''}}">
+            <button boolean="true" catchtap="trySaveImg" class="save pub-btn" hoverClass="other-button-hover" type="default">保存图片
+            </button>
+            <button boolean="true" catchtap="preventTouchMove" class="forward pub-btn" hoverClass="other-button-hover" openType="share" type="primary">转发好友
+            </button>
+        </view>
+    </view>
+</template>

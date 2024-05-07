@@ -1,0 +1,239 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+
+
+
+.set-head {
+    padding: 5px 0px 5px 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+}
+
+.set-head-text {
+    font-size: 30rpx;
+}
+
+.set-note {
+    background-color: #f1f1f1;
+    padding: 10px;
+    font-size: 12px;
+    color: #3bbb8d;
+}
+
+.set-title {
+    margin: 10px 0 0 10px;
+    border-left: solid 3px #3bbb8d;
+    height: 14px;
+    line-height: 11px;
+}
+
+.set-change {
+    display: flex;
+    flex-flow: wrap;
+    background-color: #fff;
+}
+
+.set-change-box {
+    padding: 15px 10px;
+    width: 33.33%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1rpx #f1f1f1;
+}
+
+.set-change-text {
+    font-size: 12px;
+    color: rgb(139,139,139);
+    margin-left: 8px;
+}
+
+.set-active {
+    background-color: #f1f1f1;
+}
+
+
+page {
+    height: 100%;
+}
+
+.header {
+    position: relative;
+}
+
+.header .profile {
+    background: #06c1ae;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20rpx;
+}
+
+.header .avatar {
+    width: 160rpx;
+    height: 160rpx;
+    position: relative;
+    margin-bottom: 16rpx;
+}
+
+.header .avatar .auth {
+    position: absolute;
+    left: 120rpx;
+    font-size: 24rpx;
+    background: #bbb;
+    color: #fff;
+    line-height: 40rpx;
+    border-radius: 20rpx;
+    white-space: nowrap;
+    padding: 0 16rpx;
+    z-index: 3;
+}
+
+.header .avatar .auth text {
+    font-size: 28rpx;
+    margin-right: 6rpx;
+}
+
+.header .avatar .auth-warn {
+    background: #fffcc7;
+    color: #ff9800;
+}
+
+.header .avatar avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #d8f1e8;
+}
+
+.header .name {
+    font-size: 28rpx;
+    color: #fff;
+    margin-bottom: 24rpx;
+}
+
+.header .credit {
+    line-height: 56rpx;
+    border-radius: 28rpx;
+    background: #fff;
+    font-size: 26rpx;
+    padding: 0 30rpx;
+    color: #666;
+}
+
+.header .assets {
+    display: flex;
+    width: 100%;
+    background: #fff;
+    position: relative;
+}
+
+.header .assets navigator {
+    flex: 1;
+    text-align: center;
+    color: #666;
+    position: relative;
+    z-index: 3;
+    padding: 24rpx 0;
+}
+
+.header .assets text.money {
+    padding: 10rpx 0;
+    font-size: 38rpx;
+}
+
+.header .assets text.money .sub {
+    font-size: 20rpx;
+    margin-left: 6rpx;
+}
+
+.header .assets text.type {
+    display: block;
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.body .section {
+    margin-top: 20rpx;
+    background: #fff;
+}
+
+.body .section .item {
+    height: 100rpx;
+    line-height: 100rpx;
+    padding-left: 40rpx;
+    padding-right: 0;
+    background: #fff;
+    margin-bottom: 1px;
+    display: flex;
+    border: 0 none;
+    text-align: left;
+    align-items: center;
+}
+
+.body .section .item .title {
+    flex: 1;
+    font-size: 32rpx;
+}
+
+.body .section .item .title .sub {
+    font-size: 24rpx;
+    color: #fff;
+    background: #ff9800;
+    border-radius: 6rpx;
+    padding: 2rpx 10rpx;
+    margin-left: 8rpx;
+    position: relative;
+    top: -4rpx;
+    opacity: 0.6;
+}
+
+.body .section .item .iconfont {
+    width: 100rpx;
+    text-align: center;
+    color: #bbb;
+}
+
+.body .section .item .value {
+    color: #888;
+}
+
+.body .section .item .value-msg {
+    background: #ec3d20;
+    color: #fff;
+    width: 44rpx;
+    height: 44rpx;
+    line-height: 44rpx;
+    border-radius: 50%;
+    font-size: 24rpx;
+    text-align: center;
+}
+
+.body .section .item .num {
+    margin: 0 8rpx;
+    color: #222;
+}
+
+.body .section .desc {
+    background: #f0f0f0;
+    padding: 20rpx 40rpx 10rpx 40rpx;
+    color: #aaa;
+    font-size: 24rpx;
+}
+
+.body .service {
+    margin-top: 60rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 24rpx;
+    color: #aaa;
+}
+
+.body .service view {
+    margin-bottom: 10rpx;
+}

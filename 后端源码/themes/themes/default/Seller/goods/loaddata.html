@@ -1,0 +1,100 @@
+<foreach name="list" item="order">    
+    <li class="line" <eq name="order.is_daofu" value="1">style="background:#FFF4F4;" </eq> >
+    <dt><a class="x3">订单ID：<{$order.order_id}></a><a class="x9 text-right">交易时间：<{$order.create_time|date='Y-m-d H:i:s',###}> </a></dt>
+    
+        <foreach name="goods" item="good">
+            <eq name="good.order_id" value="$order.order_id"> <!--循环商品开始-->
+                  <dd class="zhong">
+                    <div class="x2">
+                        <img src="<{:config_img($products[$good['goods_id']]['photo'])}>"  style="width:90%;">
+                     </div>
+                    <div class="10">
+                        <p class="text-gray">名称：<{$products[$good['goods_id']]['title']}></p>
+                        <if condition="!empty($good[key_name])">
+                           <p class="text-gray">规格：<{$good.key_name}></p>
+                        </if>           
+                        <p class="text-gray">单价：<{:round($good['price']/100,2)}> * <{$good['num']}> = <{:round($good['total_price']/100,2)}></p>
+                        <p class="text-gray"><if condition="$order['status'] neq 0  && $order['is_daofu'] neq 0"><{$goodtypes[$good['status']]}></if></p>
+                     </div>
+                  </dd>
+              </eq>
+        </foreach>
+
+          <eq name="order.is_daofu" value="0">         
+              <dt>
+              
+               <div class="x12">
+                 <span class="margin-right">
+                      订单类型：
+                      <a class="text-dot"><{$orderTypes[$order['orderType']]}></a> 
+                  </span>
+               </div>
+           
+                 <div class="x12">
+                      <if condition="!empty($order['need_pay'])">
+                      <p class="text-small">总价：<{:round($order['total_price']/100,2)}>
+                      <if condition="!empty($order['use_integral'])">
+                      - 积分抵现：<{:deduction($order['use_integral'])}>元（消耗<{$order['use_integral']}>积分）
+                      </if>
+                      <if condition="!empty($order['mobile_fan'])">
+                      -手机优惠：<{:round($order['mobile_fan']/100,2)}>元
+                      </if>
+                      <if condition="!empty($order['mobile_fan'])">
+                      -手机优惠：<{:round($order['mobile_fan']/100,2)}>元
+                      </if>
+                      <if condition="!empty($order['coupon_price'])">
+                      - 优惠劵抵扣：<{:round($order['coupon_price']/100,2)}>元
+                      </if>
+                      =实付金额：<a class="text-dot"><{:round($order['need_pay']/100,2)}></a>元 <eq name="order.is_change" value="1">[改]</eq>
+                      </p>
+                      <else/>
+                      <p class="text-small">该订单还未支付</p>
+                      </if>
+                 </div>
+              </dt> 
+         </eq>
+      
+
+      <dt>
+         <div class="x12">
+           <p class="text-gray">买家姓名：<{$users[$order['user_id']]['account']}></p>
+           <p class="text-gray">收货地址：
+           <{$addrs[$order['address_id']]['xm']}>-
+           <{$addrs[$order['address_id']]['tel']}>-
+           <{$addrs[$order['address_id']]['area_str']}>-
+           <{$addrs[$order['address_id']]['info']}></p>
+         </div>
+      </dt> 
+
+
+      <dl>
+        <p class="text-right padding-top x12">
+        <eq name="order.is_mobile" value="1"><a class="button button-small border-main">手机订单</a></eq>
+ 		<eq name="order.is_daofu" value="1">
+        	<a class="button button-small border-blue">货到付款</a>
+        <else/>
+        	<a class="button button-small border-blue"><{$types[$order['status']]}></a>  
+        </eq>
+        <eq name="order.status" value="0">
+        	<a href="<{:U('goods/changePrice',array('order_id'=>$order['order_id']))}>" class="button button-small bg-dot">改价</a>
+        </eq>
+        <eq name="order.status" value="1">
+            <a href="<{:U('goods/express',array('order_id'=>$order['order_id']))}>" class="button button-small bg-blue">快递发货</a>      
+            <a target="x-frame" href="<{:U('goods/deliver',array('order_id'=>$order['order_id']))}>" class="button button-small bg-dot">无需物流发货</a>
+        </eq>
+        <eq name="order.status" value="5">
+            <a class="button button-small border-blue">已退款</a>
+        </eq>
+        <eq name="order.status" value="8">
+            <a class="button button-small border-blue">已完成</a>
+        </eq>
+        <eq name="order.status" value="4">
+            <a class="button button-small bg-blue"  target="x-frame"  href="<{:U('goods/refund',array('order_id'=>$order['order_id']))}>">确认退款</a>
+        </eq>
+		<a href="<{:U('goods/detail',array('order_id'=>$order['order_id']))}>" class="button button-small bg-yellow">详情</a> 
+        </p>
+      </dl>
+    </li>
+
+    <div class="blank-10 bg"></div>
+</foreach>   

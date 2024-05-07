@@ -1,0 +1,9 @@
+{
+    "navigationBarTitleText": "详情",
+    "backgroundColor": "#06c1ae",
+    "component": true,
+    "usingComponents": {
+        "dialog": "/components/dialog",
+        "avatar": "/components/avatar"
+    }
+}

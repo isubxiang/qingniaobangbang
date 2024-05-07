@@ -1,0 +1,479 @@
+<include  file='public:header'/>
+
+<style>
+
+.tu-left-td{width: 200px;}
+.sogn{ height:30px}
+.profit{text-align:center; color:#000; font-size:18px; font-weight:bold; background:#ECECEC;}
+.main-tudou-sc-add .tu-table-box .table2 tr td{text-align: center;}
+
+</style>
+
+
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">基本设置</li>
+        <li class="li2 li3">小程序配置</li>
+    </ul>
+</div>
+
+<p class="attention"><span>注意：</span>默认小程序配置，不懂联系qq120-585-022</p>
+<form  target="x-frame" action="<{:U('setting/wxapp')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;">
+            
+            	<tr>
+                  <td class="tu-right-td profit" colspan="2">默认同城小程序配置</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">默认小程序appid：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[appid]" value="<{$CONFIG['wxapp']['appid']}>" class="tudou-manageInput w150"/>
+                        <code>默认小程序appid</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">默认小程序appsecret：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[appsecret]" value="<{$CONFIG['wxapp']['appsecret']}>" class="tudou-manageInput w360"/>
+                        <code>默认小程序appsecret</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2">广告位ID设置，广告位ID在广告位列表获取，这里不是广告ID是广告位ID</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">拼车广告位ID：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pinche_site_id]" value="<{$CONFIG['wxapp']['pinche_site_id']}>" class="tudou-manageInput w150"/>
+                        <code>拼车广告位ID</code>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="tu-left-td">拼团广告位ID：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[collage_site_id]" value="<{$CONFIG['wxapp']['collage_site_id']}>" class="tudou-manageInput w150"/>
+                        <code>拼团广告位ID</code>
+                    </td>
+                </tr>
+               
+                <tr>
+                    <td class="tu-left-td">贴吧信息广告位ID：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[thread_site_id]" value="<{$CONFIG['wxapp']['thread_site_id']}>" class="tudou-manageInput w150"/>
+                        <code>贴吧信息广告位ID</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2">首页弹窗设置</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">是否开启首页弹窗：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_index_pop]" <eq name="CONFIG.wxapp.is_index_pop" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_index_pop]" <eq name="CONFIG.wxapp.is_index_pop" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序首页有弹窗</code>
+                    </td>
+			    </tr>
+                
+                <tr>
+                    <td class="tu-left-td">首页导航图片模式：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_index_category_type]" <eq name="CONFIG.wxapp.is_index_category_type" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_index_category_type]" <eq name="CONFIG.wxapp.is_index_category_type" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>默认文字模式，开启图片模式后需要在跑腿分类那边设置分类图标否则图片不显示</code>
+                    </td>
+			    </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">
+                        首页弹窗文字：
+                    </td>
+                    <td class="tu-right-td">
+                        <textarea name="data[is_index_pop_title]" cols="50" rows="5"><{$CONFIG.wxapp.is_index_pop_title}></textarea>
+                        <code>小程序首页弹窗文字</code>
+                    </td>
+                </tr>
+                
+                
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2">小程序其他文字设置，比如会员中心，首页，认证界面等等</td>
+                </tr>
+                
+               
+                
+               
+                <tr>
+                    <td class="tu-left-td">全局学校文字：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[titleName]" value="<{$CONFIG['wxapp']['titleName']}>" class="tudou-manageInput w260"/>
+                        <code>全局的学校名字可自定义，默认是学校</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">全局同学文字：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tongxueName]" value="<{$CONFIG['wxapp']['tongxueName']}>" class="tudou-manageInput w260"/>
+                        <code>全局的同学名字可自定义，默认是同学</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">全局配送员文字：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[peisongName]" value="<{$CONFIG['wxapp']['peisongName']}>" class="tudou-manageInput w260"/>
+                        <code>全局的配送员名字可自定义，默认是跑腿同学</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">全局赏金文字：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[moneyName]" value="<{$CONFIG['wxapp']['moneyName']}>" class="tudou-manageInput w260"/>
+                        <code>小程序所有赏金的文字，可修改为，佣金，跑腿费，等等，不超过3字，不要用赏金，否则会审核不过</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">首页导航提示语：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[index_nav_name]" value="<{$CONFIG['wxapp']['index_nav_name']}>" class="tudou-manageInput w260"/>
+                        <code>首页导航提示语，默认文字：【想让同学帮你干点什么？】</code>
+                    </td>
+                </tr>
+                
+                
+                
+                
+                <tr>
+                    <td class="tu-left-td">跑腿认证界面身份证号名字：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[idCard_code_name]" value="<{$CONFIG['wxapp']['idCard_code_name']}>" class="tudou-manageInput w260"/>
+                        <code>跑腿认证界面身份证号名字，默认文字：【身份证号】</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">跑腿认证界面身份证号placeholder：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[idCard_code_placeholder]" value="<{$CONFIG['wxapp']['idCard_code_placeholder']}>" class="tudou-manageInput w260"/>
+                        <code>跑腿认证界面身份证号placeholder，默认文字：【你的身份证号码18位】</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">跑腿认证界面身份证号位数：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[idCard_code_num]" value="<{$CONFIG['wxapp']['idCard_code_num']}>" class="tudou-manageInput w80"/>
+                        <code>跑腿认证界面身份证号位数，【默认限制数量18位】</code>
+                    </td>
+                </tr>
+               
+                
+                <tr>
+                    <td class="tu-left-td">跑腿认证界面上传收款二维码：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_auth_pay_code]" <eq name="CONFIG.wxapp.is_auth_pay_code" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_auth_pay_code]" <eq name="CONFIG.wxapp.is_auth_pay_code" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序跑腿认证上传收款二维码，【默认关闭】</code>
+                    </td>
+			    </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">是否显示学号：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_studentCard_code]" <eq name="CONFIG.wxapp.is_studentCard_code" value="0">checked="checked"</eq> value="0"/>关闭显示</label>
+                    <label><input type="radio" name="data[is_studentCard_code]" <eq name="CONFIG.wxapp.is_studentCard_code" value="1">checked="checked"</eq> value="1"/>开启显示</label>
+                    <code>开启后小程序跑腿认证是否显示学号，【默认关闭】</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">是否显示院系：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_studentCard_faculty]" <eq name="CONFIG.wxapp.is_studentCard_faculty" value="0">checked="checked"</eq> value="0"/>关闭显示</label>
+                    <label><input type="radio" name="data[is_studentCard_faculty]" <eq name="CONFIG.wxapp.is_studentCard_faculty" value="1">checked="checked"</eq> value="1"/>开启显示</label>
+                    <code>开启后小程序跑腿认证是否显示院系，【默认关闭】</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">是否显示专业：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_studentCard_major]" <eq name="CONFIG.wxapp.is_studentCard_major" value="0">checked="checked"</eq> value="0"/>关闭显示</label>
+                    <label><input type="radio" name="data[is_studentCard_major]" <eq name="CONFIG.wxapp.is_studentCard_major" value="1">checked="checked"</eq> value="1"/>开启显示</label>
+                    <code>开启后小程序跑腿认证是否显示专业，【默认关闭】</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">是否显示入校年月：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_studentCard_enrollmentDate]" <eq name="CONFIG.wxapp.is_studentCard_enrollmentDate" value="0">checked="checked"</eq> value="0"/>关闭显示</label>
+                    <label><input type="radio" name="data[is_studentCard_enrollmentDate]" <eq name="CONFIG.wxapp.is_studentCard_enrollmentDate" value="1">checked="checked"</eq> value="1"/>开启显示</label>
+                    <code>开启后小程序跑腿认证是否显示入校年月，【默认关闭】</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">是否显示上传证件：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_logo]" <eq name="CONFIG.wxapp.is_logo" value="0">checked="checked"</eq> value="0"/>关闭显示</label>
+                    <label><input type="radio" name="data[is_logo]" <eq name="CONFIG.wxapp.is_logo" value="1">checked="checked"</eq> value="1"/>开启显示</label>
+                    <code>开启后小程序跑腿认证是否显示上传证件，【默认开启】这里必选选择开启，无法关闭所以这里设置没用</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">上传证件显示名称：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[is_logo_name]" value="<{$CONFIG['wxapp']['is_logo_name']}>" class="tudou-manageInput w80"/>
+                        <code>跑腿认证界面上传证件显示名称，【默认上传学生证】</code>
+                    </td>
+                </tr>
+                
+                
+              
+                <tr>
+                  <td class="tu-right-td profit" colspan="2">【小程序会员中心模块开启关闭开关】</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">开启拼团菜单：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_group_open]" <eq name="CONFIG.wxapp.is_group_open" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_group_open]" <eq name="CONFIG.wxapp.is_group_open" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序会员中心出现我的拼团菜单</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">开启拼车菜单：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_pinche_open]" <eq name="CONFIG.wxapp.is_pinche_open" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_pinche_open]" <eq name="CONFIG.wxapp.is_pinche_open" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序会员中心出现我的拼车菜单</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">开启贴吧菜单：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_thread_open]" <eq name="CONFIG.wxapp.is_thread_open" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_thread_open]" <eq name="CONFIG.wxapp.is_thread_open" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序会员中心出现我的贴吧菜单</code>
+                    </td>
+			    </tr>
+                
+                <tr>
+                    <td class="tu-left-td">开启优惠券菜单：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_coupon_open]" <eq name="CONFIG.wxapp.is_coupon_open" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_coupon_open]" <eq name="CONFIG.wxapp.is_coupon_open" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序会员中心出现我的优惠券菜单</code>
+                    </td>
+			    </tr>
+                
+                <tr>
+                    <td class="tu-left-td">开启我的海报菜单：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_canvas_open]" <eq name="CONFIG.wxapp.is_canvas_open" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_canvas_open]" <eq name="CONFIG.wxapp.is_canvas_open" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>开启后小程序会员中心出现我的我的海报菜单</code>
+                    </td>
+			    </tr>
+                
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2">【小程序信息方便的一些配置这里是贴吧】</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">信息开启自动定位：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_tzdz]" <eq name="CONFIG.wxapp.is_tzdz" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_tzdz]" <eq name="CONFIG.wxapp.is_tzdz" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>小程序里面发布信息是否开启自动定位</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td" style="color:#F00">是否开启信息审核：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_thread_fabu_audit]" <eq name="CONFIG.wxapp.is_thread_fabu_audit" value="0">checked="checked"</eq> value="0"/>开启审核</label>
+                    <label><input type="radio" name="data[is_thread_fabu_audit]" <eq name="CONFIG.wxapp.is_thread_fabu_audit" value="1">checked="checked"</eq> value="1"/>关闭审核</label>
+                    <code style="color:#F00">关闭审核后，用户发布的信息直接显示，但是不利于审核信息，建议不要开启，这里不选择默认需要后台管理员审核</code>
+                    </td>
+			    </tr>
+                
+                <tr>
+                    <td class="tu-left-td">信息开启置顶苹果支付：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_pgzf]" <eq name="CONFIG.wxapp.is_pgzf" value="0">checked="checked"</eq> value="0"/>默认</label>
+                    <label><input type="radio" name="data[is_pgzf]" <eq name="CONFIG.wxapp.is_pgzf" value="1">checked="checked"</eq> value="1"/>关闭</label>
+                    <label><input type="radio" name="data[is_pgzf]" <eq name="CONFIG.wxapp.is_pgzf" value="2">checked="checked"</eq> value="2"/>开启</label>
+                    <code>小程序信息里面不开启置顶收费2开启1不开启，是否开启苹果支付，审核期间请关闭置顶功能</code>
+                    </td>
+			    </tr>
+                
+                <tr>
+                    <td class="tu-left-td">置顶费用：</td>
+                    <td class="tu-right-td">
+                    	<code>置顶一天</code>
+                        <input type="text" name="data[top_type_1]" value="<{$CONFIG['wxapp']['top_type_1']}>" class="tudou-sc-add-text-name w80"/>元
+                        <code>置顶一周</code>
+                        <input type="text" name="data[top_type_2]" value="<{$CONFIG['wxapp']['top_type_2']}>" class="tudou-sc-add-text-name w80"/>元
+                        <code>置顶一月</code>
+                        <input type="text" name="data[top_type_3]" value="<{$CONFIG['wxapp']['top_type_3']}>" class="tudou-sc-add-text-name w80"/>元
+                        <code>请从前面填写到后面，不填写前台不显示，只填写最后一个前面的已不显示</code>
+                    </td>
+                </tr> 
+                <tr>
+                    <td class="tu-left-td">显示是否拨打电话：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_bdtel]" <eq name="CONFIG.wxapp.is_bdtel" value="0">checked="checked"</eq> value="0"/>关闭</label>
+                    <label><input type="radio" name="data[is_bdtel]" <eq name="CONFIG.wxapp.is_bdtel" value="1">checked="checked"</eq> value="1"/>开启</label>
+                    <code>贴吧分类信息开启电话图标显示是否拨打电话</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">图标显示图标样式：</td>
+                    <td class="tu-right-td">
+                    <label><input type="radio" name="data[is_ff]" <eq name="CONFIG.wxapp.is_ff" value="1">checked="checked"</eq> value="1"/>样式1</label>
+                    <label><input type="radio" name="data[is_ff]" <eq name="CONFIG.wxapp.is_ff" value="2">checked="checked"</eq> value="2"/>样式2</label>
+                    <code>贴吧分类信息开启电话图标显示图标样式</code>
+                    </td>
+			    </tr>
+                <tr>
+                    <td class="tu-left-td">贴吧的名称：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tzmc]" value="<{$CONFIG['wxapp']['tzmc']}>" class="tudou-sc-add-text-name w80"/>
+                        <code>贴吧的名称</code>
+                    </td>
+                </tr> 
+                
+                
+                
+                
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2">【免费模板消息配置】1：如果您小程序跟公众号对接了开放平台选择公众号模板消息2：如果是2019年12月后新安装选择订阅消息3:2019年12月之前已经配置模板消息客户选择模板消息</td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">消息通知模式：</td>
+                    <td class="tu-right-td">
+                        <select name="data[tpmlMsgType]"  class="tudou-sc-add-text-name sogn jq_type">
+                            <option value="0" <if condition="$CONFIG['wxapp']['tpmlMsgType'] eq 0">selected='selected'</if>>==模板消息==</option>
+                            <option value="1" <if condition="$CONFIG['wxapp']['tpmlMsgType'] eq 1">selected='selected'</if>>==订阅消息==</option>
+                            <option value="2" <if condition="$CONFIG['wxapp']['tpmlMsgType'] eq 2">selected='selected'</if>>==订阅消息+公众号模板消息==</option>
+                        </select>
+                        <code>2019年12月后请选择订阅消息【因为微信规则，一次只能推送一条】，如果您对接了开放平台，请选择公众号模板消息（如果是公众号模板消息请一定要小程序跟您公众号对接开放平台并在同一个主体下面）</code></td>
+                </tr>
+                
+                
+                
+                <tr class="jq_type_0">
+                    <td  class="tu-left-td">订单状态变动通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[formid1]" value="<{$CONFIG['wxapp']['formid1']}>" class="tudou-sc-add-text-name w360"/>
+                        <code style="color:red">搜索：订单状态变动通知 ID：AT0176  添加类型：订单号、订单状态、订单内容、备注、更新时间</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_0">
+                    <td  class="tu-left-td">网络信息到达提醒 ：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[formid2]" value="<{$CONFIG['wxapp']['formid2']}>" class="tudou-sc-add-text-name w360"/>
+                        <code style="color:red">搜索：网络信息到达提醒 ID：AT0480  添加类型：信息编号、信息类型、用户昵称、信息内容、通知时间</code>
+                    </td>
+                </tr>
+                
+                <tr class="jq_type_0">
+                    <td  class="tu-left-td">帖子评论成功通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tid3]" value="<{$CONFIG['wxapp']['tid3']}>" class="tudou-sc-add-text-name w360"/>
+                        <code>*AT0813,关键词(评论内容,评论人,评论时间)</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_0">
+                    <td  class="tu-left-td">评论回复通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[hp_tid]" value="<{$CONFIG['wxapp']['hp_tid']}>" class="tudou-sc-add-text-name w360"/>
+                        <code>AT1235,关键词(备注,回复者,回复内容,评论时间,评论内容)</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_0">
+                    <td  class="tu-left-td">帖子被赞通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[z_tid]" value="<{$CONFIG['wxapp']['z_tid']}>" class="tudou-sc-add-text-name w360"/>
+                        <code>*AT1250,关键词(点赞人,点赞时间,主题)</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_0">
+                    <td  class="tu-left-td">帖子审核通过通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tg_tid]" value="<{$CONFIG['wxapp']['tg_tid']}>" class="tudou-sc-add-text-name w360"/>
+                        <code>*AT0168,关键词(审核结果,帖子主题,会员昵称,发布时间,备注)</code>
+                    </td>
+                </tr>
+                
+             
+                <tr class="jq_type_1">
+                    <td  class="tu-left-td">订单配送通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tid1]" value="<{$CONFIG['wxapp']['tid1']}>" class="tudou-sc-add-text-name w360"/>
+                        <code style="color:red">类目：线下超市/便利店 搜索：订单配送通知  添加类型：订单编号、配送人、配送员电话、商品信息、下单时间【配送员接单通知用户】</code>
+                    </td>
+                </tr>
+                
+                 <tr class="jq_type_1">
+                    <td  class="tu-left-td">订单送达成功通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tid2]" value="<{$CONFIG['wxapp']['tid2']}>" class="tudou-sc-add-text-name w360"/>
+                        <code style="color:red">类目：快递、物流 搜索：订单完成通知  添加类型：订单号、订单状态、接单人、联系电话、送达时间【配送员完成通知用户】</code>
+                    </td>
+                </tr>
+                 <tr class="jq_type_1">
+                    <td  class="tu-left-td">订单完成通知：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[tid3]" value="<{$CONFIG['wxapp']['tid3']}>" class="tudou-sc-add-text-name w360"/>
+                        <code style="color:red">类目：快递、物流 搜索：订单完成通知  添加类型：订单号、订单状态、订单类型、温馨提示、完成时间【用户确认完成订单通知用户】</code>
+                    </td>
+                </tr>
+               
+                
+               
+                        
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+
+ <script>
+$(document).ready(function(){
+    $(".jq_type").change(function(){
+	  var tpmlMsgType = $(this).val();
+      if(tpmlMsgType == '0'){
+          $(".jq_type_0").show();
+          $(".jq_type_1").hide();
+		  $(".jq_type_2").hide();
+      }else if(tpmlMsgType == '1'){
+          $(".jq_type_0").hide();
+          $(".jq_type_1").show();
+		  $(".jq_type_2").show();
+      }else if(tpmlMsgType == '2'){
+          $(".jq_type_0").hide();
+          $(".jq_type_1").show();
+		  $(".jq_type_2").show();
+      }
+   });
+   $(".jq_type").change();
+});
+</script> 
+        
+<include  file='public:footer'/>   
+
+

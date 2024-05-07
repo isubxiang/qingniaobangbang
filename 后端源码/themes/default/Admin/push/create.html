@@ -1,0 +1,91 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">营销管理</li>
+        <li class="li2">推送管理</li>
+        <li class="li2 li3">新增推送</li>
+    </ul>
+</div>
+<div class="main-tudou-sc-add ">
+
+    <div class="tu-table-box">
+
+        <form  target="x-frame" action="<{:U('push/create')}>" method="post">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            	
+                <tr>
+                    <td class="tu-left-td">推送主体：</td>
+                    <td class="tu-right-td">
+                        <select name="data[category]" class="seleFl w200">
+                            <option value="0">请选择主体</option>
+                             <foreach name="categorys" key="key" item="item">
+                                 <option <eq name="category" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                              </foreach>
+                        </select>
+                        <code>首选选择给谁发送短信，如果您是给会员发送则不要选择商家等级，这里没做隐藏判断</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">推送类型：</td>
+                    <td class="tu-right-td">
+                        <select name="data[type]" class="seleFl w200">
+                            <option value="0">请选择类型</option>
+                             <foreach name="types" key="key" item="item">
+                                 <option <eq name="type" value="$key">selected="selected"</eq>  value="<{$key}>"><{$item}></option>
+                              </foreach>
+                        </select>
+                        <code>这里选择是短信推送还是微信推送还是其他推送，需要APP推送的联系120585022二次开发</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">会员等级：</td>
+                    <td class="tu-right-td">
+                        <select name="data[rank_id]" class="seleFl w200">
+                            <option value="0">不选择会员等级</option>
+                            <foreach name="ranks" item="item">
+                                <option <eq name="item.rank_id" value="$detail.rank_id">selected="selected"</eq> value="<{$item.rank_id}>"><{$item.rank_name}></option>
+                            </foreach>
+                        </select>
+                        <code>如果不选择则全部会员等级发送，如果您选择用户组我们针对不同的用户组发送，针对发送主体为会员时候有效</code>
+                    </td>
+                </tr>
+            
+                <tr>
+                    <td class="tu-left-td">标题：</td>
+                    <td class="tu-right-td"><input style="width:600px;" type="text" name="data[title]" value="<{$detail.title|default=''}>" class="tudou-manageInput"  />
+					 <code>字数不要太多，标题我们建议10字以内，多余的字系统推送的时候自动截取</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">内容：</td>
+                    <td class="tu-right-td"><input style="width:600px;" type="text" name="data[intro]" value="<{$detail.intro|default=''}>" class="tudou-manageInput"  />
+					<code>字数不要太多，内容我们建议60字以内，多余的字系统推送的时候自动截取</code>
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">URL：</td>
+                    <td class="tu-right-td"><input style="width:600px;" type="text" name="data[url]" value="<{$detail.url|default=''}>" class="tudou-manageInput"/>
+					<code>
+                     必须按照范例填写，参数不懂的后面有说明
+                     小程序首页：pages/errand/_/index <br>
+                     小程序下单页面：pages/errand/apply/index?type=1&remark=搬运列子&cate_id=23334  type类型这里可写1234567，remark文字说明随便写，cate_id分类ID参数在跑腿跑腿分类里<br>
+                     小程序外卖下单页面：pages/shop/_/index?type=1&cate_id=3     type外卖商家类型ID在外卖商家编辑里面可找到，cate_id分类ID参数在跑腿跑腿分类里<br>
+                     小程序会员中心：pages/mine/_/index<br>
+                    </code>
+                    </td>
+                </tr>
+            
+
+    </table>
+      <div style="margin-left:140px;margin-top:20px">
+          <input type="submit" value="确认添加" class="sm-tudou-btn-input" />
+      <div>
+</form>
+</div>
+</div>
+<include  file='public:footer'/>   

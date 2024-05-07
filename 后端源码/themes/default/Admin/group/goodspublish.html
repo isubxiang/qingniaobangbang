@@ -1,0 +1,251 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">拼团</li>
+        <li class="li2">拼团商品</li>
+        <li class="li2 li3">操作商品</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('group/goodsPublish',array('id'=>$id),'刷新本页','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+<form target="x-frame" action="<{:U('group/goodsPublish',array('id'=>$id))}>" method="post">
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<input type="hidden" name="data[id]" value="<{$id}>" class="tudou-manageInput"/>
+                
+                
+                <tr>
+                    <td class="tu-left-td">选择商家：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="shop_id" name="data[shop_id]" value="<{$detail.shop_id|default=''}>"/>
+                            <input type="text" id="shop_name" name="shop_name" value="<{$shop.shop_name}>" class="tudou-manageInput" />
+                        </div>
+                        <a mini="select"  w="1000" h="600" href="<{:U('shop/select')}>" class="tu-dou-btn">选择商家</a>
+                        <code>必须选择商家</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">选择学校：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="school_id" name="data[school_id]" value="<{$detail.school_id|default=''}>"/>
+                            <input class="tudou-sc-add-text-name w210 sj" type="text" name="Name" id="Name"  value="<{$school.Name}>"/>
+                        </div>
+                        <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="seleSj">选择学校</a>
+                        <code>中途不要选择学校，请注意编辑</code>
+                    </td>
+                </tr> 
+                
+               
+				<tr>
+                    <td class="tu-left-td">图片：</td>
+                     <td class="tu-right-td">
+                        <div style="width: 300px;height:150px;float:left;">
+                            <input type="hidden" name="data[logo]" value="<{$detail.logo}>" id="data_logo"/>
+                            <div id="fileToUpload" >上传缩略图</div>
+                        </div>
+                        <div style="width:300px;height:150px; float:left;">
+                            <img id="logo_img" width="200" height="100" src="<{:config_img($detail['logo'])}>"/>
+                        </div>
+                        <script>                                            
+                            var uploader = WebUploader.create({                             
+                            auto: true,                             
+                            swf: '/static/default/webuploader/Uploader.swf',                             
+                            server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+                            pick: '#fileToUpload',                             
+                            resize: true,  
+                        });                                                 
+                        uploader.on('uploadSuccess', function(file,resporse){                             
+                            $("#data_logo").val(resporse.url);                             
+                            $("#logo_img").attr('src',resporse.url).show();                         
+                        });                                                
+                        uploader.on('uploadError', function(file){                             
+                            alert('上传出错');                         
+                        });                     
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">名称：</td>
+                    <td class="tu-right-td"><input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="tudou-manageInput w360"/>
+					<code>商品名称</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">排序：</td>
+                    <td class="tu-right-td"><input type="text" name="data[num]" value="<{$detail.num|default=''}>" class="tudou-manageInput w80"/>
+					<code>商品排序</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">商品分类：</td>
+                    <td class="tu-right-td">
+                       <select id="grade_id" name="data[type_id]" class="seleFl w210">
+                       <option value="0">请选择...</option>
+                        <foreach name="types" item="var">
+                         <option value="<{$var.id}>"  <eq name="var.id" value="$detail.type_id">selected="selected"</eq> ><{$var.name}></option>                
+                        </foreach>
+                        </select>
+                        <code>必须选择分类</code>
+                    </td>
+                </tr>   
+                <tr>
+                    <td class="tu-left-td">拼团售价：</td>
+                    <td class="tu-right-td"><input type="text" name="data[pt_price]" value="<{$detail.pt_price|default=''}>" class="tudou-manageInput w80"/>
+					<code>拼团售价</code>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tu-left-td">拼团原价：</td>
+                    <td class="tu-right-td"><input type="text" name="data[y_price]" value="<{$detail.y_price|default=''}>" class="tudou-manageInput w80"/>
+					<code>拼团原价</code>
+                    </td>
+                </tr>
+          
+                
+                <tr>
+                    <td class="tu-left-td">单独价格：</td>
+                    <td class="tu-right-td"><input type="text" name="data[dd_price]" value="<{$detail.dd_price|default=''}>" class="tudou-manageInput w80"/>
+					<code>单独价格</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">商品库存：</td>
+                    <td class="tu-right-td"><input type="text" name="data[inventory]" value="<{$detail.inventory|default=''}>" class="tudou-manageInput w80"/>
+					<code>商品库存</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">请输入商品销量：</td>
+                    <td class="tu-right-td"><input type="text" name="data[ysc_num]" value="<{$detail.ysc_num|default=''}>" class="tudou-manageInput w80"/>
+					<code>请输入商品销量</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">已成团数量：</td>
+                    <td class="tu-right-td"><input type="text" name="data[ycd_num]" value="<{$detail.ycd_num|default=''}>" class="tudou-manageInput w80"/>
+					<code>已成团数量</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">开团人数：</td>
+                    <td class="tu-right-td"><input type="text" name="data[people]" value="<{$detail.people|default=''}>" class="tudou-manageInput w80"/>
+					<code>开团人数</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">商品简介：</td>
+                    <td class="tu-right-td"><input type="text" name="data[introduction]" value="<{$detail.introduction|default=''}>" class="tudou-manageInput w360"/>
+					<code>商品简介</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">活动日期：</td>
+                    <td class="tu-right-td">
+                    <code>开始日期</code>
+                    <input type="text" name="data[start_time]" value="<{$detail['start_time']|default=""}>" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"  class="inputData"/>
+                    <code>结束日期</code>
+                    <input type="text" name="data[end_time]" value="<{$detail['end_time']|default=""}>" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"  class="inputData"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">消费截止时间：</td>
+                    <td class="tu-right-td">
+                    <input type="text" name="data[xf_time]" value="<{$detail['xf_time']|default=""}>" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss' })"  class="inputData"/>
+                    <code>消费截止时间</code>
+                    </td>
+                </tr>
+                
+                <link rel="stylesheet" href="__PUBLIC__/qiniu_ueditor/themes/default/css/ueditor.min.css" type="text/css">
+				<script type="text/javascript" charset="utf-8" src="__PUBLIC__/qiniu_ueditor/ueditor.config.js"></script>
+                <script type="text/javascript" charset="utf-8" src="__PUBLIC__/qiniu_ueditor/ueditor.all.min.js"></script>
+                <script type="text/javascript" src="__PUBLIC__/qiniu_ueditor/lang/zh-cn/zh-cn.js"></script>
+                
+                <tr>
+                    <td class="tu-left-td">商品详情：</td>
+                    <td class="tu-right-td"><script type="text/plain" id="data_details" name="data[details]" style="width:800px;height:360px;"><{$detail.details}></script>
+                    <code>商品详情</code>
+                    </td>
+                </tr>
+        	 <script>
+                    um = UE.getEditor('data_details',{
+                        lang: 'zh-cn',
+						toolbars:[['fullscreen', 'source', 'undo', 'redo', 'bold', 'italic', 'underline', 'fontborder', 'backcolor', 'fontsize', 'fontfamily', 'justifyleft', 'justifyright', 'justifycenter', 'justifyjustify', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'autotypeset', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', 'link', 'unlink', 'map', 'template', 'background','inserttable','print','attachment',  'emotion',  'snapscreen','insertimage', 'music', 'insertvideo']],  
+                        });
+                </script>
+            
+            
+            	 <tr>
+                  <td class="tu-left-td">更多图片：</td>
+                    <td class="tu-right-td">
+                    <div>
+                        <div id="moreToUpload" >上传图片</div>
+                    </div>							
+                    <script>                                
+                        var width2 = '<{:thumbSize($CONFIG[attachs][lifepic][thumb],0)}>';  //获取宽度                              
+                        var height2 = '<{:thumbSize($CONFIG[attachs][lifepic][thumb],1)}>'; //获取高度 
+                        var uploader = WebUploader.create({                                    
+                            auto: true,                                    
+                            swf: '/static/default/webuploader/Uploader.swf',                                    
+                            server: '<{:U("app/upload/uploadify",array("model"=>"lifepic"))}>',                                    
+                            pick: '#moreToUpload',                                    
+                            fileNumberLimit:10,                                    
+                            resize: true, 
+                            crop: false,  
+                            compress : {width:width2,height:height2,quality:100,allowMagnify: false,crop: true},														
+                        });                                                               
+                        uploader.on('uploadSuccess',function(file,resporse){                                    
+                        var str = '<span style="width:220px;height:130px;float:left;margin-left:5px;margin-top:5px;"><img width="200" height="100" src="' + resporse.url + '"><input type="hidden" name="photos[]" value="' + resporse.url + '"/><a href="javascript:void(0);">取消</a></span>';                                   
+                         $(".jq_uploads_img").append(str);                                
+                        });                                                            
+                         uploader.on( 'uploadError', function(file){                                    
+                            alert('上传出错');                                
+                         });                                
+                         $(document).on("click",".jq_uploads_img a",function(){                                    
+                             $(this).parent().remove();                                
+                         });                            
+                     </script>
+                    <div class="jq_uploads_img">
+                        <foreach  name="thumb" item="item">
+                            <span style="width:220px;height:130px;float:left;margin-left:5px;margin-top:5px;"> 
+                                <img width="200" height="100" src="<{:config_img($item)}>">  
+                                <input type="hidden" name="photos[]" value="<{$item}>" />  
+                                <a href="javascript:void(0);">取消</a>  
+                            </span>
+                        </foreach>
+                    </div>					
+                    </td>
+               </tr>
+                    
+                    
+                
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认操作" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

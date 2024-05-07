@@ -1,0 +1,86 @@
+<view class="shun">
+    <view class="header" wx:if="{{slide.length!=0}}">
+        <view class="swiper-container">
+            <swiper autoplay="auto" class="swiper" indicatorActiveColor="#fff" indicatorColor="#e5e5e5" indicatorDots="true" interval="5000">
+                <swiper-item wx:for="{{slide}}" wx:key="{{item.value}}">
+                    <image bindtap="jumps" class="img" data-appid="{{item.appid}}" data-name="{{item.xcx_name}}" data-src="{{item.src}}" data-type="{{item.state}}" data-wb_src="{{item.wb_src}}" mode="aspectFill" src="{{item.logo}}"></image>
+                </swiper-item>
+            </swiper>
+        </view>
+    </view>
+
+    <view class="section flex2">
+        <view bindtap="carlist" class="section_list" data-typename="{{item.name}}" wx:for="{{release}}" wx:key="{{item.value}}">{{item.name}}</view>
+    </view>
+
+
+
+    <view class="banner rel" wx:if="{{pc.length!=0}}">
+        <view bindtap="whole" class="banner_title flex-center">
+            <image class="banner_che" src="/assets/img/che.png"></image>
+            <view>全部信息</view>
+        </view>
+        <view bindtap="carinfo" class="banner_list rel" data-id="{{item.tz.id}}" wx:for="{{pc}}" wx:key="{{item.value}}">
+            <view bindtap="shuninfo" class="mation_title flex-bet">
+                <view class="flex-center madizhi">
+                    <view class="gobyndsingle {{item.tz.class3}}" style="max-width:200rpx">{{item.tz.start_place}}</view>
+                    <image class="daoda" src="/assets/img/282792329038474488.png"></image>
+                    <view class="gobyndsingle {{item.tz.class3}}" style="max-width:200rpx">{{item.tz.end_place}}</view>
+                </view>
+                <view class="banner_time {{item.tz.class3}}">{{item.tz.time}} 发布</view>
+            </view>
+            <view class="flex-bet banner_menu">
+                <view bindtap="shuninfo" class="flex-center banner_content">
+                    <image class="timeimg" src="/assets/img/naozhong@2x.png"></image>
+                    <view class=" {{item.tz.class3}}">{{item.tz.start_time1}}日 {{item.tz.start_time_more}} {{item.tz.num}}人</view>
+                </view>
+                <view bindtap="call_phone" class="flex-center banner_tel {{item.tz.class4}}" data-tel="{{item.tz.link_tel}}">
+                    <image class="banner_telimg" src="/assets/img/baidianhua.png"></image>
+                    <view class=" ">电话</view>
+                </view>
+            </view>
+            <view class="already_stated ab ud" wx:if="{{item.tz.is_open==2}}">
+                <image mode="aspectFill" src="/assets/img/already_stated.png"></image>
+            </view>
+            <view class="car {{item.tz.class1}}" wx:if="{{item.tz.is_open==1}}">{{item.tz.typename}}</view>
+            <view class="car {{item.tz.class2}}" wx:if="{{item.tz.is_open==2}}">{{item.tz.typename}}</view>
+            <view bindtap="shuninfo" class="beizhu gobyndmulit {{item.tz.class3}}" wx:if="{{item.tz.other!=''}}">备注：{{item.tz.other}}</view>
+        </view>
+    </view>
+    <view class="none_car_info rel" wx:if="{{pc.length==0}}">
+        <image class="ab udlr" mode="aspectFill" src="/assets/img/tie2.png"></image>
+    </view>
+    <view style="color:#999;background:#fff;text-align:center;font-size:26rpx;padding:0 0 30rpx 0;" wx:if="{{pc.length==0}}">该分类暂无同行信息</view>
+    <view class="foot"></view>
+    <view class="classfinal" wx:if="{{foot==true}}">
+        <view>同行</view>
+        <view bindtap="shunfabu" id="{{item.id}}" wx:for="{{release}}" wx:key="{{item.value}}">{{item.name}}</view>
+        <view bindtap="footbtn">取消</view>
+    </view>
+</view>
+<view class="nav">
+    <view bindtap="shouye">
+        <view class="rel">
+            <image class="ab lr" mode="scaleToFill" src="/assets/img/shouye.png"></image>
+        </view>
+        <view style="color:#333">首页</view>
+    </view>
+    <view>
+        <view class="rel">
+            <image class="ab lr" mode="scaleToFill" src="/assets/img/carpooling-one.png"></image>
+        </view>
+        <view style="color:#ed414a">掌上同行</view>
+    </view>
+    <view bindtap="footbtn">
+        <view class="rel">
+            <image class="ab lr" mode="scaleToFill" src="/assets/img/release-car.png"></image>
+        </view>
+        <view style="color:#333">我要发布</view>
+    </view>
+    <view bindtap="mine_yellow">
+        <view class="rel">
+            <image class="ab lr" mode="scaleToFill" src="/assets/img/wode.png"></image>
+        </view>
+        <view style="color:#333">我的同行</view>
+    </view>
+</view>

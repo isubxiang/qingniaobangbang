@@ -1,0 +1,272 @@
+<include file='public:header'/>
+<div class="tu-main-top-btn">
+	<ul>
+		<li class="li1">设置</li>
+		<li class="li2">基本设置</li>
+		<li class="li2 li3">站点设置</li>
+	</ul>
+</div>
+<p class="attention">
+	<span>注意：</span>这个设置和全局有关系
+</p>
+<form target="x-frame" action="<{:U('setting/site')}>" method="post">
+	<div class="main-tudou-sc-add">
+		<div class="tu-table-box">
+			<table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px" style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#fff;">
+			<tr>
+				<td class="tu-left-td">
+					站点名称：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[sitename]" value="<{$CONFIG.site.sitename}>" class="tudou-sc-add-text-name " />
+					<code>注意这个不是网站的Title，一般建议是网站的品牌名</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					站点网址：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[host]" value="<{$CONFIG.site.host}>" class="tudou-sc-add-text-name " />
+					<code>例如：http://www.baidu.com 如果你在二级目录下面就需要带上二级目录</code>
+				</td>
+			</tr>
+            
+            <tr>
+				<td class="tu-left-td">
+					强制开始https：
+				</td>
+				<td class="tu-right-td">
+					<label><input type="radio" name="data[https]" <eq name="CONFIG.site.https" value="1">checked="checked"</eq> value="1"  />开启</label>
+					<label><input type="radio" name="data[https]" <eq name="CONFIG.site.https" value="0">checked="checked"</eq>  value="0"  />不开启</label>
+					<code>如果网站配置了https必须开启</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					站点根域名：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[hostdo]" value="<{$CONFIG.site.hostdo}>" class="tudou-sc-add-text-name " />
+					<code>例如：baidu.com 用于分站二级域名，这里的域名一定要泛解析，否则失效！</code>
+				</td>
+			</tr>
+            <tr>
+				<td class="tu-left-td">
+					域名前缀：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[host_prefix]" value="<{$CONFIG.site.host_prefix}>" class="tudou-sc-add-text-name " />
+					<code>默认填写www,您已可以修改为bbs，O2O，其他任意字母,这里必须配置，否则访问失败，当前域名：http://<{$CONFIG.site.host_prefix}>.<{$CONFIG.site.hostdo}></code>
+				</td>
+			</tr>
+            
+            
+            <tr>
+                <td class="tu-left-td">默认学校：</td>
+                <td class="tu-right-td">
+                    <select name="data[school_id]" class="select">
+                    <option value="">==必须选择默认学校==</option>
+                    <foreach name="schools" key="key" item="item">
+                        <option <eq name="CONFIG.site.school_id" value="$item['school_id']">selected="selected"</eq>  value="<{$item['school_id']}>"><{$item['Name']}></option>
+                    </foreach>
+                    <code>必须选择，请填写您的默认学校</code>
+                </td>
+            </tr>
+            
+            
+			
+			<tr>
+				<td class="tu-left-td">
+					网站LOGO：
+				</td>
+				<td class="tu-right-td">
+					<div style="width: 300px;height: 100px; float: left;">
+						<input type="hidden" name="data[logo]" value="<{$CONFIG.site.logo}>" id="data_logo" />
+						<div id="fileToUpload">
+							上传网站LOGO
+						</div>
+					</div>
+					<div style="width: 300px;height: 100px; float: left;">
+						<img id="logo_img" width="120" height="80" src="<{:config_img($CONFIG[site][logo])}>" />
+						<a href="<{:U('setting/attachs')}>">缩略图设置</a>
+                        建议尺寸
+						<{$config.attachs.sitelogo.thumb}>
+					</div>
+					<script>                                            
+						var width_sitelogo = '<{:thumbSize($CONFIG[attachs][sitelogo][thumb],0)}>';                         
+						var height_sitelogo = '<{:thumbSize($CONFIG[attachs][sitelogo][thumb],1)}>';                         
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>"sitelogo"))}>',                             
+						pick: '#fileToUpload',                             
+						resize: true,  
+						compress : {width: width_sitelogo,height: height_sitelogo,quality: 80,allowMagnify: false,crop: true}                       
+					});                                                 
+					uploader.on( 'uploadSuccess', function( file,resporse) {                             
+						$("#data_logo").val(resporse.url);                             
+						$("#logo_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on( 'uploadError', function( file ) {                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					微信公众号二维码：
+				</td>
+				<td class="tu-right-td">
+					<div style="width: 300px;height: 100px; float: left;">
+						<input type="hidden" name="data[wxcode]" value="<{$CONFIG.site.wxcode}>" id="data_wxcode" />
+						<div id="fileToUpload_wxcode">
+							上传微信公众号二维码
+						</div>
+					</div>
+					<div style="width: 300px;height: 100px; float: left;">
+						<img id="wxcode_img" width="120" height="80" src="<{:config_img($CONFIG[site][wxcode])}>" />
+					</div>
+					<script>                                                                
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>"shopphoto"))}>',                             
+						pick: '#fileToUpload_wxcode',                             
+						resize: true,  
+					});                                                 
+					uploader.on( 'uploadSuccess', function( file,resporse) {                             
+						$("#data_wxcode").val(resporse.url);                             
+						$("#wxcode_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on( 'uploadError', function( file ) {                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+				</td>
+			</tr>
+            
+            
+            <tr>
+				<td class="tu-left-td">
+					微信小程序二维码：
+				</td>
+				<td class="tu-right-td">
+					<div style="width: 300px;height: 100px; float: left;">
+						<input type="hidden" name="data[wxappcode]" value="<{$CONFIG.site.wxappcode}>" id="data_wxappcode" />
+						<div id="fileToUpload_wxappcode">
+							上传微小程序信二维码
+						</div>
+					</div>
+					<div style="width: 300px;height: 100px; float: left;">
+						<img id="wxappcode_img" width="120" height="80" src="<{:config_img($CONFIG[site][wxappcode])}>" />
+					</div>
+					<script>                                                                
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>"shopphoto"))}>',                             
+						pick: '#fileToUpload_wxappcode',                             
+						resize: true,  
+					});                                                 
+					uploader.on( 'uploadSuccess', function( file,resporse) {                             
+						$("#data_wxappcode").val(resporse.url);                             
+						$("#wxappcode_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on( 'uploadError', function( file ) {                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+				</td>
+			</tr>
+            
+            
+			<tr>
+				<td class="tu-left-td">
+					客服QQ：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[qq]" value="<{$CONFIG.site.qq}>" class="tudou-sc-add-text-name " />
+					<code>前台模板显示调用</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					电话：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[tel]" value="<{$CONFIG.site.tel}>" class="tudou-sc-add-text-name " />
+					<code>前台模板显示调用！</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					邮件：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[email]" value="<{$CONFIG.site.email}>" class="tudou-sc-add-text-name " />
+					<code>前台模板显示调用！</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					ICP备案：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[icp]" value="<{$CONFIG.site.icp}>" class="tudou-sc-add-text-name " />
+					<code>前台模板显示调用！</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					站点标题：
+				</td>
+				<td class="tu-right-td">
+					<input type="text" name="data[title]" value="<{$CONFIG.site.title}>" class="tudou-sc-add-text-name " />
+					<code>seo设置中调用</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					站点关键字：
+				</td>
+				<td class="tu-right-td">
+					<textarea name="data[keyword]" cols="50" rows="5"><{$CONFIG.site.keyword}></textarea>
+					<code>seo设置中调用，建议认真填写！</code>
+				</td>
+			</tr>
+			<tr>
+				<td class="tu-left-td">
+					站点描述：
+				</td>
+				<td class="tu-right-td">
+					<textarea name="data[description]" cols="50" rows="5"><{$CONFIG.site.description}></textarea>
+					<code>seo设置中调用</code>
+				</td>
+			</tr>
+			
+			<tr>
+				<td class="tu-left-td">
+					统计代码：
+				</td>
+				<td class="tu-right-td">
+					<textarea name="data[tongji]" cols="50" rows="5"><{$CONFIG.site.tongji}></textarea>
+					<code>模板中调用，有统计代码的填写在这里，或者直接添加模板里面。</code>
+				</td>
+			</tr>
+            
+            
+           
+		
+	
+			
+			
+			</table>
+		</div>
+		<div class="sm-qr-tu">
+			<input type="submit" value="确认保存" class="sm-tudou-btn-input"/>
+		</div>
+	</div>
+</form>
+<include file='public:footer'/>

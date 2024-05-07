@@ -1,0 +1,24 @@
+.body {
+    padding: 30rpx;
+}
+
+.body input,.body textarea,.footer button {
+    width: auto;
+    display: block;
+    background: #fff;
+}
+
+.body textarea {
+    height: 280rpx;
+    padding: 20rpx;
+    font-size: 30rpx;
+}
+
+.footer {
+    padding: 0 40rpx 40rpx 40rpx;
+}
+
+.footer button {
+    background: #06c1ae;
+    color: #fff;
+}

@@ -1,0 +1,166 @@
+<view class="big_border pbnavbar">
+    <view class="body" wx:if="{{slide.length!=0}}">
+        <view class="banner">
+            <view class="swiper-container">
+
+
+                <swiper autoplay="auto" bindchange="swiperChange" circular="true" class="swiper" duration="500" indicatorActiveColor="{{System.color}}" indicatorColor="#fff" indicatorDots="true" interval="5000">
+                    <swiper-item wx:for="{{slide}}" wx:key="{{item.value}}">
+                        <image bindtap="jumps" class="img" data-appid="{{item.appid}}" data-id="{{item.id}}" data-name="{{item.xcx_name}}" data-src="{{item.src}}" data-type="{{item.state}}" data-wb_src="{{item.wb_src}}" mode="aspectFill" src="{{item.logo}}"></image>
+                    </swiper-item>
+                </swiper>
+
+              <view class="home-fixed {{nav2}}">
+                <view bindtap="goPositionPage" class="home-position">
+                    <view class="home-communtiy" bindtap="onSchoolTap">
+                        <image src="/assets/img/position1.png" style="width:22rpx; height:28rpx" wx:if="{{nav2=='nav'}}"></image>
+                        <image src="/assets/img/position.png" style="width:23rpx; height:27rpx" wx:if="{{nav2=='nav-c'}}"></image>
+                        {{school_name||'定位中...'}}
+                        </view>
+                    <view class="home-downicon">
+                        <image src="/assets/img/{{nav2=='nav'?'up':'down'}}.png" style="width:20rpx; height:12rpx"></image>
+                    </view>
+                </view>
+            </view>
+
+
+            </view>
+        </view>
+    </view>
+    <view class="llfb">
+        <view class="llfbleft">
+            <image mode="aspectFill" src="/assets/img/gif.gif"></image>
+        </view>
+        <view class="llfbrt">
+            <view>
+                <text>总浏览量：</text>
+                <text style="color:#f44444">{{System.total_num}}</text>
+            </view>
+            <view>
+                <text>总{{System.tzmc}}量：</text>
+                <text style="color:#97C7FF">{{Num}}</text>
+            </view>
+
+             <view bindtap="fabu">
+                <image mode="aspectFill" src="/assets/img/add_spec.png"></image>
+                <text style="color:#F00">发布信息</text>
+            </view>
+
+        </view>
+    </view>
+    <swiper autoplay="true" circular="true" class="classify" duration="1000" indicatorActiveColor="{{System.color}}" indicatorColor="#f2f2f2" indicatorDots="{{nav.length>1}}" interval="4000" style="height:{{height}}rpx" wx:if="{{nav.length>0}}">
+        <swiper-item wx:for="{{nav}}" wx:key="{{item.value}}">
+            <view bindtap="jump" data-id="{{item.id}}" data-name="{{item.type_name}}" wx:for="{{item}}" wx:key="{{item.value}}">
+                <view class="classify_logo rel">
+                    <image class="ab udlr" mode="aspectFill" src="{{item.img}}" style="border-radius:10rpx;"></image>
+                </view>
+                <view class="classify_name center gobyndsingle">{{item.type_name}}</view>
+            </view>
+        </swiper-item>
+    </swiper>
+    <view class="ad" wx:if="{{msgList.length>0}}">
+        <view class="tctt" style="color:{{System.color}}">{{System.flgg_name}}</view>
+        <swiper autoplay="true" circular="true" class="newest_content gobyndsingle" interval="2000" vertical="true">
+            <swiper-item wx:for="{{msgList}}" wx:key="{{item.value}}">
+                <view bindtap="notice" class="adinfo gobyndsingle" data-id="{{item.id}}">
+            {{item.title}}
+          </view>
+            </swiper-item>
+        </swiper>
+    </view>
+    <view class="recommend">
+        <view bindtap="whole" data-index="{{index}}" style="color:{{activesxtab==index?System.color:''}};border-bottom:{{activesxtab==index?4:0}}rpx solid {{activesxtab==index?System.color:''}};width:{{sxtab.length==2?'15%':'30%;'}}" wx:for="{{sxtab}}">{{item}}</view>
+        <scroll-view class="nav-two" scrollX="true">
+            <view bindtap="commend" class="fon {{activeIndex==index?'bold':'normal'}}" data-index="{{index}}" id="{{index}}" style="color:{{activeIndex==index?System.color:''}}" wx:for="{{navs}}" wx:key="{{item.value}}">{{item.type_name}}</view>
+        </scroll-view>
+    </view>
+    <view class="content" wx:if="{{seller.length!=0}}" wx:for="{{seller}}" wx:key="{{item.value}}">
+        <view class="content_top">
+            <view class="content_left">
+                <image class="content_img" src="{{item.tz.user_img}}" wx:if="{{item.tz.user_img!=null}}"></image>
+                <image class="content_img" src="{{item.tz.user_img2}}" wx:else></image>
+                <view class="content_zhong">
+                    <view class="content_name">{{item.tz.user_name}}</view>
+                    <view class="content_text">
+                        <view class="content_zhi color2" wx:if="{{item.tz.top==1}}">置顶</view>
+                        <view class="content_zhi color2" wx:if="{{item.tz.is_renzheng==2}}">已认证</view>
+                        <view class="content_zhi color1" wx:if="{{item.tz.type_name!=null}}">{{item.tz.type_name}}</view>
+                        <view class="content_zhi color1" wx:if="{{item.tz.type2_name!=null}}">{{item.tz.type2_name}}</view>
+                        <view class="content_zhi" wx:if="{{item.tz.hb_money>0}}">
+                            <image mode="aspectFill" src="/assets/img/hongbao.gif" style="width:55rpx;height:55rpx;"></image>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <block wx:if="{{System.is_bdtel=='1'}}">
+                <view bindtap="phone" class="content_right" data-id="{{item.tz.user_tel}}" style="background:{{System.color}}" wx:if="{{System.is_ff=='2'}}">
+                    <view class="rel">
+                        <image class="ab udlr" mode="aspectFill" src="/assets/img/phone1.gif"></image>
+                    </view>
+                    <view>拨打电话</view>
+                </view>
+                <view bindtap="see" class="content_right" data-id="{{item.tz.id}}" style="background:{{System.color}}" wx:if="{{System.is_ff=='1'}}">
+                    <view class="rel">
+                        <image class="ab udlr" mode="aspectFill" src="/assets/img/phone1.gif"></image>
+                    </view>
+                    <view>拨打电话</view>
+                </view>
+            </block>
+        </view>
+        <view bindtap="see" class="content_wen gobyndmulit rel" data-id="{{item.tz.id}}">
+            <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+                <button formType="submit"></button>
+            </form>
+      {{item.tz.details}}</view>
+        <view bindtap="see" class="content_wen" data-id="{{item.tz.id}}">
+            <view wx:for="{{item.label}}" wx:key="{{item.value}}">{{item.label_name}}</view>
+        </view>
+        <view class="content_picture" wx:if="{{item.tz.img!=''}}">
+            <view wx:for="{{item.tz.img1}}" wx:for-item="tpitem" wx:key="{{item.value}}">
+                <image bindtap="previewImage" data-id="{{item.tz.id}}" data-inde="{{index}}" mode="aspectFill" src="{{tpitem}}" style="border-radius:10rpx;"></image>
+                <view></view>
+            </view>
+        </view>
+        <view bindtap="see" class="content_chakan" data-id="{{item.tz.id}}">
+            <view class="content_info time1">{{item.tz.time}}发布</view>
+            <view class="content_info" wx:if="{{activesxtab=='1'&&item.tz.lat!=''}}">离你{{item.tz.juli}}</view>
+        </view>
+        <view bindtap="see" class="content_chakan" data-id="{{item.tz.id}}" wx:if="{{System.is_tzdz=='1'&&item.tz.address!=''}}">
+            <view class="content_info">
+                <image mode="widthFix" src="/assets/img/address3.png"></image>
+                <text>{{item.tz.address}}</text>
+            </view>
+        </view>
+        <view class="content_liulan">
+            <image class="eye" src="/assets/img/liulan.png"></image>
+            <view class="content_num">{{item.tz.views}}</view>
+            <view class="content_ren">人浏览</view>
+            <image bindtap="thumbs_up" class="zan" data-id="{{item.tz.id}}" data-num="{{item.tz.givelike}}" src="/assets/img/zan.png" wx:if="{{item.tz.thumbs_ups==null}}"></image>
+            <image class="zan" src="/assets/img/thumbs_up.png" wx:if="{{item.tz.thumbs_ups==true}}"></image>
+            <view class="zannum" wx:if="{{item.tz.thumbs_up==null}}">{{item.tz.givelike}}</view>
+            <view class="zannum" wx:if="{{item.tz.thumbs_up!=null}}">{{item.tz.givelike}}</view>人点赞
+      <view bindtap="see" class="zannum rel" data-id="{{item.tz.id}}" style="margin-left:150rpx;">
+                <form bindreset="formReset" bindsubmit="formid_one" class="plate_form" reportSubmit="true">
+                    <button formType="submit"></button>
+                </form>
+        查看详情>></view>
+            <view class="kuang"></view>
+        </view>
+    </view>
+    <view class="loading rel" wx:if="{{refresh_top==true&&seller.length!=0}}">
+    我也是有底线的
+  </view>
+    <view class="loading rel" wx:if="{{refresh_top==false&&seller.length!=0}}">
+        <image class="ab udlr" mode="widthFix" src="/assets/img/loading.gif"></image>
+    </view>
+    <view class="none_store" wx:if="{{seller.length==0}}">
+        <view class="rel">
+            <image class="ab udlr img2" mode="aspectFill" src="/assets/img/tie2.png"></image>
+        </view>
+        <view class="center">该分类还没有发布的{{System.tzmc}}</view>
+    </view>
+</view>
+<button class="kefu" openType="contact" sessionFrom="{{userinfo.name}}" wx:if="{{System.is_kf=='1'}}">客服</button>
+<button bindtap="hddb" class="hddb" wx:if="{{System.is_kf=='1'}}">
+    <image src="/assets/img/zd.png"></image>
+</button>

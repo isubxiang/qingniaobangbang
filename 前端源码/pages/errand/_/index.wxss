@@ -1,0 +1,857 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.title {
+    font-size: 30rpx;
+}
+
+.title .iconfont {
+    font-size: 40rpx;
+    vertical-align: middle;
+}
+
+.header {
+    position: relative;
+}
+
+.header-bg {
+    background: #06c1ae;
+    padding-top: 10rpx;
+    z-index: 1;
+    width: 100%;
+}
+
+.header-content {
+    z-index: 2;
+    left: 0;
+    width: 100%;
+}
+
+.header-top {
+    padding-left: 20rpx;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.header .title {
+    color: #fff;
+}
+
+.header .nearest {
+    border-radius: 24rpx;
+    font-size: 24rpx;
+    height: 48rpx;
+    line-height: 46rpx;
+    background: #fff;
+    color: #666;
+    opacity: 0.6;
+    padding: 0 18rpx;
+    margin-left: 20rpx;
+    margin-right: 30rpx;
+}
+
+.header .nearest .iconfont {
+    position: relative;
+    top: 2rpx;
+    margin-right: 4rpx;
+}
+
+.header .input {
+    margin: 20rpx 0rpx 24rpx 0rpx;
+    background: #fff;
+    border-radius: 0rpx;
+    min-height: 100rpx;
+    margin-top: 20rpx;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.header .input .form {
+    margin: 12rpx 30rpx 0 24rpx;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 72rpx;
+}
+
+.header .input .form .dot {
+    width: 16rpx;
+    height: 16rpx;
+    border-radius: 8rpx;
+    display: inline-block;
+    background: #ff9800;
+}
+
+.header .input .form .txt {
+    font-size: 30rpx;
+    padding-left: 20rpx;
+    flex: 1;
+    margin-right: 60rpx;
+    height: 100%;
+    line-height: 80rpx;
+    color: #575757;
+    box-sizing: border-box;
+    display: inline-block;
+}
+
+.header .input .form .btn {
+    background: #06c1ae;
+    color: #fff;
+    font-size: 32rpx;
+    border-radius: 8rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    padding: 0 30rpx;
+    display: inline-block;
+    margin-top: 10rpx;
+}
+
+.header .input swiper {
+    flex: 1;
+    margin-bottom: 12rpx;
+}
+
+.header .input swiper swiper-item {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding-bottom: 40rpx;
+    box-sizing: border-box;
+}
+
+.header .input swiper .item {
+    background: #f0f0f0;
+    color: #aaa;
+    font-size: 24rpx;
+    text-align: center;
+    width: 23%;
+    display: flex;
+    flex-direction: column;
+    margin: 12rpx 1% 4rpx 1%;
+    height: 100rpx;
+    justify-content: center;
+    position: relative;
+    padding: 5rpx 0;
+}
+
+.header .input swiper .finished1 {
+    background:#fff;
+    color: #aaa;
+    font-size: 24rpx;
+    text-align: center;
+    width: 18%;
+    display: flex;
+    flex-direction: column;
+    margin: 5rpx 1% 5rpx 1%;
+    height: 120rpx;
+    justify-content: center;
+    position: relative;
+    padding: 5rpx 0;
+}
+
+.header .input swiper .finished1 image {
+    width: 75rpx;
+    height: 75rpx;
+    background: #fff;
+}
+
+.header .input swiper .finished1 .Keyword{
+    width: 100%;
+    height: 45rpx;
+    line-height: 45rpx;
+    font-size: 28rpx;
+    color: #666;
+}
+
+.udlr {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+
+
+.header .input swiper .item .hot {
+    position: absolute;
+    right: 8rpx;
+    top: -8rpx;
+    color: #fff;
+    background: #de534b;
+    font-size: 14rpx;
+    padding: 2rpx 6rpx;
+}
+
+.header .input swiper .item .tag {
+    position: absolute;
+    right: -6rpx;
+    top: -14rpx;
+    color: #fff;
+    background: #06c1ae;
+    font-size: 18rpx;
+    padding: 0 6rpx;
+}
+
+.header .input swiper .item .key {
+    margin: 0 auto 6rpx auto;
+    font-size: 30rpx;
+    color: #444;
+    width: 100rpx;
+}
+
+.header .input .swiper-bar {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 12rpx;
+    display: flex;
+    justify-content: center;
+}
+
+.header .input .swiper-bar view {
+    width: 30rpx;
+    height: 6rpx;
+    background: #ddd;
+    margin: 0 2rpx;
+}
+
+.header .input .swiper-bar view.actived {
+    background: #06c1ae;
+}
+
+.banner {
+    height:175px;
+    width: 100%;
+    display: black;
+    z-index: 1;
+}
+
+.banner .bg,.banner .bg image {
+    width: 100%;
+    height: 390rpx;
+}
+
+.banner swiper {
+    height: 180rpx;
+    width: 100%;
+    margin-bottom: 10rpx;
+}
+
+.banner swiper swiper-item {
+    position: relative;
+}
+
+.banner swiper navigator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.banner swiper image {
+    height: 100%;
+    width: 100%;
+}
+
+
+
+.home-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60rpx;
+    padding: 35rpx 0 20rpx 3%;
+    z-index: 10;
+}
+
+.bottomView {
+    width: 100%;
+    height: 64rpx;
+    line-height: 64rpx;
+    background: #f5f5f5;
+    padding: 20rpx 0;
+    clear: both;
+}
+
+.bottomView image {
+    width: 500rpx;
+    height: 64rpx;
+    display: block;
+    margin: 0 auto;
+}
+
+.home-fixed .inputButton {
+    width: 98%;
+    line-height: 56rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    margin: 0;
+}
+
+
+.nav {
+    color: #fff;
+}
+
+.nav-c {
+    background: #fff;
+    color: black;
+}
+
+.nav view,.nav-c view {
+    display: inline-block;
+}
+
+.home-communtiy {
+    max-width: 100%;
+    height: 46rpx;
+    line-height: 46rpx;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color:#fff;
+
+}
+
+.home-position {
+    background-color:rgba(0,0,0,0.20);
+    border-radius:10rpx;
+    padding:0rpx 10rpx;
+
+}
+
+.home-inputxt {
+    float: right;
+    width: 58%;
+    height: 58rpx;
+    background: rgba(200,200,200,0.5);
+    border-radius: 30rpx;
+    margin-right: 4%;
+    position: relative;
+}
+
+.home-downicon {
+    vertical-align: top;
+    margin-top: 2rpx;
+    margin-left: 16rpx;
+}
+
+.home-inputxt input {
+    padding-left: 45rpx;
+}
+
+
+
+
+
+
+
+.body {
+    background: #fff;
+}
+
+.body-top .caption {
+    padding: 20rpx 20rpx 10rpx 20rpx;
+    line-height: 48rpx;
+    display: flex;
+}
+
+.body-top .caption .title {
+    color: #06c1ae;
+}
+
+.body-top .caption .desc {
+    font-size: 24rpx;
+    color: #aaa;
+    text-indent: 20rpx;
+    flex: 1;
+}
+
+.body-top .caption .more {
+    font-size: 24rpx;
+    color: #666;
+    margin-right: 6rpx;
+    margin-left: 6rpx;
+    padding: 0 10rpx;
+    border-radius: 10rpx;
+}
+
+.body-top .caption .more .iconfont {
+    font-size: 22rpx;
+    color: #aaa;
+}
+
+.body-top .best {
+    display: flex;
+    padding: 10rpx 0 10rpx 24rpx;
+    margin-bottom: 14rpx;
+}
+
+.body-top .best .user {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    background: #f7f7f7;
+    padding: 20rpx;
+    border-radius: 10rpx;
+    position: relative;
+}
+
+.body-top .best .golden {
+    margin-right: 10rpx;
+}
+
+.body-top .best .user .medal {
+    position: absolute;
+    top: -4rpx;
+    left: 0;
+    font-size: 40rpx;
+}
+
+.body-top .best .golden .medal {
+    color: #ffd700;
+}
+
+.body-top .best .silver .medal {
+    color: #c0c0c0;
+}
+
+.body-top .best .user avatar {
+    width: 60rpx;
+    height: 60rpx;
+    background: #ddd;
+    margin-right: 10rpx;
+    border-radius: 30rpx;
+}
+
+.body-top .best .user .profile {
+    margin-right: 10rpx;
+    width: 144rpx;
+    font-size: 28rpx;
+}
+
+.body-top .best .user .profile .school {
+    color: #aaa;
+    font-size: 24rpx;
+}
+
+.body-top .best .user .income view {
+    color: #ccc;
+    font-size: 22rpx;
+    text-align: center;
+}
+
+.body-top .best .user .income .money {
+    color: #ff9800;
+    font-size: 26rpx;
+}
+
+.body-top .best .arrow {
+    color: #aaa;
+    font-size: 22rpx;
+    width: 46rpx;
+    height: 108rpx;
+    line-height: 108rpx;
+    text-indent: 8rpx;
+}
+
+.body-list .item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0 24rpx 28rpx;
+}
+
+.body-list .item .left {
+    flex: 1;
+    margin-right: 20rpx;
+}
+
+.body-list .item .content {
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+
+.body-list .item .content .secret {
+    position: static;
+    background: #06c1ae;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 40rpx;
+    width: 40rpx;
+    height: 40rpx;
+    display: inline-block;
+    text-align: center;
+    font-size: 28rpx;
+    margin-right: 4rpx;
+}
+
+.body-list .item .type {
+    color: #fff;
+    background: #ddd;
+    font-size: 24rpx;
+    padding: 2rpx 10rpx;
+    border-radius: 4rpx;
+    margin-right: 10rpx;
+}
+
+.body-list .item .desc {
+    font-size: 26rpx;
+    color: #aaa;
+    margin-top: 16rpx;
+    line-height: 40rpx;
+}
+
+.body-list .item .time {
+    font-size: 22rpx;
+    color: #ccc;
+    margin-right: 20rpx;
+}
+
+.body-list .item .right {
+    padding-right: 30rpx;
+}
+
+.body-list .item .right view {
+    font-size: 24rpx;
+    color: #666;
+    text-align: center;
+}
+
+.body-list .item .right .money {
+    color: #ff9800;
+    font-size: 30rpx;
+}
+
+.body-list .item .right button {
+    background: #06c1ae;
+    border-radius: 10rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    width: 160rpx;
+    font-size: 32rpx;
+    margin-top: 10rpx;
+    padding: 0;
+}
+
+.body-list .item .right button.disabled {
+    background: #d0d0d0;
+    color: #f7f7f7;
+}
+
+.body-list .item .right button.accepted {
+    border: none;
+    background: #f0f0f0;
+    color: #888;
+}
+
+.body-list .item .right button.finished {
+    border: none;
+    background: none;
+    color: #888;
+}
+
+.empty {
+    display: flex;
+    padding: 20rpx 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    background: #f7f7f7;
+    font-size: 24rpx;
+}
+
+.empty .iconfont {
+    font-size: 30rpx;
+    margin-right: 10rpx;
+}
+
+.modal-switch-school view {
+    font-size: 26rpx;
+}
+
+.modal-switch-school image {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10rpx;
+}
+
+.modal-switch-school .school {
+    color: #06c1ae;
+    padding: 20rpx 0 10rpx 0;
+    font-size: 32rpx;
+}
+
+.dialog-ad {
+    position: relative;
+}
+
+.dialog-ad image {
+    width: 100%;
+    height: 100%;
+}
+
+.dialog-ad .disappear {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8rpx;
+    opacity: 0.6;
+    font-size: 24rpx;
+    color: #444;
+    line-height: 26rpx;
+}
+
+.dialog-ad .disappear .iconfont {
+    margin-right: 6rpx;
+    font-size: 26rpx;
+    color: #444;
+}
+
+.dialog-coupon {
+    width: 594rpx;
+    height: 652rpx;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog-coupon image {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.dialog-coupon .title,.dialog-coupon .content,.dialog-coupon navigator {
+    position: relative;
+    z-index: 3;
+}
+
+.dialog-coupon .title {
+    font-size: 50rpx;
+    font-weight: 700;
+    color: #fee63c;
+    margin-top: 24rpx;
+}
+
+.dialog-coupon .content {
+    display: flex;
+    margin-top: 210rpx;
+    height: 188rpx;
+    width: 360rpx;
+    text-align: center;
+}
+
+.dialog-coupon .content .left {
+    width: 64rpx;
+    height: 76rpx;
+    color: #a32900;
+    font-size: 30rpx;
+    opacity: 0.8;
+    line-height: 40rpx;
+    margin-top: 56rpx;
+    border-right: 1rpx solid #e4b72a;
+    padding: 0 30rpx;
+}
+
+.dialog-coupon .content .money {
+    flex: 1;
+    line-height: 188rpx;
+    font-size: 80rpx;
+    color: #a32900;
+    font-weight: 700;
+}
+
+.dialog-coupon navigator {
+    background: #fff;
+    line-height: 90rpx;
+    border-radius: 20rpx;
+    margin-top: 32rpx;
+    padding: 0 60rpx;
+    font-size: 36rpx;
+    font-weight: 700;
+    color: #de3121;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 20;
+}
+
+.overlay .notice {
+    margin: 164rpx 40rpx 0 40rpx;
+    color: #fff;
+    text-align: center;
+}
+
+.overlay .info {
+    border: 2rpx dashed #ff9800;
+    height: 230rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay .info view {
+    font-size: 36rpx;
+    margin-bottom: 30rpx;
+}
+
+.overlay .info text {
+    font-size: 26rpx;
+    background: #666;
+    padding: 2rpx 10rpx;
+    border-radius: 16rpx;
+}
+
+.overlay button {
+    border: 1rpx solid #fff;
+    display: inline-block;
+    border-radius: 8rpx;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 0 72rpx;
+    margin-top: 200rpx;
+}
+
+.hydlzhezhao {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 998;
+}
+
+.hydl {
+    z-index: 0;
+    width: 94%;
+    box-sizing: border-box;
+    margin: 0 3%;
+    height: 300rpx;
+    margin-top: -100rpx;
+    font-size: 30rpx;
+    background: #fff;
+    border-radius: 20rpx;
+    padding: 50rpx 30rpx 30rpx;
+    text-align: center;
+}
+
+.hydltt {
+    font-size: 35rpx;
+    font-weight: bold;
+}
+
+.hydlnr {
+    margin-top: 20rpx;
+    font-size: 26rpx;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.hydlbd {
+    width: 70%;
+    left: 50%;
+    top: 15%;
+    position: fixed;
+    transform: translate(-50%,0);
+    border-radius: 10px;
+    z-index: 999;
+    padding: 0rpx;
+}
+
+.hydlimg {
+    width: 100%;
+    height: 400rpx;
+    z-index: 888;
+}
+
+.hydlqueren {
+    position: relative;
+    height: 80rpx;
+    width: 60%;
+    font-size: 30rpx;
+    line-height: 80rpx;
+    text-align: center;
+    color: white;
+    background: #34aaff;
+    border-radius: 50rpx;
+    margin-top: 60rpx;
+}
+
+button:active {
+    color: rgba(255,255,255,0.6);
+    opacity: 0.6;
+}
+
+.hydlzhezhao {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 998;
+}
+
+.kefu {
+    position: fixed;
+    right: 20rpx;
+    bottom: 280rpx;
+    width: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    background: black;
+    opacity: 0.6;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 27rpx;
+    padding: 0;
+}
+
+.hddb {
+    position: fixed;
+    right: 20rpx;
+    bottom: 170rpx;
+    width: 80rpx;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    background: black;
+    opacity: 0.6;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 27rpx;
+    padding: 0;
+}
+
+.hddb image {
+    width: 70rpx;
+    height: 70rpx;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}

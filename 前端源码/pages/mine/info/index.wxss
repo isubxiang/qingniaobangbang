@@ -1,0 +1,23 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.body {
+    background: #fff;
+    margin-top: 30rpx;
+}
+
+.body .avatar {
+    height: 140rpx;
+    line-height: 140rpx;
+}
+
+.body .avatar image {
+    width: 100rpx;
+    height: 100rpx;
+    background: #ddd;
+    margin-top: 20rpx;
+}
+
+.body .section {
+    height: 30rpx;
+    background: #f0f0f0;
+}

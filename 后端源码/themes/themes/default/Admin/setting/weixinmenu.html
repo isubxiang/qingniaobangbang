@@ -1,0 +1,224 @@
+<include  file='public:header'/>
+<style>
+.tu-left-td { width: 200px;}
+.profit{ text-align:center; color:#000; font-weight:bold; background:#ECECEC;}
+</style>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">微信</li>
+        <li class="li2">微信管理</li>
+        <li class="li2 li3">自定义菜单</li>
+    </ul>
+</div>
+<div class="main-cate">
+    <p class="attention"><span>注意：</span>新版自定义菜单，【Title】【Appid】【Pagepath】小程序跳转值，【Key】关键字回复值，【Url】菜单连接值必须是http或者https开头	</p>
+</div>  
+
+
+<style>
+.w380{width:380px !important;}
+.tudou-sc-add-text-name, .admin-sc-add-text-name{margin-right: 5px;}
+</style>
+
+       <div class="main-tudou-sc-add">
+    <div class="tu-table-box">
+        <form  target="x-frame" action="<{:U('setting/weixinmenu')}>" method="post">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF; text-align:center;">
+                <tr bgcolor="#f5f5f5" height="48px;" style="color:#333; font-size:16px; line-height:48px;">
+                    <td style="text-align: center;">项目</td>
+                    <td>名称</td>
+                    <td>类别</td>
+                    <td>Key</td>
+                    <td>Title</td>
+                    <td>Appid</td>
+                    <td>Pagepath</td>
+                    <td>Url</td>
+                </tr>
+                <tr bgcolor="#f1f1f1" style="font-size:14px; color:#545454; text-align:left; line-height:48px;">
+                
+                    <td align="center">BUTTON_1</td>
+                    <td  class="tu-right-td">
+                        <input class="tudou-sc-add-text-name w80" name="data[button][1][name]" type="text" value="<{$CONFIG['weixinmenu']['button'][1][name]|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                        <select name="data[button][1][types]" class="seleFl" id="<{$CONFIG['weixinmenu']['button'][1]['types']}>">
+                        	<option <eq name="CONFIG['weixinmenu']['button'][1]['types']" value="0">selected="selected"</eq>  value="0">请选择类别</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][1]['types']" value="1">selected="selected"</eq>  value="1">URL菜单链接</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][1]['types']" value="2">selected="selected"</eq>  value="2">关键词回复菜单</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][1]['types']" value="3">selected="selected"</eq>  value="3">小程序跳转</option>
+                        </select>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][1][key]" type="text" value="<{$CONFIG['weixinmenu']['button'][1]['key']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][1][title]" type="text" value="<{$CONFIG['weixinmenu']['button'][1]['title']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][1][appid]" type="text" value="<{$CONFIG['weixinmenu']['button'][1]['appid']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w200" name="data[button][1][pagepath]" type="text" value="<{$CONFIG['weixinmenu']['button'][1]['pagepath']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w300" name="data[button][1][url]" type="text" value="<{$CONFIG['weixinmenu']['button'][1]['url']|default=""}>"/>
+                    </td>
+                </tr>
+                <for start="1" end="6">
+                    <tr style="font-size:14px; color:#545454; text-align:center; line-height:48px;">
+                        <td>子菜单<{$i}></td>
+                        <td class="tu-right-td">
+                            <input class="tudou-sc-add-text-name w80" name="data[child][1][<{$i}>][name]" type="text" value="<{$CONFIG['weixinmenu']['child'][1][$i]['name']|default=""}>"  />
+                        </td>
+                        
+                        <td class="tu-right-td">
+                            <select name="data[child][1][<{$i}>][types]" class="seleFl" id="<{$CONFIG['weixinmenu']['child'][1][$i]['types']}>">
+                            <option <eq name="CONFIG['weixinmenu']['child'][1][$i]['types']" value="0">selected="selected"</eq>  value="0">请选择类别</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][1][$i]['types']" value="1">selected="selected"</eq>  value="1">URL菜单链接</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][1][$i]['types']" value="2">selected="selected"</eq>  value="2">关键词回复菜单</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][1][$i]['types']" value="3">selected="selected"</eq>  value="3">小程序跳转</option>
+                        </select>
+                        </td>
+                        <td class="tu-right-td">
+                         	<input class="tudou-sc-add-text-name w120" name="data[child][1][<{$i}>][key]" type="text" value="<{$CONFIG['weixinmenu']['child'][1][$i]['key']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w120" name="data[child][1][<{$i}>][title]" type="text" value="<{$CONFIG['weixinmenu']['child'][1][$i]['title']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w120" name="data[child][1][<{$i}>][appid]" type="text" value="<{$CONFIG['weixinmenu']['child'][1][$i]['appid']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w200" name="data[child][1][<{$i}>][pagepath]" type="text" value="<{$CONFIG['weixinmenu']['child'][1][$i]['pagepath']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w300" name="data[child][1][<{$i}>][url]" type="text" value="<{$CONFIG['weixinmenu']['child'][1][$i]['url']|default=""}>"/>
+                        </td>
+                    </tr>
+                </for>   
+                <tr bgcolor="#f1f1f1" style="font-size:14px; color:#545454; text-align:left; line-height:48px;">
+                    <td width="140" align="center">BUTTON_2</td>
+                    <td  class="tu-right-td">
+                        <input class="tudou-sc-add-text-name w80" name="data[button][2][name]" type="text" value="<{$CONFIG['weixinmenu']['button'][2][name]|default=""}>"  />
+                    </td>
+                    <td class="tu-right-td">
+                        <select name="data[button][2][types]" class="seleFl" id="<{$CONFIG['weixinmenu']['button'][2]['types']}>">
+                        	<option <eq name="CONFIG['weixinmenu']['button'][2]['types']" value="0">selected="selected"</eq>  value="0">请选择类别</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][2]['types']" value="1">selected="selected"</eq>  value="1">URL菜单链接</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][2]['types']" value="2">selected="selected"</eq>  value="2">关键词回复菜单</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][2]['types']" value="3">selected="selected"</eq>  value="3">小程序跳转</option>
+                        </select>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][2][key]" type="text" value="<{$CONFIG['weixinmenu']['button'][2]['key']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][2][title]" type="text" value="<{$CONFIG['weixinmenu']['button'][2]['title']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][2][appid]" type="text" value="<{$CONFIG['weixinmenu']['button'][2]['appid']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w200" name="data[button][2][pagepath]" type="text" value="<{$CONFIG['weixinmenu']['button'][2]['pagepath']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w300" name="data[button][2][url]" type="text" value="<{$CONFIG['weixinmenu']['button'][2]['url']|default=""}>"/>
+                    </td>
+                </tr>
+                <for start="1" end="6">
+                    <tr style="font-size:14px; color:#545454; text-align:center; line-height:48px;">
+                        <td>子菜单<{$i}></td>
+                        <td class="tu-right-td">
+                            <input class="tudou-sc-add-text-name w80" name="data[child][2][<{$i}>][name]" type="text" value="<{$CONFIG['weixinmenu']['child'][2][$i]['name']|default=""}>"  />
+                        </td>
+                        <td class="tu-right-td">
+                            <select name="data[child][2][<{$i}>][types]" class="seleFl" id="<{$CONFIG['weixinmenu']['child'][2][$i]['types']}>">
+                            <option <eq name="CONFIG['weixinmenu']['child'][2][$i]['types']" value="0">selected="selected"</eq>  value="0">请选择类别</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][2][$i]['types']" value="1">selected="selected"</eq>  value="1">URL菜单链接</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][2][$i]['types']" value="2">selected="selected"</eq>  value="2">关键词回复菜单</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][2][$i]['types']" value="3">selected="selected"</eq>  value="3">小程序跳转</option>
+                        </select>
+                        </td>
+                        <td class="tu-right-td">
+                         	<input class="tudou-sc-add-text-name w120" name="data[child][2][<{$i}>][key]" type="text" value="<{$CONFIG['weixinmenu']['child'][2][$i]['key']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w120" name="data[child][2][<{$i}>][title]" type="text" value="<{$CONFIG['weixinmenu']['child'][2][$i]['title']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w120" name="data[child][2][<{$i}>][appid]" type="text" value="<{$CONFIG['weixinmenu']['child'][2][$i]['appid']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w200" name="data[child][2][<{$i}>][pagepath]" type="text" value="<{$CONFIG['weixinmenu']['child'][2][$i]['pagepath']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w300" name="data[child][2][<{$i}>][url]" type="text" value="<{$CONFIG['weixinmenu']['child'][2][$i]['url']|default=""}>"/>
+                        </td>
+                    </tr>
+                </for>    
+                <tr bgcolor="#f1f1f1" style="font-size:14px; color:#545454; text-align:left; line-height:48px;">
+                    <td align="center">BUTTON_3</td>
+                    <td  class="tu-right-td">
+                        <input class="tudou-sc-add-text-name w80" name="data[button][3][name]" type="text" value="<{$CONFIG['weixinmenu']['button'][3][name]|default=""}>"  />
+                    </td>
+                    <td class="tu-right-td">
+                        <select name="data[button][3][types]" class="seleFl" id="<{$CONFIG['weixinmenu']['button'][3]['types']}>">
+                        	<option <eq name="CONFIG['weixinmenu']['button'][3]['types']" value="0">selected="selected"</eq>  value="0">请选择类别</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][3]['types']" value="1">selected="selected"</eq>  value="1">URL菜单链接</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][3]['types']" value="2">selected="selected"</eq>  value="2">关键词回复菜单</option>
+                            <option <eq name="CONFIG['weixinmenu']['button'][3]['types']" value="3">selected="selected"</eq>  value="3">小程序跳转</option>
+                        </select>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][3][key]" type="text" value="<{$CONFIG['weixinmenu']['button'][3]['key']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][3][title]" type="text" value="<{$CONFIG['weixinmenu']['button'][3]['title']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w120" name="data[button][3][appid]" type="text" value="<{$CONFIG['weixinmenu']['button'][3]['appid']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w200" name="data[button][3][pagepath]" type="text" value="<{$CONFIG['weixinmenu']['button'][3]['pagepath']|default=""}>"/>
+                    </td>
+                    <td class="tu-right-td">
+                         <input class="tudou-sc-add-text-name w300" name="data[button][3][url]" type="text" value="<{$CONFIG['weixinmenu']['button'][3]['url']|default=""}>"/>
+                    </td>
+                </tr>
+                <for start="1" end="6">
+                    <tr style="font-size:14px; color:#545454; text-align:center; line-height:48px;">
+                        <td>子菜单<{$i}></td>
+                        <td class="tu-right-td">
+                            <input class="tudou-sc-add-text-name w80" name="data[child][3][<{$i}>][name]" type="text" value="<{$CONFIG['weixinmenu']['child'][3][$i]['name']|default=""}>"  />
+                        </td>
+                        <td class="tu-right-td">
+                            <select name="data[child][3][<{$i}>][types]" class="seleFl" id="<{$CONFIG['weixinmenu']['child'][3][$i]['types']}>">
+                            <option <eq name="CONFIG['weixinmenu']['child'][3][$i]['types']" value="0">selected="selected"</eq>  value="0">请选择类别</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][3][$i]['types']" value="1">selected="selected"</eq>  value="1">URL菜单链接</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][3][$i]['types']" value="2">selected="selected"</eq>  value="2">关键词回复菜单</option>
+                            <option <eq name="CONFIG['weixinmenu']['child'][3][$i]['types']" value="3">selected="selected"</eq>  value="3">小程序跳转</option>
+                        </select>
+                        </td>
+                        <td class="tu-right-td">
+                         	<input class="tudou-sc-add-text-name w120" name="data[child][3][<{$i}>][key]" type="text" value="<{$CONFIG['weixinmenu']['child'][3][$i]['key']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w120" name="data[child][3][<{$i}>][title]" type="text" value="<{$CONFIG['weixinmenu']['child'][3][$i]['title']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w120" name="data[child][3][<{$i}>][appid]" type="text" value="<{$CONFIG['weixinmenu']['child'][3][$i]['appid']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w200" name="data[child][3][<{$i}>][pagepath]" type="text" value="<{$CONFIG['weixinmenu']['child'][3][$i]['pagepath']|default=""}>"/>
+                        </td>
+                        <td class="tu-right-td">
+                             <input class="tudou-sc-add-text-name w300" name="data[child][3][<{$i}>][url]" type="text" value="<{$CONFIG['weixinmenu']['child'][3][$i]['url']|default=""}>"/>
+                        </td>
+                    </tr>
+                </for>    
+            </table>
+            <div class="sm-qr-tu"><input type="submit" value="确认添加" class="sm-tudou-btn-input" /></div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>      

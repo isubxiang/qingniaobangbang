@@ -1,0 +1,15 @@
+<view catchtouchmove="_onBeforeScroll" class="dialog" hidden="{{hidden}}">
+    <view class="dialog-container">
+        <view bindtap="_onMaskClose" class="dialog-mask" style="opacity:{{maskOpacity}}"></view>
+        <view class="container" style="background:{{background}};border-radius:{{borderRadius+'rpx'}}">
+            <view class="close{{closeButtonPosition?' close-'+closeButtonPosition:''}}">
+                <text bindtap="_onClose" class="iconfont icon-round_close_light" style="color:{{closeButtonColor}}"></text>
+            </view>
+            <view class="header" wx:if="{{title&&title.length}}">{{title}}</view>
+            <view class="body">
+                <slot></slot>
+            </view>
+            <view class="footer"></view>
+        </view>
+    </view>
+</view>

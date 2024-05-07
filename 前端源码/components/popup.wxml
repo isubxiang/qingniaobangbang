@@ -1,0 +1,15 @@
+<view catchtouchmove="_onBeforeScroll" class="popup" hidden="{{!_display}}">
+    <view bindtap="_onMaskCancel" class="popup-mask" hidden="{{hidden}}" style="opacity:{{maskOpacity}}"></view>
+    <view animation="{{_popupAnimation}}" class="popup-container">
+        <view class="container">
+            <view class="bar" wx:if="{{showTitle}}">
+                <view bindtap="_onCancel" class="side cancel" wx:if="{{showCancelButton}}">取消</view>
+                <text class="title">{{title}}</text>
+                <view bindtap="_onConfirm" class="side confirm" wx:if="{{showConfirmButton}}">确定</view>
+            </view>
+            <view class="body">
+                <slot></slot>
+            </view>
+        </view>
+    </view>
+</view>

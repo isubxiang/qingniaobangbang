@@ -1,0 +1,38 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">模版管理</li>
+        <li class="li2">短信模版</li>
+        <li class="li2 li3">编辑模板</li>
+    </ul>
+</div>
+<p class="attention"><span>注意：</span>编辑短信模板，常用变量，站点名称：{sitename}，站点电话：{tel}</p>
+<form target="x-frame" action="<{:U('sms/edit',array('sms_id'=>$detail['sms_id']))}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">标签：</td>
+                    <td class="tu-right-td"><input type="text" name="data[sms_key]" value="<{$detail.sms_key}>" class="tudou-manageInput" />
+                    <code>这里填写您开发模板过程中的标签，请按照规则填写，sms_控制器名称_方法名称_通知对象，比如：sms_fram_order_user</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">说明：</td>
+                    <td class="tu-right-td"><input type="text"  name="data[sms_explain]" value="<{$detail.sms_explain}>" class="tudou-manageInput" />
+					<code>短信模板的说明，比如填写农家乐用户下单通知</code>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">模版：</td>
+                    <td class="tu-right-td"><textarea  name="data[sms_tmpl]" cols="80" rows="5" ><{$detail.sms_tmpl}></textarea>
+                    <code>模板内容，最后必须带上签名，格式：【{sitename}】</code>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确定编辑" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

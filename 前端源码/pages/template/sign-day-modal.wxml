@@ -1,0 +1,14 @@
+<template name="sign-day-modal">
+    <view catchtouchmove="preventTouchMove" class="modal-auth-mask" wx:if="{{signModalShow}}">
+        <view class="modal-sign-content">
+            <image class="modal-sign-image" mode="aspectFit" src="/img/sing-day.png"></image>
+            <view class="modal-sign-tip">
+                <view class="modal-sign-award">阳光 +{{signAward}}</view>
+                签到成功
+            </view>
+            <view class="modal-sign-btn-wrapper">
+                <image bindtap="signCancel" class="modal-cancel-image" src="/img/cancel.png"></image>
+            </view>
+        </view>
+    </view>
+</template>

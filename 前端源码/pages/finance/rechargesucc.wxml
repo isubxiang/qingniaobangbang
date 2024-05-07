@@ -1,0 +1,29 @@
+<view class="page">
+    <view class="weui-form-preview">
+        <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label ">金额</view>
+                <view class="weui-form-preview__value">¥{{amount}}</view>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">状态</view>
+                <view class="weui-form-preview__value">充值成功</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">时间</view>
+                <view class="weui-form-preview__value">{{completeTimeStr}}</view>
+            </view>
+            <view class="weui-form-preview__item">
+                <view class="weui-form-preview__label">交易单号</view>
+                <view class="weui-form-preview__value">{{tradeNo}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="recharge-confirm-btn-box">
+        <button bindtap="confirmSucc" class="weui-btn recharge-confirm-btn" type="primary">
+            确定
+        </button>
+    </view>
+</view>

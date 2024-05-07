@@ -1,0 +1,82 @@
+<include  file='public:header'/>    
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">系统</li>
+        <li class="li2">管理员管理</li>
+        <li class="li2 li3">角色管理</li>
+    </ul>
+</div>
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>每个角色有对应的权限，默认超级管理员角色不能删除！</p>
+    <div class="tudou-js-nr" style="  border-top: 1px solid #e1e6eb;">
+        <div class="tu-select-nr">
+            <div class="left">
+                <{:BA('role/create','','添加角色')}>
+            </div>
+            <form method="post" action="<{:U('role/index')}>">
+                <div class="right">
+                	<div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                        
+                            
+                            <label>
+                                <span>管理员类型：</span>
+                                <select class="select w120" name="type">
+                                    <option <eq name="type" value="0">selected="selected"</eq> value="0">请选择类型</option>
+                                    <option <eq name="type" value="1">selected="selected"</eq>  value="1">系统管理员</option>
+                                    <option <eq name="type" value="2">selected="selected"</eq>  value="2">分站管理员</option>
+                                </select>
+                            </label>
+                            
+                             <label>
+                                    <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                    <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                    <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                                </label>
+                             <label>
+                             
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text"/>
+                            <input type="submit" value="  搜索"  class="inpt-button-tudou" />
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td>角色ID</td>
+                    <td>类型</td>
+                    <td>角色名称</td>
+                    <td>学校ID</td>
+                    <td>学校名称</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><{$var.role_id}></td>
+                        <td>
+                        	<eq name="var.type" value="0">当前角色有误请编辑</eq>
+                            <eq name="var.type" value="1">系统管理员</eq>
+                            <eq name="var.type" value="2">分站管理员</eq>
+                        </td>
+                        <td><{$var.role_name}></td>
+                        <td><{$var.school_id}></td>
+                        <td><{$var.school.Name}></td>
+                        <td>
+                        	<eq name='var.role_id' value="1">
+                            	系统管理员不能编辑
+                            <else/>
+                            	<{:BA('role/edit',array("role_id"=>$var["role_id"]),'编辑','','tu-dou-btn')}>
+                                <{:BA('role/auth',array("role_id"=>$var['role_id']),'角色权限','','tu-dou-btn')}>
+                                <{:BA('role/delete',array("role_id"=>$var['role_id']),'删除','act','tu-dou-btn')}>
+                            </eq>
+                    	</td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+    </div>
+</div>
+<include  file='public:footer'/>       

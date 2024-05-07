@@ -1,0 +1,45 @@
+<view class="container">
+    <view class="header">
+        <view class="rule">{{model.getDeliveryDepositName}}</view>
+        <view class="circle">
+            <view class="value"></view>
+            <view class="money-ge">{{model.deposit}}</view>
+        </view>
+    </view>
+
+
+    <view class="body">
+        <view class="section">保证金详情</view>
+
+        <view class="item" wx:if="{{model.is_deposit==0}}">
+            <view bindtap="userDepositPay" class="empty primary">缴纳保证金 {{model.deposit2}} 元</view>
+        </view>
+
+
+        <view class="item" wx:if="{{model.is_deposit==1}}">
+            <view class="empty">解冻后保证金会转移到您余额中</view>
+        </view>
+        <view class="item" wx:if="{{model.is_deposit==1}}">
+            <view bindtap="userDepositThaw" class="empty primary">解冻保证金</view>
+        </view>
+
+
+        <view class="item" wx:if="{{model.is_deposit==2}}">
+            <view class="empty">解冻保证金审核中</view>
+        </view>
+
+        <view class="item" wx:if="{{model.is_deposit==3}}">
+            <view class="empty">已解冻</view>
+        </view>
+
+        <view class="item" wx:if="{{model.is_deposit==4}}">
+            <view class="empty">解冻失败</view>
+        </view>
+
+       
+    </view>
+</view>
+
+
+
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

@@ -1,0 +1,79 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">支付设置</li>
+        <li class="li2">支付方式</li>
+        <li class="li2 li3">PayPal安装</li>
+    </ul>
+</div>
+<form target="x-frame" action="<{:U('payment/install',array('payment_id'=>$detail['payment_id']))}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">支付方式:</td>
+                    <td class="tu-right-td">
+                        <img src="__PUBLIC__/images/<{$detail.logo}>" />
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">支付方式介绍:</td>
+                    <td class="tu-right-td" style="font-size: 14px;">
+                        <{$detail.contents}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">用户名：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[paypal_ec_username]" value="<{$detail.setting.paypal_ec_username}>"  class="tudou-manageInput" />
+                      <code>PayPal的用户名 <a href="https://www.paypal.com/" target="_blank">PayPal官网</a></code>
+                    </td>
+                </tr>  
+                <tr>
+                    <td class="tu-left-td">密码：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[paypal_ec_password]" value="<{$detail.setting.paypal_ec_password}>"  class="tudou-manageInput" />
+                        <code>PayPal的密码</code>
+                    </td>
+                </tr>  
+              
+                <tr>
+                    <td class="tu-left-td">签名：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[paypal_ec_signature]" value="<{$detail.setting.paypal_ec_signature}>"  class="tudou-manageInput" />
+                        <code>PayPal申请支付后的签名</code>
+                    </td>
+                </tr>  
+              <tr>
+                    <td class="tu-left-td">支付货币：</td>
+                    <td class="tu-right-td">
+                              <select name="data[paypal_ec_currency]" class="tudou-sc-add-text-name sogn">
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="AUD">selected="selected"</eq> value="AUD">澳元</option>
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="CAD">selected="selected"</eq> value="CAD">加元</option>
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="EUR">selected="selected"</eq> value="EUR">欧元</option>
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="GBP">selected="selected"</eq> value="GBP">英镑</option>
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="JPY">selected="selected"</eq> value="JPY">日元</option>
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="USD">selected="selected"</eq> value="USD" >美元</option>
+                                  <option <eq name="detail.setting.paypal_ec_currency" value="HKD">selected="selected"</eq> value="HKD">港元</option>
+                              </select>
+							<code>网站支持的货币种类，必须选择，否则无法支付</code>
+                    </td>
+                </tr>  
+                 <tr>
+                    <td class="tu-left-td">安全码：</td>
+                     <td class="tu-right-td">
+                          <input type="text" name="data[safety]" value="******"  class="tudou-sc-add-text-name w360" />
+                          <code>输入你的网站安全码，输入错误会导致修改失败哦</code>
+                    </td>
+                </tr>
+                
+                
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确定安装" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+
+
+

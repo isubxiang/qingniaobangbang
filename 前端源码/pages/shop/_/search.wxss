@@ -1,0 +1,144 @@
+page {
+    background: #FAFAFA;
+}
+
+.mt10 {
+    margin-top: 20rpx;
+}
+.ml10 {
+    margin-left: 20rpx;
+}
+.mr10 {
+    margin-right: 20rpx;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+.clear {
+height: 0;
+line-height: 0;
+font-size: 0;
+clear: both;
+}
+
+
+.search_box {
+    padding: 10rpx 25rpx;
+    position: fixed;
+    width: 750rpx;
+    box-sizing: border-box;
+    border-bottom: 1rpx solid #EDEDED;
+}
+
+.search_box .box {
+    height: 68rpx;
+    width: 100%;
+}
+
+.searchIcon {
+    float: left;
+    width: 90rpx;
+    height: 68rpx;
+    background: #EDEDED;
+    border-radius: 8rpx 0 0 8rpx;
+}
+
+.searchIcon image {
+    width: 25rpx;
+    height: 28rpx;
+    margin-left: 40rpx;
+    margin-top: 20rpx;
+}
+
+.search_box .box .text {
+    background: #EDEDED;
+    border-radius: 0 8rpx 8rpx 0;
+    height: 68rpx;
+    font-size: 28rpx;
+    float: left;
+    line-height: 68rpx;
+    color: #333;
+    width: 610rpx;
+}
+
+.search_box .box .btn {
+    background: none;
+    float: right;
+    font-size: 32rpx;
+    color: #333;
+    width: 90rpx;
+    text-align: right;
+    height: 68rpx;
+    line-height: 68rpx;
+    padding: 0;
+}
+
+.search_box .box .btn:after {
+    border: 0 none;
+}
+
+.search_contBox {
+    padding-top: 92rpx;
+    background: #ffffff;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.search_contBox .search {
+    margin: 20rpx 0 30rpx;
+}
+
+.search_contBox .bt {
+    padding: 0 20rpx;
+    line-height: 48rpx;
+}
+
+.search_contBox .bt .ico {
+    width: 28rpx;
+    height: 28rpx;
+    margin-right: 12rpx;
+    margin-top: 10rpx;
+}
+
+.search_contBox .bt .fr {
+    width: 36rpx;
+}
+
+.search_contBox .hot_link {
+    height: 70rpx;
+    line-height: 70rpx;
+    background: #F7F7F7;
+    border-radius: 6rpx;
+    display: inline-block;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+    color: #888;
+    letter-spacing: 2rpx;
+}
+
+.search_contBox .pub_list {
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.search_contBox .his_link {
+    height: 70rpx;
+    line-height: 70rpx;
+    background: #F7F7F7;
+    border-radius: 6rpx;
+    display: inline-block;
+    padding: 0 20rpx;
+    font-size: 28rpx;
+    color: #888;
+    letter-spacing: 2rpx;
+}
+
+.tyTitle {
+    font-size: 28rpx;
+    color: #333;
+}

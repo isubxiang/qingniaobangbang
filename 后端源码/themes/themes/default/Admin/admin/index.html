@@ -1,0 +1,122 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">系统</li>
+        <li class="li2">管理员管理</li>
+        <li class="li2 li3">管理员列表</li>
+    </ul>
+</div>
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>我们建议管理员密码为：大写字母+小写字母+数字或者标点符号组合，每个角色有对应的权限，默认超级管理员角色不能删除！</p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr">
+            <div class="left">
+            	<{:BA('admin/create','','添加管理员')}>
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('admin/index')}>">
+                 <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                        
+                             <label>
+                                    <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                    <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                    <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                                </label>
+                             <label>
+                        
+                        	<label>
+                                <span>管理员类型：</span>
+                                <select class="select w120" name="type">
+                                    <option <eq name="type" value="0">selected="selected"</eq> value="0">请选择类型</option>
+                                    <option <eq name="type" value="1">selected="selected"</eq>  value="2">系统管理员</option>
+                                    <option <eq name="type" value="2">selected="selected"</eq>  value="3">分站管理员</option>
+                                </select>
+                            </label>
+                			<label>
+                                <span>冻结状态：</span>
+                                <select class="select w120" name="is_username_lock">
+                                    <option <eq name="is_username_lock" value="999">selected="selected"</eq> value="999">请选择</option>
+                                    <option <eq name="is_username_lock" value="0">selected="selected"</eq>  value="0">未冻结</option>
+                                    <option <eq name="is_username_lock" value="1">selected="selected"</eq>  value="1">已冻结</option>
+                                </select>
+                            </label>
+                            <label>
+                                <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>"/>
+                                <input type="text" name="nickname" id="nickname"  value="<{$nickname}>" class="text"/>
+                                <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择绑定会员</a>
+                            </label>
+                            </div>
+        				</div> 
+                    <input type="text"  class="tu-inpt-text" name="keyword" value="<{$keyword}>"/>
+                    <input type="submit" value="  搜索"  class="inpt-button-tudou" />
+                </form>
+            </div>
+        </div>
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50">ID</td>
+                        <td>类型</td>
+                        <td>用户名</td>
+                        <td>绑定会员ID</td>
+                        <td>绑定会员昵称</td>
+                        <td>学校ID</td>
+                    	<td>学校名称</td>
+                        <td>角色</td>
+                        <td>手机</td>
+                        <td>创建时间</td>
+                        <td>创建IP</td>
+                        <td>最后登录时间</td>
+                        <td>最后登录IP</td>
+                        <td>操作</td>   
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                        	<php>
+                            	$Role = D('Role')->find($var['role_id']);
+                            </php>
+                            <td><{$var.admin_id}></td>
+                            <td>
+                            	<eq name="var.type" value="0">管理员错误</eq>
+                                <eq name="var.type" value="1">系统管理员</eq>
+                                <eq name="var.type" value="2">分站管理员</eq>
+                                <eq name="var.type" value="2">
+                                    <if condition="$var.city_id"> <{$var['city']['name']}></if>
+                                    <if condition="$var.area_id"> <{$var['area']['area_name']}></if>
+                                    <if condition="$var.business_id"><{$var['business']['business_name']}></if>
+                                </eq>
+                            </td>
+                            <td><{$var.username}></td>
+                            <td><{$var.user_id}></td>
+                            <td><{$var.user.nickname}></td>
+                            <td><{$var.school_id}></td>
+                        	<td><{$var.school.Name}></td>
+                            <td><{$Role.role_name}></td>
+                            <td><{$var.mobile}></td>
+                            <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                            <td><{$var.create_ip}>(<{$var.create_ip_area}>)</td>
+                            <td><{$var.last_time|date="Y-m-d H:i:s",###}></td>
+                            <td><{$var.last_ip}>(<{$var.last_ip_area}>)</td>
+                            <td>
+                                <eq name="var.is_username_lock" value="0"> 
+                                <{:BA('admin/is_username_lock',array("admin_id"=>$var["admin_id"]),'冻结','act','tu-dou-btn')}>
+                                <else/>
+                                <{:BA('admin/is_username_lock',array("admin_id"=>$var["admin_id"]),'解冻','act','tu-dou-btn')}>
+                                </eq>
+                                
+                                <{:BA('admin/edit',array("admin_id"=>$var["admin_id"],'p'=>$p),'编辑','','tu-dou-btn')}>
+                                <{:BA('admin/delete',array("admin_id"=>$var["admin_id"]),'删除','act','tu-dou-btn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+
+                </table>
+                <{$page}>
+            </div>
+        </form>
+
+    </div>
+</div>
+<include  file='public:footer'/>       

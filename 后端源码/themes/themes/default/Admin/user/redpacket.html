@@ -1,0 +1,87 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">会员管理</li>
+        <li class="li2">会员红包</li>
+        <li class="li2 li3">会员红包列表</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里是会员红包列表，可删除可添加，如果需要注册送红包在红包配置里面设置</p>
+    <div class="tudou-js-nr">
+    
+    
+        <div class="tu-select-nr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('user/redpacketPublish',array('school_id'=>$detail['school_id'],'date'=>$date),'添加红包')}>
+                <{:BA('user/redpacket',array('school_id'=>$detail['school_id']),'刷新本页','','',600,360)}>
+            </div>
+            <form method="post" action="<{:U('user/redpacket',array('school_id'=>$detail['school_id']))}>">
+                <div class="right">
+                     <div class="seleK">
+                         <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150"/>
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150"/>
+                    	</label>
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>" />
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>"   class="text " />
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label>
+                        <input type="submit" value="  搜索"  class="inpt-button-tudou"/>
+                    </div>
+                </div>
+           </form>
+        </div>
+ 
+ 
+ 
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="redpacket_id" /></td>
+                        <td class="w50">ID</td>
+                        <td>会员ID</td>
+                        <td>会员昵称</td>
+                        <td>红包金额</td>
+                        <td>红包备注</td>
+                        <td>使用状态</td>
+                        <td>使用订单ID</td>
+                        <td>添加时间</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_redpacket_id" type="checkbox" name="redpacket_id[]" value="<{$var.redpacket_id}>"/></td>
+                            <td><{$var.redpacket_id}></td>
+                            <td><{$var.user_id}></td>
+                            <td><{$var.user.nickname}></td>
+                            <td style="color:#F00"> &yen; <{:round($var['money']/100,2)}> 元</td>
+                            <td><{$var.info}></td>
+                            <td><eq name="var.is_used" value="0">未使用<else/>已使用</eq></td>
+                            <td><{$var.running_id}></td>
+                            <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                            <td>
+                                <{:BA('user/redpacketPublish',array("redpacket_id"=>$var["redpacket_id"]),'编辑','','tu-dou-btn')}>
+                                <{:BA('user/redpacketDelete',array("redpacket_id"=>$var["redpacket_id"]),'删除','act','tu-dou-btn')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr">
+                <div class="left">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       
+

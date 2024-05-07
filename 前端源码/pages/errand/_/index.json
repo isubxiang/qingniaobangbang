@@ -1,0 +1,11 @@
+{
+    "navigationBarTitleText": "青鸟帮帮",
+    "backgroundColor": "#06c1ae",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "light",
+    "component": true,
+    "usingComponents": {
+        "dialog": "/components/dialog",
+        "avatar": "/components/avatar"
+    }
+}

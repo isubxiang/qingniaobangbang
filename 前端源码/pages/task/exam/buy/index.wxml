@@ -1,0 +1,30 @@
+<import src="../../../template/load-tmpl.wxml"></import>
+<scroll-view bindscrolltolower="scrollLower" scrollY="true" style="height:{{scrollHeight}}px;">
+    <block wx:for="{{examList}}" wx:key="id">
+        <view bindtap="chooseItem" class="cha-box cha-title" data-id="{{item.id}}" data-index="{{index}}" data-type="{{item.type}}" wx:if="{{item.type==1||item.type==2}}">
+            <view>
+                <view class="">
+                    <text class="que-list-title ms-nav-mn">{{item.name}}</text>
+                </view>
+                <view class="que-list-bottom">
+                    <view class="ms-nav-content">购买时间：{{item.createTimeStr}}</view>
+                </view>
+            </view>
+        </view>
+        <view bindtap="chooseExam" class="cha-box buy-padding" data-id="{{item.id}}" data-index="{{index}}" data-type="{{item.type}}" wx:else>
+            <view class="cha-title buy-title-padding">
+                <view class="cha-title-text">
+                    <view class="ms-nav-mn">{{item.name}}</view>
+                    <view class="ms-nav-content">购买时间：{{item.createTimeStr}}</view>
+                </view>
+                <image class="cha-img" src="{{item.expand?'/assets/img/exam-top.png':'/assets/img/exam-bottom.png'}}"></image>
+            </view>
+            <view class="cha-body" wx:if="{{item.expand}}">
+                <view catchtap="choosePaper" class="que-list buy-list-padding" data-id="{{sitem.id}}" wx:for="{{item.subList}}" wx:for-item="sitem" wx:key="id">
+                    <view class="ms-info-text">{{sitem.paperName}}</view>
+                </view>
+            </view>
+        </view>
+    </block>
+    <template is="load-tmpl" data="{{reqInit:reqInit,loadProcess:loadProcess,dataSize:examList.length,loadingComplete:loadingComplete}}"></template>
+</scroll-view>

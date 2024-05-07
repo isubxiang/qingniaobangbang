@@ -1,0 +1,31 @@
+<view class="container">
+    <view class="header">
+        <view>{{fromFinish?'订单已完成':'订单评价'}}</view>
+        <text>请对跑腿人员的服务进行评价</text>
+    </view>
+    <view class="body">
+        <form bindsubmit="onAppraiseSubmit" reportSubmit="true">
+            <view class="score">
+                <view class="stars">
+                    <text bindtap="onStarTap" class="iconfont icon-star{{score>0?'_fill':''}}" data-index="0"></text>
+                    <text bindtap="onStarTap" class="iconfont icon-star{{score>1?'_fill':''}}" data-index="1"></text>
+                    <text bindtap="onStarTap" class="iconfont icon-star{{score>2?'_fill':''}}" data-index="2"></text>
+                    <text bindtap="onStarTap" class="iconfont icon-star{{score>3?'_fill':''}}" data-index="3"></text>
+                    <text bindtap="onStarTap" class="iconfont icon-star{{score>4?'_fill':''}}" data-index="4"></text>
+                </view>
+                <text class="text">{{score==0?'未评价':score+'星'+(score==1?'差评':score==5?'好评':'中评')}}</text>
+            </view>
+            <view class="content">
+                <textarea bindblur="onAppraiseContentChanged" bindconfirm="onAppraiseContentChanged" placeholder="输入评价内容"></textarea>
+                <view class="labels">
+                    <block wx:for="{{[0,1,2]}}" wx:for-index="i" wx:for-item="n" wx:key="i">
+                        <text bindtap="onAppraiseLabelTap" class="item {{i==0?'merit':i==1?'common':'fault'}}{{appraiseLabelsGroup==i&&util.arrayIndexOf(appraiseLabelsIndex,index)>=0?' checked':''}}{{appraiseLabelsGroup>=0&&appraiseLabelsGroup!=i?' disabled':''}}" data-group="{{i}}" data-index="{{index}}" wx:for="{{appraiseLabels[i]}}" wx:key="index">{{item}}<text class="iconfont icon-check" wx:if="{{appraiseLabelsGroup==i&&util.arrayIndexOf(appraiseLabelsIndex,index)>=0}}"></text>
+                        </text>
+                    </block>
+                </view>
+                <button formType="submit" type="primary">提交评价</button>
+            </view>
+        </form>
+    </view>
+</view>
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

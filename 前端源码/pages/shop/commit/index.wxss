@@ -1,0 +1,393 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.page-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    opacity: 0.01;
+    z-index: 1;
+}
+
+.header {
+    margin: 20rpx;
+    background: #fff;
+    border-radius: 10rpx;
+}
+
+.header .row {
+    display: flex;
+    font-size: 32rpx;
+    padding: 30rpx 0;
+}
+
+.header .info {
+    flex: 1;
+}
+
+.header view.iconfont {
+    font-size: 44rpx;
+    width: 100rpx;
+    text-align: center;
+    color: #666;
+}
+
+.header .caption {
+    font-size: 30rpx;
+}
+
+.header .addr view.iconfont {
+    margin-top: 20rpx;
+}
+
+.header .addr .contact {
+    color: #666;
+    font-size: 26rpx;
+    margin-top: 10rpx;
+}
+
+.header .addr .arrow {
+    margin-top: 36rpx;
+}
+
+.header .date view.iconfont {
+    font-size: 40rpx;
+}
+
+.header .date picker {
+    flex: 1;
+    color: #222;
+    font-size: 30rpx;
+}
+
+.header .date .picker {
+    width: 100%;
+    display: flex;
+}
+
+.header .date .picker .text {
+    flex: 1;
+}
+
+.header .date .content text {
+    color: #3aabea;
+}
+
+.header .arrow {
+    width: 60rpx;
+    text-align: center;
+    font-size: 28rpx;
+    color: #aaa;
+    margin-top: 12rpx;
+}
+
+.body {
+    margin: 0 20rpx 20rpx;
+    padding-bottom: 100rpx;
+}
+
+.body .section {
+    background: #fff;
+    margin-top: 20rpx;
+}
+
+.body .section .row {
+    display: flex;
+    padding-left: 40rpx;
+}
+
+.body .section .arrow {
+    width: 60rpx;
+    height: 100%;
+    color: #aaa;
+    display: block;
+    font-size: 22rpx;
+    text-align: center;
+}
+
+.body .shop {
+    background: #fff;
+    display: flex;
+    padding: 20rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+    border-bottom: 1rpx solid #e7e7e7;
+}
+
+.body .shop image {
+    width: 50rpx;
+    height: 50rpx;
+    background: #ddd;
+}
+
+.body .shop .name {
+    margin-left: 18rpx;
+    line-height: 50rpx;
+    font-size: 26rpx;
+    color: #888;
+}
+
+.body .menu .line {
+    height: 2rpx;
+    background: #efefef;
+}
+
+.body .menu .item {
+    padding: 20rpx 30rpx 20rpx 20rpx;
+    background: #fafafa;
+    display: flex;
+}
+
+.body .menu .item image {
+    width: 110rpx;
+    height: 110rpx;
+    margin-right: 18rpx;
+    border: 1rpx solid #ddd;
+}
+
+.body .menu .item view {
+    flex: 1;
+}
+
+.body .menu .item .name {
+    display: block;
+    margin: 12rpx 0 10rpx;
+}
+
+.body .menu .item .quantity {
+    color: #888;
+}
+
+.body .menu .item .money {
+    margin-top: 36rpx;
+    font-size: 32rpx;
+}
+
+.body .prop .row {
+    line-height: 90rpx;
+    height: 90rpx;
+}
+
+.body .prop .caption {
+    font-size: 28rpx;
+}
+
+.body .prop .text {
+    flex: 1;
+    color: #aaa;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.body .prop .text-value {
+    color: #222;
+}
+
+.body .prop .caption .special {
+    background: #06c1ae;
+    color: #fff;
+    padding: 1rpx 8rpx;
+    border-radius: 6rpx;
+    font-size: 24rpx;
+    margin-left: 20rpx;
+}
+
+.body .cost .count {
+    text-align: right;
+    color: #aaa;
+    padding: 20rpx 40rpx;
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.body .cost .count .real {
+    color: #ff9800;
+}
+
+.body .cost .count .money {
+    margin-left: 10rpx;
+}
+
+.body .prop .fee {
+    padding: 10rpx 0;
+}
+
+.body .prop .fee .row {
+    height: 70rpx;
+    line-height: 70rpx;
+}
+
+.body .prop .fee .row .text {
+    margin-right: 30rpx;
+}
+
+.body .prop .fee .row .text .money {
+    color: #ff9800;
+    margin-left: 8rpx;
+    font-size: 32rpx;
+}
+
+.body .prop .delivery {
+    padding: 30rpx 40rpx 90rpx 40rpx;
+    display: flex;
+    justify-content: space-between;
+}
+
+.body .prop .delivery .radio-group {
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.body .prop .delivery label {
+    position: relative;
+    margin-left: 40rpx;
+}
+
+.body .prop .delivery label.disabled radio {
+    display: none;
+}
+
+.body .prop .delivery label.disabled::before {
+    content: ' ';
+    display: inline-block;
+    width: 45rpx;
+    height: 45rpx;
+    border: 1rpx solid #ddd;
+    background: #f0f0f0;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 10rpx;
+}
+
+.body .prop .delivery .desc {
+    background: #fffbe7;
+    border-radius: 12rpx;
+    color: #c5b8a0;
+    border: 1px solid #e5dfd4;
+    position: absolute;
+    right: 0;
+    bottom: -68rpx;
+    text-align: center;
+    width: 426rpx;
+    height: 48rpx;
+    line-height: 48rpx;
+    font-size: 24rpx;
+    opacity: 0.6;
+}
+
+.body .prop .delivery .desc-checked {
+    opacity: 1;
+}
+
+.body .prop .delivery .desc::before {
+    background: #fffbe7;
+    border-top: 1px solid #e5dfd4;
+    border-left: 1px solid #e5dfd4;
+    transform: rotate(45deg);
+    display: block;
+    width: 16rpx;
+    height: 16rpx;
+    position: absolute;
+    right: 60rpx;
+    top: -10rpx;
+    content: "";
+}
+
+.body .prop .expired .font-blue {
+    margin: 0 2px;
+}
+
+.body .agree {
+    padding: 30rpx 40rpx;
+    color: #aaa;
+    font-size: 26rpx;
+}
+
+.body .agree .iconfont {
+    color: #06c1ae;
+    margin-right: 10rpx;
+}
+
+.body .agree .contract {
+    color: #666;
+    display: inline;
+}
+
+.footer {
+    background: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100rpx;
+    line-height: 100rpx;
+    box-shadow: 0 -2rpx 2rpx #f0f0f0;
+    display: flex;
+}
+
+.footer .payment {
+    flex: 1;
+    text-align: right;
+    font-size: 30rpx;
+}
+
+.footer .payment .money {
+    margin-left: 18rpx;
+    color: #ff9800;
+    font-size: 46rpx;
+}
+
+.footer button {
+    width: 240rpx;
+    text-align: center;
+    background: #06c1ae;
+    font-size: 36rpx;
+    color: #fff;
+    margin-left: 30rpx;
+}
+
+.popup {
+    padding: 40rpx 30rpx;
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-slider {
+    align-items: center;
+}
+
+.popup-slider text {
+    padding-bottom: 40rpx;
+    font-size: 36rpx;
+    color: #06c1ae;
+}
+
+.popup-slider .slider {
+    width: 80%;
+    padding-bottom: 20rpx;
+}
+
+.popup-remark textarea {
+    height: 280rpx;
+    width: auto;
+    display: block;
+}
+
+.drawer_screen{width:100%;height:100%;position:fixed;top:0;left:0;z-index:1000;background:#000;opacity:.5;overflow:hidden}
+.drawer_box{width:80vw;overflow:hidden;position:fixed;top:30%;left:0;z-index:1001;background:#fff;margin:0 10vw 0 10vw;border-radius:20rpx}
+.zfimg{width:50rpx;height:45rpx;margin-right:20rpx}
+.zfimg image{width:100%;height:100%}
+.yetext{color:#ff9700;font-size:26rpx;margin-left:20rpx}
+.zftext{font-size:40rpx;margin-left:20rpx}
+.zfztext{font-size:40rpx}
+.radio-group .weui-cell{padding:30rpx 30rpx;font-size:30rpx}
+.drawer_title{padding:30rpx;font:30rpx "microsoft yahei";font-weight:700;text-align:center;color:#333;background:#f2f2f2}
+.drawer_title1{border-top:.5px solid #e6e6e6;padding:20rpx;font:27rpx "microsoft yahei";text-align:center;color:#999}
+.drawer_content{height:210px;overflow-y:scroll}
+.btn_ok1{padding:25rpx;font:30rpx "microsoft yahei";text-align:center;background:linear-gradient(to bottom right,#00cd66,#1aad19);color:#fff;border-radius:0}
+.btn_ok2{padding:25rpx;font:30rpx "microsoft yahei";text-align:center;background:linear-gradient(to bottom right,#f7bc6a,#ff7f46);color:#fff;border-radius:0}
+.btn_ok3{padding:25rpx;font:30rpx "microsoft yahei";text-align:center;background:linear-gradient(to bottom right,#f7bc6a,#f56e1d);color:#fff;border-radius:0}
+.btn_ok4{padding:25rpx;font:30rpx "microsoft yahei";text-align:center;background:linear-gradient(to bottom right,#70bcf3,#34aaff);color:#fff;border-radius:0}

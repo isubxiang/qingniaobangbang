@@ -1,0 +1,88 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">拼团</li>
+        <li class="li2">拼团分类</li>
+        <li class="li2 li3">操作分类</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('group/typePublish',array('id'=>$id),'刷新本页','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+<form target="x-frame" action="<{:U('group/typePublish',array('id'=>$id))}>" method="post">
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<input type="hidden" name="data[id]" value="<{$id}>" class="tudou-manageInput"/>
+                
+               
+				<tr>
+                <td class="tu-left-td">图片：</td>
+                 <td class="tu-right-td">
+                    <div style="width: 300px;height:150px;float:left;">
+                        <input type="hidden" name="data[img]" value="<{$detail.img}>" id="data_img"/>
+                        <div id="fileToUpload" >上传缩略图</div>
+                    </div>
+                    <div style="width:300px;height:150px; float:left;">
+                        <img id="img_img" width="200" height="100" src="<{:config_img($detail['img'])}>"/>
+                    </div>
+                    <script>                                            
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>""))}>',                             
+						pick: '#fileToUpload',                             
+						resize: true,  
+					});                                                 
+					uploader.on('uploadSuccess', function(file,resporse){                             
+						$("#data_img").val(resporse.url);                             
+						$("#img_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on('uploadError', function(file){                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+                </td>
+            </tr>
+                <tr>
+                    <td class="tu-left-td">名称：</td>
+                    <td class="tu-right-td"><input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="tudou-manageInput" />
+					<code>分类名称</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">选择学校：</td>
+                    <td class="tu-right-td">
+                        <div class="lt">
+                            <input type="hidden" id="school_id" name="data[school_id]" value="<{$detail.school_id|default=''}>"/>
+                            <input class="tudou-sc-add-text-name w210 sj" type="text" name="Name" id="Name"  value="<{$school.Name}>"/>
+                        </div>
+                        <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="seleSj">选择学校</a>
+                        <code>中途不要选择学校，请注意编辑</code>
+                    </td>
+                </tr> 
+                
+                
+                <tr>
+                    <td class="tu-left-td">排序：</td>
+                    <td class="tu-right-td"><input type="text" name="data[num]" value="<{$detail.num|default=''}>" class="tudou-manageInput" />
+					<code>分类排序</code>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认操作" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

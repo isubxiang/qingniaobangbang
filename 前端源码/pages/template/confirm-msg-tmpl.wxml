@@ -1,0 +1,14 @@
+<template name="confirm-tmpl">
+    <view catchtouchmove="preventTouchMove" class="task-dialog-mask" wx:if="{{submitDialog}}">
+        <view class="task-dialog-box">
+            <view class="task-dialog-content">{{title}}</view>
+            <view class="task-dialog-btn-box">
+                <form bindsubmit="onBillFormConfirm" reportSubmit="true" style="width: 100%;">
+                    <button class="task-confirm-btn task-pub-btn" formType="submit" plain="true">
+                        确定
+                    </button>
+                </form>
+            </view>
+        </view>
+    </view>
+</template>

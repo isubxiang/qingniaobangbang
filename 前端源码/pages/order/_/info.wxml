@@ -1,0 +1,345 @@
+<view class="container">
+    <modal bindcancel="onModalCancel" bindconfirm="onModalConfirm" confirmColor="#06c1ae" hidden="{{modalType!='refund'}}" title="取消订单">
+        <view class="modal-content">
+            <view>确定要取消订单？</view>
+            <view wx:if="{{model.Type==1&&!model.LastGiveupTime}}">最多等待3分钟，就会有校园跑腿接单</view>
+            <view wx:if="{{model.Type!=1}}">建议通过已入驻商家店铺下单，订单将优先处理。</view>
+        </view>
+        <view class="modal-notice" wx:if="{{!model.RefundFeeFree}}">提醒：你今日已经取消过至少一个订单，继续取消将扣除1%作为手续费。</view>
+    </modal>
+
+
+    <dialog allowMaskTappedClose="true" bindclose="onDialogClose" hidden="{{dialogType!='finish'}}" maskOpacity="0.5">
+        <view class="dialog-finish">
+            <image src="/assets/img/order_finish.png"></image>
+            <view class="desc">是否已按要求完成订单并与用户确认？
+        <text class="notice">如用户投诉或审查发现<text class="strong">提前确认</text>或<text class="strong">未实际完成</text>，平台将会严厉惩罚。</text>
+            </view>
+            <button bindtap="onFinishConfirm" type="primary">确认完成</button>
+            <button bindtap="onDialogClose" class="cancel" type="default">点错了</button>
+        </view>
+    </dialog>
+
+      <dialog allowMaskTappedClose="true" bindclose="onDialogFangqi" hidden="{{fangqiType!='fangqi'}}" maskOpacity="0.5">
+        <view class="dialog-profile">
+            <view class="avatar">
+                <avatar color="#b1e4d1" size="160" src="{{model.Role==1?model.DelivererAvatarUrl:model.AvatarUrl}}"></avatar>
+            </view>
+            <text class="nickname">{{(model.Role==1?model.DelivererNickName:model.NickName)||''}}</text>
+            <view class="desc">请与发单人联系放弃订单</view>
+            <view class="desc" wx:if="{{dialogMessage}}">{{dialogMessage}}</view>
+            <button bindtap="onPhoneTap">
+                <text class="iconfont icon-phone"></text>电话联系</button>
+        </view>
+    </dialog>
+
+
+    <dialog allowMaskTappedClose="true" bindclose="onDialogClose" hidden="{{dialogType!='profile'}}" maskOpacity="0.5">
+        <view class="dialog-profile">
+            <view class="avatar">
+                <avatar color="#b1e4d1" size="160" src="{{model.Role==1?model.DelivererAvatarUrl:model.AvatarUrl}}"></avatar>
+            </view>
+            <text class="nickname">{{(model.Role==1?model.DelivererNickName:model.NickName)||''}}</text>
+            <view class="desc" wx:if="{{dialogMessage}}">{{dialogMessage}}</view>
+            <button bindtap="onPhoneTap">
+                <text class="iconfont icon-phone"></text>电话联系</button>
+        </view>
+    </dialog>
+
+
+
+
+    <popup bindcancel="onPopupCancel" height="360" hidden="{{popupType!='track'}}" showCancelButton="{{false}}" showConfirmButton="{{false}}" title="订单追踪">
+        <view class="popup popup-track">
+            <scroll-view class="list" scrollY="true">
+                <block wx:for="{{model.Logs}}" wx:key="index">
+                    <view class="hr" wx:if="{{index>0}}"></view>
+                    <view class="item">
+                        <view class="dot"></view>
+                        <text class="time">{{util.formatDate(item.CreatedTime,'s')}}</text>
+                        <text class="content">{{item.Title}}</text>
+                    </view>
+                </block>
+            </scroll-view>
+        </view>
+    </popup>
+
+
+
+    <dialog allowMaskTappedClose="true" bindclose="onDialogClose" hidden="{{dialogType!='qrcode'}}" maskOpacity="0.5">
+        <view class="dialog-finish">
+            <image src="{{model.DelivererPicUrl1}}"></image>
+            <view class="desc">配送员收款二维码</view>
+            <text class="notice">{{model.DelivererNickName}}</text>
+            <button bindtap="onDialogClose" class="cancel" type="default">关闭按钮</button>
+        </view>
+    </dialog>
+
+
+
+    <popup bindcancel="onPopupCancel" bindconfirm="onPopupConfirm" height="228" hidden="{{popupType!='tip'}}">
+        <view class="popup popup-tip">
+            <view class="items">
+                <view bindtap="onFeeItemTap" class="item{{feeIndex==index?' actived':''}}" data-index="{{index}}" wx:for="{{fees}}" wx:key="{{item}}">
+                    <text class="money{{item>0?' money-rmb':''}}">{{item==0?'无':item}}</text>
+                </view>
+            </view>
+            <view bindtap="onFeeItemTap" class="item item-other" data-index="-1" wx:if="{{feeIndex>=0}}">其他金额</view>
+            <view class="item item-other actived" wx:else>
+        其他金额
+        <text class="symbol">：¥ </text>
+                <input bindblur="onFeeInputBlur" cursorSpacing="{{feeInputFocus?18:0}}" focus="{{feeInputFocus}}" type="number">{{feeInputValue?feeInputValue:''}}</input>
+            </view>
+        </view>
+    </popup>
+    <popup bindcancel="onPopupCancel" bindconfirm="onPopupConfirm" height="312" hidden="{{popupType!='giveup'}}">
+        <view class="popup popup-giveup">
+            <radio-group bindchange="onGiveupCauseChange" class="radio-group">
+                <block wx:for="{{giveupCauses}}" wx:key="index">
+                    <label class="radio">
+                        <radio checked="{{giveupCausesIndex==index}}" color="#06c1ae" value="{{index}}"></radio> {{item}}
+          </label>
+                    <view class="hr"></view>
+                </block>
+                <label class="radio radio-other">
+                    <radio checked="{{giveupCausesIndex==giveupCauses.length}}" color="#06c1ae" value="{{giveupCauses.length}}"></radio>
+                    <input bindblur="onGiveupContentChanged" bindfocus="onGiveupContentFocus" cursorSpacing="{{10}}" placeholder="输入其他原因"></input>
+                </label>
+            </radio-group>
+        </view>
+    </popup>
+    <view class="header">
+        <view bindtap="onStatusTap" class="status" hoverClass="navigator-hover">{{orderStatus?model.Status<8192?orderStatus.Name:'已取消':''}}<text class="iconfont icon-right_light arrow" wx:if="{{model.Role>0&&model.Role<3}}"></text>
+        </view>
+        <block wx:if="{{model.Status<=1&&timeRemain}}">
+            <view class="desc">
+                <text>请在15分钟内完成支付，超时将自动取消</text>
+                <view>剩余时间<text class="time">{{timeRemain}}</text>
+                </view>
+            </view>
+            <form bindsubmit="onPaymentSubmit">
+                <view class="buttons">
+                    <button bindtap="onCancelTap" type="primary">取消订单</button>
+                    <button class="submit" formType="submit" type="primary">立即支付</button>
+                </view>
+            </form>
+        </block>
+        <block wx:if="{{model.Role==1&&model.Status==2}}">
+            <view class="desc">
+                <text wx:if="{{model.Type==1}}">大批校园跑腿排队抢单中，请耐心等待1-3分钟</text>
+                <text wx:else>请耐心等候，加点小费鼓励，接单更快喔</text>
+            </view>
+            <view class="buttons">
+                <button bindtap="onRefundTap" type="primary" wx:if="{{model.Status==2}}">取消订单</button>
+                <button bindtap="onRaiseTap" class="submit" type="primary">加点小费</button>
+            </view>
+            <view class="cause" wx:if="{{model.LastGiveupTime}}">
+                <text class="iconfont icon-warn"></text>
+                <view class="cause-info">
+                    <view>跑腿人员接单后又放弃了订单</view>
+                    <text>原因：{{!model.LastGiveupCause||!model.LastGiveupCause.length?'其他原因':model.LastGiveupCause}}</text>
+                </view>
+            </view>
+        </block>
+        <block wx:if="{{model.Role==1&&model.Status>2&&model.Status<32&&model.Stype>1}}">
+            <view class="desc">
+                <text>请耐心等候，加点小费鼓励，跑腿更快喔</text>
+            </view>
+            <view class="buttons">
+                <button bindtap="onRequestRefundTap" type="primary">取消订单</button>
+                <button bindtap="onRaiseTap" class="submit" type="primary">加点小费</button>
+            </view>
+        </block>
+
+       
+        <view class="buttons" wx:if="{{model.Role==2&&model.Status>2&&model.Status<32}}">
+            <button bindtap="onGiveupTap" type="primary">放弃订单</button>
+            <button bindtap="onFinishTap" class="submit" type="primary">完成订单</button>
+        </view>
+  
+
+
+        <view class="desc" wx:if="{{model.Role==2&&model.Status==32}}">
+            <text>等待下单人确认完成，并评价你的本次服务</text>
+        </view>
+        <form bindsubmit="onConfirmSubmit" reportSubmit="true" wx:if="{{model.Role==1&&model.Status==32}}">
+            <view class="desc">
+                <text>请尽快确认完成，并评价跑腿人员的本次服务</text>
+            </view>
+            <view class="buttons">
+                <button class="submit" formType="submit" type="primary">确认完成</button>
+            </view>
+        </form>
+        <view class="buttons" wx:if="{{model.Role==1&&model.Status==64}}">
+            <button bindtap="onAppraise" class="submit" type="primary">立即评价</button>
+        </view>
+        <view class="desc" wx:if="{{model.Status>=256}}">
+            <text>{{orderStatus.Name}}</text>
+        </view>
+    </view>
+    <view class="body">
+
+        <view class="user" hoverClass="navigator-hover" wx:if="{{model.Role==1&&model.DelivererUserId>0||model.Role==2}}">
+            <view class="info">
+                <avatar color="#ddd" size="120" src="{{model.Role==1?model.DelivererAvatarUrl:model.AvatarUrl}}"></avatar>
+                <text class="name">{{(model.Role==1?model.DelivererNickName:model.NickName)||''}}</text>
+            </view>
+            <button  bindtap="onPhoneTap">
+                <text class="iconfont icon-phone"></text>
+            </button>
+
+            <button bindtap="onMoneyQrcode">
+                <text class="iconfont icon-coin">收款二维码</text>
+            </button>
+        </view>
+
+
+        <view class="hr user-hr"></view>
+        <view class="content">
+            <block wx:if="{{model.Type==1}}">
+                <view class="shop">
+                    <image mode="aspectFill" src="{{model.ShopLogoSrc||'/assets/img/nopic.png'}}"></image>
+                    <text class="name">{{model.ShopName}}</text>
+                </view>
+                <view class="menu">
+                    <block wx:for="{{model.Items}}" wx:key="Id">
+                        <view class="item">
+                            <image mode="aspectFill" src="{{item.PictureUrl||'/assets/img/nopic.png'}}"></image>
+                            <view>
+                                <text class="ellipsis name">{{item.CommodityName}}</text>
+                                <text class="quantity">× {{item.Quantity}}</text>
+                            </view>
+                            <text class="money money-rmb">{{item.Money}}</text>
+                        </view>
+                        <view class="hr"></view>
+                    </block>
+                </view>
+            </block>
+            <view class="remark" wx:if="{{model.Remark&&model.Remark.length}}">
+                <text bindtap="onSecretTap" class="iconfont icon-attentionforbid secret" wx:if="{{model.IsSecret}}"></text>
+                <text class="iconfont icon-quote_start"></text>
+                <text class="text">{{model.Remark}}</text>
+                <text class="iconfont icon-quote_end"></text>
+                <text class="text" wx:if="{{model.attr_name}}">{{model.attr_name}}</text>
+            </view>
+            <view class="attend">
+                <block wx:if="{{model.Type==1}}">
+                    <block wx:if="{{model.Role==2||model.Role==3}}">
+                        <view class="serial">
+                            <text class="code">#<text>{{model.Serial}}</text>
+                            </text>
+                            <text class="advance">{{model.Role==2&&model.IsAdvanceMoney?'需垫付':'直接取货'}}</text>
+                        </view>
+                        <view class="split"></view>
+                    </block>
+                    <view class="item item-padding">
+                        <view class="value">{{model.Money}}元</view>
+                        <view class="caption">
+                            <text class="iconfont icon-pricetag"></text>商品费</view>
+                    </view>
+
+                    <view class="item item-padding" wx:if="{{model.redpacket_money>0}}">
+                        <view class="value">{{model.redpacket_money}}元</view>
+                        <view class="caption">
+                            <text class="iconfont icon-pricetag"></text>红包抵</view>
+                    </view>
+
+                    <view class="item item-padding" wx:if="{{model.coupon_price>0}}">
+                        <view class="value">{{model.coupon_price}}元</view>
+                        <view class="caption">
+                            <text class="iconfont icon-pricetag"></text>优惠券</view>
+                    </view>
+
+                    <view class="item item-padding" wx:if="{{model.attr_money>0}}">
+                        <view class="value">{{model.attr_money}}元</view>
+                        <view class="caption">
+                            <text class="iconfont icon-pricetag"></text>规格费用</view>
+                    </view>
+
+                </block>
+
+
+                <block wx:else>
+                    <block wx:if="{{model.Type==2}}">
+                        <view class="item">
+                            <view class="value">
+                                <text class="advance" wx:if="{{model.Role==2}}">需垫付</text>{{model.Money?model.Money+'元':'-'}}</view>
+                            <view class="caption">
+                                <text class="iconfont icon-pricetag"></text>预估商品费</view>
+                        </view>
+                        <view class="split"></view>
+                    </block>
+                    <view class="item">
+                        <view class="value">{{model.Weight?enums.getName(errandWeights,model.Weight):'-'}}</view>
+                        <view class="caption">
+                            <text class="iconfont icon-weight"></text>物品重量</view>
+                    </view>
+                </block>
+                <view class="split"></view>
+                <view class="item">
+                    <view class="value">{{model.MoneyFreight+model.MoneyTip}}元</view>
+                    <view class="caption">
+                        <text class="iconfont icon-coin"></text>{{model.Role==1?'跑腿费':'赏金'}}</view>
+                </view>
+
+                <view class="item" wx:if="{{model.redpacket_money>0}}">
+                    <view class="value">{{model.redpacket_money}}元</view>
+                    <view class="caption">红包抵</view>
+                </view>
+
+                <view class="item" wx:if="{{model.coupon_price>0}}">
+                    <view class="value">{{model.coupon_price}}元</view>
+                    <view class="caption">优惠券</view>
+                </view>
+
+                <view class="item" wx:if="{{model.attr_money>0}}">
+                    <view class="value">{{model.attr_money}}元</view>
+                    <view class="caption">规格费用</view>
+                </view>
+
+
+            </view>
+        </view>
+        <view class="path">
+            <view class="item item-start">
+                <view class="left">
+                    <text class="iconfont icon-time"></text>
+                </view>
+                <view class="info">{{model.ExpectTimeString}}</view>
+            </view>
+            <block wx:for="{{model.Addresses}}" wx:key="index">
+                <view class="hr"></view>
+                <view class="item">
+                    <view class="left">
+                        <text class="iconfont icon-location"></text>
+                        <view class="text">{{index==0?'前往':index==model.Addresses.length-1?'到达':'然后'}}</view>
+                    </view>
+                    <view class="info">
+                        <text class="addr">{{item.Address}}</text>
+                        <view class="concat" wx:if="{{item.Description}}">{{item.Description}}</view>
+                    </view>
+                </view>
+            </block>
+        </view>
+        <view class="list prop">
+            <view class="row">
+                <text class="left">订单号码</text>
+                <text class="value-left">{{model.Code}}</text>
+            </view>
+            <view class="hr"></view>
+            <view class="row">
+                <text class="left">下单时间</text>
+                <text class="value-left">{{util.formatDate(model.CreatedTime,'s')}}</text>
+            </view>
+            <view class="hr"></view>
+            <button class="row" bindtap="onFilePhoto" wx:if="{{model.fileNum>0}}">
+                <text class="left">附件管理</text>
+                <text class="value-left">{{model.fileNum}}个 </text>
+                <view class="iconfont icon-right_light arrow"></view>
+            </button>
+
+        </view>
+    </view>
+</view>
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />
+<wxs module="util" src="../../../assets/wxs/util.wxs" />

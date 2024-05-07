@@ -1,0 +1,24 @@
+<view class="container">
+    <view class="header">
+        <view class="">分类</view>
+        <view class="">筛选</view>
+    </view>
+    <view class="body">
+        <view class="section">
+            <view class="left">
+                <text class="month">本月</text>
+                <view class="stat">
+                    <view class="out">
+            支出<text class="money money-rmb">100.00</text>
+                    </view>
+                    <view class="in">
+            收入<text class="money money-rmb">30.00</text>
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="list">
+            <view class="item"></view>
+        </view>
+    </view>
+</view>

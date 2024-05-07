@@ -1,0 +1,90 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">拼团</li>
+        <li class="li2">拼团订单</li>
+        <li class="li2 li3">订单列表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="border-top: none; margin-top: 0px;">
+            <div class="left">
+            	 <a <eq name='type' value='wait'>class="on"</eq> href="<{:U('group/index',array('type'=>'wait'))}>">未付款</a>
+                 <a <eq name='type' value='pay'>class="on"</eq> href="<{:U('group/index',array('type'=>'pay'))}>">已付款</a>
+                 <a <eq name='type' value='complete'>class="on"</eq> href="<{:U('group/index',array('type'=>'complete'))}>">已完成</a>
+                 <a <eq name='type' value='close'>class="on"</eq> href="<{:U('group/index',array('type'=>'close'))}>">已关闭</a>
+                 <a <eq name='type' value='invalid'>class="on"</eq> href="<{:U('group/index',array('type'=>'invalid'))}>">已失效</a>
+                 <a <eq name='type' value='all'>class="on"</eq> href="<{:U('group/index',array('type'=>'all'))}>">全部订单</a>
+            </div>
+            <div class="right">
+                <form method="post" action="<{:U('group/order')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                        
+                        	 <label>
+                                <input type="hidden" id="school_id" name="school_id" value="<{$school_id|default=''}>" />
+                                <input type="text" name="Name" id="Nme"  value="<{$Name}>"   class="text "/>
+                                <a mini="select"  w="800" h="600" href="<{:U('running/schoolselect')}>" class="sumit">选择学校</a>
+                                </label>
+                             <label> 
+                         
+                            <label>
+                                <span>  关键字：</span>   
+                               <input type="text" name="keyword" value="<{$keyword|default=''}>" class="tu-inpt-text"/>
+                                <input type="submit" class="inpt-button-tudou" value="   搜索" />
+                           </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        
+        <form  target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="id" /></td>
+                        <td class="w50">ID</td>
+                        <td>学校ID</td>
+                        <td>订单编号</td>
+                        <td>商品</td>
+                   		<td>买家</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_id" type="checkbox" name="id[]" value="<{$var.id}>" /></td>
+                            <td><{$var.id}></td>
+                            <td><{$var.school_id}></td>
+                            <td><{$var.order_num}></td>
+                            <td>
+                                <a href="<{:config_weixin_img($var['goods']['logo'])}>" class="tooltip"><img src="<{:config_img($var['goods']['logo'])}>" class="w80"></a>
+                                <{$var.goods.name}>*<{$var.goods_num}> = <{$var.price}>
+                            </td>
+                            <td><{$var.user.nickname}></td>
+                            <td>
+                                <if condition="$var['state'] eq 1">未付款</if>
+                                <if condition="$var['state'] eq 2">已付款</if>
+                                <if condition="$var['state'] eq 3">已完成</if>
+                                <if condition="$var['state'] eq 4">已关闭</if>
+                                <if condition="$var['state'] eq 5">已失效</if>
+                            </td>
+                            <td>
+                                <{:BA('group/orderInfo',array("id"=>$var["id"]),'详情','','tu-dou-btn')}>
+                        	</td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

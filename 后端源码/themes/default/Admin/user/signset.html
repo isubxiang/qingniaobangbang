@@ -1,0 +1,270 @@
+<include  file='public:header'/>
+
+<style>
+.sm-tudou-btn-input {text-align: center;}
+.chongzhi{margin-bottom:10px;height:35px}
+.man,.man2,.man3,.man4,.money,.money2,.titleinp,.ygminp{float:left;border:1px solid #eee;height:35px;line-height:35px;margin-left:0;margin-right:0}
+.man{padding:0 12px;text-align:center}
+.man3{padding:0 12px;text-align:center}
+.man2{width:130px;padding:0 12px;text-align:center}
+.man4{width:160px;padding:0 12px;text-align:center}
+
+@media (min-width:1592px){.titleinp{width:15%;text-indent:1em;float:left;border:1px solid #eee;height:35px;line-height:35px;margin-left:0;margin-right:20px}
+.titleinp3{width:15%;text-indent:1em;float:left;border:1px solid #eee;height:35px;line-height:35px;margin-left:0}
+.titleinp2{float:left;height:35px;line-height:35px;margin-left:0;margin-right:20px}
+}
+@media (max-width:1591px){.titleinp{width:10%;padding-left:5px;float:left;border:1px solid #eee;height:35px;line-height:35px;margin-left:0;margin-right:10px}
+.titleinp3{width:10%;padding-left:5px;float:left;border:1px solid #eee;height:35px;line-height:35px;margin-left:0}
+.titleinp2{float:left;height:35px;line-height:35px;margin-left:0;margin-right:10px}
+}
+
+
+</style>
+
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">会员</li>
+        <li class="li2">签到</li>
+        <li class="li2 li3">签到设置</li>
+    </ul>
+</div>
+<div class="main-tudou-sc-add ">
+    <div class="tu-table-box">
+        <form target="x-frame" action="" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+             	<tr>
+                    <td class="tu-left-td">开启签到功能：</td>
+                    <td class="tu-right-td">
+                        <label> <input type="radio" name="is_open" id="emailwy1" class="kaiqi1" value="1" <eq name="res3.is_open" value="1">checked="checked"</eq>/>开启 </label>
+                        <label> <input type="radio" name="is_open" id="emailwy2" class="kaiqi2" value="2" <eq name="res3.is_open" value="2">checked="checked"</eq>/>关闭</label>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">首次签到奖励：</td>
+                    <td class="tu-right-td">
+                    	首次签到<input type="text" name="oneintegral" value="<{$res3['one']}>" class="tudou-manageInput inp1 w80"/>积分
+                        日常签到<input type="text" name="sintegral" value="<{$res3['integral']}>" class="tudou-manageInput inp2 w80"/>积分
+
+                    </td>
+                </tr>
+                
+      			<tr>
+                    <td class="tu-left-td">是否开启补签：</td>
+                    <td class="tu-right-td">
+                        <label> <input type="radio" name="is_bq" value="1" class="kaiqi3" <eq name="res3.is_bq" value="1">checked="checked"</eq>/>开启</label>
+                        <label> <input type="radio" name="is_bq" value="2" class="kaiqi4" <eq name="res3.is_bq" value="2">checked="checked"</eq>/>关闭</label>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">补签规则设置：</td>
+                    <td class="tu-right-td">
+                    	补签每天扣除<input type="number" name="" value="<{$res3['bq_integral']}>" class="tudou-manageInput w80 bqinter">积分
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">连签奖励：</td>
+                    <td class="tu-right-td">
+                    	<table class="table2 col-md-12" style="padding:0px;">
+                            <foreach name="list" item="row">
+                            <div class="col-md-12 yginter yginter2" id="addhang2" style="padding:0px;">
+                                <div class="col-md-5 chongzhi">
+                                   <div class="man4">连签奖励</div>
+                                   <input type="number" name="day" value="<{$row['day']}>" class="ygminp inp1 tudou-manageInput w80"/>
+                                   <div class="man">天</div>
+                                </div>
+                                <div class="col-md-7 chongzhi">
+                                   <div class="man2">奖励</div>
+                                   <input type="number" name="integral" value="<{$row['integral']}>" class="money2 inp2 tudou-manageInput w80"/>
+                                   <div class="man">积分</div>
+                                   <div id="del<{$row['id']}>" data-id="<{$row['id']}>" class="man shanchu shanchu<{$row['id']}>">删除</div>
+                                </div>
+                                <script>
+                                   $(function(){
+                                      $(".shanchu<{$row['id']}>").click(function(){          
+                                          var id = $("#del<{$row['id']}>").data('id');
+                                          console.log(id);
+                                          $.ajax({
+                                              type:"post",
+                                              url:"<{:U('user/DelQd')}>",
+                                              dataType:"text",
+                                              data:{id:id},
+                                              success:function(data){
+                                                  console.log("返回的data数据是："+data);  
+												  layer.msg('删除成功');    
+                                                  setTimeout(function(){
+                                                      location.reload();
+                                                  },1500)
+                                              }
+                                          })
+                                      })
+                                   })
+                                </script>
+                            </div>
+                          </foreach>
+                         </table> 
+						<div class="col-md-12">
+                            <div class="tianj1 special2 col-md-6 col-md-push-3 sm-tudou-btn-input">添加规则</div>
+                        </div> 
+                    </td>
+                </tr>
+                
+          	 	<tr>
+                    <td class="tu-left-td">特殊奖励：</td>
+                    <td class="tu-right-td">
+                	<div class="form-group col-md-12">
+                    <div class="col-sm-11">
+                        <table id="tb" class="table col-md-12" style="padding: 0px;">
+                            <div class="col-md-12 yginter" id="addhang">
+                                <form action="" method="POST" class="col-md-2">
+                                    <div class="col-md-2 ygtime">
+                                        <div class="input-group datetime">
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default">日期</span>
+                                            </span>
+                                            <input type="text" name="open_time" value="<{$res2.day|default=''}>" onfocus="WdatePicker();"  class="inputData datetimepicker form-control"/>
+                                        </div>
+                                    </div>
+                                </form>
+                                <div class="col-md-10 chongzhi">
+                                    <div class="man3">标题</div>
+                                    <input type="text" name="" value="<{$res2['title']}>" placeholder="非必填" class="titleinp tudou-manageInput w80">
+                                    <div class="man3">颜色</div>
+                                    <div class="titleinp2">
+                                    	<input type="text" name="color" value="<{$res2['color']}>" placeholder="非必填" class="titleinp tudou-manageInput w80">
+                                    </div>
+                                    <div class="man3">奖励</div>
+                                    <input type="number" name="integral2" value="<{$res2['integral']}>" class="titleinp3 inp2 tudou-manageInput w80">
+                                    <div class="man">积分</div>
+                                </div>
+                                <input type="hidden" name="">
+                            </div>
+                        </table>   
+                    </div>
+                </div>
+                 </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">签到背景：</td>
+                 <td class="tu-right-td">
+                    <div style="width:300px;height:100px;float:left;">
+                        <input type="hidden" name="qd_img" value="<{$res3.qd_img}>" id="data_photo"/>
+                        <div id="fileToUpload">上传背景</div>
+                    </div>
+                    <div style="width:300px;height:100px;float:left;">
+                        <img id="photo_img" width="120" height="80"  src="<{:config_img($res3['qd_img'])}>"/>
+                    </div>
+                    <script>                                            
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>"qd"))}>',                             
+						pick: '#fileToUpload',                             
+						resize: true,  
+					});                                                 
+					uploader.on('uploadSuccess',function(file,resporse){                             
+						$("#data_photo").val(resporse.url);                             
+						$("#photo_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on('uploadError',function(file){                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+                </td>
+            </tr>
+            
+               
+            </table>
+            <div class="sm-qr-tu"><input type="submit" name="button" value="确认保存" class="sm-tudou-btn-input" /></div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var num = $(".yginter2").length;
+    $(function(){
+ 
+        $("#frame-8").show();
+        $("#yframe-8").addClass("wyactive");
+        $(".special2").click(function(){
+            num ++;
+            var addli = $('<div class="col-md-12 yginter yginter2" id="addhang2" style="padding: 0px;"><div class="col-md-5 chongzhi"><div class="man4">连签奖励</div><input type="number" name="day" value="" class="ygminp inp1 tudou-manageInput w80"><div class="man">天</div></div><div class="col-md-7 chongzhi"><div class="man2">奖励</div><input type="number" name="integral" value="" class="money2 inp2 tudou-manageInput w80"><div class="man">积分</div><div  class="man shanchu">删除</div></div></div>');
+            addli.appendTo($(".table2"));
+            console.log($(".datetime>input").val())
+        });
+
+
+        var is_open = 1;
+        $(".kaiqi1").click(function(){
+          is_open=1;
+        })
+        $(".kaiqi2").click(function(){
+          is_open=2;
+        })
+
+
+        var is_bq = 1;
+        $(".kaiqi3").click(function(){
+          is_bq=1;
+        })
+        $(".kaiqi4").click(function(){
+          is_bq=2;
+        })
+
+
+        $("input[name='button']").click(function(){
+          var list = [];
+          var qd_img = $("input[name='qd_img']").val();
+          var color = $("input[name='color']").val();
+          var datetime = $(".datetime>input").val();
+          var title = $(".titleinp").val();
+          var bq_integral = $(".bqinter").val();
+          var one = $("input[name='oneintegral']").val();
+          var integral3 = $("input[name='sintegral']").val();
+          var integral2 = $("input[name='integral2']").val();
+          console.log("开启签到的值"+is_open+"，是否开启补签值："+is_bq);
+          for(var i = 0;i<$(".yginter2").length;i++){
+              var day = $(".yginter2").eq(i).find("input[name='day']").val();
+              var integral = $(".yginter2").eq(i).find("input[name='integral']").val();
+              console.log("天数"+day+",奖励积分是"+integral);
+              var obj = {};
+              obj.day = day;
+              obj.integral = integral;
+              list.push(obj);
+          }
+          $.ajax({
+              type:"post",
+              url:"<{:U('user/AddQd')}>",
+              dataType:"text",
+              data:{
+                list:list,
+                color:color,
+                day:datetime,
+                title:title,
+                bq_integral:bq_integral,
+                one:one,
+                integral:integral3,
+                is_open:is_open,
+                qd_img:qd_img,
+                is_bq:is_bq,
+                integral2:integral2,
+              },
+              success:function(data){
+                  console.log(data);      
+                  setTimeout(function(){
+					  layer.msg('操作成功')
+                      location.reload();
+                  },1500)
+              }
+          })
+        })
+    })  
+</script>
+
+
+<include  file='public:footer'/>       

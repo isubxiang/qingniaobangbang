@@ -1,0 +1,77 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">商家</li>
+        <li class="li2">商家等级</li>
+        <li class="li2 li3">编辑等级权限</li>
+    </ul>
+</div>
+<style>
+.biankuang{ border:1px #666666 dashed; padding:5px;}
+</style>
+<p class="attention"><span>当前等级：</span> 数量系统还没控制，后期优化，商家审核的时候必须分配等级，您当前编辑的等级<a style="color:#F00; font-size:18px;">【<{$detail['grade_name']}>】</a></p>
+<p class="attention"><span>等级说明：</span><a style="color: #00F" class="biankuang"><{$detail['content']}></a></p>
+<p class="attention"><span>等级费用：</span>单独购买费用：&yen; <{:round($detail['money']/100,2)}>元， &nbsp; 自动升级需要商户资金： &yen;</span><{:round($detail['gold']/100,2)}>元</p>
+<form  target="x-frame" action="<{:U('shopgrade/edit_jurisdiction',array('grade_id'=>$detail['grade_id']))}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                
+
+
+
+
+
+     <td class="tu-left-td">商城权限：</td>
+        <td class="tu-right-td">&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="data[is_mall]" value="1" <if condition="$detail.is_mall eq 1"> checked="checked" </if> />是 &nbsp;&nbsp;
+        <input type="radio" name="data[is_mall]" value="0"  <if condition="$detail.is_mall eq 0"> checked="checked" </if>/>否&nbsp;&nbsp;
+        <a class="tu-right-td" style="margin-left:50px;">可发布数量：</a>
+        <input type="text" name="data[is_mall_num]" value="<{$detail.is_mall_num|default=''}>" class="tudou-sc-add-text-name w150" />
+        <code>填写可发布商品数量</code>
+        </td>
+     </tr>
+     
+     
+     
+      <td class="tu-left-td">外卖权限：</td>
+        <td class="tu-right-td">&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="data[is_ele]" value="1" <if condition="$detail.is_ele eq 1"> checked="checked" </if> />是 &nbsp;&nbsp;
+        <input type="radio" name="data[is_ele]" value="0"  <if condition="$detail.is_ele eq 0"> checked="checked" </if>/>否&nbsp;&nbsp;
+        <a class="tu-right-td" style="margin-left:50px;">可发布数量：</a>
+        <input type="text" name="data[is_ele_num]" value="<{$detail.is_ele_num|default=''}>" class="tudou-sc-add-text-name w150" />
+        <code>填写可发布外卖菜品，建议50-100个</code>
+        </td>
+     </tr>
+     
+     
+     
+      <td class="tu-left-td">优惠劵权限：</td>
+        <td class="tu-right-td">&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="data[is_coupon]" value="1" <if condition="$detail.is_coupon eq 1"> checked="checked" </if> />是 &nbsp;&nbsp;
+        <input type="radio" name="data[is_coupon]" value="0"  <if condition="$detail.is_coupon eq 0"> checked="checked" </if>/>否&nbsp;&nbsp;
+        <a class="tu-right-td" style="margin-left:50px;">可发布数量：</a>
+        <input type="text" name="data[is_coupon_num]" value="<{$detail.is_coupon_num|default=''}>" class="tudou-sc-add-text-name w150" />
+        <code>填写可发布优惠劵数量</code>
+        </td>
+     </tr>
+     
+     
+      <td class="tu-left-td">积分兑换权限：</td>
+        <td class="tu-right-td">&nbsp;&nbsp;&nbsp;
+        <input type="radio" name="data[is_jifen]" value="1" <if condition="$detail.is_jifen eq 1"> checked="checked" </if> />是 &nbsp;&nbsp;
+        <input type="radio" name="data[is_jifen]" value="0"  <if condition="$detail.is_jifen eq 0"> checked="checked" </if>/>否&nbsp;&nbsp;
+        <a class="tu-right-td" style="margin-left:50px;">可发布数量：</a>
+        <input type="text" name="data[is_jifen_num]" value="<{$detail.is_jifen_num|default=''}>" class="tudou-sc-add-text-name w150" />
+        <code>填写可发布积分兑换数量</code>
+        </td>
+     </tr>
+
+ 	
+
+    </table>
+</div>
+<div class="sm-qr-tu"><input type="submit" value="确认编辑" class="sm-tudou-btn-input" /></div>
+</div>
+</form>
+<include  file='public:footer'/>       

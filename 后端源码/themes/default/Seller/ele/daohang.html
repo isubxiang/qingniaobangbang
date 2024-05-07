@@ -1,0 +1,134 @@
+<include  file='public:header'/>
+
+<style type="text/css">
+body{padding: 0;margin:0;}
+.top-fixed .top-signed a{font-size:16px;}
+.tudouInfo{background-color:#FFF;font-size:12px;box-shadow:0 0 6px 0 rgba(0,0,0,.2);-webkit-transition:all .4s ease;position:absolute;bottom:0px;background:#fff;width:100%;z-index:999999999}
+.tudouInfoBox{display:-webkit-box;-webkit-box-orient:horizontal}
+.tudouNameAndHuoDong{box-shadow:1px 1px 5px 0 rgba(0,0,0,.3);padding:5px;border-radius:5px;position:absolute;top:50%;left:35px;-webkit-transform:translate(0,-50%);background:#fff;-webkit-transition:all linear .5s .5s}
+.tudouNameAndHuoDong.dir1{text-align:center;bottom:35px;top:auto;left:50%;-webkit-transform:translate(-50%,0)}
+.tudouNameAndHuoDong.dir3{top:45px;bottom:auto;left:50%;-webkit-transform:translate(-50%,-50%);text-align:center}
+.tudouNameAndHuoDong.dir4{top:50%;left:auto;right:35px;-webkit-transform:translate(0,-50%);text-align:right}
+.tudouNameDiv{color:#666;font-size:12px}
+.shopHuoDongDiv,.tudouNameDiv{line-height:18px;max-width:300px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.goShopBtn{border-radius:initial;padding:0 15px;font-size:14px;display:-webkit-box;-webkit-box-align:center;background:#32b77d;}
+.goShopBtn a{color:#fff}
+.locMapInfoNameWrap{-webkit-box-flex:1;padding:15px 10px 10px 15px}
+.locMapInfoName{color:#11a368;font-size:18px;box-sizing:border-box;line-height:30px}
+</style>
+
+<header class="top-fixed bg-yellow bg-inverse">
+	<div class="top-back">
+		<a class="top-addr" href="javascript:history.back();"><i class="iconfont icon-angle-left"></i></a>
+	</div>
+		<div class="top-title">
+			订单轨迹图
+		</div>
+	<div class="top-signed">
+		<a href="javascript:location.reload();" class="fa-spin top-addr icon-refresh">刷新</a>	
+	</div>
+</header>
+
+
+	<div id="allmap" style="width:100%;min-height:667px;"></div>
+    
+	<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=te1e01OcptQgwrg4SyBdPx6h"></script>
+	<script type="text/javascript">
+		var deliveryIcon = new BMap.Icon("/themes/default/User/eleorder/iocn/qs-icon.png", new BMap.Size(32,45));//骑手icon图标
+		var shopIcon = new BMap.Icon("/themes/default/User/eleorder/iocn/shop-icon.png", new BMap.Size(32,45));//商家icon图标
+		var userIcon = new BMap.Icon("/themes/default/User/eleorder/iocn/user-icon.png", new BMap.Size(32,45));//买家icon图标
+		var shopPoint = new BMap.Point("<{$shop_coor['lng']}>","<{$shop_coor['lat']}>");//终点
+		var userPoint = new BMap.Point("<{$user_coor['lng']}>","<{$user_coor['lat']}>");//终点
+		
+		
+		var map = new BMap.Map("allmap");
+		refer_page();
+		setInterval(function(){
+			$.post("<{:U('ele/daohang',array('running_id'=>$running_id))}>",{},function(res){
+				var qsPoint = new BMap.Point(res.delivery_coor.lng,res.delivery_coor.lat);
+				mapAddIcon(qsPoint,deliveryIcon);
+			});
+		},5000);
+
+		function refer_page(){
+
+			getCurLocation(function(res){
+				map.centerAndZoom(res.point,14);
+				map.enableScrollWheelZoom(true);
+				map.enableScrollWheelZoom();  
+				map.enableContinuousZoom();  
+				map.enableContinuousZoom();
+				var deliveryPoint = new BMap.Point("<{$delivery_coor['lng']}>","<{$delivery_coor['lat']}>");//途径点
+				
+				mapAddIcon(deliveryPoint,deliveryIcon);//添加骑手位置
+				
+				mapAddIcon(shopPoint,shopIcon);//添加商家位置
+				
+				mapAddIcon(userPoint,userIcon);//添加买家位置
+				getLine(deliveryPoint, shopPoint,userPoint);
+					
+			});
+		}
+		
+		//路线规划
+		function getLine(sPoint,wPoint,ePoint){
+			var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true},});
+			//设置图标
+			var shopIconHtml = '<div style="position: absolute; margin: 0px; padding: 0px; width: 36px; height: 40px; overflow: hidden;"><img src="/themes/default/User/eleorder/iocn/shop-icon.png" style="display: block; border:none;margin-left:-11px; margin-top:-45px; "></div>';
+			driving.setMarkersSetCallback(function(res){
+				console.log(res);
+				res[0].marker.setIcon(deliveryIcon);
+				res[1].Om.Bc.innerHTML=shopIconHtml;
+				res[2].marker.setIcon(userIcon);
+			});
+
+			//搜索后获取时间和距离
+			
+			 driving.setSearchCompleteCallback(function(res){
+			 	console.log(res.getPlan(0));
+			 	var dist = res.getPlan(0).getDistance();
+				$('#dist').text(dist);
+				console.log(dist);
+			 	var needTime = res.getPlan(0).getDuration();
+				$('#needTime').text(needTime);
+				console.log(needTime);
+			 });
+					
+			
+			//driving.search(sPoint, ePoint);//waypoints表示途经点
+			driving.search(sPoint, ePoint,{waypoints:[wPoint]});//waypoints表示途经点
+		}
+			
+		//定位方法
+		function getCurLocation(e){
+			var geolocation = new BMap.Geolocation();
+			geolocation.getCurrentPosition(function(r){
+				if(this.getStatus() == BMAP_STATUS_SUCCESS){
+					typeof e == "function" && e(r);
+				}else {
+					alert('failed'+this.getStatus());
+				}        
+			},{enableHighAccuracy: true})
+		}
+
+		//添加地图图标
+		function mapAddIcon(point,icon){
+			var mk = new BMap.Marker(point,{icon:icon});
+			map.addOverlay(mk);//添加骑手覆盖
+		}
+	</script>
+    
+<div class="tudouInfo Hide" style="display: block;">
+  <div class="tudouInfoBox">
+    <div class="locMapInfoNameWrap">
+      <div class="locMapInfoName">
+        <span id="tudouName">距离还有：</span><span id="dist">获取中...</span>
+      </div>
+      <div class="locMapInfoHuoDong Hide">
+      </div>
+    </div>
+    <div class="Btn goShopBtn">
+     	<a>预计时间：<span id="needTime">获取中...</span></a>
+    </div>
+  </div>
+</div>

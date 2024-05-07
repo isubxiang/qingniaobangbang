@@ -1,0 +1,259 @@
+.header {
+    width: 100%;
+    height: 42px;
+    z-index: 2;
+    background-color: #fff;
+    overflow: hidden;
+}
+
+.list-filter {
+    position: absolute;
+    top: -1rpx;
+    right: 0;
+    background-color: #fff;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    padding: 9px 0 0 8px;
+    border-left: 1rpx solid #f1f1f1;
+}
+
+.filter-img {
+    width: 24px;
+    height: 24px;
+}
+
+.list-filter-text {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 15px 0;
+    border-color: #dbdbdb;
+    border-radius: 5px;
+}
+
+.list-filter-box {
+    position: fixed;
+    top: 42px;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.list-filter-mode {
+    display: flex;
+}
+
+.active-box {
+    background-color: #3bbb8d;
+}
+
+.nav-text {
+    color: rgb(156,156,156);
+}
+
+.nav-text.active {
+    color: #fff;
+    font-weight: bold;
+}
+
+.list-filter-mask {
+    top: 42px;
+}
+
+.list-filter-btn {
+    width: 50%;
+    height: 40px;
+    line-height: 40px;
+    font-size: 14px;
+    border: none!important;
+    border-radius: 0;
+}
+
+.list-filter-cancel {
+    margin-left: 20px;
+    color: rgb(241,121,121);
+    font-size: 14px;
+}
+
+.list-filter-yes {
+    background-color: #3bbb8d!important;
+    color: #fff!important;
+}
+
+.list-filter-empty {
+    background-color: rgb(238,238,238)!important;
+    color: #888!important;
+}
+
+.header scroll-view {
+    width: 100%;
+    height: 100%;
+    border-bottom: 1rpx solid #f0f0f0;
+    box-sizing: border-box;
+}
+
+.header .navs {
+    display: inline-flex;
+    height: 42px;
+    line-height: 42px;
+}
+
+.header .navs view {
+    height: 100%;
+    padding: 0 26rpx;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 30rpx;
+    color: #666;
+    display: inline-block;
+}
+
+.header .navs .first {
+    padding-left: 52rpx;
+}
+
+.header .navs .actived text {
+    padding: 4rpx 20rpx;
+    background: #3bbb8d;
+    border-radius: 10rpx;
+    color: #fff;
+}
+
+.page__bd {
+    background-color: #fff;
+}
+
+.hr {
+    margin-left: 28rpx;
+    height: 0;
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    padding: 24rpx 0 24rpx 28rpx;
+}
+
+.item .left {
+    flex: 1;
+    margin-right: 20rpx;
+}
+
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.content {
+    font-size: 32rpx;
+    line-height: 44rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.desc {
+    font-size: 26rpx;
+    color: #aaa;
+    margin-top: 16rpx;
+    line-height: 40rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.type {
+    color: #fff;
+    font-size: 24rpx;
+    padding: 4rpx 10rpx;
+    border-radius: 8rpx;
+    margin-right: 10rpx;
+}
+
+.time {
+    font-size: 22rpx;
+    color: #ccc;
+    margin-right: 20rpx;
+}
+
+.right {
+    padding-right: 30rpx;
+}
+
+.right .money {
+    color: #ff9800;
+    font-size: 30rpx;
+    display: inline-block;
+}
+
+.right .money::before {
+    margin-left: 0.2em;
+    content: '\00a5';
+    font-size: 0.6em;
+}
+
+.right .btn {
+    border-radius: 10rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    width: 160rpx;
+    font-size: 30rpx;
+    padding: 0;
+    text-align: center;
+    display: block;
+}
+
+.pub {
+    font-size: 24rpx;
+    color: #666;
+    text-align: center;
+}
+
+.list-scroll {
+    -webkit-overflow-scrolling: touch;
+}
+
+.list-fixed {
+    position: fixed;
+    bottom: 50px;
+    right: 10px;
+}
+
+.list-fixed-btn {
+    width: 30px;
+    height: 30px;
+    padding: 5px 0 0 5px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    opacity: .9;
+}
+
+.list-top-box {
+    background-color: #000;
+}
+
+.list-break-box {
+    background-color: #666;
+}
+
+.list-top {
+    width: 25px;
+    height: 25px;
+    display: block;
+}
+
+.list-filter-bg {
+    background-color: #fbfbfb;
+    border-radius: 3px;
+}
+
+.list-bottom-btn-radius {
+    overflow: hidden;
+    border-radius: 3px;
+}

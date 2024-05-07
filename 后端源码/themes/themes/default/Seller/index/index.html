@@ -1,0 +1,156 @@
+<include file="public:header"/>
+
+
+<style>
+.user-block{border-bottom:1px solid #e8e8e8;background:#FFF;box-shadow:0 3px 7px #eaeaea}
+.user-block>h2{padding:0 12px;border-bottom:1px solid #F1F1F1;font-size:16px;line-height:40px}
+.user-block>h2>a{display:block}
+.user-block>ul>li{padding:10px 0;text-align:center;font-size:14px}
+.user-block>ul>li>a{display:block;border-left:1px solid #F1F1F1;font-size:12px}
+.user-block>ul>li:first-child>a{border-left:0}
+.user-block>ul>li>a>i{display:block;color:#999;font-size:26px;line-height:30px}
+.user-block-one{overflow:hidden;background:#FFF}
+.user-block-one>ul{margin-right:-1px}
+.user-block-one>ul>li{float:left;padding:10px 0;border-right:1px solid #F1F1F1;border-bottom:1px solid #F1F1F1;text-align:center;font-size:14px}
+.user-block-one>ul>li>a{display:block;font-size:12px}
+.user-block-one>ul>li>a>i{display:block;font-size:26px;line-height:30px}
+.user-block-top{display:block;overflow:hidden;border-bottom:1px solid #e8e8e8;background:#FFF;box-shadow:0 3px 7px #eaeaea}
+.user-block-top>h2{padding:0 12px;border-bottom:1px solid #F1F1F1;font-size:16px;line-height:40px}
+.user-block-top>h2>a{display:block}
+.user-block-top>ul>li{float:left!important;padding:10px 0;width:16.666666667%;text-align:center;font-size:14px}
+.user-block-top>ul>li a span.badge{margin-top:-5px;position:absolute;}
+.user-block-top>ul>li.user-block-money{width:25%!important;}
+.user-block-top>ul>li.user-block-money p{margin-bottom:0px;line-height:inherit}
+.user-block-top>ul>li>a{display:block;border-left:1px solid #F1F1F1;font-size:12px}
+.user-block-top>ul>li:first-child>a{border-left:0}
+.user-block-top>ul>li>a>i{display:block;color:#999;font-size:26px;line-height:30px}
+.personal-btn{margin:10px;border:1px solid #e9e9e9;border-radius:44px;color:#333;text-align:center;font-size:16px;line-height:44px}
+.user-panel-list{display:flex}
+.user-panel-list ul{padding:0;list-style:none}
+.user-panel-list li{float:left;overflow:hidden;padding:.2rem 0;width:25%;height:75px;border-right:thin solid #eee;border-bottom:thin solid #eee;background:#fff;text-align:center}
+.user-panel-list li i{float:right;color:#999}
+.user-panel-list li span{display:inline-block;margin:2px;width:2rem;height:2rem;vertical-align:top;font-size:24px}
+.user-panel-sub li p{height:1rem;color:#888;font-size:12px;line-height:1rem}
+.text-little{color:#999}
+
+.member-page{position:absolute;margin:0;background:#f3f3f3;}
+.member-page .headinfo{position:relative;display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;padding-top:1rem;height:auto;border-top:1px #b2423f solid;border-bottom:1px #fa9d9d solid;-webkit-box-pack:justify;-ms-flex-pack:justify;-webkit-justify-content:space-between;justify-content:space-between;-webkit-box-align:center;-ms-flex-align:center;-webkit-align-items:center;}
+.member-page .headinfo .setbtn{position:absolute;top:.6rem;right:.6rem;width:1.2rem;height:1.2rem;color:#fff;text-align:center;line-height:1.2rem;}
+.member-page .headinfo .child{padding-bottom:1.2rem;width:30%;height:auto;text-align:center;}
+.member-page .headinfo .child.userinfo{width:70%;color:#fff;}
+.member-page .headinfo .child.userinfo .face{margin:auto;padding:.1rem;width:2.8rem;height:2.8rem;border-radius:2.8rem;background:#fff;}
+.member-page .headinfo .child.userinfo .face img{display:block;width:2.6rem;height:2.6rem;border-radius:2.6rem;}
+.member-page .headinfo .child.userinfo .face.radius{border-radius:.5rem;}
+.member-page .headinfo .child.userinfo .face.radius img{border-radius:.5rem;}
+.member-page .headinfo .child.userinfo .name{overflow:hidden;padding-top:.2rem;height:1.3rem;color:inherit;text-align:center;text-overflow:ellipsis;white-space:nowrap;}
+.member-page .headinfo .child.userinfo .level{color:inherit;text-align:center;}
+.member-page .headinfo .child .title{padding-top:1.2rem;color:#fff;text-align:center;}
+.member-page .headinfo .child .num{overflow:hidden;color:#fef31f;text-align:center;text-overflow:ellipsis;white-space:nowrap;}
+.member-page .headinfo .child .btn{margin:.2rem auto 0;padding:0;width:2.6rem;height:1.2rem;border:1px solid #fff;border-radius:1rem;color:#fff;text-align:center;line-height:1.2rem;}
+.member-page .headinfo.style-2{padding:1rem;}
+.member-page .headinfo.style-2 .face{position:relative;float:left;display:-webkit-box;display:-webkit-flex;display:flex;box-sizing:border-box;width:4rem;height:4rem;border-radius:4rem;-webkit-flex-shrink:0;-ms-flex:0 0 auto;-webkit-flex-shrink:0;flex-shrink:0;-webkit-box-lines:single;-moz-box-lines:single;-webkit-flex-wrap:nowrap;flex-wrap:nowrap;-webkit-box-align:center;-webkit-align-items:center;align-items:center;}
+.member-page .headinfo.style-2 .face img{display:block;width:4rem;height:4rem;border-radius:4rem;}
+.member-page .headinfo.style-2 .face.radius{border-radius:.5rem;}
+.member-page .headinfo.style-2 .face.radius img{border-radius:.5rem;}
+.member-page .headinfo.style-2 .inner{position:relative;display:-webkit-box;display:-webkit-flex;display:flex;display:block;overflow:hidden;box-sizing:border-box;padding-left:.5rem;width:100%;height:auto;color:#fff;-webkit-box-flex:1;-ms-flex:1;}
+.member-page .headinfo.style-2 .inner .name{line-height:1rem;}
+.member-page .headinfo.style-2 .inner .credit,.member-page .headinfo.style-2 .inner .level{line-height:.9rem;}
+.member-page .headinfo.style-2 .inner span{color:#fef31f;}
+.member-header{position:absolute;bottom:0;left:50%;z-index:80;overflow:hidden;margin-left:-3.5rem;width:7rem;height:3rem;border:2px solid #f55;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;background:#f55;-webkit-transform:scale(10,10);-moz-transform:scale(10,10);-o-transform:scale(10,10);transform:scale(10,10);-webkit-transform-origin:center bottom;-moz-transform-origin:center bottom;-o-transform-origin:center bottom;transform-origin:center bottom;ms-transform:scale(10,10);-ms-transform-origin:center bottom;}
+.member-header-group{display:block; overflow:hidden; padding-bottom:10px;}
+.member-header-group a{ text-align:center}
+</style>
+
+
+
+<div class="member-page" style="overflow:hidden;height:140px;position:relative;background:#fff;margin-top:-50px;">
+	<div class="headinfo" style="z-index:100;border:none;">
+            
+       <div class="child userinfo">
+            <a href="<{:U('shop/about')}>" data-nocache="true" style="color:white;">
+                <div class="face"><img src="<{:config_img($SHOP['logo'])}>"></div>
+                <div class="name"><{$SHOP.shop_name}> ID-<{$SHOP['shop_id']}></div>
+            </a>
+            <div class="level">
+                 <if condition="$SHOP['is_ele_pei'] eq 0">
+                    配送方式：平台配送
+                 <else/>
+                    配送方式： 商家自主配送
+                 </if>
+            </div>
+        </div>
+		<a class="setbtn" href="<{:U('shop/about')}>" data-nocache="true"><i class="iconfont icon-guanli"></i></a>
+                
+		<div class="child">
+			<div class="title">商户状态</div>
+			<div class="num"><if condition="$ELE['is_open'] eq 1">营业中<else/>打样中</if></div>
+			<a href="<{:U('ele/gears')}>"><div class="btn">操作</div></a>
+         </div>
+         <div class="child">
+			<div class="title">订单数量</div>
+			<div class="num"><{$count['ele_order']}></div>
+			<a href="<{:U('ele/order',array('aready'=>'2'))}>"><div class="btn">查看</div></a>
+         </div>
+	</div>
+	<div class="member-header"></div>
+</div>
+
+
+<div class="user-block-top margin-top">
+    <h2>
+        <a href="<{:U('money/cash',array('type'=>'user'))}>" class="float-right text-small margin-right">申请提现</a>
+        <b>商家钱包</b>
+    </h2>
+    <ul class="x12">
+        <li class="user-block-money"><a href="<{:U('money/index')}>"><p>商户总资金</p><em class="text-red text-big">&yen;<{:round($MEMBER['gold']/100,2)}></em></a></li>
+        <li class="user-block-money"><a href="<{:U('money/index')}>"><p>今日收入</p><em class="text-red text-big">&yen;<{:round($counts['money_day']/100,2)}></em></a></li>
+        <li class="user-block-money"><a href="<{:U('money/index')}>"><p>昨日收入</p><em class="text-red text-big">&yen;<{:round($counts['money_day_yesterday']/100,2)}></em></a></li>
+        <li class="user-block-money"><a href="<{:U('money/index')}>"><p>会员余额</p><em class="text-red text-big">&yen;<{:round($MEMBER['money']/100,2)}></em></a></li>
+    </ul>
+</div>
+
+
+
+<div class="user-block-top margin-top">
+    <h2>订单管理</h2>
+    <ul class="x12">
+        <li><a href="<{:U('ele/order',array('aready'=>'2'))}>"><if condition="$count['ele_order_2']"><span class="badge bg-red"><{$count['ele_order_2']}></span></if><i class="iconfont icon-daifukuan1"></i>已付款</a></li>
+        <li><a href="<{:U('ele/order',array('aready'=>'8'))}>"><if condition="$count['ele_order_8']"><span class="badge bg-red"><{$count['ele_order_8']}></span></if><i class="iconfont icon-daifukuan2"></i>已确认</a></li>
+        <li><a href="<{:U('ele/order',array('aready'=>'16'))}>"><if condition="$count['ele_order_16']"><span class="badge bg-red"><{$count['ele_order_16']}></span></if><i class="iconfont icon-tuikuan1"></i>已接单</a></li>
+        <li><a href="<{:U('ele/order',array('aready'=>'32'))}>"><if condition="$count['ele_order_32']"><span class="badge bg-red"><{$count['ele_order_32']}></span></if><i class="iconfont icon-peisong"></i>配送中</a></li>
+        <li><a href="<{:U('ele/order',array('aready'=>'64'))}>"><if condition="$count['ele_order_64']"><span class="badge bg-gray"><{$count['ele_order_64']}></span></if><i class="iconfont icon-kecheng"></i>待评价</a></li>
+        <li><a href="<{:U('ele/order',array('aready'=>'128'))}>"><if condition="$count['ele_order_128']"><span class="badge bg-gray"><{$count['ele_order_128']}></span></if><i class="iconfont icon-kecheng"></i>已完成</a></li>
+    </ul>
+</div>
+
+
+
+
+
+<div class="blank-10 bg"></div>
+<div class="panel-list">
+	<ul>
+        <li>
+            <a href="<{:U('shop/about')}>"><span class="iconfont icon-guanli"></span>商户设置<i class="iconfont icon-angle-right"></i></a>
+        </li>
+        <li>
+          <a href="<{:U('ele/index')}>"><span class="iconfont icon-waimai1"></span>菜品列表 <i class="iconfont icon-angle-right"></i> </a>
+        </li>
+        <li>
+          <a href="<{:U('ele/create')}>"><span class="iconfont icon-fabu"></span>添加菜品 <i class="iconfont icon-angle-right"></i> </a>
+        </li>
+        <li>
+          <a href="<{:U('ele/elecate')}>"><span class="iconfont icon-lipin4"></span>外卖分类 <i class="iconfont icon-angle-right"></i> </a>
+        </li>
+        <li>
+          <a href="<{:U('ele/gears')}>"><span class="iconfont icon-guanli"></span>设置  【营业时间段： <{$ELE['busihour']|default="未设置"}>】 <i class="iconfont icon-angle-right"></i> </a>
+        </li>
+        <li>
+          <a href="<{:U('ele/order',array('status'=>2))}>"><span class="iconfont icon-kecheng"></span>外卖订单 <i class="iconfont icon-angle-right"></i> </a>
+        </li>
+        <li><a href="<{:U('passport/logout')}>"><span class="iconfont icon-tuichu2"></span>注销登录<i class="iconfont icon-angle-right"></i></a></li>
+	</ul>
+</div>
+<div class="blank-10 bg"></div>
+
+<include file="public:footer"/>

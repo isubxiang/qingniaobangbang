@@ -1,0 +1,57 @@
+.popup-mask {
+    position: fixed;
+    z-index: 101;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: #888;
+    opacity: 0.5;
+}
+
+.popup-container {
+    position: fixed;
+    z-index: 102;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 0;
+}
+
+.popup .container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    min-height: 40rpx;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.popup .bar {
+    display: flex;
+    border-bottom: 1rpx solid #f0f0f0;
+    height: 78rpx;
+    line-height: 78rpx;
+}
+
+.popup .side {
+    padding: 0 30rpx;
+    font-size: 32rpx;
+    color: #3aabea;
+}
+
+.popup .cancel {
+    color: #666;
+}
+
+.popup .bar .title {
+    flex: 1;
+    font-size: 36rpx;
+    text-align: center;
+}
+
+@import "../wuBaseWxss/1.wxss";
+
+@import "../wuBaseWxss/0.wxss";

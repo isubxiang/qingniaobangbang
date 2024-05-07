@@ -1,0 +1,122 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+     	<li class="li1">设置</li>
+        <li class="li2">上传设置</li>
+        <li class="li2">参数配置</li>
+    </ul>
+</div>
+<form target="x-frame" action="<{:U('upset/edit',array('id'=>$detail['id']))}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                <tr>
+                    <td class="tu-left-td">类型：</td>
+                    <td class="tu-right-td"><{$detail.type|default=''}>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">存储地区选择<{$detail[para][region]|default=''}></td>
+                    <td class="tu-right-td">
+                    <label>
+                    	<input type="radio" name="para[region]" <eq name="detail[para][region]" value="0">checked="checked"</eq> value="0"/>华东
+                    </label>
+                    <label>
+                    	<input type="radio" name="para[region]" <eq name="detail[para][region]" value="1">checked="checked"</eq> value="1"/>华北
+                    </label>
+                    <label>
+                    	<input type="radio" name="para[region]" <eq name="detail[para][region]" value="1">checked="checked"</eq> value="2"/>华南
+                    </label>
+                    <label>
+                    	<input type="radio" name="para[region]" <eq name="detail[para][region]" value="1">checked="checked"</eq> value="3"/>北美
+                    </label>
+                    <label>
+                    	<input type="radio" name="para[region]" <eq name="detail[para][region]" value="1">checked="checked"</eq> value="4"/>东南亚
+                    </label>
+                    <code>地区您申请存储的时候选择的哪里就选择哪里，否则上传失败</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">是否开启水印：</td>
+                    <td class="tu-right-td">
+                    	 <label>
+                            <input type="radio" name="para[water]" <eq name="detail[para][water]" value="0">checked="checked"</eq> value="0"/>不开启
+                        </label>
+                        <label>
+                            <input type="radio" name="para[water]" <eq name="detail[para][water]" value="1">checked="checked"</eq> value="1"/>开启
+                        </label>
+                        <code>水印图片调用附件位置的水印图片请在附件设置那边配置</code>
+                    </td>
+                </tr>
+                
+                
+                <tr>
+                    <td class="tu-left-td">accessKey</td>
+                    <td class="tu-right-td"><input type="text" name="para[accessKey]" value="<{$detail[para][accessKey]|default=''}>" class="tudou-manageInput tudou-manageInput2" />
+                    <code>上面显示那个，不要填写反了，不然无法上传，否则上传失败</code>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tu-left-td">secrectKey：</td>
+                    <td class="tu-right-td"><input type="text" name="para[secrectKey]" value="<{$detail[para][secrectKey]|default=''}>" class="tudou-manageInput tudou-manageInput2" />
+                    <code>下面隐藏那个，注意这一定不要填写反了，否则上传失败</code>
+                    </td>
+                </tr>
+				<tr>
+                    <td class="tu-left-td">domain</td>
+                    <td class="tu-right-td"><input type="text" name="para[domain]" value="<{$detail[para][domain]|default=''}>" class="tudou-manageInput" />
+                    <code>您在七牛云通过审核的域名</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">域名类型https：</td>
+                    <td class="tu-right-td">
+                    	 <label>
+                            <input type="radio" name="para[https]" <eq name="detail[para][https]" value="0">checked="checked"</eq> value="0"/>http
+                        </label>
+                        <label>
+                            <input type="radio" name="para[https]" <eq name="detail[para][https]" value="1">checked="checked"</eq> value="1"/>https【七牛云那边需要配置ssl，如果您是小程序应用我建议您这边配置】
+                        </label>
+                        <code>【七牛云跟本地模式都生效】如果这里勾选https就返回https的图否则就是http的这个取决于您七牛云那边是如何配置的</code>
+                    </td>
+                </tr>
+                
+                
+				<tr>
+                    <td class="tu-left-td">bucket：</td>
+                    <td class="tu-right-td"><input type="text" name="para[bucket]" value="<{$detail[para][bucket]|default=''}>" class="tudou-manageInput" />
+                    <code>空间名，你七牛云创建的空间名称，必须跟后台一致</code>
+                    </td>
+                </tr>
+                
+                 
+                
+                
+				<tr>
+                    <td class="tu-left-td">timeout：</td>
+                    <td class="tu-right-td"><input type="text" name="para[timeout]" value="<{$detail[para][timeout]|default=''}>" class="tudou-manageInput" />
+                    <code>超时设置，默认不要更改</code>
+                    </td>
+                </tr>				
+                <tr>
+                    <td class="tu-left-td">是否启用：</td>
+                    <td class="tu-right-td">
+                        <label>
+                            <input type="radio" <?php if($detail['status'] == 0) echo "checked='checked'";?> name="status" value="0"  />不启用
+                        </label>
+                        <label>
+                            <input type="radio" <?php if($detail['status'] == 1) echo "checked='checked'";?> name="status" value="1"  />启用
+                        </label>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认编辑" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

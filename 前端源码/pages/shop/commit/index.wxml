@@ -1,0 +1,185 @@
+<view class="container">
+    <view class="page-mask" wx:if="{{isBusy}}"></view>
+    <dialog bindclose="onDialogClose" hidden="{{dialogType!='authorize'}}" maskOpacity="0.5">
+        <view class="dialog-authorize">
+            <view class="content">
+                <view class="caption">校园跑腿申请获取以下权限：</view>
+                <view class="desc">• 获得你的公开信息（昵称、头像等）</view>
+            </view>
+            <button bindgetuserinfo="onAuthorizeCallback" openType="getUserInfo">立即授权</button>
+        </view>
+    </dialog>
+    <popup bindcancel="onPopupCancel" bindconfirm="onPopupConfirm" height="174" hidden="{{popupType!='expired'}}">
+        <view class="popup popup-slider popup-expired">
+            <text>{{expiredTimes[expiredIndex]}}小时</text>
+            <view class="slider">
+                <slider activeColor="#06c1ae" bindchange="onExpiredSliderChange" max="{{expiredTimes.length}}" value="{{expiredIndex}}"></slider>
+            </view>
+        </view>
+    </popup>
+    <popup bindcancel="onPopupCancel" bindconfirm="onPopupConfirm" height="220" hidden="{{popupType!='remark'}}">
+        <view class="popup popup-remark">
+            <textarea bindblur="onRemarkContentChanged" bindconfirm="onRemarkContentChanged" cursorSpacing="20" focus="{{popupType=='remark'}}" placeholder="口味、偏好等要求" value="{{remarkValue||''}}"></textarea>
+        </view>
+    </popup>
+    <view class="header">
+        <view bindtap="onAddressTap" class="row dest{{!address.Address?'':' addr'}}" hoverClass="navigator-hover">
+            <view class="iconfont icon-locationfill"></view>
+            <view class="info">
+                <text class="caption" wx:if="{{!address.Address}}">选择收货地址</text>
+                <block wx:else>
+                    <text class="caption">{{address.Address}}</text>
+                    <view class="contact">{{address.Linkman}}<text class="mobile" wx:if="{{address.Phone}}">({{address.Phone}})</text>
+                    </view>
+                </block>
+            </view>
+            <text class="iconfont icon-right_light arrow"></text>
+        </view>
+        <view class="hr"></view>
+        <view class="row date" hoverClass="navigator-hover">
+            <picker bindchange="onDeliveryTimeChange" bindcolumnchange="onDeliveryTimeColumnChange" mode="multiSelector" range="{{deliveryTimes}}" rangeKey="text" value="{{deliveryTimeIndex}}">
+                <view class="picker">
+                    <view class="iconfont icon-timefill"></view>
+                    <view class="text">{{deliveryTimeValue.text}}
+            <text class="font-blue" wx:if="{{!deliveryTimeValue.value}}">（预计{{util.formatDate(util.addDate(null,30,'m'),'m','time')}}送达）</text>
+                        <text wx:else>送达</text>
+                    </view>
+                    <text class="iconfont icon-right_light arrow"></text>
+                </view>
+            </picker>
+        </view>
+    </view>
+    <view class="body">
+        <view class="shop">
+            <image mode="aspectFill" src="{{model.ShopLogoSrc||'/assets/img/nopic.png'}}"></image>
+            <text class="name">{{model.ShopName}}</text>
+        </view>
+        <view class="menu">
+            <block wx:for="{{carts.Items}}" wx:key="Id">
+                <view class="hr" wx:if="{{index>0}}"></view>
+                <view class="item">
+                    <image mode="aspectFill" src="{{item.PictureUrl||'/assets/img/nopic.png'}}"></image>
+                    <view>
+                        <text class="ellipsis name">{{item.Name}}</text>
+                        <text class="quantity">× {{item.Quantity}}</text>
+                    </view>
+                    <text class="money money-rmb">{{item.Quantity*item.Price}}</text>
+                </view>
+            </block>
+            <view class="line"></view>
+        </view>
+        <view class="section prop cost">
+            <view class="hr"></view>
+            <view class="fee">
+                <view class="row freight">
+                    <text class="caption">跑腿费<text class="special">{{model.is_ele_pei?'商家配送':'平台专送'}}</text>
+                    </text>
+                    <text class="text" wx:if="{{model.MinFreightMoney>0}}">{{model.FreightMoneyCaption?model.FreightMoneyCaption+'起送':''}}<text class="money money-rmb">{{logistics}}</text>
+                    </text>
+                    <text class="text" wx:else>免配送费</text>
+                </view>
+                <view class="row package" wx:if="{{moneyPackage}}">
+                    <text class="caption">包装费</text>
+                    <text class="text">
+                        <text class="money money-rmb">{{moneyPackage}}</text>
+                    </text>
+                </view>
+            </view>
+
+
+            <view class="hr"></view>
+            <view class="row coupon" hoverClass="navigator-hover" wx:if="{{redpacket_money}}">
+                <text class="caption">可使用红包</text>
+                <text class="text text-value">{{redpacket_money}} - {{redpacket_info}} </text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+        </view>
+        
+        <view class="section prop">
+            <view bindtap="onRemarkTap" class="row remark" hoverClass="navigator-hover">
+                <text class="capiton">备注</text>
+                <text class="ellipsis text{{remarkValue?' text-value':''}}">{{remarkValue||'口味、偏好等要求'}}</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+
+
+            <view class="hr"></view>
+            <view bindtap="onLimitTap" class="row tip" hoverClass="navigator-hover">
+                <text class="caption">抢单限制</text>
+                <text class="text{{errandGenderLimit&&errandGenderLimit.Value?' text-value':''}}">{{errandGenderLimit.Name}}</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+
+            <view class="hr"></view>
+            <view bindtap="onOrderTypeTap" class="row tip" hoverClass="navigator-hover">
+                <text class="caption">选择送货方式</text>
+                <text class="text{{errandOrderType&&errandOrderType.Value?' text-value':''}}">{{errandOrderType.Name}}</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+
+
+            <view class="hr"></view>
+            <view bindtap="onExpiredTap" class="row expired" hoverClass="navigator-hover">
+                <text class="caption">订单过期</text>
+                <text class="text{{expiredValue&&expiredValue<24?' text-value':''}}">指定出发时间<text class="font-blue">{{expiredValue||24}}小时</text>内未接单</text>
+                <text class="iconfont icon-right_light arrow"></text>
+            </view>
+        </view>
+        <view class="agree">
+            <text class="iconfont icon-roundcheck{{acceptAgreement?'fill':''}}"></text>同意并接受<text bindtap="onServiceContractLink" class="contract">《跑腿服务协议》</text>
+        </view>
+    </view>
+    <form bindsubmit="onForm" reportSubmit="true">
+        <view class="footer">
+            <text class="payment">待支付<text class="money money-rmb">{{moneyPayable}}</text>
+            </text>
+            <button formType="submit">提交订单</button>
+        </view>
+    </form>
+</view>
+<wxs module="enums" src="../../../assets/wxs/enums.wxs" />
+<wxs module="util" src="../../../assets/wxs/util.wxs" />
+
+<form bindreset="formReset" bindsubmit="formSubmit" reportSubmit="true">
+        <view bindtap="yczz" class="drawer_screen" wx:if="{{showModal}}"></view>
+        <view class="drawer_box" wx:if="{{showModal}}">
+            <view class="drawer_title">请选择支付方式</view>
+            <view class="weui-cells weui-cells_after-title">
+                <radio-group bindchange="radioChange" class="radio-group" name="radiogroup">
+                    <label>
+                        <view class="weui-cell">
+                            <view class="zfimg">
+                                <image src="/assets/img/weixin.png"></image>
+                            </view>
+                            <view class="weui-cell__bd">微信支付</view>
+                            <view class="weui-cell__ft">
+                                <radio checked="{{zffs==1}}" value="wxzf"></radio>
+                            </view>
+                        </view>
+                    </label>
+                    <label>
+                        <view class="weui-cell" style="border-top:1rpx solid #e6e6e6;">
+                            <view class="zfimg">
+                                <image src="/assets/img/yeqb.png"></image>
+                            </view>
+                            <view class="weui-cell__bd">余额支付
+                <text class="yetext">您的余额 {{wallet}}</text>
+                            </view>
+                            <view class="weui-cell__ft">
+                                <radio checked="{{zffs==2}}" color="#FF9700" value="yezf"></radio>
+                            </view>
+                        </view>
+                    </label>
+                </radio-group>
+            </view>
+         
+            <button bindtap="onFormSubmit" class="{{btntype}}" disabled="{{zfz}}" formType="submit">
+                <view wx:if="{{!zfz&&zffs!=4}}">确定支付
+            <text class="zftext">￥{{moneyPayable}}</text>
+                </view>
+                <view wx:if="{{zfz}}">
+                    <text class="zfztext">支付中...</text>
+                </view>
+            </button>
+        </view>
+    </form>

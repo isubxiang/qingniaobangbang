@@ -1,0 +1,11 @@
+<view class="container">
+    <form bindsubmit="onFormSubmit" reportSubmit="true">
+        <view class="body">
+            <input focus="{{!multiple}}" name="input" placeholder="{{placeholder||'请输入'}}" value="{{value}}" wx:if="{{!multiple}}"></input>
+            <textarea focus="{{multiple}}" name="textarea" placeholder="{{placeholder||'请输入'}}" value="{{value}}" wx:else></textarea>
+        </view>
+        <view class="footer">
+            <button formType="submit">确定</button>
+        </view>
+    </form>
+</view>

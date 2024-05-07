@@ -1,0 +1,177 @@
+<view class="container">
+    <modal bindconfirm="onModalConfirm" confirmColor="#06c1ae" confirmText="我知道了" hidden="{{modalType!='more'}}" noCancel="{{true}}">
+        <view class="dialog-more">
+            <view class="item">
+                <text class="caption">我要下单</text>
+                <view class="desc">
+                    <view>没有我想要购买的商品和店铺？</view>
+                    <view>
+                        <navigator url="/pages/errand/apply/index">点击这里</navigator>去填写要求，让同学帮你买。</view>
+                </view>
+            </view>
+            <view class="item item-b">
+                <text class="caption">我要开店</text>
+                <view class="desc">
+                    <view>店铺系统全新上线，欢迎开店入驻。</view>
+                    <view>
+                        <button openType="contact" plain="true">点击这里</button>与客服人员联系。</view>
+                </view>
+            </view>
+        </view>
+    </modal>
+    <popup bindcancel="onPopupCancel" height="320" hidden="{{popupType!='cart'}}" showCancelButton="{{false}}" showConfirmButton="{{false}}" showTitle="{{false}}">
+        <view class="popup popup-cart">
+            <view class="top">
+                <text class="title">已选商品</text>
+                <view bindtap="onCartClear" class="clear">清空购物车</view>
+            </view>
+            <scroll-view class="list" scrollY="true" style="height:440rpx">
+                <block wx:for="{{carts.Items}}" wx:key="index">
+                    <view class="item">
+                        <view class="name">
+                            <text class="ellipsis{{item.IsSale?'':' off'}}">{{item.Name}}</text>
+                            <view class="offsale" wx:if="{{!item.IsSale}}">该商品已下架</view>
+                        </view>
+                        <text class="money money-rmb">{{item.Price}}</text>
+                        <view class="adjuster">
+                            <view bindtap="onCartMinusTap" data-index="{{index}}">
+                                <text class="iconfont icon-minus_cart"></text>
+                            </view>
+                            <text class="quantity">{{item.Quantity||1}}</text>
+                            <view bindtap="onCartPlusTap" data-index="{{index}}">
+                                <text class="iconfont icon-plus_cart"></text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="hr"></view>
+                </block>
+                <view class="empty" wx:if="{{carts.Items.length<=3}}">
+                    <view wx:if="{{carts.Items.length<=3&&carts.Items.length>0}}">继续添加更多商品吧</view>
+                    <view wx:if="{{carts.Items.length==0}}">购物车空空如也</view>
+                </view>
+            </scroll-view>
+        </view>
+    </popup>
+    <view class="header">
+        <view class="shop-list" wx:if="{{options.type&&options.type.length&&model.Shops.length||options.scene&&options.scene.length&&model.Shops.length>1}}">
+            <scroll-view scrollX="true">
+                <view class="shops" style="width:{{model.Shops.length*82+50+20}}px">
+                    <view bindtap="onShopItemTap" class="item{{shopIndex==index?' actived':''}}" data-index="{{index}}" hoverClass="navigator-hover" wx:for="{{model.Shops}}" wx:key="Id">
+                        <text class="closing" wx:if="{{item.IsClosed}}">已打烊</text>
+                        <image bindtap="onPing" data-uid="{{item.uid}}" class="logo{{item.IsClosed?' closing':''}}" mode="aspectFill" src="{{item.LogoSrc||'/assets/img/nopic.png'}}"></image>
+                        <text class="name">{{item.Name}}</text>
+                        <view class="line"></view>
+                    </view>
+                    <view bindtap="onMoreShopTap" class="item more" hoverClass="navigator-hover">
+                        <view>
+                            <text class="dot"></text>
+                        </view>
+                    </view>
+                </view>
+            </scroll-view>
+        </view>
+        <view class="shop-single" wx:if="{{(options.id||options.scene)&&model.Shops&&model.Shops.length==1}}">
+            <image bindtap="onPing" data-uid="{{model.Shops[0].uid}}" class="logo" mode="aspectFill" src="{{model.Shops[0].LogoSrc||'/assets/img/nopic.png'}}"></image>
+            <view class="info">
+                <view class="name">{{model.Shops[0].Name}}</view>
+                <view class="desc">{{model.Shops[0].Description||model.Shops[0].Address}}</view>
+            </view>
+        </view>
+        <view style="height:{{model.GroupInfo.HeaderHeight*2}}rpx" wx:if="{{options.groupId&&model.GroupInfo}}">
+            <image class="intro" mode="aspectFill" src="{{model.GroupInfo.BgImageSrc}}"></image>
+        </view>
+    </view>
+    <view class="body" style="background:{{options.groupId&&model.GroupInfo&&options.groupId&&model.GroupInfo.BackgroundColor?model.GroupInfo.BackgroundColor:'#06c1ae'}}">
+        <scroll-view class="menu" scrollY="true" wx:if="{{!options.groupId||model.Categories.length>1}}">
+            <view class="bd" style="min-height:{{screenHeight-62-10-35}}px">
+
+                <view bindtap="onQuery" class="item" data-shopId="{{model.Shops[0].shop_id}}" data-shopName="{{model.Shops[0].shop_name}}">
+                    <text>
+                        <text class="iconfont icon-search"></text>搜索{{search}}</text>
+                </view>
+
+                <view bindtap="offQuery" class="item" data-shopId="{{model.Shops[0].shop_id}}" wx:if="{{search}}">
+                    <text>
+                        <text class="iconfont icon-close"></text>关闭搜索</text>
+                </view>
+
+
+
+                <view bindtap="onMenuItemTap" class="item{{categoryIndex==0?' actived':''}}" data-index="0">
+                    <text>
+                        <text class="iconfont icon-pricetag"></text>全部</text>
+                </view>
+                <view bindtap="onMenuItemTap" class="item{{categoryIndex==index+1?' actived':''}}" data-index="{{index+1}}" wx:for="{{model.Categories}}" wx:key="Id">
+                    <text class="num" wx:if="{{item.Quantity}}">{{item.Quantity}}</text>
+                    <text>{{item.Name}}</text>
+                </view>
+            </view>
+        </scroll-view>
+        <scroll-view class="list" scrollY="true" style="{{!options.groupId||model.Categories.length>1?null:'margin:0 20rpx'}}">
+            <view class="item" wx:for="{{items}}" wx:key="Id" wx:if="{{item.Id}}">
+                <image catchtap="modelpop" data-id="{{item.Id}}" data-desc="{{item.desc}}" data-name="{{item.Name}}" data-img="{{item.PictureUrl}}" class="img" mode="aspectFill" src="{{item.PictureUrl||'/assets/img/nopic.png'}}"></image>
+                <view class="info">
+                    <view class="name">{{item.Name}}</view>
+                    <view class="desc" wx:if="{{item.Description}}">{{item.Description}}</view>
+                    <view class="stat">
+                        <text>月售{{item.SaleQuantity}}</text>
+                        <text>库存{{item.num}}</text>
+                    </view>
+                    <view class="price">
+                        <view class="nums">
+                            <text class="money money-rmb">{{item.Price}}</text>
+                            <text class="money delete" wx:if="{{item.PriceMarket&&item.PriceMarket!=item.Price}}">原价 ¥{{item.PriceMarket}}</text>
+                        </view>
+                        <view class="adjuster">
+                            <block wx:if="{{item.Quantity}}">
+                                <view bindtap="onListMinusTap" data-index="{{index}}">
+                                    <text class="iconfont icon-minus_cart"></text>
+                                </view>
+                                <text class="quantity">{{item.Quantity||1}}</text>
+                            </block>
+                            <view bindtap="onListPlusTap" data-index="{{index}}">
+                                <text class="iconfont icon-plus_cart"></text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </view>
+            <view class="empty" wx:if="{{!items.length}}">
+                <text class="iconfont icon-time"></text>
+                <view>加载中或者暂无商品/或者关闭搜索试试…</view>
+            </view>
+        </scroll-view>
+    </view>
+    <form bindsubmit="onFormSubmit" reportSubmit="true">
+        <view class="footer">
+            <view bindtap="onCartTap" class="cart">
+                <text class="num" wx:if="{{carts.Items.length}}">{{carts.Quantity}}</text>
+                <text class="iconfont icon-cart"></text>
+            </view>
+            <view class="payment">
+                <view class="price">
+                    <view class="money money-rmb">{{moneyPayable}}</view>
+                    <text class="desc" wx:if="{{log.logistics>0}}">送费{{log.logistics}} </text>
+                    <text class="desc" wx:if="{{log.logistics_full>0}}">满{{log.logistics_full}}免运费 </text>
+                    <text class="money money-rmb">{{log.MinFreightMoney}}</text>起送
+                    <text class="desc" wx:if="{{log.logistics==0}}">免配送费</text>
+                </view>
+
+                <button class="submit" disabled="{{!carts.Items.length||model.Shops[shopIndex].IsClosed}}" formType="submit">{{model.Shops[shopIndex].IsClosed?'已打烊':'去结算'}}</button>
+            </view>
+        </view>
+    </form>
+</view>
+
+
+<!--弹出框-->
+<modal bindcancel="cancel" bindconfirm="modalConfirm" confirmColor="#06c1ae" hidden="{{hidden}}" title="{{modelName}}">
+  <view class="model-img">
+    <image style="width:100%" src="{{modelImg}}"></image>
+  </view>
+  <view class="model-name">{{modelName}}</view>
+  <view class="model-number">
+    <view class="number-text2">简介：{{modelDesc}}</view>
+  </view>
+</modal>
+<!--弹出框结束-->

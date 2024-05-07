@@ -1,0 +1,25 @@
+<view bindtap="chooseRegion" class="ms-head">
+    <view class="ms-head-text que-color">
+        <text class="ms-nav-dt">{{selectRegionName}}</text>
+        <image class="ms-head-img" src="/assets/img/exam-bottom.png"></image>
+    </view>
+    <view class="ms-head-text que-color">
+        <text class="ms-nav-mn">{{selectYear}}</text>
+        <image class="ms-head-img" src="/assets/img/exam-bottom.png"></image>
+    </view>
+</view>
+<view class="ms-body que-box">
+    <view bindtap="choosePaper" class="que-list" data-id="{{item.id}}" data-name="{{item.paperName}}" wx:for="{{paperList}}" wx:key="id">
+        <image class="cha-new" src="/assets/img/new.png" wx:if="{{item.newFlag==1}}"></image>
+        <view class="que-list-title">{{item.paperName}}</view>
+        <view class="que-list-bottom">
+            <view class="ms-nav-content">共{{item.totalQuest}}题
+                <text class="que-margin">{{item.examNum}}人做过</text>
+            </view>
+            <view class="">
+                <text class="que-list-money">{{item.priceStr}}</text>
+            </view>
+        </view>
+    </view>
+</view>
+<include src="../../../template/exam-region-tmpl.wxml"></include>

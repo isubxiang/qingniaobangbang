@@ -1,0 +1,76 @@
+<include  file='public:header'/>
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">拼团</li>
+        <li class="li2">拼团订单</li>
+        <li class="li2 li3">订单列表</li>
+    </ul>
+</div>
+<p class="attention"><span>注意：</span>拼团订单列表</p>
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<tr>
+                    <td class="tu-left-td">订单号：</td>
+                    <td class="tu-right-td">订单号：<{$detail['order_num']}></td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">易完成状态：</td>
+                    <td class="tu-right-td">
+                       <if condition="$detail['state'] eq 1">买家下单</if>
+                       <if condition="$detail['state'] eq 2">买家付款</if>
+                       <if condition="$detail['state'] eq 3">交易完成</if>
+                       <if condition="$detail['state'] eq 4">交易关闭</if>
+                       <if condition="$detail['state'] eq 5">交易失效</if>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">团购ID：</td>
+                    <td class="tu-right-td">
+                       <{$detail['group_id']}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">下单时间：</td>
+                    <td class="tu-right-td">
+                      <{$detail.time|date='Y-m-d H:i',###}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">付款时间：</td>
+                    <td class="tu-right-td">
+                      <{$detail.pay_time|date='Y-m-d H:i',###}>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">收货信息：</td>
+                    <td class="tu-right-td">
+                      		<p><span>买家信息：</span><{$detail['nick_name']}></p>
+							<p><span>收货信息：</span><{$detail['receive_name']}>--<{$detail['receive_tel']}>--<{$detail['receive_address']}></p>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">买家留言：</td>
+                    <td class="tu-right-td">
+                      <{$detail.note}>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">总金额：</td>
+                    <td class="tu-right-td">
+                      （货价<{$detail['price']}>*<{$detail['goods_num']}>） = ¥<{$detail['money']}>
+                    </td>
+                </tr>
+                 
+                        
+                        
+                        
+            </table>
+        </div>
+    </div>
+</form>
+<include  file='public:footer'/>       
+

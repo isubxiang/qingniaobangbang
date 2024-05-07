@@ -1,0 +1,19 @@
+<template name="acc-person-tmpl">
+    <view class="contact" wx:if="{{personFlag}}">
+        <view class="weui-cells weui-cells_form">
+            <view class="weui-cell">
+                <view class="weui-cell__hd">
+                    <label class="weui-label">接单人员</label>
+                </view>
+                <view bindtap="phoneCall" class="weui-cell__bd" data-phone="{{accPhone}}">
+                    <view class="change-add dial-box">
+                        <view>
+                            <view class="pic-adddet">{{accPhone}}</view>
+                        </view>
+                        <image class="dial-img" src="/img/dial.png"></image>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+</template>

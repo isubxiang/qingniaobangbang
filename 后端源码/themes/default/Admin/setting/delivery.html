@@ -1,0 +1,156 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">基本设置</li>
+        <li class="li2 li3">配送员配置</li>
+    </ul>
+</div>
+
+<style>
+.tu-left-td{ width: 200px;}
+.profit{ text-align:center; color:#000; font-weight:bold; background:#ECECEC;}
+</style>
+
+
+<p class="attention"><span>注意：</span>首先再这里配置配送员评分项以及其他的项目，请第一次点击下保存</p>
+<form  target="x-frame" action="<{:U('setting/delivery')}>" method="post">
+    <div class="main-tudou-sc-add">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            	<tr>
+                  <td class="tu-right-td profit" colspan="2"> 配送员抢单设置</td>
+                </tr>
+                
+            	<tr>
+                    <td class="tu-left-td">配送员抢单间隔时间：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[interval_time]" value="<{$CONFIG['delivery']['interval_time']|default='300'}>" class="tudou-manageInput w150" />
+                        <code>单位秒，这里是配送员接单第一单后再次抢单需要间隔多少秒</code>
+                    </td>
+                </tr>
+            
+            	<tr>
+                    <td class="tu-left-td">配送员同时可配送多少单：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[num]" value="<{$CONFIG['delivery']['num']|default='3'}>" class="tudou-manageInput w150"/>
+                        <code>建议设置3单，就是说如果配送员没完成订单，可抢多少单，超过这数量的订单没完成配送则无法抢单</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                  <td class="tu-right-td profit" colspan="2"> 配送员配送费设置</td>
+                </tr>
+               
+                 <tr>
+                     <td class="tu-left-td">配送费结算模式：</td>
+                     <td class="tu-right-td">
+                        <select name="data[pei_type]" class="seleFl jq_type" style="display:inline-block;">
+                            <option <eq name="CONFIG.delivery.pei_type" value="0">selected="selected"</eq> value="0">固定配送费</option>
+                            <option <eq name="CONFIG.delivery.pei_type" value="1">selected="selected"</eq> value="1">按照距离收费</option>
+                        </select>
+                        <code>这里是结算给配送员的费用模式，选择固定配送费就是外卖商家设置的固定配送费【商家设置多少钱就结算多少钱给配送员】，选择按照距离收费则是商家到用户的距离给配送员结算配送费</code>
+                    </td>
+                  </tr>
+                 <script>
+                        $(document).ready(function(){
+                            $(".jq_type").change(function(){
+                                if($(this).val() == 0){
+                                    $(".jq_type_1").show();
+                                    $(".jq_type_2").hide();
+                                }else{
+                                    $(".jq_type_2").show();
+                                    $(".jq_type_1").hide();
+                                }
+                            });
+                            $(".jq_type").change();
+                        });
+                </script>
+                
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">0-1千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_1km]" value="<{$CONFIG.delivery.pei_type_1km}>" class="tudou-manageInput w80"/>元
+                        <code>0-1千米配送费多少钱，支持小数点，不填写则默认4元</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">1-2千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_2km]" value="<{$CONFIG.delivery.pei_type_2km}>" class="tudou-manageInput w80"/>元
+                        <code>1-2千米配送费多少钱，支持小数点，不填写则默认5元</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">2-3千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_3km]" value="<{$CONFIG.delivery.pei_type_3km}>" class="tudou-manageInput w80"/>元
+                        <code>2-3千米配送费多少钱，支持小数点，不填写则默认6元</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">3-4千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_4km]" value="<{$CONFIG.delivery.pei_type_4km}>" class="tudou-manageInput w80"/>元
+                        <code>3-4千米配送费多少钱，支持小数点，不填写则默认7元</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">4-5千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_5km]" value="<{$CONFIG.delivery.pei_type_5km}>" class="tudou-manageInput w80"/>元
+                        <code>4-5千米配送费多少钱，支持小数点，不填写则默认8元</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">5-6千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_6km]" value="<{$CONFIG.delivery.pei_type_6km}>" class="tudou-manageInput w80"/>元
+                        <code>5-6千米配送费多少钱，支持小数点，不填写则默认9元</code>
+                    </td>
+                </tr>
+                <tr class="jq_type_2">
+                    <td class="tu-left-td">6-7千米配送费：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[pei_type_7km]" value="<{$CONFIG.delivery.pei_type_7km}>" class="tudou-manageInput w80"/>元
+                        <code>6-7千米配送费多少钱，支持小数点，不填写则默认10元</code>
+                    </td>
+                </tr>
+                
+            	<tr>
+                  <td class="tu-right-td profit" colspan="2"> 配送员评分项配置</td>
+                </tr>
+                <tr>
+                    <td class="tu-left-td">配送员评分项1：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[d1]" value="<{$CONFIG['delivery']['d1']|default='描述相符'}>" class="tudou-manageInput w150" />
+                        <code>配送员评分项1</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">配送员评分项2：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[d2]" value="<{$CONFIG['delivery']['d2']|default='服务态度'}>" class="tudou-manageInput w150" />
+                        <code>配送员评分项2</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">配送员评分项2：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[d3]" value="<{$CONFIG['delivery']['d3']|default='快速守时'}>" class="tudou-manageInput w150" />
+                        <code>配送员评分项2</code>
+                    </td>
+                </tr>
+                
+              
+                        
+                        
+            </table>
+        </div>
+        <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+    </div>
+</form>
+<include  file='public:footer'/>   

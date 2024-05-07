@@ -1,0 +1,36 @@
+<div class="listBox clfx">
+    <div class="menuManage">
+        <form  target="x-frame" action="<{:U('menu/create')}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                        <tr>
+                            <td class="tu-left-td">上级菜单：</td>
+                            <td class="tu-right-td">
+                                <select name="data[parent_id]" class="seleFl w200">
+                                    <option value="0">一级菜单</option>
+                                    <foreach name="datas" item="var">
+                                        <if condition="($var.parent_id eq 0)">  
+                                            <option value="<{$var.menu_id}>"   <eq name="var.menu_id" value="$parent_id"> selected="selected" </eq> ><{$var.menu_name}></option>
+                                        </if>
+                                    </foreach>       
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tu-left-td">模块名称：</td>
+                            <td class="tu-right-td">
+                                <input name="data[menu_name]" type="text" class="tudou-sc-add-text-name w200" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sm-qr-tu"><input type="submit" value="确认添加" class="sm-tudou-btn-input" /></div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+

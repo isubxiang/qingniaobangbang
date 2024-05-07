@@ -1,0 +1,40 @@
+<view class="search_box">
+    <form>
+        <view class="box">
+            <view class="searchIcon">
+                <image src="/assets/img/quan_sou.png"></image>
+            </view>
+            <input bindconfirm="sousou" bindinput="inputvalue" class="text" placeholder="搜索商家或者商品" placeholderStyle="color:#999;" type="text" value="{{kong}}"></input>
+        </view>
+    </form>
+</view>
+<view class="page_cont_box search_contBox">
+    <view class="page_cont">
+        <view class="search">
+            <view class="bt">
+                <view class="fl">
+                    <text class="tyTitle">历史搜索</text>
+                </view>
+                <view bindtap="clearup" class="fr">
+                    <image class="fl ico" src="/assets/img/clear-btn.png"></image>
+                </view>
+                <view class="clear"></view>
+            </view>
+            <view class="ml10 mt10">
+                <view bindtap="hislink" class=" mr10 his_link" data-itm="{{item}}" wx:for="{{hisSearch}}">{{item}}</view>
+            </view>
+        </view>
+        <view class="search">
+            <view class="bt">
+                <view class="tyTitle">热门搜索</view>
+                <view class="clear"></view>
+            </view>
+            <view class="mt10 ml10">
+                <view bindtap="resou" class="fl mr10 mb10 hot_link" data-idx="{{hotSearch[idx]}}" wx:for="{{hotSearch}}" wx:for-index="idx">
+                    {{hotSearch[idx]}}
+                </view>
+                <view class="clear"></view>
+            </view>
+        </view>
+    </view>
+</view>

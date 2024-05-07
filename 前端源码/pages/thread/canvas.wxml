@@ -1,0 +1,4 @@
+<canvas canvasId="firstCanvas" class="canvas_share" style="width:100%;height:{{canvas_height}}px"></canvas>
+<view bindtap="totemp" style="background:{{system.color}}">
+    保存图片
+</view>

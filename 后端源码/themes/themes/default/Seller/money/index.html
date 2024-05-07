@@ -1,0 +1,110 @@
+<include file='public:header'/>  
+<style>
+.panel-list li em {float: inherit !important; margin-left:20px;}
+</style>	
+<header class="top-fixed bg-yellow bg-inverse">
+		<div class="top-back">
+			<a class="top-addr" href="<{:U('index/index')}>"><i class="iconfont icon-angle-left"></i></a>
+		</div>
+		<div class="top-title">
+			商家资金
+		</div>
+		<div class="top-share">
+			<a href="javascript:void(0);" id="cate-btn"></a>
+		</div>
+	</header>
+
+<!-- 筛选TAB -->
+<ul id="shangjia_tab">
+     <li style="width:25%;"><a href="<{:U('money/index')}>"  class="on">商家资金</a></li>
+     <li style="width:25%;"><a href="<{:U('money/detail')}>">资金日志</a></li>
+     <li style="width:25%;"><a href="<{:U('money/cashlogs')}>">提现日志</a></li>
+     <li style="width:25%;"><a href="<{:U('money/cash')}>">申请提现</a></li>
+</ul>  
+
+
+<div class="blank-30"></div>
+<div class="blank-10 bg"></div>
+
+
+<script src="/Public/js/echarts-all-3.js"></script>
+<div id="jin_my_chart" style="width:100%; height:300px;"></div>
+<script type="text/javascript">
+	var dom = document.getElementById("jin_my_chart");
+	var myChart = echarts.init(dom);
+	var app = {};
+	option = null;
+        option = {
+			title :{
+				text: '商城销售统计数据',
+				subtext: '销售额统计',
+				x:'center'
+			},
+			tooltip:{
+				trigger: 'item',
+				formatter: "{a} <br>{b} : {c} ({d}%)"
+			},
+			series :[
+				{
+					name: '绑定来源',
+					type: 'pie',
+					radius : '42%',
+					center: ['50%','60%'],
+					data:[
+						{value:"<{:round($counts['money_goods']/100,2)}>", name:'商城<{:round($counts["money_goods"]/100,2)}><{:currencyText($ctl,$act)}>'},
+						{value:"<{:round($counts['money_ele']/100,2)}>", name:'外卖<{:round($counts["money_ele"]/100,2)}><{:currencyText($ctl,$act)}>'},
+						{value:"<{:round($counts['money_appoint']/100,2)}>", name:'家政<{:round($counts["money_appoint"]/100,2)}><{:currencyText($ctl,$act)}>'},
+						{value:"<{:round($counts['money_book']/100,2)}>", name:'订座<{:round($counts["money_book"]/100,2)}><{:currencyText($ctl,$act)}>'},
+						{value:"<{:round($counts['money_breaks']/100,2)}>", name:'收银<{:round($counts["money_breaks"]/100,2)}><{:currencyText($ctl,$act)}>'}
+					],
+					itemStyle:{
+						emphasis:{
+							shadowBlur: 10,
+							shadowOffsetX: 0,
+							shadowColor: 'rgba(0, 0, 0, 0.5)'
+						}
+					}
+				}
+			]
+		};
+       if(option && typeof option === "object"){
+    	myChart.setOption(option, true);
+	  }
+</script>
+
+
+
+
+<div class="blank-10 bg"></div>
+<div class="panel-list">
+	<ul>
+		<if condition="$MEMBER['gold']">
+			<li><a href="<{:U('money/cash')}>">商户资金余额<em class="text-dot"> <{:currency($ctl,$act)}> <{:round($MEMBER['gold']/100,2)}><{:currencyText($ctl,$act)}></em><i class="iconfont icon-angle-right"></i></a></li>
+        </if>
+        
+        <if condition="$MEMBER['frozen_gold']">
+			<li><a href="javascript:;">商户资金冻结金<em class="text-yellow"> <{:currency($ctl,$act)}> <{:round($MEMBER['frozen_gold']/100,2)}><{:currencyText($ctl,$act)}></em></a></li>
+        </if>
+        <li><a href="javascript:;">商户资金总收入<em class="text-blue"> <{:currency($ctl,$act)}> <{:round($counts['money']/100,2)}><{:currencyText($ctl,$act)}></em></a></li>
+		<li><a href="javascript:;">商户资金今日收入<em class="text-blue"> <{:currency($ctl,$act)}> <{:round($counts['money_day']/100,2)}><{:currencyText($ctl,$act)}></em></a></li>
+		<li><a href="javascript:;">商户资金昨日收入<em class="text-blue"> <{:currency($ctl,$act)}> <{:round($counts['money_day_yesterday']/100,2)}><{:currencyText($ctl,$act)}></em></a></li>
+	</ul>
+</div>
+
+
+<div class="blank-10 bg"></div>
+<div class="panel-list">
+	<ul>
+    	<li><a href="<{:U('user/index/index')}>">会员账户昵称<em><{$MEMBER['nickname']}> ID【<{$MEMBER.user_id}>】</em><i class="iconfont icon-angle-right"></i></a></li>
+		<if condition="$MEMBER['money']">
+			<li><a href="<{:U('user/index/index')}>">会员账户余额<em class="text-dot"> <{:currency($ctl,$act)}> <{:round($MEMBER['money']/100,2)}><{:currencyText($ctl,$act)}></em><i class="iconfont icon-angle-right"></i></a></li>
+        </if>
+        
+        <if condition="$MEMBER['frozen_money']">
+			<li><a href="javascript:;">会员账户冻结金<em class="text-yellow"> <{:currency($ctl,$act)}> <{:round($MEMBER['frozen_money']/100,2)}><{:currencyText($ctl,$act)}></em></a></li>
+        </if>
+	</ul>
+</div>
+
+<include file="public:footer"/>
+

@@ -1,0 +1,329 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header {
+    background: #06c1ae;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40rpx;
+}
+
+.header .money {
+    font-size: 50rpx;
+    color: #fff;
+    height: 56rpx;
+    line-height: 56rpx;
+    overflow: hidden;
+}
+
+.header .caption {
+    color: #fff;
+    opacity: 0.5;
+    font-size: 26rpx;
+}
+
+.body {
+    padding: 40rpx 40rpx 110rpx;
+}
+
+.body .date {
+    padding-bottom: 30rpx;
+    text-align: center;
+    color: #ccc;
+    font-size: 24rpx;
+}
+
+.body .cause {
+    padding: 12rpx 40rpx;
+    margin: 0 auto 20rpx auto;
+    display: flex;
+    background: #e7e7e7;
+    border-radius: 10rpx;
+    color: #aaa;
+    font-size: 24rpx;
+    align-items: center;
+}
+
+.body .cause .iconfont {
+    font-size: 48rpx;
+}
+
+.body .cause .cause-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-left: 20rpx;
+}
+
+.body .cause .cause-info view {
+    font-size: 28rpx;
+    margin-bottom: 6rpx;
+}
+
+.body .demand {
+    display: flex;
+}
+
+.body .demand avatar {
+    height: 90rpx;
+    width: 90rpx;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.body .demand .content {
+    margin-left: 40rpx;
+    border-radius: 20rpx;
+    background: #fff;
+    padding-bottom: 24rpx;
+    flex: 1;
+    position: relative;
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+
+.body .demand .content::before {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-width: 20rpx;
+    border-style: solid;
+    border-color: transparent #fff transparent transparent;
+    left: -40rpx;
+    top: 28rpx;
+}
+
+.body .demand .content .menu {
+    padding: 24rpx 24rpx 0 24rpx;
+}
+
+.body .demand .content .remark {
+    margin: 24rpx;
+}
+
+.body .demand .content .remark .secret {
+    position: static;
+    background: #06c1ae;
+    color: #fff;
+    border-radius: 50%;
+    line-height: 40rpx;
+    width: 40rpx;
+    height: 40rpx;
+    display: inline-block;
+    text-align: center;
+    font-size: 28rpx;
+    margin-right: 4rpx;
+}
+
+.body .shop {
+    background: #fff;
+    display: flex;
+    padding: 20rpx 30rpx;
+    border-top-left-radius: 10rpx;
+    border-top-right-radius: 10rpx;
+    border-bottom: 1rpx solid #e7e7e7;
+}
+
+.body .shop image {
+    width: 50rpx;
+    height: 50rpx;
+    background: #ddd;
+}
+
+.body .shop .name {
+    margin-left: 18rpx;
+    line-height: 50rpx;
+    font-size: 26rpx;
+    color: #888;
+}
+
+.body .menu .line {
+    height: 2rpx;
+    background: #efefef;
+}
+
+.body .menu .item {
+    padding: 16rpx 24rpx;
+    display: flex;
+}
+
+.body .menu .item image {
+    width: 90rpx;
+    height: 90rpx;
+    background: #ddd;
+    margin-right: 18rpx;
+}
+
+.body .menu .item view {
+    flex: 1;
+}
+
+.body .menu .item .name {
+    display: block;
+}
+
+.body .menu .item .quantity {
+    color: #888;
+    font-size: 24rpx;
+}
+
+.body .menu .item .money {
+    margin-top: 36rpx;
+    font-size: 32rpx;
+}
+
+.body .demand .attend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 24rpx;
+    background: #f7f7f7;
+    padding: 10rpx;
+}
+
+.body .demand .attend .item {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-align: center;
+}
+
+.body .demand .attend .item .value .advance {
+    background: #bbb;
+    color: #fff;
+    font-size: 20rpx;
+    border-radius: 6rpx;
+    padding: 0 6rpx;
+    height: 28rpx;
+    line-height: 28rpx;
+    margin-right: 8rpx;
+    display: inline-block;
+    position: relative;
+    top: -3rpx;
+}
+
+.body .demand .attend .item .value {
+    color: #888;
+    font-size: 28rpx;
+}
+
+.body .demand .attend .item .iconfont {
+    margin-right: 6rpx;
+    font-size: 26rpx;
+}
+
+.body .demand .attend .item .caption {
+    color: #ccc;
+    font-size: 24rpx;
+}
+
+.body .demand .attend .split {
+    border-left: 1rpx solid #eee;
+    width: 0;
+    height: 60rpx;
+}
+
+.body .path {
+    background: #fff;
+    margin-top: 40rpx;
+    border-radius: 20rpx;
+}
+
+.body .path .left {
+    margin: 0 20rpx 0 40rpx;
+    width: 60rpx;
+    text-align: center;
+    color: #ccc;
+    font-size: 24rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 6rpx;
+}
+
+.body .path .left .iconfont {
+    font-size: 36rpx;
+}
+
+.body .path .item {
+    padding: 30rpx 0;
+    display: flex;
+}
+
+.body .path .item-start .info {
+    height: 64rpx;
+}
+
+.body .path .item-start .left {
+    padding-top: 18rpx;
+    text-align: center;
+}
+
+.body .path .item-start .left .iconfont {
+    font-size: 32rpx;
+}
+
+.body .path .info {
+    height: 90rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 30rpx;
+}
+
+.body .path .info .concat {
+    color: #666;
+    margin-top: 8rpx;
+    font-size: 28rpx;
+}
+
+.body .path .info .concat text {
+    margin-left: 10rpx;
+}
+
+.footer {
+    background: #fff;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 92rpx;
+    box-shadow: 0 -2rpx 2rpx #f0f0f0;
+}
+
+.footer form {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.footer .form {
+    display: flex;
+    height: 100%;
+}
+
+.footer view {
+    flex: 1;
+    height: 100%;
+    line-height: 92rpx;
+    font-size: 32rpx;
+    text-align: center;
+}
+
+.footer button {
+    background: #06c1ae;
+    font-size: 36rpx;
+    color: #fff;
+    height: 100%;
+}
+
+.footer button[form-type],.footer button.detail {
+    flex: 1;
+}
+
+.footer button.disabled {
+    flex: 1;
+    background: transparent;
+    color: #888;
+}

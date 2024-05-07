@@ -1,0 +1,66 @@
+<view class="step" wx:if="{{reqInit&&!bindFlag}}">
+    <view class="set-title step-ts">
+        共
+        <text class="set-font">3</text>
+        步操作
+    </view>
+    <view class="step-title">
+        <view class="step-nunber">1</view>
+        <button bindtap="gotoWx" class="par-btn set-btn" type="primary">点击进行用户绑定</button>
+    </view>
+    <view class="step-box"></view>
+    <view class="step-title">
+        <view class="step-nunber">2</view>
+        <text class="step-text">保存图片</text>
+        <text bindtap="trySaveImg" class="btn-color">【点击保存】</text>
+    </view>
+    <view class="step-box">
+        <image bindtap="previewImage" class="step-img" src="{{wxImg}}"></image>
+    </view>
+    <view class="step-title">
+        <view class="step-nunber">3</view>
+        <text class="step-text">使用{{agentDesc}}扫一扫，扫描保存的图片</text>
+    </view>
+    <view class="step-box"></view>
+    <view class="step-pro orange-color">请按以上步骤操作,否则将无法收到消息</view>
+</view>
+<view class="set-box" wx:if="{{bindFlag}}">
+    <view class="set-head">
+        <text class="set-head-text">接受消息</text>
+        <switch bindchange="switchChange" checked="{{notifyFlag}}" color="#3bbb8d"></switch>
+    </view>
+    <view class="set-note">关闭后将不再推送消息</view>
+    <view class="weui-cell white-bg">
+        <view class="weui-cell__hd">
+            <label class="weui-label">接受时间段</label>
+        </view>
+        <view class="weui-cell__bd">
+            <view class="change-add par-text-size" hoverClass="navigator-hover">
+                <picker bindchange="bindMultiPickerChange" mode="multiSelector" range="{{multiArray}}" style="width:100%;" value="{{multiIndex}}">
+                    <view class="blue-color book-time">
+                        {{multiArray[0][multiIndex[0]]}}-{{multiArray[1][multiIndex[1]]}}
+                    </view>
+                </picker>
+                <image class="change-img" src="/assets/img/right.png"></image>
+            </view>
+        </view>
+    </view>
+    <view class="set-note">设置后只在时间段内收到消息</view>
+    <view class="white-bg set-padding">
+        <view class="set-title">
+            <text class="set-title-text">接收类型</text>
+        </view>
+    </view>
+    <view class="set-change">
+        <view catchtap="selectItem" class="set-change-box" data-id="{{item.id}}" hoverClass="set-active" wx:if="{{item.show}}" wx:for="{{catList}}" wx:key="id">
+            <icon color="#3bbb8d" size="26px" type="{{selectedBusi[item.id]?'success':'circle'}}"></icon>
+            <text class="set-change-text">{{item.busiName}}</text>
+        </view>
+    </view>
+    <view class="par-margin par-btn-box">
+        <button bindtap="submitNotify" class="par-btn par-margin" type="primary" wx:if="{{reqInit}}">
+            保存
+        </button>
+    </view>
+    <view bindtap="previewImage" class="step-pro orange-color setp-href">{{focusDesc}}</view>
+</view>

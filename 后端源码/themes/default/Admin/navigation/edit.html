@@ -1,0 +1,301 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">导航</li>
+        <li class="li2">导航管理</li>
+        <li class="li2 li3">编辑导航</li>
+    </ul>
+</div>
+<div class="main-tudou-sc-add ">
+    <div class="tu-table-box">
+        <form target="x-frame" action="<{:U('navigation/edit',array('nav_id'=>$detail['nav_id'],'status'=>$status))}>" method="post">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+            
+            
+            <if condition="$aready neq 6"> 
+                <tr>
+                    <td class="tu-left-td">导航名称：</td>
+                    <td class="tu-right-td"><input type="text" name="data[nav_name]" value="<{$detail.nav_name|default=''}>" class="tudou-manageInput" />
+					<code>2-4字之间！</code>
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">别名：</td>
+                    <td class="tu-right-td"><input type="text" name="data[title]" value="<{$detail.title|default=''}>" class="tudou-manageInput w80" />
+					<code>这里是很多时候关联calss时候用，建议填写！前台用$ctl函数判断！</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">ioc图标：</td>
+                    <td class="tu-right-td"><input type="text" name="data[ioc]" value="<{$detail.ioc|default=''}>" class="tudou-manageInput" />
+       <code>这里是在手机上如果需传ioc图标时候启用格式为：icon-check-circle 其中check-circle是图标名称，前缀是icon-</a></code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">导航链接：</td>
+                    <td class="tu-right-td"><input type="text" name="data[url]" value="<{$detail.url|default=''}>" class="tudou-manageInput" />
+                    <code>按照我以前添加的填写</code>
+                    </td>
+                </tr>
+                
+                
+              
+            
+                  <tr>
+                    <td class="tu-left-td">IOC小图标：</td>
+                 <td class="tu-right-td">
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <input type="hidden" name="data[photo]" value="<{$detail.photo}>" id="data_photo" />
+                        <div id="fileToUpload" >上传缩略图</div>
+                    </div>
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <img id="photo_img" width="60" height="60"  src="<{:config_img($detail['photo'])}>" />
+                         <a href="<{:U('setting/attachs')}>">缩略图设置</a>
+                        建议尺寸<{$CONFIG.attachs.navigation.thumb}> 注意目前的模板不支持上传图片
+                    </div>
+                    <script>                                            
+						var width_navigation = '<{:thumbSize($CONFIG[attachs][navigation][thumb],0)}>';                         
+						var height_navigation = '<{:thumbSize($CONFIG[attachs][navigation][thumb],1)}>'; 
+						var pic_pc_quality = '<{$CONFIG[attachs][pic_pc_quality][thumb]}>';                         
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>"navigation"))}>',                             
+						pick: '#fileToUpload',                             
+						resize: true,  
+						accept: {
+							title: 'Images',
+							extensions: 'gif,jpg,jpeg,png',
+							mimeTypes: 'image/*'//只永许上传JPG格式文件
+						}, 
+						compress:{
+							width: width_navigation,//宽度
+							height: height_navigation,//高度
+							quality: pic_pc_quality,//压缩质量
+							allowMagnify: false,
+							crop: false,
+							preserveHeaders: true,
+							noCompressIfLarger: true,
+							compressSize:0
+						}                    
+					});                                                 
+					uploader.on( 'uploadSuccess', function( file,resporse) {                             
+						$("#data_photo").val(resporse.url);                             
+						$("#photo_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on( 'uploadError', function( file ) {                             
+						alert('上传出错');                         
+					});                     
+                    </script>
+                </td>
+            </tr>
+            </if>
+            
+             <tr>
+                    <td class="tu-left-td">图标颜色：</td>
+                    <td class="tu-right-td"><input type="text" name="data[colour]" value="<{$detail.colour|default=''}>" class="tudou-manageInput" />
+                    <code>请填写颜色代码</code>
+                    </td>
+                </tr>
+            
+            
+                <tr>
+                    <td class="tu-left-td">所属导航分类</td>
+                    <td class="tu-right-td">
+
+                <input type="radio" name="data[status]" value="1" <if condition="$detail[status] eq 1">checked="checked"</if> />手机底部导航
+				<input type="radio" name="data[status]" value="2" <if condition="$detail[status] eq 2">checked="checked" </if> />手机首页导航
+                <input type="radio" name="data[status]" value="4" <if condition="$detail[status] eq 4">checked="checked" </if> />电脑主导航
+                <input type="radio" name="data[status]" value="6" <if condition="$detail[status] eq 6">checked="checked"</if> />小程序导航
+                        <code>注意：编辑的时候不要修改类型！</code>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td class="tu-left-td">排序：</td>
+                    <td class="tu-right-td"><input type="text" name="data[orderby]" value="<{$detail.orderby|default=''}>" class="tudou-manageInput" />
+                        <code>数字越小越高</code>
+                    </td>
+                </tr>
+              
+                <tr>
+                    <td class="tu-left-td">是否新窗口打开</td>
+                    <td class="tu-right-td">
+                <input type="radio" name="data[target]" value="0" <if condition="$detail[target] eq 0">checked="checked"</if> />当前窗口
+				<input type="radio" name="data[target]" value="1" <if condition="$detail[target] eq 1">checked="checked"</if> />新窗口
+                        <code>开启后再新窗口打开，默认当前窗口打开哦！</code>
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">是否新版块</td>
+                    <td class="tu-right-td">
+                <input type="radio" name="data[is_new]" value="0" <if condition="$detail[is_new] eq 0">checked="checked"</if> />否
+				<input type="radio" name="data[is_new]" value="1" <if condition="$detail[is_new] eq 1">checked="checked"</if> />是
+                        <code>选择是，在PC端导航上显示NEW标签</code>
+                    </td>
+                </tr>
+                
+               
+                
+                
+                
+                
+                
+                
+                <if condition="$aready eq 6">  
+                <style>
+					.profit{text-align: center;color: #333;font-weight: bold; background: #F5F5FB;}
+				</style>
+					
+				 <tr>
+					<td class="admin-table-right profit" colspan="2">小程序广告配置</td>
+				 </tr>
+				  
+                  
+                   <tr>
+                    <td class="tu-left-td">小程序名称：</td>
+                    <td class="tu-right-td"><input type="text" name="data[nav_name]" value="<{$detail.nav_name|default=''}>" class="tudou-manageInput" />
+					<code>2-4字之间</code>
+                    </td>
+                </tr>
+                
+                 <tr>
+                    <td class="tu-left-td">小程序导航小图标：</td>
+                 <td class="tu-right-td">
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <input type="hidden" name="data[photo]" value="<{$detail.photo}>" id="data_photo" />
+                        <div id="fileToUpload" >上传缩略图</div>
+                    </div>
+                    <div style="width: 300px;height: 100px; float: left;">
+                        <img id="photo_img" width="60" height="60"  src="<{:config_img($detail['photo'])}>" />
+                         <a href="{:url('setting/attachs')}">缩略图设置</a>
+                        建议尺寸<{$CONFIG.attachs.navigation.thumb}> 
+                    </div>
+                    <script>                                            
+						var width = '<{:thumbSize($CONFIG["attachs"]["navigation"]["thumb"],0)}>';                         
+						var height = '<{:thumbSize($CONFIG["attachs"]["navigation"]["thumb"],1)}>'; 
+						var uploader = WebUploader.create({                             
+						auto: true,                             
+						swf: '/static/default/webuploader/Uploader.swf',                             
+						server: '<{:U("app/upload/uploadify",array("model"=>"navigation"))}>',                             
+						pick: '#fileToUpload',                             
+						resize: true,  
+						compress:{width: width,height: height,quality: 80,allowMagnify: false,crop: false,preserveHeaders: true,noCompressIfLarger: true,compressSize:0}                    
+					});                                                 
+					uploader.on( 'uploadSuccess', function( file,resporse) {                             
+						$("#data_photo").val(resporse.url);                             
+						$("#photo_img").attr('src',resporse.url).show();                         
+					});                                                
+					uploader.on( 'uploadError', function( file ) {                             
+						layer.msg('上传出错', {icon: 5});                         
+					});                     
+                    </script>
+                </td>
+            </tr>
+				  
+				  <tr>
+					  <td class="tu-left-td">是否小程序</td>
+					  <td class="tu-right-td">
+						 <input type="radio" name="data[is_wxapp]" value="1" checked="checked"/>是
+						 <code>如果是小程序则配置下面的选项</code>
+					  </td>
+				  </tr>
+				  
+				  
+				   <tr>
+					  <td class="tu-left-td">选择跳转路径：</td>
+					  <td class="tu-right-td">
+						   <select name="data[state]" class="admin-sele-Fl  jq_type" style="display: inline-block;">
+							   <option <eq name="detail[state]" value="1">selected="selected"</eq>  value="1">内部网页跳转</option>
+							   <option <eq name="detail[state]" value="2">selected="selected"</eq>  value="2">外部网页跳转</option>
+							   <option <eq name="detail[state]" value="3">selected="selected"</eq>  value="3">关联小程序跳转</option>
+						   </select>
+						  <code>这里必须选择</code>
+					   </td>
+				   </tr>
+				   <script>
+					   $(document).ready(function (){
+						 $(".jq_type").change(function (){
+							if($(this).val() == 1){
+								 $(".jq_type_1").show();
+								 $(".jq_type_2").hide();
+								 $(".jq_type_3").hide();
+							 }else if($(this).val() == 2){
+								 $(".jq_type_1").hide();
+								 $(".jq_type_2").show();
+								 $(".jq_type_3").hide();;
+							  }else{
+								 $(".jq_type_1").hide();
+								 $(".jq_type_2").hide();
+								 $(".jq_type_3").show();
+							  }
+						   });
+						   $(".jq_type").change();
+						});
+					 </script>
+					 <tr class="jq_type_1">
+						 <td class="tu-left-td">内部链接：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[src]" value="<{$detail.src}>" class="tudou-manageInput tudou-manageInput2"/>
+								<code>
+									<br>
+									*跳转商家页面请按以下格式填写,id值在商家列表中获取(../sellerinfo/sellerinfo?id=1)<br>
+                                    *跳转商家分类页面请按以下格式填写,id和name值在分类列表中获取(../store/business?id=1&typename=商家分类名字)<br>
+                                    *跳转资讯页面请按以下格式填写(../message/message)<br>
+                                    *跳转顺风车页面请按以下格式填写(../shun/shun)<br>
+                                    *跳转帖子分类页面请按以下格式填写,id和name值在分类列表中获取(../marry/marry?id=1&name=帖子分类名字)<br>
+                                    *跳转帖子页面请按以下格式填写,id在帖子列表中获取(../infodetial/infodetial?id=1)
+                                    *跳转签到页面请按以下格式填写(../qd/qd)<br>
+                                    *跳转底部发布页面请按以下格式填写(../fabu/fabu/fabu)<br>
+                                    *跳转底部商家页面请按以下格式填写(../store/store)<br>
+								</code>
+						 </td>
+					 </tr>
+					
+					<tr class="jq_type_2">
+						 <td class="tu-left-td">外部链接：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[wb_src]" value="<{$detail.wb_src}>" class="tudou-manageInput"/>
+								<code>
+									*此链接为网页外部跳转链接，需要在小程序后台配置业务域名。
+								</code>
+						 </td>
+					 </tr>
+							
+					 <tr class="jq_type_3">
+						 <td class="tu-left-td">跳转小程序名称：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[xcx_name]" value="<{$detail.xcx_name}>" class="tudou-manageInput"/>
+								<code>跳转的小程序名称</code>
+						 </td>
+					 </tr> 
+					 <tr class="jq_type_3">
+						 <td class="tu-left-td">小程序appid：</td>
+						 <td class="tu-right-td">
+							   <input type="text" name="data[appid]" value="<{$detail.appid}>" class="tudou-manageInput"/>
+								<code>要跳转的小程序appid(只有同一公众号下的关联的小程序之间才可相互跳转)</code>
+						 </td>
+					 </tr>   
+         			</if>
+                
+                
+                
+                <tr>
+                    <td class="tu-left-td">是否显示</td>
+                    <td class="tu-right-td">
+                <input type="radio" name="data[closed]" value="0" <if condition="$detail[closed] eq 0">checked="checked"</if> />显示
+				<input type="radio" name="data[closed]" value="1" <if condition="$detail[closed] eq 1">checked="checked"</if> />隐藏
+                        <code>这里是可以开启关闭导航显示的，必须选哦！</code>
+                    </td>
+                </tr>
+            </table>
+            <div class="sm-qr-tu"><input type="submit" value="确认保存" class="sm-tudou-btn-input" /></div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>    

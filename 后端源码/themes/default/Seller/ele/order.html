@@ -1,0 +1,85 @@
+<include file='public:header'/>  
+<style>
+.list-media-x{margin-top:2.2rem;}
+.x14284{ width:14.284%}
+#shangjia_tab li a span.badge {
+    margin-top: -5px;
+    position: absolute;
+}
+.top-fixed .top-share a.iconfont {
+    font-size: 16px;
+}
+.top-fixed .top-share a {
+    width:90px!important;
+}
+.serch-bar-mask-list li {
+    line-height: 36px;
+}
+</style>
+
+
+	<header class="top-fixed bg-yellow bg-inverse">
+		<div class="top-back">
+			<a class="top-addr" href="javascript:history.back(-1);"><i class="iconfont icon-angle-left"></i></a>
+		</div>
+		<div class="top-title">
+			外卖订单
+		</div>
+        <div class="top-share">
+        	<a href="javascript:void(0);" id="cate-btn" class="top-addr iconfont icon-xiangxia">更多状态</a>
+		</div>
+	</header>
+
+ 
+<ul id="shangjia_tab">
+	<li class="x14284"><a href="<{:U('ele/order',array('status'=>999))}>"  <eq name="status" value="999">class="on"</eq>>全部</a></li>
+	<li class="x14284"><a href="<{:U('ele/order',array('status'=>2))}>"  <eq name="status" value="2">class="on"</eq>>已付款</a></li>
+    <li class="x14284"><a href="<{:U('ele/order',array('status'=>8))}>"  <eq name="status" value="8">class="on"</eq>>已确认</a></li>
+    <li class="x14284"><a href="<{:U('ele/order',array('status'=>16))}>"  <eq name="status" value="16">class="on"</eq>>已接单</a></li>
+    <li class="x14284"><a href="<{:U('ele/order',array('status'=>32))}>"  <eq name="status" value="32">class="on"</eq>>配送中</a></li>
+    <li class="x14284"><a href="<{:U('ele/order',array('status'=>64))}>"  <eq name="status" value="64">class="on"</eq>>待评价</a></li>
+    <li class="x14284"><a href="<{:U('ele/order',array('status'=>128))}>"  <eq name="status" value="128">class="on"</eq>>已完成</a></li>
+</ul>  
+ 
+<div class="serch-bar-mask" id="cate_menu" style="display:none;top:50px;">
+    <div class="serch-bar-mask-list">
+        <ul>
+        <li style="background:#fdfafa;"><a href="<{:U('ele/order',array('status'=>999))}>">关闭菜单 X</a></li>
+        <foreach name="getOrderStatus" item="item">
+        	<li><a <eq name="item['id']" value="$status">style="color:#F00"</eq> href="<{:U('running/index',array('OrderStatus'=>$item['id']))}>"><{$item.name}>
+            <if condition="$item['count'] gt 0">
+            	<b class="text-red">(<{$item.count}>)</b>
+            </if>
+            <i class="iconfont icon-angle-right float-right"></i></a></li>
+        </foreach>
+        </ul>
+    </div>
+</div>
+
+
+<div class="list-media-x" id="list-media">
+<div class="blank-10 bg"></div>
+<ul>
+</ul>
+</div> 
+
+<script>
+	$(document).ready(function(){
+		
+		$("#cate-btn").click(function(){
+			//$("#cate-btn").html('关闭');
+			//$("#cate-btn").removeClass("icon-xiangxia");
+			//$("#cate-btn").addClass("icon-xiangshang");
+			$("#cate_menu").toggle();
+		});
+		
+		$("#cate_menu ul li a").click(function(){
+			$("#cate_menu").toggle();
+		});
+			
+		loaddata('<{$nextpage}>', $("#list-media ul"), true);
+	});
+
+</script>
+
+<include file="public:footer"/>

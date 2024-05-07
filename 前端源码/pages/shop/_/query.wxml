@@ -1,0 +1,16 @@
+<view class="container">
+    <view class="header">
+        <view class="header-top">
+            <text class="iconfont icon-search"></text>
+            <input class="query" bindinput="bindinput" focus="true" placeholder="输入关键字"></input>
+            
+        </view>
+    </view>
+    <view class="body">
+        <view class="body-top">
+            <view class="section hot">
+                <button bindtap="search" class="search">搜索</button>
+            </view>
+        </view>
+      </view>  
+</view>

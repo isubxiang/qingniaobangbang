@@ -1,0 +1,63 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header-module navigator image {
+    height: 180rpx;
+    width: 100%;
+}
+
+.body {
+    background: #6bc785;
+    padding-top: 300rpx;
+    padding-bottom: 40rpx;
+    position: relative;
+    margin-top: 20rpx;
+}
+
+.body .task-bg {
+    width: 100%;
+    height: 410rpx;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    filter: hue-rotate(43deg) brightness(90%) saturate(80%);
+}
+
+.body .item {
+    margin: 30rpx 30rpx 0 30rpx;
+    background: #fff;
+    border-radius: 10rpx;
+    padding: 20rpx 30rpx;
+    display: flex;
+    position: relative;
+    z-index: 3;
+}
+
+.body .item .iconfont {
+    width: 60rpx;
+    height: 60rpx;
+    background: #ddd;
+    margin-top: 10rpx;
+}
+
+.body .item view {
+    flex: 1;
+    color: #aaa;
+    margin-left: 20rpx;
+    font-size: 26rpx;
+}
+
+.body .item view .name {
+    font-size: 30rpx;
+    color: #222;
+    display: block;
+    line-height: 48rpx;
+}
+
+.body .item .button {
+    width: 160rpx;
+    height: 64rpx;
+    line-height: 64rpx;
+    margin-top: 10rpx;
+    font-size: 32rpx;
+}

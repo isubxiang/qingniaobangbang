@@ -1,0 +1,32 @@
+<view class="container">
+    <view class="body">
+        <view class="section"></view>
+        <view class="list">
+            <view class="row row-bd">
+                <text class="caption">接受平台自动派单</text>
+                <switch bindchange="onAutoAssignChange" checked="{{model.AutoAssign}}" class="value"></switch>
+            </view>
+        </view>
+        <block wx:if="{{model.AutoAssign}}">
+            <view class="section-header">工作时间</view>
+            <view class="list list-date">
+                <block wx:for="{{model.TimeList}}" wx:key="index">
+                    <view class="hr" wx:if="{{index>0}}"></view>
+                    <navigator class="row" url="errandtime">
+                        <view class="left ellipsis">
+                            <view class="caption ellipsis">
+                                <view catchtap="onRemoveTap" class="iconfont icon-minus_cart minus"></view>{{item.WeekdaysString}}</view>
+                            <view class="time">{{item.TimeRangesString}}</view>
+                        </view>
+                        <text class="iconfont icon-right_light arrow"></text>
+                    </navigator>
+                </block>
+                <navigator class="row row-add" url="errandtime">
+                    <text class="caption">
+                        <text class="iconfont icon-roundadd"></text>添加</text>
+                </navigator>
+            </view>
+        </block>
+        <view class="remark">开启自动接单后，系统会在设置的工作时间内自动分派订单</view>
+    </view>
+</view>

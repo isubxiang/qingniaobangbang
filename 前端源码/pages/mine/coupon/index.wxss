@@ -1,0 +1,128 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.body {
+    padding: 30rpx;
+}
+
+.body .coupon {
+    background: #fff;
+    margin-bottom: 30rpx;
+    font-size: 26rpx;
+    position: relative;
+}
+
+.body .coupon .checked {
+    width: 0;
+    height: 0;
+    border-width: 40rpx;
+    border-style: solid;
+    border-color: #ff9800 #ff9800 transparent transparent;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.body .coupon .checked text {
+    color: #fff;
+    position: absolute;
+    right: -36rpx;
+    top: -36rpx;
+    font-size: 36rpx;
+    font-weight: 700;
+}
+
+.body .coupon .content {
+    display: flex;
+    color: #666;
+    padding: 30rpx;
+}
+
+.body .coupon .content .left {
+    width: 200rpx;
+    text-align: center;
+    margin-right: 40rpx;
+}
+
+.body .coupon .content .money {
+    font-size: 70rpx;
+    color: #ff9800;
+}
+
+.body .coupon .content .right {
+    flex: 1;
+}
+
+.body .coupon .content .name {
+    font-size: 32rpx;
+    color: #222;
+    line-height: 98rpx;
+}
+
+.body .coupon .limit {
+    background: #f9f9f9;
+    color: #aaa;
+    padding: 20rpx 40rpx;
+    position: relative;
+}
+
+.body .coupon .gap {
+    width: 32rpx;
+    height: 32rpx;
+    border-radius: 16rpx;
+    background: #f0f0f0;
+    position: absolute;
+    top: -16rpx;
+    z-index: 2;
+}
+
+.body .coupon .gap-l {
+    left: -16rpx;
+}
+
+.body .coupon .gap-r {
+    right: -16rpx;
+}
+
+.body .coupon-disabled {
+    opacity: 0.6;
+}
+
+.body .more {
+    color: #aaa;
+    font-size: 26rpx;
+    text-align: center;
+}
+
+.body navigator {
+    color: #666;
+    display: inline;
+}
+
+.body navigator .iconfont {
+    font-size: 24rpx;
+}
+
+.empty {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #aaa;
+}
+
+.empty .iconfont {
+    font-size: 120rpx;
+    margin-top: -40rpx;
+    margin-bottom: 40rpx;
+}
+
+.empty navigator {
+    margin-top: 10rpx;
+    font-size: 28rpx;
+}

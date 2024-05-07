@@ -1,0 +1,113 @@
+<popup bindcancel="onPopupCancel" height="320" hidden="{{popupType!='cart'}}" showCancelButton="{{false}}" showConfirmButton="{{false}}" showTitle="{{false}}">
+    <view class="popup popup-cart">
+        <view class="top">
+            <text class="title">已选商品</text>
+            <view bindtap="onCartClear" class="clear">清空购物车</view>
+        </view>
+        <scroll-view class="list" scrollY="true" style="height:440rpx">
+            <block wx:for="{{carts.Items}}" wx:key="index">
+                <view class="item">
+                    <view class="name">
+                        <text class="ellipsis{{item.IsSale?'':' off'}}">{{item.Name}}</text>
+                        <view class="offsale" wx:if="{{!item.IsSale}}">该商品已下架</view>
+                    </view>
+                    <text class="money money-rmb">{{item.Price}}</text>
+                    <view class="adjuster">
+                        <view bindtap="onCartMinusTap" data-index="{{index}}">
+                            <text class="iconfont icon-minus_cart"></text>
+                        </view>
+                        <text class="quantity">{{item.Quantity||1}}</text>
+                        <view bindtap="onCartPlusTap" data-index="{{index}}">
+                            <text class="iconfont icon-plus_cart"></text>
+                        </view>
+                    </view>
+                </view>
+                <view class="hr"></view>
+            </block>
+            <view class="empty" wx:if="{{carts.Items.length<=3}}">
+                <view wx:if="{{carts.Items.length<=3&&carts.Items.length>0}}">继续添加更多商品吧</view>
+                <view wx:if="{{carts.Items.length==0}}">购物车空空如也</view>
+            </view>
+        </scroll-view>
+    </view>
+</popup>
+<scroll-view class="container">
+    <view class="header">
+        <view class="header-main">
+            <image class="logo" mode="aspectFill" src="{{model.LogoSrc}}"></image>
+            <view class="info">
+                <view class="name">{{model.Name}}</view>
+                <view class="desc">
+                    <text class="address">{{model.Address}}</text>
+                </view>
+            </view>
+        </view>
+    </view>
+    <view class="body">
+        <view class="pages" style="height: {{screenHeight-62+50}}px">
+            <view class="order actived">
+                <view class="swiper-main">
+                    <scroll-view class="menu" scrollY="true" style="height: {{screenHeight-62-10}}px">
+                        <view class="bd" style="min-height:{{screenHeight-62-10-35}}px">
+                            <view bindtap="onMenuItemTap" class="item{{categoryIndex==0?' actived':''}}" data-index="0">
+                                <text>
+                                    <text class="iconfont icon-pricetag"></text>热销</text>
+                            </view>
+                            <view bindtap="onMenuItemTap" class="item{{categoryIndex==index+1?' actived':''}}" data-index="{{index+1}}" wx:for="{{model.Categories}}" wx:key="Id">
+                                <text class="num" wx:if="{{item.Quantity}}">{{item.Quantity}}</text>
+                                <text>{{item.Name}}</text>
+                            </view>
+                        </view>
+                    </scroll-view>
+                    <scroll-view class="list" scrollY="true" style="height: {{screenHeight-62-10}}px">
+                        <view class="bd">
+                            <view class="item" wx:for="{{items}}" wx:key="Id">
+                                <image class="img" src="{{item.ImageSrc}}"></image>
+                                <view class="info">
+                                    <view class="name">{{item.Name}}</view>
+                                    <view class="desc" wx:if="{{item.Description}}">{{item.Description}}</view>
+                                    <view class="stat">
+                                        <text>月售{{item.SaleQuantity}}</text>
+                                    </view>
+                                    <view class="price">
+                                        <text class="money money-rmb">{{item.Price}}</text>
+                                        <view class="adjuster">
+                                            <block wx:if="{{item.Quantity}}">
+                                                <view bindtap="onListMinusTap" data-index="{{index}}">
+                                                    <text class="iconfont icon-minus_cart"></text>
+                                                </view>
+                                                <text class="quantity">{{item.Quantity||1}}</text>
+                                            </block>
+                                            <view bindtap="onListPlusTap" data-index="{{index}}">
+                                                <text class="iconfont icon-plus_cart"></text>
+                                            </view>
+                                        </view>
+                                    </view>
+                                </view>
+                            </view>
+                            <view class="empty" wx:if="{{!items.length}}">
+                                <text class="iconfont icon-time"></text>
+                                <view>加载中…</view>
+                            </view>
+                        </view>
+                    </scroll-view>
+                </view>
+                <form bindsubmit="onFormSubmit" reportSubmit="true">
+                    <view class="swiper-footer">
+                        <view bindtap="onCartTap" class="cart">
+                            <text class="num" wx:if="{{carts.Items.length}}">{{carts.Quantity}}</text>
+                            <text class="iconfont icon-cart"></text>
+                        </view>
+                        <view class="payment">
+                            <view class="price">
+                                <view class="money money-rmb">{{moneyPayable}}</view>
+                                <view class="desc">另需配送费，<text class="money money-rmb">{{model.MinFreightMoney}}</text>起送</view>
+                            </view>
+                            <button class="submit" disabled="{{!carts.Items.length}}" formType="submit">去结算</button>
+                        </view>
+                    </view>
+                </form>
+            </view>
+        </view>
+    </view>
+</scroll-view>

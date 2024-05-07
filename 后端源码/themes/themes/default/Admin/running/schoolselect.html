@@ -1,0 +1,72 @@
+<include  file='public:header'/>
+<div class="main-tu-js main-sc">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="right">    
+                <form class="search_form" method="post" action="<{:U('running/schoolselect')}>">
+                    <div class="seleHidden" id="seleHidden">
+                    	<div class="seleK">
+                        <span>关键字</span>
+                        <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                        <input type="submit" value="   搜索"  class="inpt-button-tudou" />
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+            
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50">ID</td>
+                    <td>学校名称</td>
+                    <td>区域</td>
+                    <td>运费说明</td>
+                    <td>最小运费</td>
+                    <td>添加时间</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input type="radio" name="school_id" rel="<{$var.Name}>" value="<{$var.school_id}>" /><{$var.school_id}></td>
+                        <td><{$var.Name}></td>
+                        <td><{$var.Region}></td>
+                        <td><{$var['FreightMoneyCaption']}></td>
+                        <td><{$var['MinFreightMoney']}></td>
+                         <td><{$var.create_time|date='Y-m-d H:i:s',###}></td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom:none;">
+            <div class="left">
+                <input style="border:1px solid #dbdbdb; width: 100px; height: 38px; line-height: 38px; text-align: center;" type="button" id="select_btn" class="tu-dou-btn" value="确定选择" />
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+
+<script>
+    $(document).ready(function(e){
+        $("#select_btn").click(function(){
+            $("input[name='school_id']").each(function(a){
+                if($(this).prop("checked") == true){
+                    parent.selectCallBack('school_id', 'Name', $(this).val(),$(this).attr('rel'));
+                }
+            });
+        });
+
+    });
+</script>
+<include  file='public:footer'/>  
+
+
+
+
+
+
+

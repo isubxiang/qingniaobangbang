@@ -1,0 +1,210 @@
+<include  file='public:header'/>
+
+<style>
+
+.tu-left-td{width:180px;}
+.profit{text-align:center; color:#000; font-weight:bold; background:#f5f5f5;}
+.main-tudou-sc-add .tu-table-box table tr td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr {
+    border: 1px solid #fff !important;
+}
+.main-tu-js .tudou-js-nr, .main-tudou-sc-add .tudou-js-nr {
+    border: 1px solid #eee;
+}
+.tu-left-td {
+    line-height:24px;
+}
+table {
+    border-color: #eee;
+}
+</style>
+
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">跑腿系统</li>
+        <li class="li2">订单管理</li>
+        <li class="li2 li3">订单详细</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin:10px 20px;">
+            <div class="left">
+                <{:BA('running/index',array('running_id'=>$var['running_id'],'p'=>$p,'colour'=>'#eee'),'返回订单列表','','',600,360)}>
+                <{:BA('running/detail',array('running_id'=>$var['running_id'],'p'=>$p),'刷新当前页面','','',600,360)}>
+            </div>
+        </div>
+ </div>       
+        
+
+    <div class="main-tudou-sc-add" style="margin-top:10px;">
+        <div class="tu-table-box">
+            <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+       
+                <tr>
+                	<td class="tu-left-td">订单ID：</td><td class="tu-right-td"><{$var.running_id}>  &nbsp;&nbsp; 订单号：<{$var.Code}>   &nbsp;&nbsp; 分类ID：<{$var.cate_id}></td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">学校名称：</td><td class="tu-right-td"><{$var.school.Name}></td>
+                </tr>
+                
+                
+                <tr>
+                	<td class="tu-left-td">付款金额：</td><td class="tu-right-td">&yen;<{:round($var['price']/100,2)}>元</td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">垫付金额：</td><td class="tu-right-td">&yen;<{:round($var['Money']/100,2)}>元</td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">跑腿金额：</td><td class="tu-right-td">&yen;<{:round($var['freight']/100,2)}>元</td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td" style="color:#F00">红包使用金额：</td><td class="tu-right-td">&yen;<{:round($var['coupon_price']/100,2)}>元</td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td" style="color:#F00">外卖配送费满减：</td><td class="tu-right-td">&yen;<{:round($var['MoneyFreightFullMoney']/100,2)}>元</td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">付款金额：</td><td class="tu-right-td">&yen;<{:round($var['price']/100,2)}>元</td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">实际金额：</td><td class="tu-right-td">&yen;<{:round($var['need_pay']/100,2)}>元</td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">订单结算给配送员费用：</td><td class="tu-right-td">&yen;<{:round($var['money']['money']/100,2)}>元</td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">订单类型：</td><td class="tu-right-td"><if condition="$var['Type'] eq 2">跑腿订单<else/>外卖订单</if></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">配送方式：</td><td class="tu-right-td"><if condition="$var['is_ele_pei'] eq 1">商家配送<else/>平台配送</if></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">外卖订单下单方式：</td><td class="tu-right-td"><if condition="$var['orderType'] eq 1">在线点餐<else/>到店消费</if></td>
+                </tr>
+                
+                <tr>
+                	<td class="tu-left-td">需求标题：</td><td class="tu-right-td"><{$var.title}></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">订单状态码：</td><td class="tu-right-td"><{$getOrderStatus[$var['OrderStatus']]}>【<{$var['OrderStatus']}>】</td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">订单重量：</td><td class="tu-right-td"><{$var['Weight']}>公斤</td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">预期时间：</td><td class="tu-right-td"><{$var['ExpectTime']}></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">限时时间：</td><td class="tu-right-td"><{$var['ExpiredMinutes']}>分钟</td>
+                </tr>
+             	<tr>
+                	<td class="tu-left-td">下单会员信息：</td><td class="tu-right-td"><{$var.user.nickname}> 【<{$var.user_id}>】</td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">配送地址：</td><td class="tu-right-td">姓名：<{$var['name']|default="无"}> &nbsp;&nbsp;手机： <{$var.mobile}> &nbsp;&nbsp;  地址：<{$var.addr}></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">配送员信息：</td><td class="tu-right-td"><{$var.deliveryInfo}></td>
+                </tr>
+                
+                <tr><td class="tu-right-td profit" colspan="2">操作时间</td></tr>
+                <tr>
+                	<td class="tu-left-td">操作时间：</td><td class="tu-right-td">
+                    
+                    		创建订单：
+                            <{$var.create_time|date='Y-m-d H:i:s',###}>
+                            <if condition="$var['pay_time']">
+                        		&nbsp;&nbsp;&nbsp;&nbsp;付款时间：<{$var.pay_time|date='Y-m-d H:i:s',###}>
+                            </if>
+                            <if condition="$var['update_time']">
+                            	&nbsp;&nbsp;&nbsp;&nbsp;接单时间：<{$var.update_time|date='Y-m-d H:i:s',###}>
+                            </if>
+                            <if condition="$var['end_time']">
+                            	&nbsp;&nbsp;&nbsp;&nbsp;完成时间<{$var.end_time|date='Y-m-d H:i:s',###}>
+                            </if>
+                    </td>
+                </tr>
+                <tr><td class="tu-right-td profit" colspan="2">评价管理</td></tr>
+                
+                <tr>
+                	<td class="tu-left-td">评价内容：</td><td class="tu-right-td"><{$var.content}></td>
+                </tr>
+                <tr>
+                	<td class="tu-left-td">评价标签：</td><td class="tu-right-td"><{$var.labels}></td>
+                </tr>
+                <tr><td class="tu-right-td profit" colspan="2">退款信息</td></tr>
+                <tr>
+                	<td class="tu-left-td">退款理由：</td><td class="tu-right-td"><{$var.OrderRefundInfo}></td>
+                </tr>
+                
+                
+                <tr><td class="tu-right-td profit" colspan="2">其他操作</td></tr>
+                <tr>
+                	<td class="tu-left-td"></td>
+                    <td class="tu-right-td">
+                    
+                    <eq name="var.OrderStatus" value="1">
+                        <{:BA('running/deleteOrder',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn')}>
+                        <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn')}>
+                    </eq>
+                    
+                    <eq name="var.OrderStatus" value="2">
+                        <{:BA('running/closedOrder',array("running_id"=>$var["running_id"],"p"=>$p),'关闭订单','act','tu-dou-btn')}>
+                        <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn')}>
+                    </eq>
+                    
+                    <eq name="var.OrderStatus" value="32">
+                        <{:BA('running/completeOrder',array("running_id"=>$var["running_id"],"p"=>$p),'完成订单','act','tu-dou-btn')}>
+                    </eq>
+                    
+                    
+                    <eq name="var.OrderStatus" value="256">
+                        <{:BA('running/delete',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn-small')}>
+                    </eq>
+                    <eq name="var.OrderStatus" value="2048">
+                        <{:BA('running/delete',array("running_id"=>$var["running_id"],"p"=>$p),'删除订单','act','tu-dou-btn-small')}>
+                    </eq>
+                    
+                    <eq name="var.OrderStatus" value="128">
+                        <{:BA('delivery/finance',array("order_id"=>$var["running_id"],"delivery_id"=>$var["cid"],"p"=>$p),'财务','','tu-dou-btn-small')}>
+                    </eq>
+                    
+                    <eq name="var.Type" value="1">
+                        <{:BA('running/product',array("running_id"=>$var["running_id"],"shop_id"=>$var["ShopId"],"source"=>"index","p"=>$p),'订单明细','','tu-dou-btn-small')}>
+                    </eq>
+                    
+                    <{:BA('running/delete2',array("running_id"=>$var["running_id"],"p"=>$p),'强制删除','act','tu-dou-btn-small')}>
+                    <{:BA('running/complete',array("running_id"=>$var["running_id"],"p"=>$p),'强制完成','act','tu-dou-btn-small')}>
+                    
+                    
+                    
+                    <eq name="var.files" value="1">
+                        <{:BA('running/files',array("running_id"=>$var["running_id"],"p"=>$p),'附件','','tu-dou-btn-small-waring')}>
+                    </eq>
+                    
+                    <{:BA('running/detail',array("running_id"=>$var["running_id"],"p"=>$p),'刷新当前页面','','tu-dou-btn-small')}>
+                    <{:BA('running/index',array("running_id"=>$var["running_id"],"p"=>$p),'返回订单列表','','tu-dou-btn-small')}>
+                    
+                    
+                    </td>
+                </tr>
+             
+            </table>
+        </div>
+    </div>
+
+<include  file='public:footer'/>       
+

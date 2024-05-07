@@ -1,0 +1,27 @@
+<view class="container">
+    <view class="header">
+        <view class="query">
+            <view bindtap="onRegionTap" class="region" hoverClass="navigator-hover">{{regions[regionIndex]}}<text class="iconfont icon-unfold"></text>
+            </view>
+            <input bindinput="onQueryInput" focus="true" placeholder="搜索" value="{{queryString}}"></input>
+        </view>
+    </view>
+    <view class="body">
+        <block wx:for="{{model}}" wx:key="index">
+            <view bindtap="onItemTap" class="item" data-index="{{index}}" hoverClass="navigator-hover">
+                <text class="title">{{item.Name}}</text>
+                <text class="iconfont icon-right_light"></text>
+            </view>
+            <view class="hr"></view>
+        </block>
+        <form bindsubmit="onFormSubmit" reportSubmit="true" wx:if="{{queryString&&queryString.length}}">
+            <view class="notfound">
+                <view class="desc">没有搜索到？可以直接输入详细地址</view>
+                <view class="input">
+                    <input bindblur="onInputBlur" value="{{inputValue}}"></input>
+                    <button formType="submit">确定</button>
+                </view>
+            </view>
+        </form>
+    </view>
+</view>

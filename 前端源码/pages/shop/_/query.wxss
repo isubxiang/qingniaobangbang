@@ -1,0 +1,137 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header-top {
+    align-items: center;
+    background: #06c1ae;
+    height: 80rpx;
+    padding: 0 20rpx;
+    position: relative;
+}
+
+.header-top .query {
+    height: 56rpx;
+    line-height: 56rpx;
+    text-align: left;
+    font-size: 28rpx;
+    border-radius: 28rpx;
+    color: #bbb;
+    background: #fff;
+    padding-left: 56rpx;
+}
+
+.header-top .iconfont {
+    margin-right: 8rpx;
+    position: absolute;
+    z-index: 2;
+    top: 10rpx;
+    left: 36rpx;
+    color: #aaa;
+}
+
+.body {
+    background: #fff;
+}
+
+.body-top .section {
+    padding: 20rpx 24rpx;
+}
+
+.body-top .section .name {
+    font-size: 26rpx;
+    margin-bottom: 24rpx;
+    color: #aaa;
+}
+
+.body-top .section .words {
+    color: #aaa;
+    line-height: 70rpx;
+}
+
+.body-top .section text {
+    border: 1rpx solid #ddd;
+    font-size: 24rpx;
+    padding: 0 20rpx;
+    margin-right: 10rpx;
+    display: inline-block;
+    height: 50rpx;
+    line-height: 50rpx;
+}
+
+.body-top .history {
+    border-top: 1rpx solid #f0f0f0;
+}
+
+.body-list .item {
+    display: flex;
+    border-top: 1px solid #f0f0f0;
+    padding: 30rpx;
+    position: relative;
+}
+
+.body-list .item navigator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+.body-list .logo {
+    width: 160rpx;
+    height: 160rpx;
+    margin-right: 30rpx;
+    background: #bbb;
+}
+
+.body-list .name {
+    font-size: 28rpx;
+}
+
+.body-list .grade {
+    margin: 6rpx 0;
+}
+
+.body-list .left {
+    font-size: 24rpx;
+    color: #aaa;
+}
+
+.body-list .score {
+    color: #ff9800;
+}
+
+.body-list .score .iconfont {
+    font-size: 22rpx;
+}
+
+.body-list .score .value {
+    margin-left: 6rpx;
+    margin-right: 16rpx;
+}
+
+.body-list .desc {
+    font-size: 24rpx;
+    color: #666;
+}
+
+.body-list .promotions {
+    font-size: 24rpx;
+    color: #666;
+    padding-top: 16rpx;
+}
+
+.body-list .promotions view {
+    padding: 6rpx 0;
+}
+
+.body-list .promotions text {
+    background: #ff9800;
+    color: #fff;
+    width: 32rpx;
+    height: 32rpx;
+    display: inline-block;
+    text-align: center;
+    line-height: 32rpx;
+    margin-right: 6rpx;
+}

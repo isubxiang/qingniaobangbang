@@ -1,0 +1,1 @@
+<view catchtap="reportClick" class="det-report" wx:if="{{det.state==1}}">举报</view>

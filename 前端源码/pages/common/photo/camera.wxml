@@ -1,0 +1,28 @@
+<camera binderror="error" devicePosition="{{devicePosition}}" flash="off">
+    <cover-view class="cover">
+        <cover-view class="region{{!hasPhotoed?' region-photo':''}}">
+            <cover-view class="img">
+                <cover-image class="reg" src="/assets/img/photo_{{photoType}}_region.png" style="height:{{screenWidth*2}}rpx" wx:if="{{!hasPhotoed}}"></cover-image>
+                <cover-image class="res" src="{{imageSrc}}" wx:else></cover-image>
+            </cover-view>
+            <cover-view class="mask">
+                <cover-view class="side"></cover-view>
+                <cover-view class="placeholder" style="height:{{screenWidth*2}}rpx"></cover-view>
+                <cover-view class="side"></cover-view>
+            </cover-view>
+        </cover-view>
+        <cover-view class="tools">
+            <cover-image bindtap="onSwitch" class="switch" src="/assets/img/photo_camera_switch.png"></cover-image>
+        </cover-view>
+        <cover-view class="controls{{!hasPhotoed?' controls-photo':''}}">
+            <cover-view bindtap="onPhoto" class="photo" wx:if="{{!hasPhotoed}}">
+                <cover-view></cover-view>
+            </cover-view>
+            <block wx:else>
+                <cover-view bindtap="onRevert" class="btn revert">重拍</cover-view>
+                <cover-view bindtap="onConfirm" class="btn confirm">确定</cover-view>
+            </block>
+        </cover-view>
+    </cover-view>
+</camera>
+<canvas canvasId="canvasId" style="width: {{screenWidth}}px; height: {{screenHeight}}px;"></canvas>

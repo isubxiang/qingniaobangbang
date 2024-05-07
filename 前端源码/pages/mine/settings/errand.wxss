@@ -1,0 +1,60 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.body .section-header {
+    height: 60rpx;
+    padding-left: 30rpx;
+    line-height: 60rpx;
+    font-size: 26rpx;
+    color: #aaa;
+}
+
+.body .section {
+    height: 30rpx;
+}
+
+.list {
+    background: #fff;
+}
+
+.list-date .row {
+    padding-left: 0;
+}
+
+.list-date .row .left {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-date .row .left .desc {
+    color: #888;
+}
+
+.list-date .row .minus {
+    height: 100%;
+    width: 80rpx;
+    font-size: 38rpx;
+    color: #de534b;
+    text-align: center;
+    line-height: 100rpx;
+    display: inline-block;
+}
+
+.list .row-add {
+    justify-content: center;
+    color: #06c1ae;
+    border-top: 1rpx solid #f0f0f0;
+    font-size: 32rpx;
+    line-height: 100rpx;
+}
+
+.list .row-add .iconfont {
+    color: #06c1ae;
+    font-size: 38rpx;
+    margin-right: 6rpx;
+}
+
+.remark {
+    font-size: 26rpx;
+    color: #aaa;
+    padding: 20rpx 30rpx 30rpx 30rpx;
+}

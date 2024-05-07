@@ -1,0 +1,35 @@
+<view class="container">
+    <view class="list body">
+        <view class="row avatar">
+            <text class="caption">头像</text>
+            <image src="{{model.AvatarUrl}}"></image>
+        </view>
+        <view class="hr"></view>
+        <view class="row">
+            <text class="caption">昵称</text>
+            <view class="value">{{model.NickName}}</view>
+        </view>
+        <view class="hr"></view>
+        <view class="row">
+            <text class="caption">性别</text>
+            <view class="value">{{model.Gender==1?'男':model.Gender==2?'女':'-'}}</view>
+        </view>
+        <view class="hr"></view>
+        <view class="row">
+            <text class="caption">邮箱</text>
+            <view class="value{{!model.Email?' value-holder':''}}">{{model.Email||'未绑定'}}</view>
+        </view>
+        <view class="hr"></view>
+        <navigator class="row" url="../../mine/info/bindmobile?rebind=true&normalMsg=true">
+            <text class="caption">手机号</text>
+            <view class="value">{{model.Mobile||'未绑定'}}<text class="iconfont icon-right_light"></text>
+            </view>
+        </navigator>
+        <view class="section"></view>
+        <navigator class="row" url="{{status==0||status==3?'auth':'student'}}">
+            <text class="caption">跑腿认证</text>
+            <view class="value">{{statusName}}<text class="iconfont icon-right_light"></text>
+            </view>
+        </navigator>
+    </view>
+</view>

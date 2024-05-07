@@ -1,0 +1,26 @@
+<view class="container">
+    <view class="body">
+        <view class="list">
+            <block wx:for="{{model}}" wx:key="Id">
+                <view class="hr"></view>
+                <view bindtap="onItemTap" class="item" data-id="{{item.Id}}" hoverClass="navigator-hover">
+                    <view class="left">
+                        <text class="content ellipsis">{{item.Address}}</text>
+                        <view class="contact">
+                            <text class="name">{{item.Linkman}}</text>
+                            <text class="phone">{{item.Phone}}</text>
+                        </view>
+                    </view>
+                    <text class="iconfont icon-right_light arrow"></text>
+                </view>
+            </block>
+        </view>
+        <view class="list">
+            <navigator class="row" url="edit">
+                <view class="caption">
+                    <text class="iconfont icon-roundadd add"></text>新增地址</view>
+                <text class="iconfont icon-right_light arrow"></text>
+            </navigator>
+        </view>
+    </view>
+</view>

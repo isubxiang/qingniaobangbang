@@ -1,0 +1,2 @@
+按照这个方法安装伪静态IIS6.0
+http://jingyan.baidu.com/article/6525d4b13aa408ac7d2e94b6.html

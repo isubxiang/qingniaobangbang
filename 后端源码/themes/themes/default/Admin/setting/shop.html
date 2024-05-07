@@ -1,0 +1,41 @@
+<include  file='public:header'/>
+<style>
+.tu-left-td{width:200px;}
+.profit{text-align:center; color:#000; font-weight:bold; background:#ECECEC;}
+</style>
+
+
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">设置</li>
+        <li class="li2">商家功能</li>
+        <li class="li2 li3">功能设置</li>
+    </ul>
+</div>
+<div class="main-cate">
+    <p class="attention"><span>注意：</span>商家的基本设置写在这里</p>
+</div>  
+
+     
+<div class="main-tudou-sc-add">
+    <div class="tu-table-box">
+        <form  target="x-frame" action="<{:U('setting/shop')}>" method="post">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+            
+          
+                
+                <tr><td class="tu-right-td profit" colspan = "2"> 商家入驻设置  </td></tr>
+                <tr>
+                    <td  class="tu-left-td">商家入驻扣除费用：</td>
+                    <td class="tu-right-td">
+                        <input type="text" name="data[shop_apply_prrice]" value="<{$CONFIG.shop.shop_apply_prrice}>" class="tudou-sc-add-text-name  w80" />
+                        <code>单位元，不支持负数，建议填写整数，不填写或者填写为0不生效，具体是在商家入驻成功后扣除相关费用，如果会员余额不足，无法入驻，建议留空或者填写为0。</code>
+                    </td>
+                </tr>
+               
+            </table>
+            <div class="sm-qr-tu"><input type="submit" value="确认设置" class="sm-tudou-btn-input" /></div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       

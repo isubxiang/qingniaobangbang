@@ -1,0 +1,85 @@
+<import src="../../template/bulletin.wxml"></import>
+<view class="pub-bull-head" wx:if="{{noticeList.length>=1}}">
+    <template is="pub-bulletin" data="{{noticeList:noticeList,marqueeDistance:marqueeDistance}}"></template>
+</view>
+<view bindtap="hideTypeDialog" catchtouchmove="preventTouchMove" class="ms-mask" wx:if="{{typeDialog}}">
+    <view catchtap="preventTouchMove" class="ms-sort">
+        <scroll-view scrollY class="ms-sort-left" scrollIntoView="top{{selectTopItem}}">
+            <view catchtap="chooseTop" class="ms-sort-name  {{selectTopItem==item.id?'active':''}}" data-tid="{{item.id}}" id="top{{item.id}}" wx:for="{{topArr}}" wx:key="id">
+                {{item.typeName}}
+            </view>
+        </scroll-view>
+        <scroll-view scrollY class="ms-sort-right">
+            <view catchtap="chooseSub" class="ms-sort-text {{selectChildItem==item.id?'acitve':''}}" data-id="{{item.id}}" data-name="{{item.typeName}}" data-pid="{{item.pid}}" data-pname="{{item.pname}}" wx:for="{{subArr}}" wx:key="id">{{item.typeName}}
+            </view>
+        </scroll-view>
+    </view>
+</view>
+<view bindtap="changeType" class="ms-head" style="top:{{noticeList.length>=1?'39px':'0px'}}">
+    <view class="ms-head-name">{{selectTypeInfo.topName}}</view>
+    <view class="ms-head-text">
+        <text>{{selectTypeInfo.subName}}</text>
+        <image class="ms-head-img" src="/assets/img/right.png"></image>
+    </view>
+</view>
+<view class="ms-body">
+    <view class="ms-info" wx:if="{{personInit}}">
+        <view class="ms-info-title" wx:if="{{totalPerson!=''}}">总参与人数：{{totalPerson}}人</view>
+        <view class="ms-info-box">
+            <view class="ms-info-answer">
+                <view class="ms-info-text">答题数
+                    <text class="ms-info-number">{{quest.answerNum}}</text>
+                </view>
+                <view class="ms-info-text">正确率
+                    <text class="ms-info-number">{{quest.rightRatio}}</text>
+                </view>
+            </view>
+            <view bindtap="memCenter" class="ms-grade">
+                <view class="ms-grade-number">
+                    <image class="ms-grade-img" src="/assets/img/member.png"></image>
+                </view>
+                <view class="ms-grade-text">【{{rankPerson.rankTypeStr}}】</view>
+                <view class="ms-grade-invalid-text" wx:if="{{!rankPerson.valid}}">已过期</view>
+            </view>
+        </view>
+    </view>
+    <view class="ms-nav">
+        <view bindtap="chooseFn" class="ms-nav-box" data-id="{{item.id}}" data-path="{{item.path}}" wx:for="{{fnList}}" wx:key="id">
+            <view class="ms-nav-text">
+                <view class="ms-nav-title" style="color:{{item.color}}">{{item.typeName}}</view>
+                <view class="ms-nav-content" wx:if="{{item.subName!=''}}">{{item.subName}}</view>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="showCenter" class="ms-mask" wx:if="{{centerFlag}}">
+    <view catchtap="preventTouchMove" class="ms-me">
+        <view catchtap="memCenter" class="ms-me-head">
+            <image class="ms-me-head-img" src="/assets/img/member.png"></image>
+            <view class="ms-me-name">【{{rankPerson.rankTypeStr}}】
+                <text class="ms-me-text">{{rankPerson.memDesc}}</text>
+            </view>
+            <view class="ms-nav-content" wx:if="{{rankPerson.expireStr!=''&&rankPerson.rankType!=3}}">
+                过期时间：{{rankPerson.expireStr}}
+            </view>
+        </view>
+        <view class="ms-me-box">
+            <view bindtap="navClick" class="ms-me-list" data-url="./buy/index">
+                <image class="ms-me-list-img" src="/assets/img/tk.png"></image>
+                <text class="me-me-list-text">我的题库</text>
+            </view>
+            <view bindtap="navClick" class="ms-me-list" data-url="./used/index">
+                <image class="ms-me-list-img" src="/assets/img/lx.png"></image>
+                <text class="me-me-list-text">练习记录</text>
+            </view>
+            <view bindtap="navClick" class="ms-me-list" data-url="./err/index">
+                <image class="ms-me-list-img" src="/assets/img/ct.png"></image>
+                <text class="me-me-list-text">错题记录</text>
+            </view>
+        </view>
+    </view>
+</view>
+<view bindtap="showCenter" class="ms-bottom-new">我的</view>
+<button class="shop-btn" openType="contact" plain="true" wx:if="{{servantShow}}">
+    <image class="shop-btn-img" src="/img/servant.png"></image>
+</button>

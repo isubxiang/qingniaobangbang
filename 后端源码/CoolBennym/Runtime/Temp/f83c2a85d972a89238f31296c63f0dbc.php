@@ -1,0 +1,3 @@
+<?php
+//000000086400a:1:{i:1;a:11:{s:10:"payment_id";s:1:"1";s:9:"school_id";N;s:4:"name";s:15:"小程序支付";s:4:"logo";s:9:"wxapp.png";s:4:"code";s:5:"wxapp";s:11:"mobile_logo";s:16:"wxapp_mobile.png";s:8:"contents";s:69:"认证服务号并必须绑定本网站并设置好支付授权目录";s:7:"setting";a:5:{s:5:"appid";s:18:"wxe8ff72966a5c807b";s:9:"appsecret";s:32:"faba3ef97fb9aef3bcce446bea1ea341";s:5:"mchid";s:10:"1600007517";s:6:"appkey";s:32:"76ER256wXHrm65lpQrWZ08CGlRmyTA32";s:6:"safety";s:6:"******";}s:14:"is_mobile_only";s:1:"1";s:7:"is_open";s:1:"1";s:11:"error_intro";N;}}
+?>

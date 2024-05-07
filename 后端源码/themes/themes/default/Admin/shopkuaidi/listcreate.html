@@ -1,0 +1,54 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">商家</li>
+        <li class="li2">运费模板</li>
+        <li class="li2 li3">运费添加</li>
+    </ul>
+</div>
+
+    <div class="menuManage">
+        <form  target="x-frame" action="<{:U('shopkuaidi/listcreate', array('kuaidi_id' => $kuaidi_id))}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                    
+                    
+
+                        <tr>
+                            <td class="tu-left-td">配送名称：</td>
+                            <td class="tu-right-td"><input type="text" name="data[name]" value="<{$detail.name|default=''}>" class="tudou-sc-add-text-name w150" />
+                            </td>
+                        </tr>
+                        <tr>
+                    <td class="tu-left-td">配送区域：</td>
+                     <td class="tu-right-td">
+                        <select id="province_id" name="data[province_id]" class="tu-manage-select w100">
+                            <foreach name="provinceList" item="var">
+                                <option value="<{$var.id}>"  <eq name="var.id" value="$detail.province_id">selected="selected"</eq> ><{$var.name}></option>      
+                            </foreach>
+                        </select>
+                    </td>
+                </tr>   
+                        <tr>
+                            <td class="tu-left-td">首重费用：</td>
+                            <td class="tu-right-td"><input type="text" name="data[shouzhong]" value="<{$detail.shouzhong|default=''}>" class="tudou-sc-add-text-name w150" />
+                            	<code>1KG为首重</code>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="tu-left-td">续重费用：</td>
+                            <td class="tu-right-td"><input type="text" name="data[xuzhong]" value="<{$detail.xuzhong|default=''}>" class="tudou-sc-add-text-name w150" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="sm-qr-tu"><input type="submit" value="确认添加" class="sm-tudou-btn-input" /></div>
+            </div>
+        </form>
+    </div>
+<include  file='public:footer'/>   
+
+
+
+

@@ -1,0 +1,29 @@
+<div class="listBox clfx">
+    <div class="menuManage">
+        <form target="x-frame" action="<{:U('template/edit',array('template_id'=>$detail['template_id']))}>" method="post">
+            <div class="main-tudou-sc-add">
+                <div class="tu-table-box">
+                    <table  bordercolor="#dbdbdb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                       <tr>
+                            <td class="tu-left-td">价格：</td>
+                            <td class="tu-right-td"><input type="text" name="price" value="<{:round($detail['price']/100,2)}>" class="tudou-sc-add-text-name w200" />
+                            <code>改模板的销售价格，只针对商家模板有效</code>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td class="tu-left-td">模板简介：</td>
+                            <td class="tu-right-td">
+                                <textarea name="intro" cols="50" rows="4"><{$detail['intro']}></textarea>
+                                <code>模板的简单介绍，30字以内</code>
+                            </td>
+                        </tr>
+
+           			 </tr>
+                    </table>
+                </div>
+                <div class="sm-qr-tu"><input type="submit" value="确定编辑" class="sm-tudou-btn-input" /></div>
+            </div>
+        </form>
+    </div>
+</div>

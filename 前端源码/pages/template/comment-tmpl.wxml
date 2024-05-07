@@ -1,0 +1,1 @@
+<view catchtap="commentClick" class="det-report" wx:if="{{det.comment}}">评价</view>

@@ -1,0 +1,2 @@
+按照这个方法安装伪静态IIS7.0
+http://jingyan.baidu.com/article/b0b63dbff07fec4a48307083.html

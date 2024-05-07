@@ -1,0 +1,97 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">小程序</li>
+        <li class="li2">直播管理</li>
+        <li class="li2 li3">直播列表</li>
+    </ul>
+</div>
+<style>
+
+.tips{color: #fff; background: #1ca290; padding: 0px 5px; border-radius:0px; margin-left:0 5px; display: inline-block; float: right; height: 20px; line-height: 20px;}
+.attention {
+    height: auto;
+}
+
+</style>
+<div class="main-tu-js main-sc">
+
+	<p class="attention">
+        <span>小程序直播运营操作说明：</span>
+        1、登录微信小程序后台，在左侧功能栏“直播”点击创建直播间。<br>
+        2、在小程序后台成功创建直播间后，点击列表中的”同步直播间“按钮。同步直播间后直播列表页面中会显示。<br>
+        3、切勿重复点击”同步直播间“按钮。小程序每天有请求次数限制。
+    </p>
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="border-top: none; margin-top: 0px;">
+        	<div class="left">
+                <a mini="act" href="<{:U('weixinmsg/sync')}>">同步直播间</a>  
+                <a target="_blank" href="https://mp.weixin.qq.com">添加直播间</a>  
+            </div>
+            
+            <div class="right">
+                <form method="post" action="<{:U('weixinmsg/wxlive')}>">
+                    <div class="seleHidden" id="seleHidden">
+                        <div class="seleK">
+                            <label>
+                            	<span> 关键字：</span>   <input type="text" name="keyword" value="<{$keyword|default=''}>" class="tu-inpt-text"/>
+                            </label>
+                            <input type="submit" class="inpt-button-tudou" value=" 搜索"/></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <form  target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;" >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="id"/></td>
+                        <td class="w50">ID</td>
+                        <td>直播间ID</td>
+                        <td>直播标题</td>
+                        <td>主播昵称</td>
+                        <td>直播间封面</td>
+                        <td>分享封面</td>
+                        <td>开播时间</td>
+                        <td>结束直播</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                        <td><input class="child_id" type="checkbox" name="id[]" value="<{$var.id}>" /></td>
+                        <td><{$var.id}></td>
+                        <td><{$var['roomid']}></td>
+                        <td><{$var['name']}></td>
+                        <td><{$var['anchor_name']}></td>
+                        
+                        <td><a href="<{:config_weixin_img($var['cover_img'])}>" class="tooltip"><img src="<{:config_img($var['cover_img'])}>" class="w80"></a></td>
+                        <td><a href="<{:config_weixin_img($var['share_img'])}>" class="tooltip"><img src="<{:config_img($var['share_img'])}>" class="w80"></a></td>
+                        <td><{$var.start_time|date="Y-m-d H:i:s",###}></td>
+                        <td><{$var.end_time|date="Y-m-d H:i:s",###}></td>
+                        <td></td>
+                        </tr>
+                    </foreach>
+                </table>
+                <{$page}>
+            </div>
+            <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+  <script>
+       $(document).ready(function (e) {
+			$(".tips").click(function () {
+				var tipnr = $(this).attr('rel');
+				layer.tips(tipnr, $(this), {
+					tips: [4, '#1ca290'],
+					time: 4000
+				});
+			})
+		});
+    </script>
+<include  file='public:footer'/>       

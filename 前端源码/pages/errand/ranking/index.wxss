@@ -1,0 +1,124 @@
+@import "../../../wuBaseWxss/1.wxss";
+
+.header {
+    background: #fff;
+    padding: 40rpx;
+    display: flex;
+}
+
+.header .left {
+    width: 190rpx;
+    text-align: center;
+    background: #f7f7f7;
+    border-radius: 30rpx;
+    padding: 30rpx 0 16rpx 0;
+    margin: 0 40rpx;
+}
+
+.header .text {
+    font-size: 28rpx;
+}
+
+.header .money {
+    color: #ff9800;
+    font-size: 56rpx;
+}
+
+.header .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 16rpx;
+}
+
+.header .desc {
+    color: #666;
+}
+
+.header .button {
+    width: 240rpx;
+    height: 72rpx;
+    line-height: 72rpx;
+    margin-top: 20rpx;
+    font-size: 30rpx;
+}
+
+.body .section {
+    height: 58rpx;
+    line-height: 58rpx;
+    color: #aaa;
+    padding-left: 24rpx;
+}
+
+.body .list {
+    background: #fff;
+}
+
+.body .item {
+    display: flex;
+    padding: 30rpx 40rpx;
+}
+
+.body .item .rank {
+    text-align: center;
+    width: 50rpx;
+    margin-right: 40rpx;
+    padding-top: 12rpx;
+}
+
+.body .item .rank .iconfont {
+    font-size: 48rpx;
+}
+
+.body .item .rank .value {
+    width: 36rpx;
+    height: 36rpx;
+    line-height: 36rpx;
+    border-radius: 50%;
+    background: #aaa;
+    color: #fff;
+    display: inline-block;
+    margin-top: 8rpx;
+}
+
+.body .item .top_1 {
+    color: #ffd700;
+}
+
+.body .item .top_2 {
+    color: #c0c0c0;
+}
+
+.body .item .top_3 {
+    color: #d4a860;
+}
+
+.body .item avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+    margin-right: 10rpx;
+    background: #ddd;
+}
+
+.body .item .user {
+    color: #aaa;
+    flex: 1;
+    font-size: 26rpx;
+}
+
+.body .item .user .name {
+    font-size: 30rpx;
+    line-height: 48rpx;
+    color: #222;
+    margin-bottom: 8rpx;
+}
+
+.body .item .money {
+    text-align: center;
+    font-size: 46rpx;
+    width: 120rpx;
+    margin-top: 18rpx;
+    color: #ff9800;
+}

@@ -1,0 +1,58 @@
+<include file='public:header'/>  
+
+	<header class="top-fixed bg-yellow bg-inverse">
+		<div class="top-back">
+			<a class="top-addr" href="javascript:history.back(-1);"><i class="iconfont icon-angle-left"></i></a>
+		</div>
+		<div class="top-title">
+			商城订单<if condition="$SHOP['is_goods_pei'] eq 1">（已开通配送）</if>
+		</div>
+        <div class="top-share">
+        	<a href="javascript:void(0);" id="cate-btn" class="top-addr icon-chevron-down"> 添加</a>
+		</div>
+	</header>
+    
+     <div class="serch-bar-mask" id="cate_menu" style="display:none;top:50px;">
+		<div class="serch-bar-mask-list">
+			<ul>
+            <li><a href="<{:u('goods/create')}>">添加商品</a></li>
+            <li><a href="<{:u('goods/goodscate')}>">添加商品分类</a></li>
+			</ul>
+		</div>
+	</div>
+    
+    <script>
+		$(document).ready(function(){
+			$("#cate-btn").click(function(){
+				$("#cate_menu").toggle();
+			});
+			$("#cate_menu ul li a").click(function(){
+				$("#cate_menu").toggle();
+			});
+		});
+	</script> 
+
+
+
+<ul id="shangjia_tab">
+   <li class="x2"><a href="<{:U('goods/order',array('status'=>0))}>" <eq name="status" value="">class="on"</eq>>未付款</a></li>
+   <li class="x2"><a href="<{:U('goods/order',array('status'=>1))}>" <eq name="status" value="1">class="on"</eq>>待配送</a></li>
+   <li class="x2"><a href="<{:U('goods/order',array('status'=>2))}>" <eq name="status" value="2">class="on"</eq>>已配送</a></li>
+   <li class="x2"><a href="<{:U('goods/order',array('status'=>4))}>" <eq name="status" value="4">class="on"</eq>>待退款</a></li>
+   <li class="x2"><a href="<{:U('goods/order',array('status'=>5))}>" <eq name="status" value="5">class="on"</eq>>已退款</a></li>
+   <li class="x2"><a href="<{:U('goods/order',array('status'=>8))}>" <eq name="status" value="8">class="on"</eq>>已完成</a></li>
+</ul>  
+
+
+<div class="list-media-x" id="list-media">
+	<div class="blank-40 bg"></div>
+    <ul></ul>
+</div> 
+
+<script>
+	$(document).ready(function(){
+		loaddata('<{$nextpage}>', $("#list-media ul"), true);
+	});
+</script>
+
+<include file="public:footer"/>

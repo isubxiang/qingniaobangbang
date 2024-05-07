@@ -1,0 +1,65 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">订单管理</li>
+        <li class="li2">订单附件</li>
+        <li class="li2 li3">附件列表</li>
+    </ul>
+</div>
+
+<div class="main-tu-js">
+    <p class="attention"><span>注意：</span>这里是订单列表  当前订单号【<{$running_id}>】</p>
+    <div class="tudou-js-nr">
+    
+    
+        <div class="tu-select-nr" style="margin: 10px 20px;">
+            <div class="left">
+                <{:BA('running/index',array('p'=>$p),'返回订单列表')}>
+                <{:BA('running/files',array('running_id'=>$running_id,'p'=>$p),'刷新本页','','',600,360)}>
+            </div>
+        </div>
+ 
+ 
+        <form target="x-frame" method="post">
+            <div class="tu-table-box">
+                <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                    <tr>
+                        <td class="w50"><input type="checkbox" class="checkAll" rel="id"/></td>
+                        <td class="w50">ID</td>
+                        <td>原始订单ID</td>
+                        <td>学校ID</td>
+                        <td>附件名称</td>
+                        <td>附件大小</td>
+                        <td>附件预览</td>
+                        <td>创建时间</td>
+                        <td>操作</td>
+                    </tr>
+                    <foreach name="list" item="var">
+                        <tr>
+                            <td><input class="child_id" type="checkbox" name="id[]" value="<{$var.id}>"/></td>
+                            <td><{$var.id}></td>
+                            <td><{$var.running_id}></td>
+                            <td><{$var.school_id}></td>
+                            <td><{$var.name}></td>
+                            <td><{$var.origSize}>B</td>
+                            <td>
+                            	<a href="<{:config_weixin_img($var['srcImg'])}>" class="tooltip"><img src="<{:config_img($var['srcImg'])}>" class="w80"></a>
+                                <a target="_blank" href="<{:config_weixin_img($var['file'])}>">下载</a>
+                            </td>
+                            <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                            <td>
+                            	<{:BA('running/index',array("running_id"=>$var["running_id"],"p"=>$p),'查看订单','','tu-dou-btn-small-waring')}>
+                            </td>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
+            <div class="tu-select-nr">
+                <div class="left">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<include  file='public:footer'/>       
+

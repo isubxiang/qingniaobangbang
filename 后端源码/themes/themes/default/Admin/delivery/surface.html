@@ -1,0 +1,113 @@
+<include  file='public:header'/>
+<div class="tu-main-top-btn">
+    <ul>
+        <li class="li1">配送员</li>
+        <li class="li2">配送员管理</li>
+        <li class="li2 li3">配送员报表</li>
+    </ul>
+</div>
+<div class="main-tu-js main-sc">
+
+    <div class="tudou-js-nr">
+        <div class="tu-select-nr" style="margin-top: 0px; border-top:none;">
+            <div class="right">
+                <form class="search_form" method="post" action="<{:U('delivery/surface')}>">
+                    <div class="seleHidden" id="seleHidden">
+          				<div class="seleK">
+                        <label>
+                            <span>开始时间</span>
+                            <input type="text" name="bg_date" value="<{$bg_date|default=''}>"  onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                        <label>
+                            <span>结束时间</span>
+                            <input type="text" name="end_date" value="<{$end_date|default=''}>" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'});"  class="text w150" />
+                        </label>
+                          
+                        <label>
+                            <input type="hidden" id="user_id" name="user_id" value="<{$user_id|default=''}>"/>
+                            <input type="text" name="nickname" id="nickname"  value="<{$nickname}>" class="text "/>
+                            <a mini="select"  w="800" h="600" href="<{:U('user/select')}>" class="sumit">选择用户</a>
+                        </label>
+                        
+                        <label>
+                            <span>审核状态：</span>
+                            <select class="select w120" name="audit">
+                                <option <eq name="audit" value="999">selected="selected"</eq> value="999">请选择状态</option>
+                                <option <eq name="audit" value="0">selected="selected"</eq> value="0">未审核</option>
+                                <option <eq name="audit" value="1">selected="selected"</eq> value="1">已审核</option>
+                            </select>
+                        </label>    
+                        <label>
+                            <span>关键字</span>
+                            <input type="text" name="keyword" value="<{$keyword}>" class="tu-inpt-text" />
+                            <input type="submit" value="搜索"  class="inpt-button-tudou" />
+                        </label>
+                        </div> 
+                    </div> 
+                </form>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+    
+    <form  target="x-frame" method="post">
+        <div class="tu-table-box">
+            <table bordercolor="#e1e6eb" cellspacing="0" width="100%" border="1px"  style=" border-collapse: collapse; margin:0px; vertical-align:middle; background-color:#FFF;"  >
+                <tr>
+                    <td class="w50"><input type="checkbox" class="checkAll" rel="surface_id" /></td>
+                    <td class="w50">报表ID</td>
+                    <td>配送员ID</td>
+                    <td>会员ID</td>
+                    <td>会员昵称</td>
+                    <td>地区</td>
+                    <td>商家名称</td>
+                    <td>商家手机</td>
+                    <td>签收人</td>
+                    <td>备注</td>
+                    <td>图片</td>
+                    <td>报表状态</td>
+                    <td>申请时间</td>
+                    <td>操作</td>
+                </tr>
+                <foreach name="list" item="var">
+                    <tr>
+                        <td><input class="child_surface_id" type="checkbox" name="surface_id[]" value="<{$var.surface_id}>"/></td>
+                        <td><{$var.surface_id}></td>
+                        <td><{$var.delivery_id}></td>
+                        <td><{$var.user_id}></td>
+                        <td><{$var.user.nickname}></td>
+                        <td><{$var['city']['name']}>-<{$var['area']['area_name']}>-<{$var['business']['business_name']}></td>
+                        <td><{$var.name}></td>
+                        <td><{$var.mobile}></td>
+                        <td><{$var.receiver}></td>
+                        <td><{$var.intro}></td>
+                        <td>
+                         	<foreach name="var.thumb" item="item">            
+                                <a href="<{:config_weixin_img($item)}>" class="tooltip">
+                                    <img src="<{:config_img($item)}>" class="w80">
+                                </a>
+                            </foreach>
+                        </td>
+                        <td><eq name="var.audit" value="0">未审核<else/>已审核</eq></td>
+                        <td><{$var.create_time|date="Y-m-d H:i:s",###}></td>
+                        <td>
+                        	<eq name="var.audit" value="0"> <{:BA('delivery/surface_audit',array("surface_id"=>$var["surface_id"]),'审核','act','tu-dou-btn')}> </eq>
+                            <a target="_blank" href="<{:U('user/manage',array('user_id'=>$var['user_id']))}>" class="tu-dou-btn-small">管理用户</a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+            <{$page}>
+        </div>
+        <div class="tu-select-nr" style="margin-bottom: 0px; border-bottom: none;">
+                <div class="left">
+                    <{:BA('delivery/surface_audit','','批量审核','list','tu-dou-btn')}>
+                </div>
+            </div>
+    </form>
+</div>
+</div>
+<include  file='public:footer'/>  
+
+
